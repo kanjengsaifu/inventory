@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/prod_glasir/DataDetail",
+			url		: "<?php echo site_url(); ?>/glasir_prod/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -23,10 +23,10 @@ $(document).ready(function(){
 		});
 		//return false();
 	}
-	
-	$("#tgl").datepicker({
+	        
+        $("#tgl_plng").datepicker({
 			dateFormat:"dd-mm-yy"
-    });
+            });
 	
 	$("#id_glasir").focus();
 	$("#id_glasir").keyup(function(e){
@@ -53,7 +53,6 @@ $(document).ready(function(){
 			dataType : "json",
 			success	: function(data){
 				$("#nama_glasir").val(data.nama_glasir);
-                                $("#nama_alias").val(data.nama_alias);
 			}
 		});
 	};
@@ -90,6 +89,8 @@ $(document).ready(function(){
 		var no_po	= $("#no_po").val();
 		var planner     = $("#planner").val();
 		var tgl_plng    = $("#tgl_plng").val();
+                var petugas     = $("#petugas").val();
+                var densitas    = $("#densitas").val();
 		
 		var string = $("#form").serialize();
 		
@@ -103,6 +104,18 @@ $(document).ready(function(){
 			$("#no_po").focus();
 			return false();
 		}
+                
+                 if(tgl_plng.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, No Order tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tgl_plng").focus();
+			return false();
+		}
+                
 		if(planner.length==0){
 			$.messager.show({
 				title:'Info',
@@ -113,16 +126,7 @@ $(document).ready(function(){
 			$("#planner").focus();
 			return false();
 		}
-		if(!$("#tgl_plng").val()){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Tanggal Planning tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#tgl_plng").focus();
-			return false();
-		}
+		
 		if(id_glasir.length==0){
 			$.messager.show({
 				title:'Info',
@@ -153,10 +157,30 @@ $(document).ready(function(){
 			$("#volume").focus();
 			return false();
 		}
+                if(densitas.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
+                if(petugas.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Petugas tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#petugas").focus();
+			return false();
+		}
 		
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/prod_glasir/simpan",
+			url		: "<?php echo site_url(); ?>/glasir_prod/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -241,12 +265,12 @@ $(document).ready(function(){
     <tr>    
         <td>Tgl Input</td>
         <td>:</td>
-        <td><input type="text" name="tgl_inp" id="tgl_inp"  size="15" maxlength="15" class="easyui-datetimebox" data-options="required:true,validType:'length[3,20]'" value="<?php echo $tgl_inp;?>"/></td>
+        <td><input name="tgl_inp" id="tgl_inp"  size="12" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_inp;?>" readonly="readonly"/></td>
     </tr>
     <tr>    
         <td>Tgl Planning</td>
         <td>:</td>
-        <td><input type="text" name="tgl_plng" id="tgl_plng"  size="15" maxlength="15" class="easyui-datetimebox" data-options="required:true,validType:'length[3,20]'" value="<?php echo $tgl_plng;?>"/></td>
+        <td><input name="tgl_plng" id="tgl_plng"  size="12" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_plng;?>"/></td>
     </tr>
     <tr>    
         <td width="150">Planner</td>
@@ -275,12 +299,6 @@ $(document).ready(function(){
         <td>Nama Glasir</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="50" class="detail" maxlength="50"/></td>
-    </tr>
-        <tr>    
-        <td>Alias Glasir</td>
-        <td>:</td>
-        <td><input readonly="readonly" type="text" name="nama_alias" id="nama_alias"  size="50" class="detail" maxlength="50"/></td>
-    </tr>
     <tr>    
         <td>Status Glasir</td>
         <td>:</td>
@@ -374,7 +392,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/pembelian/">
+    <a href="<?php echo base_url();?>index.php/glasir_prod/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

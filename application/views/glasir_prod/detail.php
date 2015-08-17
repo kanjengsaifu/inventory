@@ -29,32 +29,37 @@ $(function() {
 </style>
 <table id="dataTable" width="100%">
 <tr>
-	<th>No</th>
-    <th>Kode Barang</th>
-    <th>Nama Barang</th>
-    <th>Satuan</th>
-    <th>Harga</th>
-    <th>Jumlah</th>
-    <th>Total</th>
-    <th>Aksi</th>
+    <th>No</th>
+    <th>No. Produksi</th>
+    <th>Id. Glasir</th>
+    <th>Status Glasir</th>
+    <th>Volume (ltr)</th>
+    <th>Densitas</th>
+    <th>Ball Mill</th>
+    <th>Tong</th>
+    <th>Petugas</th>
+    <th>Inputer</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
 		$g_total=0;
 		$no =1;
 		foreach($data->result_array() as $db){  
-		$total = $db['jmlbeli']*$db['hargabeli'];
+		$total = $db['volume'];
 		?>    
     	<tr>
-			<td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="100" ><?php echo $db['kode_barang']; ?></td>
-			<td ><?php echo $db['nama_barang']; ?></td>
-            <td align="center" width="100" ><?php echo $db['satuan']; ?></td>
-            <td align="right" width="100" ><?php echo number_format($db['hargabeli']); ?></td>
-            <td align="center" width="100" ><?php echo $db['jmlbeli']; ?></td>
-            <td align="right" width="100" ><?php echo number_format($total); ?></td>
+            <td align="center" width="20"><?php echo $no; ?></td>
+            <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
+            <td ><?php echo $db['id_glasir']; ?></td>
+            <td align="center" width="100" ><?php echo $db['nama_gps']; ?></td>
+            <td align="right" width="100" ><?php echo number_format($db['volume']); ?></td>
+            <td align="right" width="100" ><?php echo number_format($db['densitas']); ?></td>
+            <td align="center" width="100" ><?php echo $db['nama_bm']; ?></td>
+            <td align="center" width="100" ><?php echo $db['nama_tong']; ?></td>
+            <td align="center" width="100" ><?php echo $db['petugas']; ?></td>
+            <td align="center" width="100" ><?php echo $db['inputer']; ?></td>
             <td align="center" width="80">
-            <a href="<?php echo base_url();?>index.php/pembelian/hapus_detail/<?php echo $db['kodebeli'];?>/<?php echo $db['kode_barang'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_prod/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['no_prod'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
@@ -74,7 +79,7 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="6" align="right">Total</th>
+	<th colspan="4" align="right">Total</th>
     <th align="right"><?php echo number_format($g_total);?></th>
 </tr>    
 </table>

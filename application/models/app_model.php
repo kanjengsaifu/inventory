@@ -160,32 +160,6 @@ class App_Model extends CI_Model {
 		}
 		return $hasil;
 	}
-        
-        public function ProsesGlasir($id){
-		$t = "SELECT idphd FROM phd_glasir WHERE no_prod='$id'";
-		$d = $this->app_model->manualQuery($t);
-		$r = $d->num_rows();
-		if($r>0){
-			$hasil = $r;
-		}else{
-			$hasil = 0;
-		}
-		return $hasil;
-	}
-        
-        public function JmlGlasir($id){
-		$t = "SELECT sum(volume) as jml FROM phd_glasir WHERE no_prod='$id'";
-		$d = $this->app_model->manualQuery($t);
-		$r = $d->num_rows();
-		if($r>0){
-			foreach($d->result() as $h){
-				$hasil = $h->jml;
-			}
-		}else{
-			$hasil = 0;
-		}
-		return $hasil;
-	}
 	
 	public function JmlBeli($id){
 		$t = "SELECT sum(jmlbeli * hargabeli) as jml FROM d_beli WHERE kodebeli='$id'";
@@ -394,23 +368,6 @@ class App_Model extends CI_Model {
 			}
 		}else{
 			$hasil = 'BL'.'00001';
-		}
-		return $hasil;
-	}
-        
-        public function MaxPhGlasir(){
-		$bln = date('m');
-		$th = date('y');
-		$text = "SELECT max(no_prod) as no FROM ph_glasir";
-		$data = $this->app_model->manualQuery($text);
-		if($data->num_rows() > 0 ){
-			foreach($data->result() as $t){
-				$no = $t->no; 
-				$tmp = ((int) substr($no,2,5))+1;
-				$hasil = 'PG'.sprintf("%05s", $tmp);
-			}
-		}else{
-			$hasil = 'PG'.'00001';
 		}
 		return $hasil;
 	}

@@ -11,13 +11,13 @@ if($this->session->userdata('level')=='01'){
     	<td class="btn" align="center" width="20%"><a href="<?php echo base_url();?>index.php/glasir"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
         <b>Item Glasir</b></a>
         </td>
-        <td align="center" width="20%"><a href="<?php echo base_url();?>index.php/pembelian"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
+        <td align="center" width="20%"><a href="<?php echo base_url();?>index.php/glasir_prod"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
         <b>Produksi Glasir</b></a>
         </td>
-        <td  class="btn" align="center" width="20%"><a href="<?php echo base_url();?>index.php/penjualan"><img src="<?php echo base_url();?>asset/images/surat_keputusan.png" /><br />
+        <td  class="btn" align="center" width="20%"><a href="<?php echo base_url();?>index.php/trans_glasir"><img src="<?php echo base_url();?>asset/images/surat_keputusan.png" /><br />
         <b>Transaksi Glasir</b></a>
         </td>
-		<td align="center" width="20%"><a href="<?php echo base_url();?>index.php/supplier"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
+		<td align="center" width="20%"><a href="<?php echo base_url();?>index.php/adj_glasir"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>Penyesuaian Stok Glasir</b></a>
         </td>
         <td class="btn" align="center" width="20%"><a href="<?php echo base_url();?>index.php/lap_barang"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />

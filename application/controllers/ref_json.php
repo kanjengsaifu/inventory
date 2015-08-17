@@ -3,26 +3,26 @@
 class Ref_json extends CI_Controller {
 
 	/**
-	 * @author : Deddy Rusdiansyah,S.Kom
-	 * @web : http://deddyrusdiansyah.blogspot.com
-	 * @keterangan : Controller untuk halaman profil
+	 * @author      : Mpod Schuzatcky    
+	 * @web         : http://itmov.wordpress.com
+	 * @keterangan  : Controller halaman master glasir
 	 **/
-	
-	public function CariNoSJ(){
-		$bln = date('m');
-		$th = date('y');
-		$text = "SELECT max(kodebeli) as no FROM h_beli";
-		$data = $this->app_model->manualQuery($text);
-		if($data->num_rows() > 0 ){
-			foreach($data->result() as $t){
-				$no = $t->no; 
-				$tmp = ((int) substr($no,5,5))+1;
-				$hasil = 'BL'.sprintf("%05s", $tmp);
+        
+        public function DataGlasir(){
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			$cari= $this->input->post('cari');
+			if(empty($cari)){
+				$text = "SELECT * FROM glasir";
+			}else{
+				$text = "SELECT * FROM glasir WHERE id_glasir LIKE '%$cari%' OR nama_glasir LIKE '%$cari%' OR nama_alias LIKE '%$cari%'";
 			}
+			$d['data'] = $this->app_model->manualQuery($text);
+			
+			$this->load->view('data_glasir',$d);
 		}else{
-			$hasil = 'BL'.'00001';
+			header('location:'.base_url());
 		}
-		return $hasil;
 	}
 	
 	public function InfoGlasir()
@@ -39,6 +39,7 @@ class Ref_json extends CI_Controller {
                                         $data['nama_alias'] = $t->nama_alias;
 					$data['satuan'] = $t->satuan;
 					$data['status'] = $t->status;
+                                        $data['stok_awal'] = $t->stok_awal;
 					echo json_encode($data);
 				}
 			}else{
@@ -46,11 +47,29 @@ class Ref_json extends CI_Controller {
                                         $data['nama_alias'] = '';
 					$data['satuan'] = 'Liter';
 					$data['status'] = '';
+                                        $data['stok_awal'] = '';
 				echo json_encode($data);
 			}
 		}else{
 			header('location:'.base_url());
 		}
+	}
+        
+        public function CariNoSJ(){
+		$bln = date('m');
+		$th = date('y');
+		$text = "SELECT max(kodebeli) as no FROM h_beli";
+		$data = $this->app_model->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,5,5))+1;
+				$hasil = 'BL'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'BL'.'00001';
+		}
+		return $hasil;
 	}
 	
 	public function InfoSupplier()
@@ -94,22 +113,6 @@ class Ref_json extends CI_Controller {
 		}
 	}
         
-        public function DataGlasir(){
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			$cari= $this->input->post('cari');
-			if(empty($cari)){
-				$text = "SELECT * FROM glasir";
-			}else{
-				$text = "SELECT * FROM glasir WHERE id_glasir LIKE '%$cari%' OR nama_glasir LIKE '%$cari%' OR nama_alias LIKE '%$cari%'";
-			}
-			$d['data'] = $this->app_model->manualQuery($text);
-			
-			$this->load->view('data_glasir',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
 }
 
 /* End of file profil.php */

@@ -3,9 +3,9 @@
 class Glasir extends CI_Controller {
 
 	/**
-	 * @author : Mpod Schuzatcky    
-	 * @web : http://itmov.wordpress.com
-	 * @keterangan : Controller halaman master glasir
+	 * @author      : Mpod Schuzatcky    
+	 * @web         : http://itmov.wordpress.com
+	 * @keterangan  : Controller halaman master glasir
 	 **/
 	
 	public function index()
@@ -45,7 +45,7 @@ class Glasir extends CI_Controller {
 			endif;
 			
 			$text = "SELECT * FROM glasir $where ";		
-			$tot_hal = $this->app_model->manualQuery($text);		
+			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
@@ -65,7 +65,7 @@ class Glasir extends CI_Controller {
 			$text = "SELECT * FROM glasir $where 
 					ORDER BY id_glasir ASC 
 					LIMIT $limit OFFSET $offset";
-			$d['data'] = $this->app_model->manualQuery($text);
+			$d['data'] = $this->glzModel->manualQuery($text);
 			
 			
 			$d['content'] = $this->load->view('glasir/view', $d, true);		
@@ -91,7 +91,7 @@ class Glasir extends CI_Controller {
 			
 			$d['kode_glasir']   ='';
 			$d['nama_glasir']   ='';
-                        $d['stok_awal']   ='';
+                        $d['stok_awal']     ='';
 			$d['satuan']        ='Liter';
 			$d['status']        ='';
 			
@@ -119,7 +119,7 @@ class Glasir extends CI_Controller {
 			
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM glasir WHERE id_glasir='$id'";
-			$data = $this->app_model->manualQuery($text);
+			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['kode_glasir']   =$id;
@@ -131,7 +131,7 @@ class Glasir extends CI_Controller {
 			}else{
 					$d['kode_glasir']   =$id;
 					$d['nama_glasir']   ='';
-                                        $d['stok_awal']        ='';
+                                        $d['stok_awal']     ='';
 					$d['satuan']        ='Liter';
 					$d['hrg_beli']      ='';
 					$d['status']        ='';
@@ -149,7 +149,7 @@ class Glasir extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){			
 			$id = $this->uri->segment(3);
-			$this->app_model->manualQuery("DELETE FROM glasir WHERE id_glasir='$id'");
+			$this->glzModel->manualQuery("DELETE FROM glasir WHERE id_glasir='$id'");
 			echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir'>";			
 		}else{
 			header('location:'.base_url());
@@ -172,7 +172,7 @@ class Glasir extends CI_Controller {
 				
 				$id['id_glasir']=$this->input->post('kode_glasir');
 				
-				$data = $this->app_model->getSelectedData("glasir",$id);
+				$data = $this->glzModel->getSelectedData("glasir",$id);
 				if($data->num_rows()>0){
                                         $up['tgl_update'] = date('Y-m-d h:i:s');
 					$this->app_model->updateData("glasir",$up,$id);
