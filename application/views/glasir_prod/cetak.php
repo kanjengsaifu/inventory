@@ -82,19 +82,24 @@ $kiri .= '<p>'.$alamat_instansi.'</p>';
 
 $kanan = "<table class='kanan' width='100%'>
 		  <tr>
-		  	<td>Kode</td>
+		  	<td>No. Produksi</td>
 			<td width='5'>:</td>
-			<td><b>$kode_beli</b></td>
+			<td><b>$no_prod</b></td>
+		  </tr>
+                  <tr>
+		  	<td>No. Order</td>
+			<td width='5'>:</td>
+			<td><b>$no_po</b></td>
 		  </tr>
 		  <tr>
-		  	<td>Tanggal</td>
+		  	<td>Tanggal Planning</td>
 			<td width='5'>:</td>
-			<td>$tgl_beli</td>
+			<td>$tgl_plng</td>
 		  </tr>
 		  <tr>
-		  	<td>Supplier</td>
+		  	<td>Planner</td>
 			<td width='5'>:</td>
-			<td>$supplier</td>
+			<td>$planner</td>
 		  </tr>
 		  </table>";
 function myheader($kiri,$kanan,$judul){
@@ -114,13 +119,16 @@ function myheader($kiri,$kanan,$judul){
 </div>
 <table class="grid" width="100%">
 	<tr>
-    	<th width="20">No</th>
-        <th width="150">Kode Barang</th>
-        <th width="400">Nama Barang</th>
-        <th width="120">Satuan</th>
-        <th width="50">Jumlah</th>
-        <th width="150">Harga</th>
-        <th width="150">Total</th>
+    	<th width="5%">No</th>
+        <th width="12%">No. Produksi</th>
+        <th width="10%">Id. Glasir</th>
+        <th width="15%">Status Glasir</th>
+        <th width="8%">Volume (ltr)</th>
+        <th width="5%">Densitas</th>
+        <th width="15%">Ball Mill</th>
+        <th width="10%">Tong</th>
+        <th width="10%">Petugas</th>
+        <th width="10%">Inputer</th>
 	</tr>        
 <?php
 }
@@ -131,7 +139,7 @@ function myfooter(){
 	$no=1;
 	$page =1;
 	foreach($data->result_array() as $r){
-	$total = $r['jmlbeli']*$r['hargabeli'];
+	$total = $r['volume'];
 	if(($no%25) == 1){
    	if($no > 1){
         myfooter();
@@ -145,21 +153,49 @@ function myfooter(){
 	?>
     <tr>
     	<td align="center"><?php echo $no;?></td>
-        <td align="center"><?php echo $r['kode_barang'];?></td>
-        <td ><?php echo $r['nama_barang'];?></td>
-        <td align="center"><?php echo $r['satuan'];?></td>
-        <td align="center"><?php echo $r['jmlbeli'];?></td>
-        <td align="right"><?php echo number_format($r['hargabeli']);?></td>
-        <td align="right"><?php echo number_format($total);?></td>
+        <td align="center"><?php echo $r['no_prod'];?></td>
+        <td align="center"><?php echo $r['id_glasir'];?></td>
+        <td align="center"><?php echo $r['nama_gps'];?></td>
+        <td align="right"><?php echo number_format($r['volume']);?></td>
+        <td align="right"><?php echo number_format($r['densitas']);?></td>
+        <td align="center"><?php echo $r['nama_bm'];?></td>
+        <td align="center"><?php echo $r['nama_tong'];?></td>
+        <td align="center"><?php echo $r['petugas'];?></td>
+        <td align="center"><?php echo $r['inputer'];?></td>
     </tr>
     <?php
 	$no++;
 	$g_total = $g_total+$total;
 	}
 	echo "<tr>
-			<td colspan='6' align='center'>Total</td>
+			<td colspan='4' align='center'>Total</td>
 			<td align='right'>".number_format($g_total)."</td>
-		</tr>";
+              </tr>
+              <tr>
+			<td colspan='7' align='center' style='border-left-color: #FFFFFF; border-top-color: #FFFFFF; border-bottom-color: #FFFFFF'></td>
+			<td align='center'>Dibuat</td>
+                        <td align='center'>Disetujui</td>
+                        <td align='center'>Diterima</td>
+              </tr>
+              <tr>
+			<td colspan='7' align='center' style='border-left-color: #FFFFFF; border-top-color: #FFFFFF; border-bottom-color: #FFFFFF'></td>
+			<td align='center' height='60px'></td>
+                        <td align='center'></td>
+                        <td align='center'></td>
+              </tr>
+              <tr>
+			<td colspan='7' align='center' style='border-left-color: #FFFFFF; border-top-color: #FFFFFF; border-bottom-color: #FFFFFF'></td>
+			<td align='center'>Planner</td>
+                        <td align='center'>Mgr. PPIC</td>
+                        <td align='center'>Pelaksana</td>
+              </tr>
+              <tr>
+			<td colspan='7' align='center' style='border-left-color: #FFFFFF; border-top-color: #FFFFFF; border-bottom-color: #FFFFFF'></td>
+			<td align='center'>xx.xx.xx</td>
+                        <td colspan='2' align='center'>No. xxx.F.PPIC.REVISI-0</td>
+                        
+              </tr>
+            ";
 myfooter();	
 	echo "</table>";
 	echo "<div class='page' align='center'>Hal - ".$page."</div>";

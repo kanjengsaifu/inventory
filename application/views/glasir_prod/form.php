@@ -56,11 +56,13 @@ $(document).ready(function(){
 			}
 		});
 	};
+        
 	$("#harga").keypress(function(data){
 		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
 			return false;
 		}
 	});
+        
 	$("#jml").keypress(function(data){
 		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
 			return false;
@@ -217,7 +219,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/prod_glasir/cetak/'+kode);
+		window.open('<?php echo site_url();?>/glasir_prod/cetak/'+kode);
 		return false();
 	});
 	

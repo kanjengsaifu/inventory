@@ -32,7 +32,7 @@ class Glasir_prod extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Produksi Glasir";
+			$d['judul']="Daftar Produksi Glasir";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -62,7 +62,7 @@ class Glasir_prod extends CI_Controller {
 			
 
 			$text = "SELECT * FROM glasir_ph $where 
-					ORDER BY tgl_plng DESC 
+					ORDER BY no_prod DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
@@ -132,12 +132,12 @@ class Glasir_prod extends CI_Controller {
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['id_tong']          = $this->input->post('id_tong');
                                 $ud['petugas']          = $this->input->post('petugas');
-                                $ud['planner']          = $this->session->userdata('username');
+                                $ud['inputer']          = $this->session->userdata('username');
 				
-				$id['no_prod']          =$this->input->post('no_prod');
+				$id['no_prod']          = $this->input->post('no_prod');
 				
-				$id_d['no_prod']        =$this->input->post('no_prod');
-				$id_d['id_glasir']      =$this->input->post('id_glasir');
+				$id_d['no_prod']        = $this->input->post('no_prod');
+				$id_d['id_glasir']      = $this->input->post('id_glasir');
 				
 				$data = $this->glzModel->getSelectedData("glasir_ph",$id);
 				if($data->num_rows()>0){
@@ -178,29 +178,37 @@ class Glasir_prod extends CI_Controller {
 			$d['judul'] = "Form Order Produksi Glasir";
 			
 			$id = $this->uri->segment(3);
-			$text = "SELECT * FROM h_beli WHERE kodebeli='$id'";
+			$text = "SELECT * FROM glasir_ph WHERE no_prod='$id'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
-					$d['kode_beli']	= $id;
-					$d['tgl_beli']	= $this->glzModel->tgl_indo($db->tglbeli);
-					$d['supplier']	= $db->kode_supplier.' - '.$this->glzModel->NamaSupp($db->kode_supplier);
+					$d['no_prod']	= $id;
+					$d['tgl_plng']	= $this->glzModel->tgl_indo($db->tgl_plng);
+					$d['no_po']	= $db->no_po;
+                                        $d['planner']	= $db->planner;
 				}
 			}else{
-					$d['kode_beli']		=$id;
-					$d['tgl_beli']	='';
-					$d['supplier']	='';
+					$d['no_prod']		=$id;
+					$d['tgl_plng']	='';
+					$d['no_po']	='';
+                                        $d['planner']	='';
 			}
 			
-			$text = "SELECT a.kodebeli,a.kode_barang,a.jmlbeli,a.hargabeli,
-					b.nama_barang,b.satuan
-					FROM d_beli as a 
-					JOIN barang as b
-					ON a.kode_barang=b.kode_barang
-					WHERE a.kodebeli='$id'";
+			$text = "SELECT a.no_prod,a.id_glasir,c.nama_gps,a.volume,a.densitas,
+					d.nama_bm,e.nama_tong,a.petugas,a.inputer
+					FROM glasir_phd as a 
+					JOIN glasir_ph as b
+					ON a.no_prod=b.no_prod
+					JOIN glasir_patt as c
+					ON a.idgps=c.idgps
+					JOIN bm as d
+					ON a.id_bm=d.id_bm
+					JOIN tong as e
+					ON a.id_tong=e.id_tong
+					WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 									
-			$this->load->view('pembelian/cetak',$d);
+			$this->load->view('glasir_prod/cetak',$d);
 		}else{
 			header('location:'.base_url());
 		}
