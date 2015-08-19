@@ -113,6 +113,45 @@ class Glasir_prod extends CI_Controller {
 		}
 	}
         
+        public function status()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			$d['prg']= $this->config->item('prg');
+			$d['web_prg']= $this->config->item('web_prg');
+			
+			$d['nama_program']= $this->config->item('nama_program');
+			$d['instansi']= $this->config->item('instansi');
+			$d['usaha']= $this->config->item('usaha');
+			$d['alamat_instansi']= $this->config->item('alamat_instansi');
+
+			$d['judul']="Status Detail Produksi Glasir";
+			
+			$idphdh     = $this->glzModel->MaxPhdhGlasir();
+			//$tgl_inp    = date('Y-m-d h:i:s');
+                        $no_prod    = $this->uri->segment(3);
+			$id_glasir  = $this->uri->segment(4);
+                        $batch      = $this->uri->segment(5);
+			
+			$d['idphdh']	= $idphdh;
+                        $d['no_prod']	= $no_prod;
+                        $d['id_glasir']	= $id_glasir;
+                        $d['batch']	= $batch;
+                        			
+			$gps = "SELECT * FROM glasir_patt";
+			$d['l_gps'] = $this->glzModel->manualQuery($gps);
+                        $bm = "SELECT * FROM bm";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
+                        $tong = "SELECT * FROM tong";
+			$d['l_tong'] = $this->glzModel->manualQuery($tong);
+			
+			$d['content'] = $this->load->view('glasir_prod/form_detail', $d, true);		
+			$this->load->view('home',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
         public function simpan()
 	{
 		
@@ -264,13 +303,39 @@ class Glasir_prod extends CI_Controller {
 		}
 	}
         
+        public function DataDetailHistory()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			
+			$id = $this->input->post('kode');
+			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,c.nama_gps,a.volume,a.densitas,
+					d.nama_bm,e.nama_tong,a.petugas,a.inputer
+					FROM glasir_phd as a 
+					JOIN glasir_ph as b
+					ON a.no_prod=b.no_prod
+					JOIN glasir_patt as c
+					ON a.idgps=c.idgps
+					JOIN bm as d
+					ON a.id_bm=d.id_bm
+					JOIN tong as e
+					ON a.id_tong=e.id_tong
+					WHERE a.no_prod='$id'";
+			$d['data']= $this->glzModel->manualQuery($text);
+
+			$this->load->view('glasir_prod/detail_history',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
         public function DataDetail()
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.id_glasir,c.nama_gps,a.volume,a.densitas,
+			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,c.nama_gps,a.volume,a.densitas,
 					d.nama_bm,e.nama_tong,a.petugas,a.inputer
 					FROM glasir_phd as a 
 					JOIN glasir_ph as b
@@ -309,7 +374,8 @@ class Glasir_prod extends CI_Controller {
 		if(!empty($cek)){			
 			$id = $this->uri->segment(3);
 			$kode = $this->uri->segment(4);
-			$this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id' AND id_glasir='$kode'");
+                        $batch = $this->uri->segment(5);
+			$this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
 			
 			$this->edit();
 		}else{

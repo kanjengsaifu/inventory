@@ -1,12 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class GlzModel extends CI_Model {
+class Glzmodel extends CI_Model {
 
 	/**
 	 * @author      : Fadli Rifa'o
 	 * @web         : http://itmov.wordpress.com
 	 * @keterangan  : Model untuk menangani query modul glasir
 	 **/
+         
+        public function __construct()
+            {
+                parent::__construct();
+            }
     
         //Konversi tanggal
 	public function tgl_sql($date){
@@ -126,8 +131,6 @@ class GlzModel extends CI_Model {
 	}
         
         public function MaxPhGlasir(){
-		$bln = date('m');
-		$th = date('y');
 		$text = "SELECT max(no_prod) as no FROM glasir_ph";
 		$data = $this->glzModel->manualQuery($text);
 		if($data->num_rows() > 0 ){
@@ -138,6 +141,21 @@ class GlzModel extends CI_Model {
 			}
 		}else{
 			$hasil = 'PG'.'00001';
+		}
+		return $hasil;
+	}
+        
+        public function MaxPhdhGlasir(){
+		$text = "SELECT max(idphdh) as no FROM glasir_phdh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'GLZPHDH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'GLZPHDH'.'00001';
 		}
 		return $hasil;
 	}
