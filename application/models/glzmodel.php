@@ -152,10 +152,10 @@ class Glzmodel extends CI_Model {
 			foreach($data->result() as $t){
 				$no = $t->no; 
 				$tmp = ((int) substr($no,2,5))+1;
-				$hasil = 'GLZPHDH'.sprintf("%05s", $tmp);
+				$hasil = 'HG'.sprintf("%05s", $tmp);
 			}
 		}else{
-			$hasil = 'GLZPHDH'.'00001';
+			$hasil = 'HG'.'00001';
 		}
 		return $hasil;
 	}

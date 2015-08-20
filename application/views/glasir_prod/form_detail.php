@@ -8,16 +8,20 @@ $(document).ready(function(){
 	});	
 	
 	tampil_data();
+        
+        $("#tgl").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
 	
 	function tampil_data(){
 		var noprod = $("#noprod").val();
                 var batch = $("#batch").val();
-                var idphd = $("#idphd").val();
+                var idglasir = $("#idglasir").val();
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
 			url		: "<?php echo site_url(); ?>/glasir_prod/DataDetailHistory",
-			data	: { 'noprod' : noprod, 'batch' : batch, 'idphd' : idphd,},
+			data	: { 'noprod' : noprod, 'batch' : batch, 'idglasir' : idglasir,},
 			cache	: false,
 			success	: function(data){
 				$("#tampil_data").html(data);
@@ -58,89 +62,17 @@ $(document).ready(function(){
 			}
 		});
 	};
-        
-	$("#harga").keypress(function(data){
-		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
-			return false;
-		}
-	});
-        
-	$("#jml").keypress(function(data){
-		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
-			return false;
-		}
-	});
-	
-	function hitung(){
-		var jml = $("#jml").val();
-		var harga = $("#harga").val();
-		
-		var total = parseInt(jml)*parseInt(harga);
-		$("#total").val(total);
-	}
-	$("#jml").keyup(function(){
-		hitung();
-	});
-	$("#harga").keyup(function(){
-		hitung();
-	});
 	
 	$("#simpan").click(function(){
             
-		var id_glasir	= $("#id_glasir").val();
 		var status	= $("#status").val();
 		var volume	= $("#volume").val();
-		var no_po	= $("#no_po").val();
-		var planner     = $("#planner").val();
-		var tgl_plng    = $("#tgl_plng").val();
                 var petugas     = $("#petugas").val();
                 var densitas    = $("#densitas").val();
+                var tgl         = $("#tgl").val();
 		
 		var string = $("#form").serialize();
 		
-                if(no_po.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, No Order tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#no_po").focus();
-			return false();
-		}
-                
-                 if(tgl_plng.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, No Order tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#tgl_plng").focus();
-			return false();
-		}
-                
-		if(planner.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Nama Planner tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#planner").focus();
-			return false();
-		}
-		
-		if(id_glasir.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Kode Glasir tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#id_glasir").focus();
-			return false();
-		}
 		if(status.length==0){
 			$.messager.show({
 				title:'Info',
@@ -151,6 +83,7 @@ $(document).ready(function(){
 			$("#status").focus();
 			return false();
 		}
+                
 		if(volume.length==0){
 			$.messager.show({
 				title:'Info',
@@ -161,6 +94,7 @@ $(document).ready(function(){
 			$("#volume").focus();
 			return false();
 		}
+                
                 if(densitas.length==0){
 			$.messager.show({
 				title:'Info',
@@ -171,6 +105,7 @@ $(document).ready(function(){
 			$("#densitas").focus();
 			return false();
 		}
+                
                 if(petugas.length==0){
 			$.messager.show({
 				title:'Info',
@@ -181,10 +116,21 @@ $(document).ready(function(){
 			$("#petugas").focus();
 			return false();
 		}
+                
+                if(tgl.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal status tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tgl").focus();
+			return false();
+		}
 		
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_prod/simpan",
+			url		: "<?php echo site_url(); ?>/glasir_prod/simpanStatus",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -209,14 +155,7 @@ $(document).ready(function(){
 	});
 	
 	$("#tambah_data").click(function(){
-		$(".detail").val('');
-		$("#id_glasir").val('');
-                $("#status").val('');
-                $("#volume").val('');
-                $("#densitas").val('');
-                $("#id_bm").val('');
-                $("#id_tong").val('');
-		$("#id_glasir").focus();
+		$("#status").focus();
 	});
 	
 	$("#cetak").click(function(){
@@ -225,29 +164,6 @@ $(document).ready(function(){
 		return false();
 	});
 	
-	$("#cari_barang").click(function(){
-		AmbilDaftarGlasir();
-		$("#dlg").dialog('open');
-	});
-	
-	$("#text_cari").keyup(function(){
-		AmbilDaftarGlasir();
-		//$("#dlg").dialog('open');
-	});
-	
-	function AmbilDaftarGlasir(){
-		var cari = $("#text_cari").val();
-		
-		$.ajax({
-			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/ref_json/DataGlasir",
-			data	: "cari="+cari,
-			cache	: false,
-			success	: function(data){
-				$("#daftar_glasir").html(data);
-			}
-		});
-	}
 });	
 </script>
 <form name="form" id="form">
@@ -296,6 +212,11 @@ $(document).ready(function(){
         <?php }
 		} ?>
         </select>
+    </tr
+    <tr>    
+        <td>Tgl Pelaksanaan</td>
+        <td>:</td>
+        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox"/></td>
     </tr>
     </table>
     </fieldset>
@@ -306,12 +227,12 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Volume</td>
         <td width="5">:</td>
-        <td><input type="text" name="volume" id="volume"  size="41" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/> liter</td>
+        <td><input type="text" name="volume" id="volume"  size="41" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;" value="<?php echo $volume;?>"/> liter</td>
     </tr>
     <tr>    
         <td>Densitas</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;" value="<?php echo $densitas;?>"/></td>
     <tr>    
         <td>Ball Mill</td>
         <td>:</td>

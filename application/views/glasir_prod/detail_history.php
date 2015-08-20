@@ -29,44 +29,47 @@ $(function() {
 </style>
 <table id="dataTable" width="100%">
 <tr>
-    <th>No. History</th>
-    <th>No. Produksi</th>
-    <th>Id. Glasir</th>
-    <th>Batch</th>
-    <th>Status Glasir</th>
-    <th>Volume (ltr)</th>
-    <th>Densitas</th>
-    <th>Ball Mill</th>
-    <th>Tong</th>
-    <th>PIC</th>
-    <th>Inputer</th>
+    <th style="font-size:12px">No</th>
+    <th style="font-size:12px">Kode</th>
+    <th style="font-size:12px">Status</th>
+    <th style="font-size:12px">Volume (ltr)</th>
+    <th style="font-size:12px">Densitas</th>
+    <th style="font-size:12px">Ball Mill</th>
+    <th style="font-size:12px">Tong</th>
+    <th style="font-size:12px">PIC</th>
+    <th style="font-size:12px">Inputer</th>
+    <th style="font-size:12px">Waktu Input</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
 		$g_total=0;
+                $h_total=0;
 		$no =1;
 		foreach($data->result_array() as $db){  
 		$total = $db['volume'];
+                $totald = $db['densitas'];
+                $pembagi = $no;
 		?>    
     	<tr>
-            <td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
-            <td align="center" width="100" ><?php echo $db['id_glasir']; ?></td>
-            <td align="center" width="50" ><?php echo $db['idphd']; ?></td>
-            <td align="center" width="100" ><?php echo $db['nama_gps']; ?></td>
-            <td align="right" width="100" ><?php echo number_format($db['volume']); ?></td>
-            <td align="right" width="100" ><?php echo number_format($db['densitas']); ?></td>
-            <td align="center" width="100" ><?php echo $db['nama_bm']; ?></td>
-            <td align="center" width="100" ><?php echo $db['nama_tong']; ?></td>
-            <td align="center" width="100" ><?php echo $db['petugas']; ?></td>
-            <td align="center" width="100" ><?php echo $db['inputer']; ?></td>
+            <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
+            <td align="center" width="80" style="font-size:10px"><?php echo $db['idphdh']; ?></td>
+            <td align="left" width="150" style="font-size:10px"><?php echo $db['tgl']; ?> | <?php echo $db['nama_gps']; ?></td>
+            <td align="right" width="100" style="font-size:10px"><?php echo number_format($db['volume']); ?></td>
+            <td align="right" width="80" style="font-size:10px"><?php echo number_format($db['densitas']); ?></td>
+            <td align="center" width="100" style="font-size:10px">[<?php echo $db['id_bm']; ?>] - <?php echo $db['nama_bm']; ?></td>
+            <td align="center" width="100" style="font-size:10px">[<?php echo $db['id_tong']; ?>] - <?php echo $db['nama_tong']; ?></td>
+            <td align="center" width="100" style="font-size:10px"><?php echo $db['petugas']; ?></td>
+            <td align="center" width="100" style="font-size:10px"><?php echo $db['inp']; ?></td>
+            <td align="center" width="100" style="font-size:10px"><?php echo $db['inp_time']; ?></td>
     </tr>
     <?php
 		$no++;
 		$g_total=$g_total+$total;
+                $h_total=$h_total+$totald;
 		}
 	}else{
 		$g_total=0;
+                $h_total=0;
 	?>
     	<tr>
         	<td colspan="8" align="center" >Tidak Ada Data</td>
@@ -75,7 +78,17 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="5" align="center">Total</th>
-        <th style="text-align:right"><?php echo number_format($g_total);?></th>
+	<th colspan="3" align="center"></th>
+        <?php 
+        if ($g_total==0 and $h_total==0){
+            $sip = 0;
+            $xip = 0;
+        }else{
+            $sip = $g_total/$pembagi;
+            $xip = $h_total/$pembagi;
+        }
+        ?>
+        <th style="text-align:right; font-size:10px">Total = <?php echo number_format($sip);?></th>
+        <th style="text-align:right; font-size:10px">Rerata = <?php echo number_format($xip);?></th>
 </tr>    
 </table>

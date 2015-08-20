@@ -98,13 +98,12 @@ class Glasir_prod extends CI_Controller {
                         $d['tgl_plng']	= '';
                         $d['inputer']	= $inputer;
                         $d['planner']	= '';
+                        $d['dsc']	= '';
 			
-			$gps = "SELECT * FROM glasir_patt";
-			$d['l_gps'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM bm";
-			$d['l_bm'] = $this->glzModel->manualQuery($bm);
-                        $tong = "SELECT * FROM tong";
-			$d['l_tong'] = $this->glzModel->manualQuery($tong);
+			$gps = "SELECT * FROM global_buyer";
+			$d['l_byr'] = $this->glzModel->manualQuery($gps);
+                        $bm = "SELECT * FROM global_delivery";
+			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -132,17 +131,22 @@ class Glasir_prod extends CI_Controller {
                         $no_prod    = $this->uri->segment(3);
 			$id_glasir  = $this->uri->segment(4);
                         $batch      = $this->uri->segment(5);
+                        $volume     = $this->uri->segment(6);
+                        $densitas   = $this->uri->segment(7);
 			
 			$d['idphdh']	= $idphdh;
                         $d['no_prod']	= $no_prod;
                         $d['id_glasir']	= $id_glasir;
                         $d['batch']	= $batch;
+                        $d['volume']	= $volume;
+                        $d['densitas']	= $densitas;
                         			
-			$gps = "SELECT * FROM glasir_patt";
+			$gps = "SELECT * FROM glasir_patt WHERE idgps NOT IN (SELECT idgps FROM glasir_phdh 
+                                        where noprod = '$no_prod'  AND idglasir = '$id_glasir' AND idphd = '$batch')";
 			$d['l_gps'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM bm";
+                        $bm = "SELECT * FROM global_mesin";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
-                        $tong = "SELECT * FROM tong";
+                        $tong = "SELECT * FROM global_tong";
 			$d['l_tong'] = $this->glzModel->manualQuery($tong);
 			
 			$d['content'] = $this->load->view('glasir_prod/form_detail', $d, true);		
@@ -165,11 +169,11 @@ class Glasir_prod extends CI_Controller {
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
-				$ud['idgps']            = $this->input->post('status');
 				$ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
-                                $ud['id_bm']            = $this->input->post('id_bm');
-                                $ud['id_tong']          = $this->input->post('id_tong');
+                                $ud['buyer']            = $this->input->post('buyer');
+                                $ud['jns']              = $this->input->post('jns');
+                                $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['inputer']          = $this->session->userdata('username');
 				
@@ -192,9 +196,46 @@ class Glasir_prod extends CI_Controller {
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_ph",$up);
+                                        $ud['tgl_insert']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_phd",$ud);
 					echo 'Simpan data Sukses';		
 				}
+		}else{
+				header('location:'.base_url());
+		}
+	
+	}
+        
+        public function simpanStatus()
+	{
+		
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			$ud['idphdh']		= $this->glzModel->MaxPhdhGlasir(); //
+			$ud['tgl']		= $this->glzModel->tgl_sql($this->input->post('tgl'));
+			$ud['idglasir']         = $this->input->post('idglasir'); //
+			$ud['inp']              = $this->session->userdata('username'); //
+			$ud['noprod']           = $this->input->post('noprod'); //
+			$ud['idphd']            = $this->input->post('batch');
+			$ud['volume']           = $this->input->post('volume');
+                        $ud['densitas']         = $this->input->post('densitas');
+                        $ud['idgps']            = $this->input->post('status');
+                        $ud['idbm']             = $this->input->post('id_bm');
+                        $ud['idtong']           = $this->input->post('id_tong');
+                        $ud['petugas']          = $this->input->post('petugas');
+			
+                        $id['idphdh']           = $this->input->post('idphdh');
+			$q = $this->db->get_where("glasir_phdh",$id);
+			$row = $q->num_rows();
+			if($row>0){
+				$ud['inp_time'] = date('Y-m-d h:i:s');
+				$this->db->update("glasir_phdh",$ud,$id);
+				echo "Data Sukses diUpdate";
+			}else{
+				$ud['inp_time'] = date('Y-m-d h:i:s');
+				$this->db->insert("glasir_phdh",$ud);
+				echo "Data Sukses diSimpan";
+			}
 		}else{
 				header('location:'.base_url());
 		}
@@ -240,9 +281,9 @@ class Glasir_prod extends CI_Controller {
 					ON a.no_prod=b.no_prod
 					JOIN glasir_patt as c
 					ON a.idgps=c.idgps
-					JOIN bm as d
+					JOIN global_mesin as d
 					ON a.id_bm=d.id_bm
-					JOIN tong as e
+					JOIN global_tong as e
 					ON a.id_tong=e.id_tong
 					WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
@@ -275,7 +316,7 @@ class Glasir_prod extends CI_Controller {
 				foreach($data->result() as $db){
 					$d['no_prod']	= $id;
 					$d['tgl_plng']	= $this->glzModel->tgl_str($db->tgl_plng);
-                                        $d['tgl_inp']	= $this->glzModel->tgl_str($db->tgl_inp);
+                                        $d['tgl_inp']	= $db->tgl_inp;
 					$d['no_po']	= $db->no_po;
                                         $d['inputer']	= $db->inputer;
                                         $d['planner']	= $db->planner;  
@@ -289,12 +330,10 @@ class Glasir_prod extends CI_Controller {
                                         $d['planner']	='';
 			}
 			
-			$gps = "SELECT * FROM glasir_patt";
-			$d['l_gps'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM bm";
-			$d['l_bm'] = $this->glzModel->manualQuery($bm);
-                        $tong = "SELECT * FROM tong";
-			$d['l_tong'] = $this->glzModel->manualQuery($tong);
+			$gps = "SELECT * FROM global_buyer";
+			$d['l_byr'] = $this->glzModel->manualQuery($gps);
+                        $bm = "SELECT * FROM global_delivery";
+			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -308,19 +347,14 @@ class Glasir_prod extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 			
-			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,c.nama_gps,a.volume,a.densitas,
-					d.nama_bm,e.nama_tong,a.petugas,a.inputer
-					FROM glasir_phd as a 
-					JOIN glasir_ph as b
-					ON a.no_prod=b.no_prod
-					JOIN glasir_patt as c
-					ON a.idgps=c.idgps
-					JOIN bm as d
-					ON a.id_bm=d.id_bm
-					JOIN tong as e
-					ON a.id_tong=e.id_tong
-					WHERE a.no_prod='$id'";
+			$noprod     = $this->input->post('noprod');
+                        $idglasir   = $this->input->post('idglasir');
+                        $batch      = $this->input->post('batch');
+			$text = "select a.idphdh,a.noprod,a.idglasir,a.idphd,b.nama_gps,a.tgl,a.volume,a.densitas,
+                                    c.id_bm,c.nama_bm,d.id_tong,d.nama_tong,a.petugas,a.inp,a.inp_time from glasir_phdh a
+                                    join glasir_patt b on a.idgps = b.idgps join global_mesin c on a.idbm = c.id_bm 
+                                    join global_tong d on a.idtong = d.id_tong
+                                    where a.noprod = '$noprod' and a.idglasir = '$idglasir' and a.idphd ='$batch'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_prod/detail_history',$d);
@@ -335,18 +369,9 @@ class Glasir_prod extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,c.nama_gps,a.volume,a.densitas,
-					d.nama_bm,e.nama_tong,a.petugas,a.inputer
-					FROM glasir_phd as a 
-					JOIN glasir_ph as b
-					ON a.no_prod=b.no_prod
-					JOIN glasir_patt as c
-					ON a.idgps=c.idgps
-					JOIN bm as d
-					ON a.id_bm=d.id_bm
-					JOIN tong as e
-					ON a.id_tong=e.id_tong
-					WHERE a.no_prod='$id'";
+			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,a.volume,a.densitas,a.petugas,a.inputer,c.nama as buyer, d.nama as jns, a.dsc
+                                    FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod JOIN global_buyer as c ON a.buyer=c.id JOIN global_delivery as d
+                                    ON a.jns=d.id JOIN glasir as e ON a.id_glasir=e.id_glasir WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_prod/detail',$d);

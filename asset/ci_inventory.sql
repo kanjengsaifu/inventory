@@ -54,45 +54,6 @@ DELETE FROM `barang`;
 /*!40000 ALTER TABLE `barang` ENABLE KEYS */;
 
 
--- Dumping structure for table inventory.bm
-CREATE TABLE IF NOT EXISTS `bm` (
-  `id_bm` smallint(6) NOT NULL AUTO_INCREMENT,
-  `nama_bm` varchar(50) NOT NULL,
-  `jns_bm` varchar(50) NOT NULL,
-  `no_bm` varchar(50) NOT NULL,
-  `kapasitas` double NOT NULL,
-  `satuan` char(50) NOT NULL,
-  `lokasi` char(50) NOT NULL,
-  PRIMARY KEY (`id_bm`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- Dumping data for table inventory.bm: ~20 rows (approximately)
-DELETE FROM `bm`;
-/*!40000 ALTER TABLE `bm` DISABLE KEYS */;
-INSERT INTO `bm` (`id_bm`, `nama_bm`, `jns_bm`, `no_bm`, `kapasitas`, `satuan`, `lokasi`) VALUES
-	(1, 'Ball Mill 200  kg', '200 kg', '1', 200, 'kg', ''),
-	(2, 'Ball Mill 200  kg', '200 kg', '2', 200, 'kg', ''),
-	(3, 'Ball Mill 200  kg', '200 kg', '3', 200, 'kg', ''),
-	(4, 'Ball Mill 200  kg', '200 kg', '4', 200, 'kg', ''),
-	(5, 'Ball Mill 500  kg', '500 kg', '1', 500, 'kg', ''),
-	(6, 'Ball Mill 500  kg', '500 kg', '2', 500, 'kg', ''),
-	(7, 'Ball Mill 500  kg', '500 kg', '3', 500, 'kg', ''),
-	(8, 'Ball Mill 500  kg', '500 kg', '4', 500, 'kg', ''),
-	(9, 'Ball Mill 500  kg', '500 kg', '5', 500, 'kg', ''),
-	(10, 'Ball Mill 500  kg', '500 kg', '6', 500, 'kg', ''),
-	(11, 'Ball Mill 500  kg', '500 kg', '7', 500, 'kg', ''),
-	(12, 'Ball Mill 500  kg', '500 kg', '8', 500, 'kg', ''),
-	(13, 'Ball Mill 500  kg', '500 kg', '9', 500, 'kg', ''),
-	(14, 'Ball Mill 500  kg', '500 kg', '10', 500, 'kg', ''),
-	(15, 'Ball Mill 2 ton', '2 ton', '1', 2000, 'kg', ''),
-	(16, 'Ball Mill 2 ton', '2 ton', '2', 2000, 'kg', ''),
-	(17, 'Ball Mill 2 ton', '2 ton', '3', 2000, 'kg', ''),
-	(18, 'Ball Mill 3 ton', '3 ton', '1', 3000, 'kg', ''),
-	(19, 'Ball Mill 3 ton', '3 ton', '5', 3000, 'kg', ''),
-	(20, 'Ball Mill 3 ton', '3 ton', 'P3', 3000, 'kg', '');
-/*!40000 ALTER TABLE `bm` ENABLE KEYS */;
-
-
 -- Dumping structure for table inventory.ci_sessions
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
   `session_id` varchar(40) NOT NULL DEFAULT '0',
@@ -104,23 +65,12 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.ci_sessions: ~13 rows (approximately)
+-- Dumping data for table inventory.ci_sessions: ~2 rows (approximately)
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('05ec3e0bf3a536187b8ee881b46ef669', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975163, ''),
-	('07509e3701f70a40ca885426e57f8021', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439981684, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
-	('0ac8b82a3abb751544e411839751716f', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975124, ''),
-	('19ae58c69d9ae4eda56a2cacb1f7d959', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975136, ''),
-	('22ce274269398b2f7b6d2c650c649c69', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975133, ''),
-	('5cfe515d62031d468b023fc784038c2b', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975142, ''),
-	('67098ca6acd198689dbccf2e75357c28', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975148, ''),
-	('6fe45bc774ece289bc7e639f80563c1d', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975178, ''),
-	('74b38bce6882b3cedf5de403983ac041', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975160, ''),
-	('7d3b43401c34f570d19fa318c078e877', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975157, ''),
-	('92029c3ae76188943d8e3ad97661e03b', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975115, ''),
-	('d8683e20b003ed0207567bcb7d72e0ad', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439975166, ''),
-	('f7806f57236b1ba00c474480d89eb9ed', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1439974998, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}');
+	('207f9d1ef0529e0b328747e1816146ee', '127.0.0.1', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko/20100101 Firefox/40.0', 1440065045, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
+	('e057e8b806c951dc97067d8e73e00954', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/44.0.2403.89 Chrome/44.0.2403.89 ', 1440065106, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -178,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `glasir` (
   PRIMARY KEY (`id_glasir`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.glasir: ~212 rows (approximately)
+-- Dumping data for table inventory.glasir: ~201 rows (approximately)
 DELETE FROM `glasir`;
 /*!40000 ALTER TABLE `glasir` DISABLE KEYS */;
 INSERT INTO `glasir` (`id_glasir`, `nama_glasir`, `nama_alias`, `satuan`, `status`, `stok_awal`, `inputer`, `tgl_input`, `tgl_update`) VALUES
@@ -405,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `glasir_patt` (
   PRIMARY KEY (`idgps`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.glasir_patt: ~6 rows (approximately)
+-- Dumping data for table inventory.glasir_patt: ~5 rows (approximately)
 DELETE FROM `glasir_patt`;
 /*!40000 ALTER TABLE `glasir_patt` DISABLE KEYS */;
 INSERT INTO `glasir_patt` (`idgps`, `nama_gps`, `desc_gps`) VALUES
@@ -413,8 +363,7 @@ INSERT INTO `glasir_patt` (`idgps`, `nama_gps`, `desc_gps`) VALUES
 	(2, 'Glasir Ori', 'Glasir selesai tes bakar sudah di tong'),
 	(3, 'Glasir Hold', 'Glasir sedang dilakukan proses setel atau setelah '),
 	(4, 'Glasir Pass', 'Glasir sudah dilakukan proses setel siap digunakan'),
-	(5, 'Glasir No Pass', 'Glasir tidak bisa digunakan'),
-	(6, 'Glasir Return', 'Glasir pengembalian dari conveyer');
+	(5, 'Glasir No Pass', 'Glasir tidak bisa digunakan');
 /*!40000 ALTER TABLE `glasir_patt` ENABLE KEYS */;
 
 
@@ -430,16 +379,11 @@ CREATE TABLE IF NOT EXISTS `glasir_ph` (
   PRIMARY KEY (`no_prod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_ph: ~6 rows (approximately)
+-- Dumping data for table inventory.glasir_ph: ~7 rows (approximately)
 DELETE FROM `glasir_ph`;
 /*!40000 ALTER TABLE `glasir_ph` DISABLE KEYS */;
 INSERT INTO `glasir_ph` (`no_prod`, `tgl_plng`, `no_po`, `inputer`, `planner`, `tgl_inp`, `lst_upd`) VALUES
-	('PG00001', '2015-08-13', 'OG00001', 'admin', 'Masitoh', '2015-08-07 15:01:01', '0000-00-00 00:00:00'),
-	('PG00002', '2015-08-16', 'OG00002', 'admin', 'Masitoh', '2015-08-17 11:06:20', '0000-00-00 00:00:00'),
-	('PG00003', '2015-08-01', 'OG00003', 'admin', 'Yuni', '2015-08-17 01:50:37', '0000-00-00 00:00:00'),
-	('PG00004', '2015-08-01', 'OG00003', 'admin', 'Yuni', '2015-08-17 01:58:03', '0000-00-00 00:00:00'),
-	('PG00005', '2015-08-01', 'OG00003', 'admin', 'Yuni', '2015-08-17 02:04:05', '0000-00-00 00:00:00'),
-	('PG00006', '2015-08-18', 'OG00006', 'admin', 'Yuni', '2015-08-18 09:36:03', '0000-00-00 00:00:00');
+	('PG00001', '2015-08-01', 'OG00002', 'admin', 'Masitoh', '2015-08-20 05:00:18', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `glasir_ph` ENABLE KEYS */;
 
 
@@ -448,36 +392,28 @@ CREATE TABLE IF NOT EXISTS `glasir_phd` (
   `idphd` smallint(6) NOT NULL AUTO_INCREMENT,
   `no_prod` char(15) NOT NULL,
   `id_glasir` varchar(50) NOT NULL,
-  `idgps` smallint(6) NOT NULL,
+  `buyer` smallint(6) NOT NULL,
+  `jns` smallint(6) NOT NULL,
+  `dsc` varchar(255) NOT NULL,
   `volume` double NOT NULL,
   `densitas` double NOT NULL,
-  `id_bm` smallint(6) NOT NULL,
-  `id_tong` smallint(6) NOT NULL,
   `inputer` varchar(50) NOT NULL,
   `petugas` varchar(50) NOT NULL,
   `tgl_insert` datetime NOT NULL,
   PRIMARY KEY (`idphd`),
   KEY `FK_glasir_phd_glasir` (`id_glasir`),
-  KEY `FK_glasir_phd_glasir_patt` (`idgps`),
   KEY `FK_glasir_phd_glasir_ph` (`no_prod`),
   KEY `FK_glasir_phd_admins` (`inputer`),
-  CONSTRAINT `FK_glasir_phd_admins` FOREIGN KEY (`inputer`) REFERENCES `admins` (`username`),
-  CONSTRAINT `FK_glasir_phd_glasir` FOREIGN KEY (`id_glasir`) REFERENCES `glasir` (`id_glasir`),
-  CONSTRAINT `FK_glasir_phd_glasir_ph` FOREIGN KEY (`no_prod`) REFERENCES `glasir_ph` (`no_prod`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+  KEY `FK_glasir_phd_global_buyer` (`buyer`),
+  KEY `FK_glasir_phd_global_delivery` (`jns`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_phd: ~8 rows (approximately)
+-- Dumping data for table inventory.glasir_phd: ~10 rows (approximately)
 DELETE FROM `glasir_phd`;
 /*!40000 ALTER TABLE `glasir_phd` DISABLE KEYS */;
-INSERT INTO `glasir_phd` (`idphd`, `no_prod`, `id_glasir`, `idgps`, `volume`, `densitas`, `id_bm`, `id_tong`, `inputer`, `petugas`, `tgl_insert`) VALUES
-	(1, 'PG00001', 'Y00001', 1, 50, 1600, 1, 1, 'sukini', 'zainudin', '2015-08-07 15:01:01'),
-	(3, 'PG00002', 'Y00002', 1, 150, 1600, 1, 1, 'sukini', 'zainudin', '2015-08-07 15:01:01'),
-	(7, 'PG00002', 'Y00008', 1, 150, 1600, 1, 1, 'sukini', 'zainudin', '2015-08-07 15:01:01'),
-	(12, 'PG00005', 'Y00008', 1, 500, 1800, 3, 4, 'admin', 'nana', '0000-00-00 00:00:00'),
-	(13, 'PG00003', 'Y00013', 1, 100, 1500, 6, 1, 'admin', 'dian', '2015-08-17 02:08:03'),
-	(14, 'PG00004', 'Y00086', 1, 300, 1450, 9, 11, 'admin', 'nana', '2015-08-17 02:08:54'),
-	(15, 'PG00006', 'Y00002', 1, 200, 0, 2, 2, 'admin', 'zainudin', '0000-00-00 00:00:00'),
-	(16, 'PG00001', 'Y00001', 1, 50, 1600, 1, 1, 'sukini', 'zainudin', '2015-08-07 15:01:01');
+INSERT INTO `glasir_phd` (`idphd`, `no_prod`, `id_glasir`, `buyer`, `jns`, `dsc`, `volume`, `densitas`, `inputer`, `petugas`, `tgl_insert`) VALUES
+	(19, 'PG00001', 'Y00002', 1, 1, 'Siap-siap', 100, 1600, 'admin', 'zainudin', '2015-08-20 05:00:18'),
+	(20, 'PG00001', 'Y00010', 2, 4, 'tambahan', 120, 1500, 'admin', 'rodi', '2015-08-20 05:02:28');
 /*!40000 ALTER TABLE `glasir_phd` ENABLE KEYS */;
 
 
@@ -487,12 +423,15 @@ CREATE TABLE IF NOT EXISTS `glasir_phdh` (
   `noprod` char(15) NOT NULL,
   `idglasir` varchar(50) NOT NULL,
   `idphd` smallint(6) NOT NULL,
+  `tgl` date NOT NULL,
   `idgps` smallint(6) NOT NULL,
   `volume` decimal(10,0) NOT NULL,
   `densitas` decimal(10,0) NOT NULL,
   `idbm` smallint(6) NOT NULL,
   `idtong` smallint(6) NOT NULL,
   `petugas` varchar(50) NOT NULL,
+  `inp` varchar(50) NOT NULL,
+  `inp_time` datetime NOT NULL,
   PRIMARY KEY (`idphdh`),
   KEY `FK_glasir_phdh_glasir_phd` (`noprod`),
   KEY `FK_glasir_phdh_glasir_phd_2` (`idglasir`),
@@ -500,19 +439,20 @@ CREATE TABLE IF NOT EXISTS `glasir_phdh` (
   KEY `FK_glasir_phdh_glasir_patt` (`idgps`),
   KEY `FK_glasir_phdh_bm` (`idbm`),
   KEY `FK_glasir_phdh_tong` (`idtong`),
-  CONSTRAINT `FK_glasir_phdh_bm` FOREIGN KEY (`idbm`) REFERENCES `bm` (`id_bm`),
-  CONSTRAINT `FK_glasir_phdh_tong` FOREIGN KEY (`idtong`) REFERENCES `tong` (`id_tong`),
+  CONSTRAINT `FK_glasir_phdh_bm` FOREIGN KEY (`idbm`) REFERENCES `global_mesin` (`id_bm`),
   CONSTRAINT `FK_glasir_phdh_glasir_patt` FOREIGN KEY (`idgps`) REFERENCES `glasir_patt` (`idgps`),
   CONSTRAINT `FK_glasir_phdh_glasir_phd` FOREIGN KEY (`noprod`) REFERENCES `glasir_phd` (`no_prod`),
   CONSTRAINT `FK_glasir_phdh_glasir_phd_2` FOREIGN KEY (`idglasir`) REFERENCES `glasir_phd` (`id_glasir`),
-  CONSTRAINT `FK_glasir_phdh_glasir_phd_3` FOREIGN KEY (`idphd`) REFERENCES `glasir_phd` (`idphd`)
+  CONSTRAINT `FK_glasir_phdh_glasir_phd_3` FOREIGN KEY (`idphd`) REFERENCES `glasir_phd` (`idphd`),
+  CONSTRAINT `FK_glasir_phdh_tong` FOREIGN KEY (`idtong`) REFERENCES `global_tong` (`id_tong`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.glasir_phdh: ~1 rows (approximately)
+-- Dumping data for table inventory.glasir_phdh: ~0 rows (approximately)
 DELETE FROM `glasir_phdh`;
 /*!40000 ALTER TABLE `glasir_phdh` DISABLE KEYS */;
-INSERT INTO `glasir_phdh` (`idphdh`, `noprod`, `idglasir`, `idphd`, `idgps`, `volume`, `densitas`, `idbm`, `idtong`, `petugas`) VALUES
-	('GLZPHDH00001', 'PG00001', 'Y00001', 1, 1, 50, 1600, 1, 1, 'zainudin');
+INSERT INTO `glasir_phdh` (`idphdh`, `noprod`, `idglasir`, `idphd`, `tgl`, `idgps`, `volume`, `densitas`, `idbm`, `idtong`, `petugas`, `inp`, `inp_time`) VALUES
+	('HG00001', 'PG00001', 'Y00002', 19, '2015-08-02', 1, 100, 1600, 2, 1, 'sukitna', 'admin', '2015-08-20 05:01:09'),
+	('HG00002', 'PG00001', 'Y00010', 20, '2015-08-03', 1, 120, 1500, 3, 1, 'asep', 'admin', '2015-08-20 05:02:55');
 /*!40000 ALTER TABLE `glasir_phdh` ENABLE KEYS */;
 
 
@@ -530,6 +470,114 @@ INSERT INTO `glasir_status` (`id_status`, `status`) VALUES
 	(0, 'Disabled'),
 	(1, 'Active');
 /*!40000 ALTER TABLE `glasir_status` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.global_buyer
+CREATE TABLE IF NOT EXISTS `global_buyer` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(255) NOT NULL,
+  `dsc` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table inventory.global_buyer: ~3 rows (approximately)
+DELETE FROM `global_buyer`;
+/*!40000 ALTER TABLE `global_buyer` DISABLE KEYS */;
+INSERT INTO `global_buyer` (`id`, `nama`, `dsc`) VALUES
+	(1, 'None', 'None'),
+	(2, 'Noritake', 'Noritake from Japan'),
+	(3, 'Guydegreene', 'Guydegreene dari Yunani');
+/*!40000 ALTER TABLE `global_buyer` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.global_delivery
+CREATE TABLE IF NOT EXISTS `global_delivery` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `nama` varchar(50) NOT NULL,
+  `dsc` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.global_delivery: ~4 rows (approximately)
+DELETE FROM `global_delivery`;
+/*!40000 ALTER TABLE `global_delivery` DISABLE KEYS */;
+INSERT INTO `global_delivery` (`id`, `nama`, `dsc`) VALUES
+	(1, 'None', 'None'),
+	(2, 'Ekspor', ''),
+	(3, 'Lokal', ''),
+	(4, 'Open Stock', '');
+/*!40000 ALTER TABLE `global_delivery` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.global_mesin
+CREATE TABLE IF NOT EXISTS `global_mesin` (
+  `id_bm` smallint(6) NOT NULL AUTO_INCREMENT,
+  `nama_bm` varchar(50) NOT NULL,
+  `jns_bm` varchar(50) NOT NULL,
+  `no_bm` varchar(50) NOT NULL,
+  `kapasitas` double NOT NULL,
+  `satuan` char(50) NOT NULL,
+  `lokasi` char(50) NOT NULL,
+  PRIMARY KEY (`id_bm`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.global_mesin: ~21 rows (approximately)
+DELETE FROM `global_mesin`;
+/*!40000 ALTER TABLE `global_mesin` DISABLE KEYS */;
+INSERT INTO `global_mesin` (`id_bm`, `nama_bm`, `jns_bm`, `no_bm`, `kapasitas`, `satuan`, `lokasi`) VALUES
+	(1, 'None', 'None', 'None', 0, 'None', 'None'),
+	(2, 'Ball Mill 200  kg', '200 kg', '1', 200, 'kg', ''),
+	(3, 'Ball Mill 200  kg', '200 kg', '2', 200, 'kg', ''),
+	(4, 'Ball Mill 200  kg', '200 kg', '3', 200, 'kg', ''),
+	(5, 'Ball Mill 200  kg', '200 kg', '4', 200, 'kg', ''),
+	(6, 'Ball Mill 500  kg', '500 kg', '1', 500, 'kg', ''),
+	(7, 'Ball Mill 500  kg', '500 kg', '2', 500, 'kg', ''),
+	(8, 'Ball Mill 500  kg', '500 kg', '3', 500, 'kg', ''),
+	(9, 'Ball Mill 500  kg', '500 kg', '4', 500, 'kg', ''),
+	(10, 'Ball Mill 500  kg', '500 kg', '5', 500, 'kg', ''),
+	(11, 'Ball Mill 500  kg', '500 kg', '6', 500, 'kg', ''),
+	(12, 'Ball Mill 500  kg', '500 kg', '7', 500, 'kg', ''),
+	(13, 'Ball Mill 500  kg', '500 kg', '8', 500, 'kg', ''),
+	(14, 'Ball Mill 500  kg', '500 kg', '9', 500, 'kg', ''),
+	(15, 'Ball Mill 500  kg', '500 kg', '10', 500, 'kg', ''),
+	(16, 'Ball Mill 2 ton', '2 ton', '1', 2000, 'kg', ''),
+	(17, 'Ball Mill 2 ton', '2 ton', '2', 2000, 'kg', ''),
+	(18, 'Ball Mill 2 ton', '2 ton', '3', 2000, 'kg', ''),
+	(19, 'Ball Mill 3 ton', '3 ton', '1', 3000, 'kg', ''),
+	(20, 'Ball Mill 3 ton', '3 ton', '5', 3000, 'kg', ''),
+	(21, 'Ball Mill 3 ton', '3 ton', 'P3', 3000, 'kg', '');
+/*!40000 ALTER TABLE `global_mesin` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.global_tong
+CREATE TABLE IF NOT EXISTS `global_tong` (
+  `id_tong` smallint(6) NOT NULL AUTO_INCREMENT,
+  `nama_tong` varchar(50) NOT NULL,
+  `jns_tong` varchar(50) NOT NULL,
+  `no_tong` varchar(50) NOT NULL,
+  `kapasitas` double NOT NULL,
+  `satuan` char(50) NOT NULL,
+  `lokasi` char(50) NOT NULL,
+  PRIMARY KEY (`id_tong`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.global_tong: ~12 rows (approximately)
+DELETE FROM `global_tong`;
+/*!40000 ALTER TABLE `global_tong` DISABLE KEYS */;
+INSERT INTO `global_tong` (`id_tong`, `nama_tong`, `jns_tong`, `no_tong`, `kapasitas`, `satuan`, `lokasi`) VALUES
+	(1, 'None', 'None', 'None', 0, 'None', 'None'),
+	(2, 'Tong 1', 'Tong Glasir 1', '1', 200, 'kg', ''),
+	(3, 'Tong 2', 'Tong Glasir 2', '2', 200, 'kg', ''),
+	(4, 'Tong 3', 'Tong Glasir 3', '3', 200, 'kg', ''),
+	(5, 'Tong 4', 'Tong Glasir 4', '4', 200, 'kg', ''),
+	(6, 'Tong 5', 'Tong Glasir 5', '5', 200, 'kg', ''),
+	(7, 'Tong 6', 'Tong Glasir 6', '6', 200, 'kg', ''),
+	(8, 'Tong 7', 'Tong Glasir 7', '7', 200, 'kg', ''),
+	(9, 'Tong 8', 'Tong Glasir 8', '8', 200, 'kg', ''),
+	(10, 'Tong 9', 'Tong Glasir 9', '9', 200, 'kg', ''),
+	(11, 'Tong 10', 'Tong Glasir 10', '10', 200, 'kg', ''),
+	(12, 'Tong 11', 'Tong Glasir 12', '11', 200, 'kg', '');
+/*!40000 ALTER TABLE `global_tong` ENABLE KEYS */;
 
 
 -- Dumping structure for table inventory.h_beli
@@ -611,36 +659,6 @@ CREATE TABLE IF NOT EXISTS `supplier` (
 DELETE FROM `supplier`;
 /*!40000 ALTER TABLE `supplier` DISABLE KEYS */;
 /*!40000 ALTER TABLE `supplier` ENABLE KEYS */;
-
-
--- Dumping structure for table inventory.tong
-CREATE TABLE IF NOT EXISTS `tong` (
-  `id_tong` smallint(6) NOT NULL AUTO_INCREMENT,
-  `nama_tong` varchar(50) NOT NULL,
-  `jns_tong` varchar(50) NOT NULL,
-  `no_tong` varchar(50) NOT NULL,
-  `kapasitas` double NOT NULL,
-  `satuan` char(50) NOT NULL,
-  `lokasi` char(50) NOT NULL,
-  PRIMARY KEY (`id_tong`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
-
--- Dumping data for table inventory.tong: ~11 rows (approximately)
-DELETE FROM `tong`;
-/*!40000 ALTER TABLE `tong` DISABLE KEYS */;
-INSERT INTO `tong` (`id_tong`, `nama_tong`, `jns_tong`, `no_tong`, `kapasitas`, `satuan`, `lokasi`) VALUES
-	(1, 'Tong 1', 'Tong Glasir 1', '1', 200, 'kg', ''),
-	(2, 'Tong 2', 'Tong Glasir 2', '2', 200, 'kg', ''),
-	(3, 'Tong 3', 'Tong Glasir 3', '3', 200, 'kg', ''),
-	(4, 'Tong 4', 'Tong Glasir 4', '4', 200, 'kg', ''),
-	(5, 'Tong 5', 'Tong Glasir 5', '5', 200, 'kg', ''),
-	(6, 'Tong 6', 'Tong Glasir 6', '6', 200, 'kg', ''),
-	(7, 'Tong 7', 'Tong Glasir 7', '7', 200, 'kg', ''),
-	(8, 'Tong 8', 'Tong Glasir 8', '8', 200, 'kg', ''),
-	(9, 'Tong 9', 'Tong Glasir 9', '9', 200, 'kg', ''),
-	(10, 'Tong 10', 'Tong Glasir 10', '10', 200, 'kg', ''),
-	(11, 'Tong 11', 'Tong Glasir 12', '11', 200, 'kg', '');
-/*!40000 ALTER TABLE `tong` ENABLE KEYS */;
 
 
 -- Dumping structure for trigger inventory.kurang_stok

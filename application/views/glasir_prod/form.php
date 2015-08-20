@@ -56,37 +56,10 @@ $(document).ready(function(){
 			}
 		});
 	};
-        
-	$("#harga").keypress(function(data){
-		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
-			return false;
-		}
-	});
-        
-	$("#jml").keypress(function(data){
-		if (data.which!=8 && data.which!=0 && (data.which<48 || data.which>57)) {
-			return false;
-		}
-	});
-	
-	function hitung(){
-		var jml = $("#jml").val();
-		var harga = $("#harga").val();
-		
-		var total = parseInt(jml)*parseInt(harga);
-		$("#total").val(total);
-	}
-	$("#jml").keyup(function(){
-		hitung();
-	});
-	$("#harga").keyup(function(){
-		hitung();
-	});
 	
 	$("#simpan").click(function(){
             
 		var id_glasir	= $("#id_glasir").val();
-		var status	= $("#status").val();
 		var volume	= $("#volume").val();
 		var no_po	= $("#no_po").val();
 		var planner     = $("#planner").val();
@@ -139,16 +112,6 @@ $(document).ready(function(){
 			$("#id_glasir").focus();
 			return false();
 		}
-		if(status.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Status Glasir tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#status").focus();
-			return false();
-		}
 		if(volume.length==0){
 			$.messager.show({
 				title:'Info',
@@ -182,7 +145,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_prod/simpan",
+			url	: "<?php echo site_url(); ?>/glasir_prod/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -209,11 +172,11 @@ $(document).ready(function(){
 	$("#tambah_data").click(function(){
 		$(".detail").val('');
 		$("#id_glasir").val('');
-                $("#status").val('');
                 $("#volume").val('');
                 $("#densitas").val('');
-                $("#id_bm").val('');
-                $("#id_tong").val('');
+                $("#buyer").val('');
+                $("#jns").val('');
+                $("#dsc").val('');
 		$("#id_glasir").focus();
 	});
 	
@@ -257,67 +220,95 @@ $(document).ready(function(){
     <tr>    
         <td width="150">No. Produksi</td>
         <td width="5">:</td>
-        <td><input type="text" name="no_prod" id="no_prod" size="12" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
+        <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
         <td width="150">No. Order</td>
         <td width="5">:</td>
-        <td><input type="text" name="no_po" id="no_po" size="12" maxlength="12" value="<?php echo $no_po;?>" /></td>
+        <td><input type="text" name="no_po" id="no_po" size="45" maxlength="12" value="<?php echo $no_po;?>" /></td>
     </tr>
     <tr>    
-        <td>Tgl Input</td>
+        <td>Waktu Input</td>
         <td>:</td>
-        <td><input name="tgl_inp" id="tgl_inp"  size="12" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_inp;?>" readonly="readonly"/></td>
+        <td><input name="tgl_inp" id="tgl_inp"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_inp;?>" readonly="readonly"/></td>
     </tr>
     <tr>    
         <td>Tgl Planning</td>
         <td>:</td>
-        <td><input name="tgl_plng" id="tgl_plng"  size="12" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_plng;?>"/></td>
+        <td><input name="tgl_plng" id="tgl_plng"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_plng;?>"/></td>
     </tr>
     <tr>    
         <td width="150">Planner</td>
         <td width="5">:</td>
-        <td><input type="text" name="planner" id="planner" size="12" maxlength="12" value="<?php echo $planner;?>" /></td>
+        <td><input type="text" name="planner" id="planner" size="45" maxlength="12" value="<?php echo $planner;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Inputer</td>
         <td width="5">:</td>
-        <td><input type="text" name="inputer" id="inputer" size="12" maxlength="12" readonly="readonly" value="<?php echo $inputer;?>" /></td>
+        <td><input type="text" name="inputer" id="inputer" size="45" maxlength="12" readonly="readonly" value="<?php echo $inputer;?>" /></td>
+    </tr>
+    <tr>    
+        <td width="150">Keterangan</td>
+        <td width="5">:</td>
+        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     </table>
     </fieldset>
 </td>
 <td valign="top" width="50%">
-    <fieldset class="atas">
+    <fieldset>
     <table width="100%">
     <tr>    
         <td width="150">Kode Glasir</td>
         <td width="5">:</td>
-        <td><input type="text" name="id_glasir" id="id_glasir" size="12" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" />
+        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" />
         <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
     <tr>    
         <td>Nama Glasir</td>
         <td>:</td>
-        <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="50" class="detail" maxlength="50"/></td>
+        <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
+    </tr>
     <tr>    
-        <td>Status Glasir</td>
+        <td>Buyer</td>
         <td>:</td>
         <td>
-        <select name="status" id="status">
+        <select name="buyer" id="buyer" style="width:382px;">
         <?php 
-		if(empty($status)){
+		if(empty($buyer)){
 		?>
         <option value="">-PILIH-</option>
         <?php
 		}
-		foreach($l_gps->result() as $t){
-			if($status==$t->idgps){
+		foreach($l_byr->result() as $t){
+			if($buyer==$t->id){
 		?>
-        <option value="<?php echo $t->idgps;?>" selected="selected"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
+        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
         <?php }else { ?>
-        <option value="<?php echo $t->idgps;?>"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
+        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }
+		} ?>
+        </select>
+        </td>
+    </tr>
+    <tr>    
+        <td>Jenis Pengiriman</td>
+        <td>:</td>
+        <td>
+        <select name="jns" id="jns" style="width:382px;">
+        <?php 
+		if(empty($jns)){
+		?>
+            <option value="">-PILIH-</option>
+        <?php
+		}
+		foreach($l_dlv->result() as $t){
+			if($jns==$t->id){
+		?>
+        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
         <?php }
 		} ?>
         </select>
@@ -326,61 +317,17 @@ $(document).ready(function(){
     <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="20" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td>Densitas</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="20" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
-    </tr>
-    <tr>    
-        <td>Ball Mill</td>
-        <td>:</td>
-        <td>
-            <select name="id_bm" id="id_bm">
-        <?php 
-		if(empty($id_bm)){
-		?>
-        <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_bm->result() as $t){
-			if($id_bm==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-    </tr>
-    <tr>    
-        <td>Tong</td>
-        <td>:</td>
-        <td>
-        <select name="id_tong" id="id_tong">
-        <?php 
-		if(empty($id_tong)){
-		?>
-        <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_tong->result() as $t){
-			if($id_tong==$t->id_tong){
-		?>
-        <option value="<?php echo $t->id_tong;?>" selected="selected"><?php echo $t->id_tong;?> - <?php echo $t->nama_tong;?> - <?php echo $t->jns_tong;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_tong;?>"><?php echo $t->id_tong;?> - <?php echo $t->nama_tong;?> - <?php echo $t->jns_tong;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
+        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="20" maxlength="20"/></td>
+        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
     </tr>
     </table>
     </fieldset>
