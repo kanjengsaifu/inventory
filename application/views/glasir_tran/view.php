@@ -7,18 +7,18 @@ $(document).ready(function(){
 </script>
 <div id="view">
 <div style="float:left; padding-bottom:5px;">
-<a href="<?php echo base_url();?>index.php/glasir_prod/tambah">
+<a href="<?php echo base_url();?>index.php/glasir_tran/tambah">
 <button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah Data</button>
 </a>
-<a href="<?php echo base_url();?>index.php/glasir_prod">
+<a href="<?php echo base_url();?>index.php/glasir_tran">
 <button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
 </a>
 
 </div>
 <div style="float:right; padding-bottom:5px;">
-<form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_prod">
+<form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_tran">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
-Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
+Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
 </form>
 </div>
@@ -26,11 +26,10 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
 <table id="dataTable" width="100%">
 <tr>
     <th>No</th>
-    <th>No. Produksi</th>
+    <th>No. Transaksi</th>
     <th>Tanggal Planning</th>
-    <th>No. Order</th>
-    <th>Banyak Order Item Glasir</th>
-    <th>Jumlah Produksi Glasir</th>
+    <th>Banyak Transaksi Item Glasir</th>
+    <th>Jumlah Pemakaian Glasir</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
@@ -42,8 +41,8 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
 		foreach($data->result_array() as $db){  
 		$tgl_plng = $this->glzModel->tgl_indo($db['tgl_plng']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
-		$proses = $this->glzModel->ProsesGlasir($db['no_prod']);
-		$jml = $this->glzModel->JmlGlasir($db['no_prod']);
+		$proses = $this->glzModel->ProsesGlasirTran($db['no_prod']);
+		$jml = $this->glzModel->JmlGlasirTran($db['no_prod']);
                 $p_total = $p_total + $proses;
                 $g_total = $g_total + $jml;
 		?>    
@@ -51,7 +50,6 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
             <td align="center" width="130" ><?php echo $tgl_plng; ?></td>
-            <td align="center" width="100" ><?php echo $db['no_po']; ?></td>
             <td align="right" width="200"><?php echo $proses; ?></td>
             <td align="right"><?php echo $jml; ?> Liter</td>
             <td align="center"><?php echo $nama_lengkap; ?></td>
@@ -59,10 +57,10 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
-            <a href="<?php echo base_url();?>index.php/glasir_prod/edit/<?php echo $db['no_prod'];?>">
+            <a href="<?php echo base_url();?>index.php/glasir_tran/edit/<?php echo $db['no_prod'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/glasir_prod/hapus/<?php echo $db['no_prod'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_tran/hapus/<?php echo $db['no_prod'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

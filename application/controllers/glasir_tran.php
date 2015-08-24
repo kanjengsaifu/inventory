@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Glasir_prod extends CI_Controller {
+class Glasir_tran extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -32,7 +32,7 @@ class Glasir_prod extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar Produksi Glasir";
+			$d['judul']="Daftar Pemakaian Glasir";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -43,12 +43,12 @@ class Glasir_prod extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_ph $where ";		
+			$text = "SELECT * FROM glasir_th $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/glasir_prod/index/';
+			$config['base_url'] = site_url() . '/glasir_tran/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -61,13 +61,13 @@ class Glasir_prod extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_ph $where 
+			$text = "SELECT * FROM glasir_th $where 
 					ORDER BY no_prod DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('glasir_prod/view', $d, true);		
+			$d['content'] = $this->load->view('glasir_tran/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -86,17 +86,13 @@ class Glasir_prod extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
-			$d['judul']="Order Produksi Glasir";
+			$d['judul']="Order Transaksi Glasir";
 			
-			$no_prod    = $this->glzModel->MaxPhGlasir();
+			$no_prod    = $this->glzModel->MaxPhGlasirTran();
 			$tgl_inp    = date('d-m-Y  h:i:s');
-                        $inputer    = $this->session->userdata('username');
 			
 			$d['no_prod']	= $no_prod;
-                        $d['no_po']	= '';
-			$d['tgl_inp']	= $tgl_inp;
                         $d['tgl_plng']	= '';
-                        $d['inputer']	= $inputer;
                         $d['planner']	= '';
                         $d['dsc']	= '';
 			
@@ -104,8 +100,12 @@ class Glasir_prod extends CI_Controller {
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
                         $bm = "SELECT * FROM global_delivery";
 			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->glzModel->manualQuery($sft);
+                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
+			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 			
-			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_tran/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -150,7 +150,7 @@ class Glasir_prod extends CI_Controller {
                         $tong = "SELECT * FROM global_tong";
 			$d['l_tong'] = $this->glzModel->manualQuery($tong);
 			
-			$d['content'] = $this->load->view('glasir_prod/form_detail', $d, true);		
+			$d['content'] = $this->load->view('glasir_tran/form_detail', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -291,7 +291,7 @@ class Glasir_prod extends CI_Controller {
 					WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 									
-			$this->load->view('glasir_prod/cetak',$d);
+			$this->load->view('glasir_tran/cetak',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -337,8 +337,12 @@ class Glasir_prod extends CI_Controller {
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
                         $bm = "SELECT * FROM global_delivery";
 			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->glzModel->manualQuery($sft);
+                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
+			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 									
-			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_tran/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -360,7 +364,7 @@ class Glasir_prod extends CI_Controller {
                                     where a.noprod = '$noprod' and a.idglasir = '$idglasir' and a.idphd ='$batch'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_prod/detail_history',$d);
+			$this->load->view('glasir_tran/detail_history',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -372,12 +376,13 @@ class Glasir_prod extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,a.volume,a.densitas,a.petugas,a.inputer,c.nama as buyer, d.nama as jns, a.dsc
-                                    FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod JOIN global_buyer as c ON a.buyer=c.id JOIN global_delivery as d
-                                    ON a.jns=d.id JOIN glasir as e ON a.id_glasir=e.id_glasir WHERE a.no_prod='$id'";
+			$text = "SELECT a.no_prod,f.nama,g.nama_bm,a.idthd,a.id_glasir,e.nama_glasir,a.volume,a.densitas,a.petugas,a.inputer,c.nama as buyer, d.nama as jns, a.dsc
+                                    FROM glasir_thd as a JOIN glasir_th as b ON a.no_prod=b.no_prod JOIN global_buyer as c ON a.buyer=c.id JOIN global_delivery as d
+                                    ON a.jns=d.id JOIN glasir as e ON a.id_glasir=e.id_glasir join global_shift f on a.shift=f.id
+                                    join global_mesin g on a.mpr=g.id_bm WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_prod/detail',$d);
+			$this->load->view('glasir_tran/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -392,18 +397,18 @@ class Glasir_prod extends CI_Controller {
 			$row = $q->num_rows();
 			if($row>0){
 				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
+                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
 			}else{
 				$idy['no_prod'] = $this->uri->segment(3);
                                 $q = $this->db->get_where("glasir_phd",$idy);
                                 $row = $q->num_rows();
                                 if($row>0){
                                         echo "Masih ada data order produksi yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                        echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
+                                        echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
                                 }else{
 				$this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id'");
                                 $this->glzModel->manualQuery("DELETE FROM glasir_ph WHERE no_prod='$id'");
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
+                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
 			}
 			}			
 		}else{
@@ -420,7 +425,7 @@ class Glasir_prod extends CI_Controller {
 			$row = $q->num_rows();
 			if($row>0){
 				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
+                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
 			}else{
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
