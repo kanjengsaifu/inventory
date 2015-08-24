@@ -7,16 +7,16 @@ $(document).ready(function(){
 </script>
 <div id="view">
 <div style="float:left; padding-bottom:5px;">
-<a href="<?php echo base_url();?>index.php/glasir_tran/tambah">
+<a href="<?php echo base_url();?>index.php/glasir_retu/tambah">
 <button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah Data</button>
 </a>
-<a href="<?php echo base_url();?>index.php/glasir_tran">
+<a href="<?php echo base_url();?>index.php/glasir_retu">
 <button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
 </a>
 
 </div>
 <div style="float:right; padding-bottom:5px;">
-<form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_tran">
+<form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_retu">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
 Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
@@ -41,8 +41,8 @@ Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" 
 		foreach($data->result_array() as $db){  
 		$tgl_plng = $this->glzModel->tgl_indo($db['tgl_plng']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
-		$proses = $this->glzModel->ProsesGlasirTran($db['no_prod']);
-		$jml = $this->glzModel->JmlGlasirTran($db['no_prod']);
+		$proses = $this->glzModel->ProsesGlasirRetu($db['no_prod']);
+		$jml = $this->glzModel->JmlGlasirRetu($db['no_prod']);
                 $p_total = $p_total + $proses;
                 $g_total = $g_total + $jml;
 		?>    
@@ -57,10 +57,10 @@ Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" 
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
-            <a href="<?php echo base_url();?>index.php/glasir_tran/edit/<?php echo $db['no_prod'];?>">
+            <a href="<?php echo base_url();?>index.php/glasir_retu/edit/<?php echo $db['no_prod'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/glasir_tran/hapus/<?php echo $db['no_prod'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_retu/hapus/<?php echo $db['no_prod'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

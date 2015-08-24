@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Glasir_tran extends CI_Controller {
+class Glasir_retu extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -32,7 +32,7 @@ class Glasir_tran extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar Pemakaian Glasir";
+			$d['judul']="Daftar Pengembalian Glasir";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -43,12 +43,12 @@ class Glasir_tran extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_th $where ";		
+			$text = "SELECT * FROM glasir_rh $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/glasir_tran/index/';
+			$config['base_url'] = site_url() . '/glasir_retu/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -61,13 +61,13 @@ class Glasir_tran extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_th $where 
+			$text = "SELECT * FROM glasir_rh $where 
 					ORDER BY no_prod DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('glasir_tran/view', $d, true);		
+			$d['content'] = $this->load->view('glasir_retu/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());

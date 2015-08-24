@@ -21,10 +21,10 @@
     <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian Glasir</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_tran">Pengembalian Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_retu">Pengembalian Glasir</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_tran">Stock Opname Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname Glasir</a>
     </li>
     </ul>
     </div>

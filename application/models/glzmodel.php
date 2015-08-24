@@ -227,6 +227,32 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesGlasirRetu($id){
+		$t = "SELECT idthd FROM glasir_rhd WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlGlasirRetu($id){
+		$t = "SELECT sum(volume) as jml FROM glasir_rhd WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jml;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function NewStatus($noprod,$idglasir,$batch){
 		$t = "SELECT b.nama_gps FROM glasir_phdh a
                         join glasir_patt b on a.idgps = b.idgps
