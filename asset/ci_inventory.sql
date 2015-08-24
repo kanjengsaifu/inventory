@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.6.25 - MySQL Community Server (GPL)
+-- Server version:               5.6.21 - MySQL Community Server (GPL)
 -- Server OS:                    Win32
--- HeidiSQL Version:             9.3.0.4984
+-- HeidiSQL Version:             9.2.0.4947
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -65,14 +65,12 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.ci_sessions: ~4 rows (approximately)
+-- Dumping data for table inventory.ci_sessions: ~3 rows (approximately)
 DELETE FROM `ci_sessions`;
 /*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-	('176a2a77ee05075ae563e51a32b68fe2', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440313204, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
-	('a3dffa25112fce1fee8faba7ec13e6ad', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440316954, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
-	('e4512abbb046b854bef03642861389a3', '::1', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440311937, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
-	('f2ea27941c9b8b84642afdf6f5ca8567', '::1', 'Mozilla/5.0 (Windows NT 6.1; rv:40.0) Gecko/20100101 Firefox/40.0', 1440312884, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}');
+	('8558706745fcfd6035c6bc44636da4c9', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440399174, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}'),
+	('f12f8e5392424c91967befabc135a003', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1440399343, 'a:6:{s:9:"user_data";s:0:"";s:9:"logged_in";s:13:"aingLoginYeuh";s:8:"username";s:5:"admin";s:12:"nama_lengkap";s:13:"Administrator";s:4:"foto";s:9:"admin.jpg";s:5:"level";s:2:"01";}');
 /*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
 
 
@@ -134,9 +132,9 @@ CREATE TABLE IF NOT EXISTS `glasir` (
 DELETE FROM `glasir`;
 /*!40000 ALTER TABLE `glasir` DISABLE KEYS */;
 INSERT INTO `glasir` (`id_glasir`, `nama_glasir`, `nama_alias`, `satuan`, `status`, `stok_awal`, `inputer`, `tgl_input`, `tgl_update`) VALUES
-	('Y00001', '0202 Brown', 'Brown si madun', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '2015-08-17 03:44:18'),
-	('Y00002', '0202 Brown Floral dream', 'Mirip jenis sabun', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
-	('Y00003', '0202 Pink', 'Pink jambu muda', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
+	('Y00001', '0202 Brown', 'Brown si madun', 'Liter', '1', 300, 'admin', '2015-08-07 09:09:08', '2015-08-17 03:44:18'),
+	('Y00002', '0202 Brown Floral dream', 'Mirip jenis sabun', 'Liter', '1', 300, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
+	('Y00003', '0202 Pink', 'Pink jambu muda', 'Liter', '1', 50, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
 	('Y00004', '0401 Blue', 'Blue coral', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
 	('Y00005', '0401 Pink', 'Pink ngejreng', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
 	('Y00006', '0402 Blue', 'Blue langit', 'Liter', '1', 100, 'admin', '2015-08-07 09:09:08', '0000-00-00 00:00:00'),
@@ -381,11 +379,13 @@ CREATE TABLE IF NOT EXISTS `glasir_ph` (
   PRIMARY KEY (`no_prod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_ph: ~1 rows (approximately)
+-- Dumping data for table inventory.glasir_ph: ~3 rows (approximately)
 DELETE FROM `glasir_ph`;
 /*!40000 ALTER TABLE `glasir_ph` DISABLE KEYS */;
 INSERT INTO `glasir_ph` (`no_prod`, `tgl_plng`, `no_po`, `inputer`, `planner`, `tgl_inp`, `lst_upd`) VALUES
-	('PG00001', '2015-08-01', 'OG00001', 'admin', 'Yuni', '2015-08-22 11:21:52', '0000-00-00 00:00:00');
+	('PG00001', '2015-08-01', 'OG00001', 'admin', 'Yuni', '2015-08-22 11:21:52', '0000-00-00 00:00:00'),
+	('PG00002', '2015-08-04', 'OG00002', 'admin', 'Masitoh', '2015-08-24 07:51:43', '0000-00-00 00:00:00'),
+	('PG00003', '2015-08-04', 'OG00003', 'admin', 'Yuni', '2015-08-24 08:00:16', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `glasir_ph` ENABLE KEYS */;
 
 
@@ -408,13 +408,15 @@ CREATE TABLE IF NOT EXISTS `glasir_phd` (
   KEY `FK_glasir_phd_admins` (`inputer`),
   KEY `FK_glasir_phd_global_buyer` (`buyer`),
   KEY `FK_glasir_phd_global_delivery` (`jns`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_phd: ~1 rows (approximately)
+-- Dumping data for table inventory.glasir_phd: ~3 rows (approximately)
 DELETE FROM `glasir_phd`;
 /*!40000 ALTER TABLE `glasir_phd` DISABLE KEYS */;
 INSERT INTO `glasir_phd` (`idphd`, `no_prod`, `id_glasir`, `buyer`, `jns`, `dsc`, `volume`, `densitas`, `inputer`, `petugas`, `tgl_insert`) VALUES
-	(21, 'PG00001', 'Y00011', 1, 1, 'Ok', 100, 1600, 'admin', 'zainudin', '2015-08-22 11:21:52');
+	(21, 'PG00001', 'Y00011', 1, 1, 'Ok', 100, 1600, 'admin', 'zainudin', '2015-08-22 11:21:52'),
+	(23, 'PG00002', 'Y00001', 1, 1, 'ditambah', 200, 1500, 'admin', 'zainudin', '2015-08-24 07:52:34'),
+	(24, 'PG00003', 'Y00002', 2, 2, 'Diorder', 200, 0, 'admin', 'sukijan', '2015-08-24 08:00:16');
 /*!40000 ALTER TABLE `glasir_phd` ENABLE KEYS */;
 
 
@@ -449,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `glasir_phdh` (
   CONSTRAINT `FK_glasir_phdh_tong` FOREIGN KEY (`idtong`) REFERENCES `global_tong` (`id_tong`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table inventory.glasir_phdh: ~6 rows (approximately)
+-- Dumping data for table inventory.glasir_phdh: ~7 rows (approximately)
 DELETE FROM `glasir_phdh`;
 /*!40000 ALTER TABLE `glasir_phdh` DISABLE KEYS */;
 INSERT INTO `glasir_phdh` (`idphdh`, `noprod`, `idglasir`, `idphd`, `tgl`, `idgps`, `volume`, `densitas`, `idbm`, `idtong`, `dsc`, `petugas`, `inp`, `inp_time`) VALUES
@@ -461,6 +463,95 @@ INSERT INTO `glasir_phdh` (`idphdh`, `noprod`, `idglasir`, `idphd`, `tgl`, `idgp
 	('HG00006', 'PG00001', 'Y00011', 21, '2015-08-06', 3, 50, 1600, 1, 3, 'dites qc pak sukitman, ', 'sukirman', 'admin', '2015-08-23 04:20:15'),
 	('HG00007', 'PG00001', 'Y00011', 21, '2015-08-07', 4, 100, 1600, 1, 4, 'galsir pass kata pak hadi qc, semua disatukan kembali ke satu tong', 'sukirman', 'admin', '2015-08-23 04:21:21');
 /*!40000 ALTER TABLE `glasir_phdh` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.glasir_rh
+CREATE TABLE IF NOT EXISTS `glasir_rh` (
+  `no_prod` char(15) NOT NULL,
+  `tgl_plng` date NOT NULL,
+  `inputer` varchar(50) NOT NULL,
+  `planner` varchar(50) NOT NULL,
+  `tgl_inp` datetime NOT NULL,
+  `lst_upd` datetime NOT NULL,
+  PRIMARY KEY (`no_prod`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.glasir_rh: ~3 rows (approximately)
+DELETE FROM `glasir_rh`;
+/*!40000 ALTER TABLE `glasir_rh` DISABLE KEYS */;
+INSERT INTO `glasir_rh` (`no_prod`, `tgl_plng`, `inputer`, `planner`, `tgl_inp`, `lst_upd`) VALUES
+	('RG00001', '2015-08-01', 'admin', 'Yuni', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	('RG00002', '2015-08-01', 'admin', 'Yuni', '2015-08-24 07:15:09', '0000-00-00 00:00:00'),
+	('RG00003', '2015-08-06', 'admin', 'Yuni', '2015-08-24 07:53:43', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `glasir_rh` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.glasir_rhd
+CREATE TABLE IF NOT EXISTS `glasir_rhd` (
+  `idthd` smallint(6) NOT NULL AUTO_INCREMENT,
+  `no_prod` char(15) NOT NULL,
+  `id_glasir` varchar(50) NOT NULL,
+  `buyer` smallint(6) NOT NULL,
+  `jns` smallint(6) NOT NULL,
+  `shift` smallint(6) NOT NULL,
+  `mpr` smallint(6) NOT NULL,
+  `dsc` varchar(255) NOT NULL,
+  `volume` double NOT NULL,
+  `densitas` double NOT NULL,
+  `vsc` double NOT NULL,
+  `inputer` varchar(50) NOT NULL,
+  `petugas` varchar(50) NOT NULL,
+  `wktp` date NOT NULL,
+  `tgl_insert` datetime NOT NULL,
+  PRIMARY KEY (`idthd`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.glasir_rhd: ~4 rows (approximately)
+DELETE FROM `glasir_rhd`;
+/*!40000 ALTER TABLE `glasir_rhd` DISABLE KEYS */;
+INSERT INTO `glasir_rhd` (`idthd`, `no_prod`, `id_glasir`, `buyer`, `jns`, `shift`, `mpr`, `dsc`, `volume`, `densitas`, `vsc`, `inputer`, `petugas`, `wktp`, `tgl_insert`) VALUES
+	(1, 'RG00001', 'Y00001', 2, 2, 2, 24, 'sippo', 5, 1600, 0.1, 'admin', 'Rita', '0000-00-00', '0000-00-00 00:00:00'),
+	(2, 'RG00002', 'Y00002', 2, 2, 2, 22, 'Ok jon', 7, 1500, 0.2, 'admin', 'Sukijan', '2015-08-02', '2015-08-24 07:15:09'),
+	(3, 'RG00002', 'Y00003', 2, 2, 2, 22, 'Ok jon', 3, 1500, 0.2, 'admin', 'Sukijan', '2015-08-02', '2015-08-24 07:15:39'),
+	(6, 'RG00003', 'Y00003', 2, 2, 2, 23, 'Dipakai', 5, 1500, 0.2, 'admin', 'rara', '2015-08-24', '2015-08-24 08:02:21');
+/*!40000 ALTER TABLE `glasir_rhd` ENABLE KEYS */;
+
+
+-- Dumping structure for table inventory.glasir_rhdh
+CREATE TABLE IF NOT EXISTS `glasir_rhdh` (
+  `idphdh` char(15) NOT NULL,
+  `noprod` char(15) NOT NULL,
+  `idglasir` varchar(50) NOT NULL,
+  `idphd` smallint(6) NOT NULL,
+  `tgl` date NOT NULL,
+  `idgps` smallint(6) NOT NULL,
+  `volume` decimal(10,0) NOT NULL,
+  `densitas` decimal(10,0) NOT NULL,
+  `idbm` smallint(6) NOT NULL,
+  `idtong` smallint(6) NOT NULL,
+  `dsc` varchar(255) NOT NULL,
+  `petugas` varchar(50) NOT NULL,
+  `inp` varchar(50) NOT NULL,
+  `inp_time` datetime NOT NULL,
+  PRIMARY KEY (`idphdh`),
+  KEY `FK_glasir_phdh_glasir_phd` (`noprod`),
+  KEY `FK_glasir_phdh_glasir_phd_2` (`idglasir`),
+  KEY `FK_glasir_phdh_glasir_phd_3` (`idphd`),
+  KEY `FK_glasir_phdh_glasir_patt` (`idgps`),
+  KEY `FK_glasir_phdh_bm` (`idbm`),
+  KEY `FK_glasir_phdh_tong` (`idtong`),
+  CONSTRAINT `glasir_rhdh_ibfk_1` FOREIGN KEY (`idbm`) REFERENCES `global_mesin` (`id_bm`),
+  CONSTRAINT `glasir_rhdh_ibfk_2` FOREIGN KEY (`idgps`) REFERENCES `glasir_patt` (`idgps`),
+  CONSTRAINT `glasir_rhdh_ibfk_3` FOREIGN KEY (`noprod`) REFERENCES `glasir_phd` (`no_prod`),
+  CONSTRAINT `glasir_rhdh_ibfk_4` FOREIGN KEY (`idglasir`) REFERENCES `glasir_phd` (`id_glasir`),
+  CONSTRAINT `glasir_rhdh_ibfk_5` FOREIGN KEY (`idphd`) REFERENCES `glasir_phd` (`idphd`),
+  CONSTRAINT `glasir_rhdh_ibfk_6` FOREIGN KEY (`idtong`) REFERENCES `global_tong` (`id_tong`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- Dumping data for table inventory.glasir_rhdh: ~0 rows (approximately)
+DELETE FROM `glasir_rhdh`;
+/*!40000 ALTER TABLE `glasir_rhdh` DISABLE KEYS */;
+/*!40000 ALTER TABLE `glasir_rhdh` ENABLE KEYS */;
 
 
 -- Dumping structure for table inventory.glasir_status
@@ -490,11 +581,13 @@ CREATE TABLE IF NOT EXISTS `glasir_th` (
   PRIMARY KEY (`no_prod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_th: ~1 rows (approximately)
+-- Dumping data for table inventory.glasir_th: ~3 rows (approximately)
 DELETE FROM `glasir_th`;
 /*!40000 ALTER TABLE `glasir_th` DISABLE KEYS */;
 INSERT INTO `glasir_th` (`no_prod`, `tgl_plng`, `inputer`, `planner`, `tgl_inp`, `lst_upd`) VALUES
-	('TG00001', '2015-08-01', 'admin', 'Yuni', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+	('TG00001', '2015-08-01', 'admin', 'Yuni', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+	('TG00002', '2015-08-01', 'admin', 'Yuni', '2015-08-24 07:15:09', '0000-00-00 00:00:00'),
+	('TG00003', '2015-08-06', 'admin', 'Yuni', '2015-08-24 07:53:43', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `glasir_th` ENABLE KEYS */;
 
 
@@ -510,18 +603,22 @@ CREATE TABLE IF NOT EXISTS `glasir_thd` (
   `dsc` varchar(255) NOT NULL,
   `volume` double NOT NULL,
   `densitas` double NOT NULL,
+  `vsc` double NOT NULL,
   `inputer` varchar(50) NOT NULL,
   `petugas` varchar(50) NOT NULL,
-  `wktp` datetime NOT NULL,
+  `wktp` date NOT NULL,
   `tgl_insert` datetime NOT NULL,
   PRIMARY KEY (`idthd`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.glasir_thd: ~1 rows (approximately)
+-- Dumping data for table inventory.glasir_thd: ~4 rows (approximately)
 DELETE FROM `glasir_thd`;
 /*!40000 ALTER TABLE `glasir_thd` DISABLE KEYS */;
-INSERT INTO `glasir_thd` (`idthd`, `no_prod`, `id_glasir`, `buyer`, `jns`, `shift`, `mpr`, `dsc`, `volume`, `densitas`, `inputer`, `petugas`, `wktp`, `tgl_insert`) VALUES
-	(1, 'TG00001', 'Y00001', 2, 2, 2, 24, 'sippo', 20, 1600, 'admin', 'Rita', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `glasir_thd` (`idthd`, `no_prod`, `id_glasir`, `buyer`, `jns`, `shift`, `mpr`, `dsc`, `volume`, `densitas`, `vsc`, `inputer`, `petugas`, `wktp`, `tgl_insert`) VALUES
+	(1, 'TG00001', 'Y00001', 2, 2, 2, 24, 'sippo', 20, 1600, 0.1, 'admin', 'Rita', '0000-00-00', '0000-00-00 00:00:00'),
+	(2, 'TG00002', 'Y00002', 2, 2, 2, 22, 'Ok jon', 50, 1500, 0.2, 'admin', 'Sukijan', '2015-08-02', '2015-08-24 07:15:09'),
+	(3, 'TG00002', 'Y00003', 2, 2, 2, 22, 'Ok jon', 50, 1500, 0.2, 'admin', 'Sukijan', '2015-08-02', '2015-08-24 07:15:39'),
+	(6, 'TG00003', 'Y00003', 2, 2, 2, 23, 'Dipakai', 50, 1500, 0.2, 'admin', 'rara', '2015-08-24', '2015-08-24 08:02:21');
 /*!40000 ALTER TABLE `glasir_thd` ENABLE KEYS */;
 
 
@@ -611,7 +708,7 @@ CREATE TABLE IF NOT EXISTS `global_mesin` (
   PRIMARY KEY (`id_bm`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.global_mesin: ~25 rows (approximately)
+-- Dumping data for table inventory.global_mesin: ~26 rows (approximately)
 DELETE FROM `global_mesin`;
 /*!40000 ALTER TABLE `global_mesin` DISABLE KEYS */;
 INSERT INTO `global_mesin` (`id_bm`, `nama_bm`, `jns_bm`, `no_bm`, `kapasitas`, `satuan`, `lokasi`) VALUES
@@ -652,7 +749,7 @@ CREATE TABLE IF NOT EXISTS `global_shift` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
--- Dumping data for table inventory.global_shift: ~3 rows (approximately)
+-- Dumping data for table inventory.global_shift: ~4 rows (approximately)
 DELETE FROM `global_shift`;
 /*!40000 ALTER TABLE `global_shift` DISABLE KEYS */;
 INSERT INTO `global_shift` (`id`, `nama`, `dsc`) VALUES
@@ -788,6 +885,19 @@ DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 
+-- Dumping structure for trigger inventory.glasir_add_stok_tran
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `glasir_add_stok_tran` BEFORE DELETE ON `glasir_thd` FOR EACH ROW BEGIN 
+UPDATE glasir 
+SET stok_awal = stok_awal + OLD.volume
+WHERE
+id_glasir = OLD.id_glasir;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
 -- Dumping structure for trigger inventory.glasir_min_stok
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ENGINE_SUBSTITUTION';
 DELIMITER //
@@ -796,6 +906,19 @@ UPDATE glasir
 SET stok_awal = stok_awal - OLD.volume
 WHERE
 id_glasir = OLD.id_glasir;
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+
+-- Dumping structure for trigger inventory.glasir_min_stok_tran
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `glasir_min_stok_tran` AFTER INSERT ON `glasir_thd` FOR EACH ROW BEGIN 
+UPDATE glasir 
+SET stok_awal = stok_awal - NEW.volume
+WHERE
+id_glasir = NEW.id_glasir;
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
