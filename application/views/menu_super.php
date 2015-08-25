@@ -8,6 +8,9 @@
     <li data-options="iconCls:'icon-surat_keputusan'">
     <a href="<?php echo base_url();?>index.php/glasir">Item Glasir</a>
     </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/saggar">Master Saggar</a>
+    </li>
     </ul>
     </div>
 </div>
@@ -25,6 +28,18 @@
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
     <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname Glasir</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/saggar_prod">Input Saggar Baru</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/saggar_tran">Penggunaan Saggar</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/saggar_retu">Retur Saggar</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/saggar_opna">Stock Opname Saggar</a>
     </li>
     </ul>
     </div>
@@ -47,6 +62,21 @@
     <li>
     <span><a href="<?php echo base_url();?>index.php/profit">Stock Opname</a></span>
     </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/lap_barang">Stok Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/lap_beli">Produksi Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/lap_jual">Konsumsi Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/profit">Pengembalian Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/profit">Stock Opname Saggar</a></span>
+    </li>
     </ul>
     </div>
 </div>
@@ -67,6 +97,21 @@
     </li>
     <li>
     <span><a href="<?php echo base_url();?>index.php/grafik_jual">Stock Opname Glasir</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_beli">Stok Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Produksi Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_beli">Konsumsi Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Pengembalian Saggar</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Stock Opname Saggar</a></span>
     </li>
     </ul>
     </div>
