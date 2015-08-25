@@ -39,10 +39,13 @@
     <span><a href="<?php echo base_url();?>index.php/lap_beli">Produksi Glasir</a></span>
     </li>
     <li>
-    <span><a href="<?php echo base_url();?>index.php/lap_jual">Transaksi Glasir</a></span>
+    <span><a href="<?php echo base_url();?>index.php/lap_jual">Konsumsi Glasir</a></span>
     </li>
     <li>
-    <span><a href="<?php echo base_url();?>index.php/profit">Profit</a></span>
+    <span><a href="<?php echo base_url();?>index.php/profit">Pengembalian Glasir</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/profit">Stock Opname</a></span>
     </li>
     </ul>
     </div>
@@ -51,10 +54,19 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/grafik_beli">Pembelian</a></span>
+    <span><a href="<?php echo base_url();?>index.php/grafik_beli">Stok Glasir</a></span>
     </li>
     <li>
-    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Penjualan</a></span>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Produksi Glasir</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_beli">Konsumsi Glasir</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Pengembalian Glasir</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/grafik_jual">Stock Opname Glasir</a></span>
     </li>
     </ul>
     </div>

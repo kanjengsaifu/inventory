@@ -56,7 +56,7 @@ $(function() {
 		foreach($data->result_array() as $db){
                 $noprod = $db['no_prod'];
                 $idglasir = $db['id_glasir'];
-                $batch = $db['idthd'];
+                $batch = $db['idrhd'];
                 $new_status = $this->glzModel->NewStatus($noprod,$idglasir,$batch);
                 $count_status = $this->glzModel->CountStatus($noprod,$idglasir,$batch);
 		$total = $db['volume'];
@@ -70,7 +70,7 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['jns']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['idthd']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['idrhd']; ?></td>
             <td align="right" style="font-size:10px"><?php echo number_format($db['volume']); ?> Liter</td>
             <td align="right" style="font-size:10px"><?php echo number_format($db['densitas']); ?> gr/L</td>
             <td align="right" style="font-size:10px"><?php echo number_format($db['vsc'],2,'.', ''); ?> Pois</td>
@@ -80,11 +80,11 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/glasir_tran/status/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_retu/status/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idrhd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin merubah status data ini?')">
 			<img src="<?php echo base_url();?>asset/images/drive-download.png" title='Update status data'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/glasir_tran/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_retu/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idrhd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

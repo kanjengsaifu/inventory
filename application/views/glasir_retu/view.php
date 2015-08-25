@@ -18,7 +18,7 @@ $(document).ready(function(){
 <div style="float:right; padding-bottom:5px;">
 <form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_retu">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
-Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
+Cari No. Pengembalian/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
 </form>
 </div>
@@ -26,7 +26,7 @@ Cari No. Transaksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" 
 <table id="dataTable" width="100%">
 <tr>
     <th>No</th>
-    <th>No. Transaksi</th>
+    <th>No. Pengembalian</th>
     <th>Tanggal Planning</th>
     <th>Banyak Transaksi Item Glasir</th>
     <th>Jumlah Pemakaian Glasir</th>

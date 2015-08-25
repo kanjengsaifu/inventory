@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_tran/DataDetail",
+			url		: "<?php echo site_url(); ?>/glasir_retu/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -211,7 +211,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/glasir_tran/simpan",
+			url	: "<?php echo site_url(); ?>/glasir_retu/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -253,7 +253,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/glasir_tran/cetak/'+kode);
+		window.open('<?php echo site_url();?>/glasir_retu/cetak/'+kode);
 		return false();
 	});
 	
@@ -451,7 +451,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/glasir_tran/">
+    <a href="<?php echo base_url();?>index.php/glasir_retu/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

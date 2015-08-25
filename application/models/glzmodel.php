@@ -160,6 +160,21 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhGlasirRetu(){
+		$text = "SELECT max(no_prod) as no FROM glasir_rh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'RG'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'RG'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function MaxPhdhGlasir(){
 		$text = "SELECT max(idphdh) as no FROM glasir_phdh";
 		$data = $this->glzModel->manualQuery($text);
@@ -228,7 +243,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function ProsesGlasirRetu($id){
-		$t = "SELECT idthd FROM glasir_rhd WHERE no_prod='$id'";
+		$t = "SELECT idrhd FROM glasir_rhd WHERE no_prod='$id'";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
