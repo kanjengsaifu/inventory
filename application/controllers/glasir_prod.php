@@ -89,21 +89,13 @@ class Glasir_prod extends CI_Controller {
 			$d['judul']="Order Produksi Glasir";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasir();
-			$tgl_inp    = date('d-m-Y  h:i:s');
-                        $inputer    = $this->session->userdata('username');
 			
 			$d['no_prod']	= $no_prod;
-                        $d['no_po']	= '';
-			$d['tgl_inp']	= $tgl_inp;
-                        $d['tgl_plng']	= '';
-                        $d['inputer']	= $inputer;
                         $d['planner']	= '';
                         $d['dsc']	= '';
 			
-			$gps = "SELECT * FROM global_buyer";
-			$d['l_byr'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM global_delivery";
-			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
+			$bm = "SELECT * FROM global_mesin";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -163,19 +155,16 @@ class Glasir_prod extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 				$up['no_prod']		= $this->input->post('no_prod');
-				$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
-				$up['no_po']            = $this->input->post('no_po');
+				//$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
 				$up['inputer']          = $this->session->userdata('username');
                                 $up['planner']          = $this->input->post('planner');
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
 				$ud['volume']           = $this->input->post('volume');
-                                $ud['densitas']         = $this->input->post('densitas');
                                 $ud['buyer']            = $this->input->post('buyer');
                                 $ud['jns']              = $this->input->post('jns');
                                 $ud['dsc']              = $this->input->post('dsc');
-                                $ud['petugas']          = $this->input->post('petugas');
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -318,25 +307,15 @@ class Glasir_prod extends CI_Controller {
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['no_prod']	= $id;
-					$d['tgl_plng']	= $this->glzModel->tgl_str($db->tgl_plng);
-                                        $d['tgl_inp']	= $db->tgl_inp;
-					$d['no_po']	= $db->no_po;
-                                        $d['inputer']	= $db->inputer;
-                                        $d['planner']	= $db->planner;  
+                                        $d['inputer']	= $db->inputer;  
 				}
 			}else{
 					$d['no_prod'] =$id;
-					$d['tgl_plng']	='';
-                                        $d['tgl_inp']	='';
-					$d['no_po']	='';
                                         $d['inputer']	='';
-                                        $d['planner']	='';
 			}
 			
-			$gps = "SELECT * FROM global_buyer";
-			$d['l_byr'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM global_delivery";
-			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
+			$bm = "SELECT * FROM global_mesin";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -372,9 +351,9 @@ class Glasir_prod extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,a.volume,a.densitas,a.petugas,a.inputer,c.nama as buyer, d.nama as jns, a.dsc
-                                    FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod JOIN global_buyer as c ON a.buyer=c.id JOIN global_delivery as d
-                                    ON a.jns=d.id JOIN glasir as e ON a.id_glasir=e.id_glasir WHERE a.no_prod='$id'";
+			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,a.bkb,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
+                                    FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod 
+                                    JOIN glasir as e ON a.id_glasir=e.id_glasir WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_prod/detail',$d);

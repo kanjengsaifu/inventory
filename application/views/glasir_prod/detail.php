@@ -32,11 +32,8 @@ $(function() {
     <th style="font-size:10px">No</th>
     <th style="font-size:10px">Id. Glasir</th>
     <th style="font-size:10px">Nama Glasir</th>
-    <th style="font-size:10px">Buyer</th>
-    <th style="font-size:10px">Jenis</th>
     <th style="font-size:10px">Batch</th>
-    <th style="font-size:10px">Volume (ltr)</th>
-    <th style="font-size:10px">Status</th>
+    <th style="font-size:10px">Berat Kotor (Kg)</th>
     <th style="font-size:10px">Keterangan</th>
     <th style="font-size:10px">PIC</th>
     <th style="font-size:10px">Inputer</th>
@@ -58,11 +55,8 @@ $(function() {
             <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
-            <td align="center" width="100"  style="font-size:10px"><?php echo $db['buyer']; ?></td>
-            <td align="center" width="100"  style="font-size:10px"><?php echo $db['jns']; ?></td>
             <td align="center" width="50"  style="font-size:10px"><?php echo $db['idphd']; ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['volume']); ?></td>
-            <td align="center" style="font-size:10px"><?php echo $new_status; ?>-[<?php echo $count_status; ?> status]</td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['bkb']); ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['inputer']; ?></td>

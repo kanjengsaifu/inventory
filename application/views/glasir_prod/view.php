@@ -28,7 +28,6 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
     <th>No</th>
     <th>No. Produksi</th>
     <th>Tanggal Planning</th>
-    <th>No. Order</th>
     <th>Banyak Order Item Glasir</th>
     <th>Jumlah Produksi Glasir</th>
     <th>Inputer</th>
@@ -51,7 +50,6 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
             <td align="center" width="130" ><?php echo $tgl_plng; ?></td>
-            <td align="center" width="100" ><?php echo $db['no_po']; ?></td>
             <td align="right" width="200"><?php echo $proses; ?></td>
             <td align="right"><?php echo $jml; ?> Liter</td>
             <td align="center"><?php echo $nama_lengkap; ?></td>

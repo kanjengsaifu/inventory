@@ -218,34 +218,9 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-        <td width="150">No. Produksi</td>
+        <td width="150">No. Transaksi</td>
         <td width="5">:</td>
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
-    </tr>
-    <tr>    
-        <td width="150">No. Order</td>
-        <td width="5">:</td>
-        <td><input type="text" name="no_po" id="no_po" size="45" maxlength="12" value="<?php echo $no_po;?>" /></td>
-    </tr>
-    <tr>    
-        <td>Waktu Input</td>
-        <td>:</td>
-        <td><input name="tgl_inp" id="tgl_inp"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_inp;?>" readonly="readonly"/></td>
-    </tr>
-    <tr>    
-        <td>Tgl Planning</td>
-        <td>:</td>
-        <td><input name="tgl_plng" id="tgl_plng"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_plng;?>"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Planner</td>
-        <td width="5">:</td>
-        <td><input type="text" name="planner" id="planner" size="45" maxlength="12" value="<?php echo $planner;?>" /></td>
-    </tr>
-    <tr>    
-        <td width="150">Inputer</td>
-        <td width="5">:</td>
-        <td><input type="text" name="inputer" id="inputer" size="45" maxlength="12" readonly="readonly" value="<?php echo $inputer;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>
@@ -271,51 +246,30 @@ $(document).ready(function(){
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
-        <td>Buyer</td>
+        <td>Ball Mill</td>
         <td>:</td>
         <td>
-        <select name="buyer" id="buyer" style="width:382px;">
+            <select name="id_bm" id="id_bm" style="width:382px;">
         <?php 
-		if(empty($buyer)){
+		if(empty($id_bm)){
 		?>
         <option value="">-PILIH-</option>
         <?php
 		}
-		foreach($l_byr->result() as $t){
-			if($buyer==$t->id){
+		foreach($l_bm->result() as $t){
+			if($id_bm==$t->id_bm){
 		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
         <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
         <?php }
 		} ?>
         </select>
         </td>
-    </tr>
-    <tr>    
-        <td>Jenis Pengiriman</td>
-        <td>:</td>
-        <td>
-        <select name="jns" id="jns" style="width:382px;">
-        <?php 
-		if(empty($jns)){
-		?>
-            <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_dlv->result() as $t){
-			if($jns==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }
-		} ?>
-        </select>
         </td>
     </tr>
     <tr>    
-        <td>Volume (liter)</td>
+        <td>Berat Kotor (Kg)</td>
         <td>:</td>
         <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>

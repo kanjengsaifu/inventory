@@ -18,7 +18,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_prod">Produksi Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_prod">01-Stok BM</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
     <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian Glasir</a>
