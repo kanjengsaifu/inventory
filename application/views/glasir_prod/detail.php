@@ -34,6 +34,7 @@ $(function() {
     <th style="font-size:10px">Nama Glasir</th>
     <th style="font-size:10px">Batch</th>
     <th style="font-size:10px">Berat Kotor (Kg)</th>
+    <th style="font-size:10px">Mesin Ball Mill</th>
     <th style="font-size:10px">Keterangan</th>
     <th style="font-size:10px">PIC</th>
     <th style="font-size:10px">Inputer</th>
@@ -49,7 +50,7 @@ $(function() {
                 $batch = $db['idphd'];
                 $new_status = $this->glzModel->NewStatus($noprod,$idglasir,$batch);
                 $count_status = $this->glzModel->CountStatus($noprod,$idglasir,$batch);
-		$total = $db['volume'];
+		$total = $db['bkb'];
 		?>    
     	<tr>
             <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
@@ -57,15 +58,12 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
             <td align="center" width="50"  style="font-size:10px"><?php echo $db['idphd']; ?></td>
             <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['bkb']); ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" width="80" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/glasir_prod/status/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
-            onClick="return confirm('Anda yakin ingin merubah status data ini?')">
-			<img src="<?php echo base_url();?>asset/images/drive-download.png" title='Update status data'>
-			</a>
-            <a href="<?php echo base_url();?>index.php/glasir_prod/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_prod/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['bkb'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
@@ -85,7 +83,7 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="6" align="center">Total</th>
+	<th colspan="4" align="center">Total</th>
         <th style="text-align:right"><?php echo number_format($g_total);?></th>
 </tr>    
 </table>

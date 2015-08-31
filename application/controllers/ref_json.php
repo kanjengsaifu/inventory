@@ -39,7 +39,7 @@ class Ref_json extends CI_Controller {
                                         $data['nama_alias'] = $t->nama_alias;
 					$data['satuan'] = $t->satuan;
 					$data['status'] = $t->status;
-                                        $data['stok_awal'] = $t->stok_awal;
+                                        //$data['stok_awal'] = $t->stok_awal;
 					echo json_encode($data);
 				}
 			}else{
@@ -47,7 +47,7 @@ class Ref_json extends CI_Controller {
                                         $data['nama_alias'] = '';
 					$data['satuan'] = 'Liter';
 					$data['status'] = '';
-                                        $data['stok_awal'] = '';
+                                        //$data['stok_awal'] = '';
 				echo json_encode($data);
 			}
 		}else{

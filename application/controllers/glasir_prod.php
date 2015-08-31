@@ -32,7 +32,7 @@ class Glasir_prod extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar Produksi Glasir";
+			$d['judul']="Daftar Input Stock Glasir di Ball Mill";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -91,10 +91,9 @@ class Glasir_prod extends CI_Controller {
 			$no_prod    = $this->glzModel->MaxPhGlasir();
 			
 			$d['no_prod']	= $no_prod;
-                        $d['planner']	= '';
                         $d['dsc']	= '';
 			
-			$bm = "SELECT * FROM global_mesin";
+			$bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
@@ -157,14 +156,15 @@ class Glasir_prod extends CI_Controller {
 				$up['no_prod']		= $this->input->post('no_prod');
 				//$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
 				$up['inputer']          = $this->session->userdata('username');
-                                $up['planner']          = $this->input->post('planner');
+                                //$up['planner']          = $this->input->post('planner');
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
-				$ud['volume']           = $this->input->post('volume');
-                                $ud['buyer']            = $this->input->post('buyer');
-                                $ud['jns']              = $this->input->post('jns');
+				$ud['bkb']              = $this->input->post('bkb');
+                                $ud['densitas']         = $this->input->post('densitas');
+                                $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['dsc']              = $this->input->post('dsc');
+                                $ud['petugas']          = $this->input->post('petugas');
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -314,7 +314,7 @@ class Glasir_prod extends CI_Controller {
                                         $d['inputer']	='';
 			}
 			
-			$bm = "SELECT * FROM global_mesin";
+			$bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
@@ -351,9 +351,10 @@ class Glasir_prod extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,a.bkb,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
+			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,c.nama_bm,a.bkb,a.densitas,a.petugas,a.inputer, a.dsc
                                     FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod 
-                                    JOIN glasir as e ON a.id_glasir=e.id_glasir WHERE a.no_prod='$id'";
+                                    JOIN glasir as e ON a.id_glasir=e.id_glasir
+                                    JOIN global_mesin as c ON a.id_bm=c.id_bm WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_prod/detail',$d);

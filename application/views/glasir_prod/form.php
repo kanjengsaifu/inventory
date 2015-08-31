@@ -60,47 +60,11 @@ $(document).ready(function(){
 	$("#simpan").click(function(){
             
 		var id_glasir	= $("#id_glasir").val();
-		var volume	= $("#volume").val();
-		var no_po	= $("#no_po").val();
-		var planner     = $("#planner").val();
-		var tgl_plng    = $("#tgl_plng").val();
+		var bkb	= $("#bkb").val();
                 var petugas     = $("#petugas").val();
                 var densitas    = $("#densitas").val();
 		
 		var string = $("#form").serialize();
-		
-                if(no_po.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, No Order tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#no_po").focus();
-			return false();
-		}
-                
-                 if(tgl_plng.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, No Order tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#tgl_plng").focus();
-			return false();
-		}
-                
-		if(planner.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Nama Planner tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#planner").focus();
-			return false();
-		}
 		
 		if(id_glasir.length==0){
 			$.messager.show({
@@ -112,14 +76,14 @@ $(document).ready(function(){
 			$("#id_glasir").focus();
 			return false();
 		}
-		if(volume.length==0){
+		if(bkb.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Volume tidak boleh kosong', 
+				msg:'Maaf, Berat Kotor tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#volume").focus();
+			$("#bkb").focus();
 			return false();
 		}
                 if(densitas.length==0){
@@ -172,10 +136,9 @@ $(document).ready(function(){
 	$("#tambah_data").click(function(){
 		$(".detail").val('');
 		$("#id_glasir").val('');
-                $("#volume").val('');
+                $("#bkb").val('');
                 $("#densitas").val('');
-                $("#buyer").val('');
-                $("#jns").val('');
+                $("#id_bm").val('');
                 $("#dsc").val('');
 		$("#id_glasir").focus();
 	});
@@ -271,7 +234,7 @@ $(document).ready(function(){
     <tr>    
         <td>Berat Kotor (Kg)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="bkb" id="bkb"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td>Densitas</td>
@@ -308,6 +271,6 @@ $(document).ready(function(){
 <div id="tampil_data"></div>
 </fieldset>
 <div id="dlg" class="easyui-dialog" title="Item Glasir" style="width:900px;height:400px; padding:5px;" data-options="closed:true">
-	Cari : <input type="text" name="text_cari" id="text_cari" size="50" />
+	Cari : <input type="text" name="text_cari" id="text_cari" size="50"/>
 	<div id="daftar_glasir"></div>
 </div>

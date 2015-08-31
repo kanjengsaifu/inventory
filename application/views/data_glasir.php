@@ -24,7 +24,6 @@ function pilih(id){
     <th>Kode Glasir</th>
     <th>Nama Glasir</th>
     <th>Nama Alias Glasir</th>
-    <th>Stok Awal</th>
     <th>Satuan</th>
     <th>Inputer</th>
     <th>Status</th>
@@ -41,7 +40,6 @@ function pilih(id){
             <td align="center" width="80" ><?php echo $db['id_glasir']; ?></td>
             <td ><?php echo $db['nama_glasir']; ?></td>
             <td ><?php echo $db['nama_alias']; ?></td>
-             <td align="center" width="80" ><?php echo $db['stok_awal']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
             <td align="center" width="60" ><?php echo $db['inputer']; ?></td>
             <td align="center" width="60" ><?php echo $status; ?></td>
