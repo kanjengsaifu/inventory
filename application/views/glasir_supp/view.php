@@ -29,7 +29,7 @@ Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" s
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
     <th>Banyak Transaksi Input</th>
-    <th>Total Produksi Glasir dari Ball Mill</th>
+    <th>Jumlah Produksi Glasir di Ball Mill</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>

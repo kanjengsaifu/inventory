@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Glasir_prod extends CI_Controller {
+class Glasir_supp extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -32,7 +32,7 @@ class Glasir_prod extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar input stock glasir turun ball mill";
+			$d['judul']="Daftar input stock supply glasir";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -43,7 +43,7 @@ class Glasir_prod extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_ph $where ";		
+			$text = "SELECT * FROM glasir_ph_sp $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
@@ -61,13 +61,13 @@ class Glasir_prod extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_ph $where 
+			$text = "SELECT * FROM glasir_ph_sp $where 
 					ORDER BY no_prod DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('glasir_prod/view', $d, true);		
+			$d['content'] = $this->load->view('glasir_supp/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());

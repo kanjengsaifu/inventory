@@ -203,7 +203,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function JmlGlasir($id){
-		$t = "SELECT sum(bkb) as jml FROM glasir_phd WHERE no_prod='$id'";
+		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd WHERE no_prod='$id'";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){

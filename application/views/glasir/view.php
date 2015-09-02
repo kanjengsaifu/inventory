@@ -22,8 +22,7 @@ Cari Kode & Nama Glasir : <input type="text" name="txt_cari" id="txt_cari" size=
     <th>Nama Glasir</th>
     <th>Nama Alias Glasir</th>
     <th>Satuan</th>
-    <th>Stok di BM</th>
-    <th>Stok di Tong</th>
+    <th>Stok di BGPS</th>
     <th>Stok di Supply</th>
     <th>Inputer</th>
     <th>Status</th>
@@ -43,8 +42,7 @@ Cari Kode & Nama Glasir : <input type="text" name="txt_cari" id="txt_cari" size=
             <td ><?php echo $db['nama_glasir']; ?></td>
             <td ><?php echo $db['nama_alias']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps_bm']); ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps_tong']); ?></td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps']); ?></td>
             <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_supply']); ?></td>
             <td align="center" width="60" ><?php echo $db['inputer']; ?></td>
             <td align="center" width="60" ><?php echo $status; ?></td>
