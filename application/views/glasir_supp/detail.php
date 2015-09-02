@@ -33,8 +33,11 @@ $(function() {
     <th style="font-size:10px">Id. Glasir</th>
     <th style="font-size:10px">Nama Glasir</th>
     <th style="font-size:10px">Batch</th>
+    <th style="font-size:10px">Volume</th>
+    <th style="font-size:10px">Densitas</th>
     <th style="font-size:10px">Berat Kering (Kg)</th>
-    <th style="font-size:10px">Mesin Ball Mill</th>
+    <th style="font-size:10px">Tong</th>
+    <th style="font-size:10px">Status</th>
     <th style="font-size:10px">Keterangan</th>
     <th style="font-size:10px">PIC</th>
     <th style="font-size:10px">Inputer</th>
@@ -48,8 +51,8 @@ $(function() {
                 $noprod = $db['no_prod'];
                 $idglasir = $db['id_glasir'];
                 $batch = $db['idphd'];
-                $new_status = $this->glzModel->NewStatus($noprod,$idglasir,$batch);
-                $count_status = $this->glzModel->CountStatus($noprod,$idglasir,$batch);
+                //$new_status = $this->glzModel->NewStatus($noprod,$idglasir,$batch);
+                //$count_status = $this->glzModel->CountStatus($noprod,$idglasir,$batch);
 		$total = 1.565*(($db['densitas']-1000)/1000)*$db['volume'];
                 $bk = 1.565*(($db['densitas']-1000)/1000)*$db['volume'];
 		?>    
@@ -58,13 +61,16 @@ $(function() {
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
             <td align="center" width="50"  style="font-size:10px"><?php echo $db['idphd']; ?></td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['volume'],2,',','.'); ?> Liter</td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['densitas'],2,',','.'); ?></td>
             <td align="right" width="100"  style="font-size:10px"><?php echo number_format($bk,2,',','.'); ?> Kg</td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['nama_gps']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" width="80" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/glasir_prod/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_supp/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
@@ -84,7 +90,7 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="4" align="center">Total</th>
+	<th colspan="6" align="center">Total</th>
         <th style="text-align:right"><?php echo number_format($g_total,2,'.',',');?> Kg</th>
 </tr>    
 </table>

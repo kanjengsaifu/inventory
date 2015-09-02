@@ -48,7 +48,7 @@ class Glasir_supp extends CI_Controller {
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/glasir_prod/index/';
+			$config['base_url'] = site_url() . '/glasir_supp/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -86,17 +86,20 @@ class Glasir_supp extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
-			$d['judul']="Input stock glasir turun ball mill";
+			$d['judul']="Input stock supply glasir";
 			
-			$no_prod    = $this->glzModel->MaxPhGlasir();
+			$no_prod    = $this->glzModel->MaxPhGlasirSupp();
 			
 			$d['no_prod']	= $no_prod;
                         $d['dsc']	= '';
+                        $d['status']	= 2;
 			
-			$bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%'";
+			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
+                        $status = "SELECT * FROM global_status";
+			$d['l_status'] = $this->glzModel->manualQuery($status);
 			
-			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_supp/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -141,7 +144,7 @@ class Glasir_supp extends CI_Controller {
                         $tong = "SELECT * FROM global_tong";
 			$d['l_tong'] = $this->glzModel->manualQuery($tong);
 			
-			$d['content'] = $this->load->view('glasir_prod/form_detail', $d, true);		
+			$d['content'] = $this->load->view('glasir_supp/form_detail', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -160,25 +163,25 @@ class Glasir_supp extends CI_Controller {
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
+                                $ud['id_bm']            = $this->input->post('id_bm');
+                                $ud['id_gps']            = $this->input->post('status');
 				$ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
-                                $ud['id_bm']            = $this->input->post('id_bm');
-                                $ud['id_bmt']           = $this->input->post('id_bmt');
+                                $ud['inputer']          = $this->session->userdata('username');
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
-                                $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
 				
-				$data = $this->glzModel->getSelectedData("glasir_ph",$id);
+				$data = $this->glzModel->getSelectedData("glasir_ph_sp",$id);
 				if($data->num_rows()>0){
-					$this->glzModel->updateData("glasir_ph",$up,$id);
-						$data = $this->glzModel->getSelectedData("glasir_phd",$id_d);
+					$this->glzModel->updateData("glasir_ph_sp",$up,$id);
+						$data = $this->glzModel->getSelectedData("glasir_phd_sp",$id_d);
 						if($data->num_rows()>0){
-							$this->glzModel->updateData("glasir_phd",$ud,$id_d);
+							$this->glzModel->updateData("glasir_phd_sp",$ud,$id_d);
 						}else{
                                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_phd",$ud);
@@ -186,9 +189,9 @@ class Glasir_supp extends CI_Controller {
 					echo 'Update data Sukses';
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
-					$this->glzModel->insertData("glasir_ph",$up);
+					$this->glzModel->insertData("glasir_ph_sp",$up);
                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
-					$this->glzModel->insertData("glasir_phd",$ud);
+					$this->glzModel->insertData("glasir_phd_sp",$ud);
 					echo 'Simpan data Sukses';		
 				}
 		}else{
@@ -281,7 +284,7 @@ class Glasir_supp extends CI_Controller {
 					WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 									
-			$this->load->view('glasir_prod/cetak',$d);
+			$this->load->view('glasir_supp/cetak',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -300,10 +303,10 @@ class Glasir_supp extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 			
-			$d['judul'] = "Ubah input stock glasir turun ball mill";
+			$d['judul'] = "Ubah input stock supply glasir";
 			
 			$id = $this->uri->segment(3);
-			$text = "SELECT * FROM glasir_ph WHERE no_prod='$id'";
+			$text = "SELECT * FROM glasir_ph_sp WHERE no_prod='$id'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
@@ -311,14 +314,16 @@ class Glasir_supp extends CI_Controller {
                                         $d['inputer']	= $db->inputer;  
 				}
 			}else{
-					$d['no_prod'] =$id;
+					$d['no_prod'] ='';
                                         $d['inputer']	='';
 			}
 			
-			$bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%'";
+			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
+                        $status = "SELECT * FROM global_status";
+			$d['l_status'] = $this->glzModel->manualQuery($status);
 									
-			$d['content'] = $this->load->view('glasir_prod/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_supp/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -340,7 +345,7 @@ class Glasir_supp extends CI_Controller {
                                     where a.noprod = '$noprod' and a.idglasir = '$idglasir' and a.idphd ='$batch'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_prod/detail_history',$d);
+			$this->load->view('glasir_supp/detail_history',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -352,13 +357,14 @@ class Glasir_supp extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
-                                    FROM glasir_phd as a JOIN glasir_ph as b ON a.no_prod=b.no_prod 
+			$text = "SELECT a.no_prod,a.idphd,d.nama_gps,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
+                                    FROM glasir_phd_sp as a JOIN glasir_ph_sp as b ON a.no_prod=b.no_prod 
                                     JOIN glasir as e ON a.id_glasir=e.id_glasir
-                                    JOIN global_mesin as c ON a.id_bm=c.id_bm WHERE a.no_prod='$id'";
+                                    JOIN global_mesin as c ON a.id_bm=c.id_bm 
+                                    JOIN global_status as d ON a.id_gps=d.idgps WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_prod/detail',$d);
+			$this->load->view('glasir_supp/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -368,26 +374,14 @@ class Glasir_supp extends CI_Controller {
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
-                        $idx['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_phdh",$idx);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}else{
-				$idy['no_prod'] = $this->uri->segment(3);
-                                $q = $this->db->get_where("glasir_phd",$idy);
-                                $row = $q->num_rows();
-                                if($row>0){
-                                        echo "Masih ada data order produksi yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                        echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-                                }else{
-				$this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id'");
-                                $this->glzModel->manualQuery("DELETE FROM glasir_ph WHERE no_prod='$id'");
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}
+                        $id = $this->uri->segment(3);
+			
+				$this->glzModel->manualQuery("DELETE FROM glasir_phd_sp WHERE no_prod='$id'");
+                                $this->glzModel->manualQuery("DELETE FROM glasir_ph_sp WHERE no_prod='$id'");
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_supp'>";
+			
 			}			
-		}else{
+		else{
 			header('location:'.base_url());
 		}
 	}
@@ -395,20 +389,12 @@ class Glasir_supp extends CI_Controller {
 	public function hapus_detail()
 	{
 		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){                        
-                        $id['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_phdh",$id);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}else{
+		if(!empty($cek)){
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
-                                $this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
+                                $this->glzModel->manualQuery("DELETE FROM glasir_phd_sp WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
                                 $this->edit();
-			}
                         
 		}else{
 			header('location:'.base_url());

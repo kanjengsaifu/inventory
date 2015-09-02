@@ -109,7 +109,7 @@ $(function() {
 			
 
 <div class="panel-header" fit="true" style="height:20px;text-align:center;">	    
-Copyright &copy; <?php echo $instansi;?> 2013.
+Copyright &copy; <?php echo $instansi;?> <?php echo date("Y"); ?>.
 </div>
 </body>
 </html>

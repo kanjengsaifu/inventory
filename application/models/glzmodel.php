@@ -145,6 +145,21 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhGlasirSupp(){
+		$text = "SELECT max(no_prod) as no FROM glasir_ph_sp";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'SG'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'SG'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function MaxPhGlasirTran(){
 		$text = "SELECT max(no_prod) as no FROM glasir_th";
 		$data = $this->glzModel->manualQuery($text);
@@ -204,6 +219,32 @@ class Glzmodel extends CI_Model {
         
         public function JmlGlasir($id){
 		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jml;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function ProsesGlasirSupp($id){
+		$t = "SELECT idphd FROM glasir_phd_sp WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlGlasirSupp($id){
+		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd_sp WHERE no_prod='$id'";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){

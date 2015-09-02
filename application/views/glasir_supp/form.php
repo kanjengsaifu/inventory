@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_prod/DataDetail",
+			url		: "<?php echo site_url(); ?>/glasir_supp/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -64,7 +64,7 @@ $(document).ready(function(){
                 var petugas     = $("#petugas").val();
                 var densitas    = $("#densitas").val();
                 var id_bm       = $("#id_bm").val();
-                var id_bmt       = $("#id_bmt").val();
+                var status       = $("#status").val();
 		
 		var string = $("#form").serialize();
 		
@@ -90,14 +90,14 @@ $(document).ready(function(){
 			return false();
 		}
                 
-                if(id_bmt.length==0){
+                if(status.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Turun ke tidak boleh kosong', 
+				msg:'Maaf, Status tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#id_bmt").focus();
+			$("#status").focus();
 			return false();
 		}
                 
@@ -134,7 +134,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/glasir_prod/simpan",
+			url	: "<?php echo site_url(); ?>/glasir_supp/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -170,7 +170,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/glasir_prod/cetak/'+kode);
+		window.open('<?php echo site_url();?>/glasir_supp/cetak/'+kode);
 		return false();
 	});
 	
@@ -234,7 +234,7 @@ $(document).ready(function(){
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
-        <td>Turun Dari Ball Mill</td>
+        <td>Tong</td>
         <td>:</td>
         <td>
             <select name="id_bm" id="id_bm" style="width:382px;">
@@ -247,9 +247,9 @@ $(document).ready(function(){
 		foreach($l_bm->result() as $t){
 			if($id_bm==$t->id_bm){
 		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
         <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
         <?php }
 		} ?>
         </select>
@@ -257,14 +257,24 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Turun Ke</td>
+        <td>Status</td>
         <td>:</td>
         <td>
-            <select name="id_bmt" id="id_bmt" style="width:382px;">
+            <select name="status" id="status" style="width:382px;">
+        <?php 
+		if(empty($status)){
+		?>
         <option value="">-PILIH-</option>
-        <option value="1">Kapsul</option>
-        <option value="2">Tanker</option>
-        <option value="3">Tong</option>
+        <?php
+		}
+		foreach($l_status->result() as $t){
+			if($status==$t->idgps){
+		?>
+        <option value="<?php echo $t->idgps;?>" selected="selected"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->idgps;?>"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
+        <?php }
+		} ?>
         </select>
         </td>
         </td>
@@ -296,7 +306,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/glasir_prod/">
+    <a href="<?php echo base_url();?>index.php/glasir_supp/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>
