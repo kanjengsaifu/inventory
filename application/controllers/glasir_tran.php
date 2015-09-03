@@ -17,10 +17,10 @@ class Glasir_tran extends CI_Controller {
 			
                         $where = " WHERE no_prod<>''";
 			if(!empty($cari)){
-				$where .= " AND no_prod LIKE '%$cari%' OR no_po LIKE '%$cari%'";
+				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
 			}
 			if(!empty($tgl)){
-				$where .= " AND tgl_plng='$tgl'";
+				$where .= " AND tgl_inp LIKE '%$tgl%'";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -387,10 +387,11 @@ class Glasir_tran extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,f.nama,g.nama_bm,a.idthd,a.id_glasir,e.nama_glasir,a.volume,a.densitas,a.vsc,a.petugas,a.inputer,c.nama as buyer, d.nama as jns, a.dsc
-                                    FROM glasir_thd as a JOIN glasir_th as b ON a.no_prod=b.no_prod JOIN global_buyer as c ON a.buyer=c.id JOIN global_delivery as d
-                                    ON a.jns=d.id JOIN glasir as e ON a.id_glasir=e.id_glasir join global_shift f on a.shift=f.id
-                                    join global_mesin g on a.mpr=g.id_bm WHERE a.no_prod='$id'";
+			$text = "SELECT a.no_prod,a.idthd,d.nama as shift,a.tgl,a.jam,a.id_glasir,b.nama_glasir,c.nama_bm,a.volume,a.densitas,a.vsc,a.dsc,a.petugas1,a.petugas2,a.petugas3,a.petugas4,a.inputer
+                                    FROM glasir_thd a
+                                    JOIN glasir b ON a.id_glasir = b.id_glasir
+                                    JOIN global_mesin c ON a.id_bm = c.id_bm
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_tran/detail',$d);

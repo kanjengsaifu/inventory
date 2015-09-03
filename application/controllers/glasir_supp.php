@@ -98,6 +98,8 @@ class Glasir_supp extends CI_Controller {
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
                         $status = "SELECT * FROM global_status";
 			$d['l_status'] = $this->glzModel->manualQuery($status);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->glzModel->manualQuery($sft);
 			
 			$d['content'] = $this->load->view('glasir_supp/form', $d, true);		
 			$this->load->view('home',$d);
@@ -169,6 +171,9 @@ class Glasir_supp extends CI_Controller {
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['inputer']          = $this->session->userdata('username');
                                 $ud['dsc']              = $this->input->post('dsc');
+                                $ud['shift']            = $this->input->post('shift');
+                                $ud['jam']              = $this->input->post('jam');
+                                $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['petugas']          = $this->input->post('petugas');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -322,6 +327,8 @@ class Glasir_supp extends CI_Controller {
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
                         $status = "SELECT * FROM global_status";
 			$d['l_status'] = $this->glzModel->manualQuery($status);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->glzModel->manualQuery($sft);
 									
 			$d['content'] = $this->load->view('glasir_supp/form', $d, true);		
 			$this->load->view('home',$d);
@@ -357,11 +364,12 @@ class Glasir_supp extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.idphd,d.nama_gps,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
+			$text = "SELECT a.no_prod,a.jam,a.tgl,a.idphd,d.nama_gps,f.nama,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
                                     FROM glasir_phd_sp as a JOIN glasir_ph_sp as b ON a.no_prod=b.no_prod 
                                     JOIN glasir as e ON a.id_glasir=e.id_glasir
                                     JOIN global_mesin as c ON a.id_bm=c.id_bm 
-                                    JOIN global_status as d ON a.id_gps=d.idgps WHERE a.no_prod='$id'";
+                                    JOIN global_status as d ON a.id_gps=d.idgps
+                                    JOIN global_shift as f ON a.shift=f.id WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_supp/detail',$d);

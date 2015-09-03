@@ -30,6 +30,9 @@ $(function() {
 <table id="dataTable" width="100%">
 <tr>
     <th style="font-size:10px">No</th>
+    <th style="font-size:10px">Tgl</th>
+    <th style="font-size:10px">Jam</th>
+    <th style="font-size:10px">Shift</th>
     <th style="font-size:10px">Id. Glasir</th>
     <th style="font-size:10px">Nama Glasir</th>
     <th style="font-size:10px">Batch</th>
@@ -58,6 +61,9 @@ $(function() {
 		?>    
     	<tr>
             <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['tgl']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['jam']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['nama']; ?></td>
             <td align="center" width="100"  style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
             <td align="center" width="50"  style="font-size:10px"><?php echo $db['idphd']; ?></td>
@@ -90,7 +96,7 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="6" align="center">Total</th>
+	<th colspan="9" align="center">Total</th>
         <th style="text-align:right"><?php echo number_format($g_total,2,'.',',');?> Kg</th>
 </tr>    
 </table>

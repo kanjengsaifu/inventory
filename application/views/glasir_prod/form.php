@@ -24,7 +24,7 @@ $(document).ready(function(){
 		//return false();
 	}
 	        
-        $("#tgl_plng").datepicker({
+        $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
 	
@@ -64,7 +64,10 @@ $(document).ready(function(){
                 var petugas     = $("#petugas").val();
                 var densitas    = $("#densitas").val();
                 var id_bm       = $("#id_bm").val();
-                var id_bmt       = $("#id_bmt").val();
+                var id_bmt      = $("#id_bmt").val();
+                var shift       = $("#shift").val();
+                var jam         = $("#jam").val();
+                var tgl         = $("#tgl").val();
 		
 		var string = $("#form").serialize();
 		
@@ -76,6 +79,39 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#id_glasir").focus();
+			return false();
+		}
+                
+                if(shift.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Shift tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#shift").focus();
+			return false();
+		}
+                
+                if(tgl.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal pelaksanaan tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tgl").focus();
+			return false();
+		}
+                
+                if(jam.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Jam pelaksanaan tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#jam").focus();
 			return false();
 		}
                 
@@ -165,6 +201,9 @@ $(document).ready(function(){
                 $("#densitas").val('');
                 $("#id_bm").val('');
                 $("#dsc").val('');
+                $("#shift").val('');
+                $("#jam").val('');
+                $("#tgl").val('');
 		$("#id_glasir").focus();
 	});
 	
@@ -211,9 +250,46 @@ $(document).ready(function(){
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
+        <td>Petugas</td>
+        <td>:</td>
+        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+    </tr>
+    <tr>    
         <td width="150">Keterangan</td>
         <td width="5">:</td>
         <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Tanggal Pelaksanaan</td>
+        <td width="5">:</td>
+        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+    </tr>
+    <tr>    
+        <td width="150">Jam Pelaksanaan</td>
+        <td width="5">:</td>
+        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value=""/></td>
+    </tr>
+    <tr>    
+        <td>Shift</td>
+        <td>:</td>
+        <td>
+        <select name="shift" id="shift" style="width:382px;">
+        <?php 
+		if(empty($shift)){
+		?>
+            <option value="">-PILIH-</option>
+        <?php
+		}
+		foreach($l_sft->result() as $t){
+			if($shift==$t->id){
+		?>
+        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }
+		} ?>
+        </select>
+        </td>
     </tr>
     </table>
     </fieldset>
@@ -278,11 +354,6 @@ $(document).ready(function(){
         <td>Densitas</td>
         <td>:</td>
         <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
-    </tr>
-    <tr>    
-        <td>Petugas</td>
-        <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
     </tr>
     </table>
     </fieldset>

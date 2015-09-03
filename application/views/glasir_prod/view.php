@@ -18,7 +18,7 @@ $(document).ready(function(){
 <div style="float:right; padding-bottom:5px;">
 <form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_prod">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
-Cari No. Produksi/No. Order : <input type="text" name="txt_cari" id="txt_cari" size="50" />
+Cari No. Produksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" size="50" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
 </form>
 </div>

@@ -30,6 +30,9 @@ $(function() {
 <table id="dataTable" width="100%">
 <tr>
     <th style="font-size:10px">No</th>
+    <th style="font-size:10px">Tgl</th>
+    <th style="font-size:10px">Jam</th>
+    <th style="font-size:10px">Shift</th>
     <th style="font-size:10px">Id. Glasir</th>
     <th style="font-size:10px">Nama Glasir</th>
     <th style="font-size:10px">Batch</th>
@@ -57,17 +60,20 @@ $(function() {
 		?>    
     	<tr>
             <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
-            <td align="center" width="100"  style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['tgl']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['jam']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['nama']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
-            <td align="center" width="50"  style="font-size:10px"><?php echo $db['idphd']; ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['volume'],2,',','.'); ?> Liter</td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['densitas'],2,',','.'); ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($bk,2,',','.'); ?> Kg</td>
+            <td align="center" style="font-size:10px"><?php echo $db['idphd']; ?></td>
+            <td align="right" style="font-size:10px"><?php echo number_format($db['volume'],2,',','.'); ?> Liter</td>
+            <td align="right" style="font-size:10px"><?php echo number_format($db['densitas'],2,',','.'); ?></td>
+            <td align="right" style="font-size:10px"><?php echo number_format($bk,2,',','.'); ?> Kg</td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
-            <td align="center" width="100"  style="font-size:10px"><?php echo $db['petugas']; ?></td>
-            <td align="center" width="100"  style="font-size:10px"><?php echo $db['inputer']; ?></td>
-            <td align="center" width="80" style="font-size:10px">
+            <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
+            <td align="center" style="font-size:10px">
             <a href="<?php echo base_url();?>index.php/glasir_prod/hapus_detail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idphd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>

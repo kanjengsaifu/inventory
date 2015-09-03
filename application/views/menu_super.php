@@ -8,9 +8,6 @@
     <li data-options="iconCls:'icon-surat_keputusan'">
     <a href="<?php echo base_url();?>index.php/glasir">Item Glasir</a>
     </li>
-    <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/saggar">Master Saggar</a>
-    </li>
     </ul>
     </div>
 </div>
@@ -31,18 +28,6 @@
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
     <a href="<?php echo base_url();?>index.php/glasir_opna">05-Stock Opname Glasir</a>
-    </li>
-    <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/saggar_prod">Input Saggar Baru</a>
-    </li>
-    <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/saggar_tran">Penggunaan Saggar</a>
-    </li>
-    <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/saggar_retu">Retur Saggar</a>
-    </li>
-    <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/saggar_opna">Stock Opname Saggar</a>
     </li>
     </ul>
     </div>
