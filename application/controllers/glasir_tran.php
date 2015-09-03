@@ -94,14 +94,6 @@ class Glasir_tran extends CI_Controller {
 			$d['no_prod']	= $no_prod;
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
-                        //$d['dsc']	= '';
-                        //$d['buyer']	= '';
-                        //$d['jns']	= '';
-                        //$d['shift']	= '';
-                        //$d['mpr']	= '';
-                        //$d['densitas']	= '';
-                        //$d['vsc']	= '';
-                        //$d['wktp']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -170,24 +162,27 @@ class Glasir_tran extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 				$up['no_prod']		= $this->input->post('no_prod');
-				$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
+				//$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
 				//$up['no_po']            = $this->input->post('no_po');
 				$up['inputer']          = $this->session->userdata('username');
-                                $up['planner']          = $this->input->post('planner');
+                                //$up['planner']          = $this->input->post('planner');
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
-                                $ud['buyer']            = $this->input->post('buyer');
-                                $ud['jns']              = $this->input->post('jns');
-                                $ud['shift']            = $this->input->post('shift');
-                                $ud['mpr']              = $this->input->post('mpr');
                                 $ud['dsc']              = $this->input->post('dsc');
+                                $ud['petugas1']         = $this->input->post('petugas1');
+                                $ud['petugas2']         = $this->input->post('petugas2');
+                                $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['jam']              = $this->input->post('jam');
+                                $ud['shift']            = $this->input->post('shift');
+                                $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['vsc']              = $this->input->post('vsc');
-                                $ud['petugas']          = $this->input->post('petugas');
+                                $ud['ddri']             = $this->input->post('ddri');
+                                $ud['petugas3']         = $this->input->post('petugas3');
+                                $ud['petugas4']         = $this->input->post('petugas4');
                                 $ud['inputer']          = $this->session->userdata('username');
-                                $ud['wktp']		= $this->app_model->tgl_sql($this->input->post('wktp'));
 				
 				$id['no_prod']          = $this->input->post('no_prod');
 				
@@ -212,44 +207,6 @@ class Glasir_tran extends CI_Controller {
 					$this->glzModel->insertData("glasir_thd",$ud);
 					echo 'Simpan data Sukses';		
 				}
-		}else{
-				header('location:'.base_url());
-		}
-	
-	}
-        
-        public function simpanStatus()
-	{
-		
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			$ud['idphdh']		= $this->glzModel->MaxPhdhGlasir(); //
-			$ud['tgl']		= $this->glzModel->tgl_sql($this->input->post('tgl'));
-			$ud['idglasir']         = $this->input->post('idglasir'); //
-			$ud['inp']              = $this->session->userdata('username'); //
-			$ud['noprod']           = $this->input->post('noprod'); //
-			$ud['idphd']            = $this->input->post('batch');
-			$ud['volume']           = $this->input->post('volume');
-                        $ud['densitas']         = $this->input->post('densitas');
-                        $ud['idgps']            = $this->input->post('status');
-                        $ud['idbm']             = $this->input->post('id_bm');
-                        $ud['idtong']           = $this->input->post('id_tong');
-                        $ud['petugas']          = $this->input->post('petugas');
-                        $ud['dsc']          = $this->input->post('dsc');
-			
-                        $id['idphdh']           = $this->input->post('idphdh');
-			$q = $this->db->get_where("glasir_phdh",$id);
-			$row = $q->num_rows();
-			if($row>0){
-				$ud['inp_time'] = date('Y-m-d h:i:s');
-				//$this->db->update("glasir_phdh",$ud,$id);
-                                $this->db->insert("glasir_phdh",$ud);
-				echo "Data Sukses diUpdate";
-			}else{
-				$ud['inp_time'] = date('Y-m-d h:i:s');
-				$this->db->insert("glasir_phdh",$ud);
-				echo "Data Sukses diSimpan";
-			}
 		}else{
 				header('location:'.base_url());
 		}
@@ -329,19 +286,15 @@ class Glasir_tran extends CI_Controller {
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['no_prod']	= $id;
-					$d['tgl_plng']	= $this->glzModel->tgl_str($db->tgl_plng);
+					$d['tgl']	= $this->glzModel->tgl_str($db->tgl);
                                         $d['tgl_inp']	= $db->tgl_inp;
-					$d['no_po']	= $db->no_po;
                                         $d['inputer']	= $db->inputer;
-                                        $d['planner']	= $db->planner;  
 				}
 			}else{
 					$d['no_prod'] =$id;
-					$d['tgl_plng']	='';
+					$d['tgl']	='';
                                         $d['tgl_inp']	='';
-					$d['no_po']	='';
                                         $d['inputer']	='';
-                                        $d['planner']	='';
 			}
 			
 			$gps = "SELECT * FROM global_buyer";
@@ -355,27 +308,6 @@ class Glasir_tran extends CI_Controller {
 									
 			$d['content'] = $this->load->view('glasir_tran/form', $d, true);		
 			$this->load->view('home',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
-        
-        public function DataDetailHistory()
-	{
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			
-			$noprod     = $this->input->post('noprod');
-                        $idglasir   = $this->input->post('idglasir');
-                        $batch      = $this->input->post('batch');
-			$text = "select a.idphdh,a.noprod,a.idglasir,a.idphd,b.nama_gps,a.tgl,a.volume,a.densitas,
-                                    c.id_bm,c.nama_bm,d.id_tong,d.nama_tong,a.petugas,a.dsc,a.inp,a.inp_time from glasir_phdh a
-                                    join glasir_patt b on a.idgps = b.idgps join global_mesin c on a.idbm = c.id_bm 
-                                    join global_tong d on a.idtong = d.id_tong
-                                    where a.noprod = '$noprod' and a.idglasir = '$idglasir' and a.idphd ='$batch'";
-			$d['data']= $this->glzModel->manualQuery($text);
-
-			$this->load->view('glasir_tran/detail_history',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -404,25 +336,12 @@ class Glasir_tran extends CI_Controller {
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
-                        $idx['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_thdh",$idx);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
-			}else{
-				$idy['no_prod'] = $this->uri->segment(3);
-                                $q = $this->db->get_where("glasir_thd",$idy);
-                                $row = $q->num_rows();
-                                if($row>0){
-                                        echo "Masih ada data order produksi yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                        echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
-                                }else{
-				$this->glzModel->manualQuery("DELETE FROM glasir_thd WHERE no_prod='$id'");
+                                $id = $this->uri->segment(3);
+                                $this->glzModel->manualQuery("DELETE FROM glasir_thd WHERE no_prod='$id'");
                                 $this->glzModel->manualQuery("DELETE FROM glasir_th WHERE no_prod='$id'");
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
-			}
-			}			
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_tran'>";
+			
+						
 		}else{
 			header('location:'.base_url());
 		}
@@ -431,21 +350,12 @@ class Glasir_tran extends CI_Controller {
 	public function hapus_detail()
 	{
 		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){                        
-                        $id['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_thdh",$id);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_tran'>";
-			}else{
+		if(!empty($cek)){
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
                                 $this->glzModel->manualQuery("DELETE FROM glasir_thd WHERE no_prod='$id' AND id_glasir='$kode' AND idthd='$batch'");
                                 $this->edit();
-			}
-                        
 		}else{
 			header('location:'.base_url());
 		}

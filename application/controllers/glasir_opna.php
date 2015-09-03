@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Glasir_retu extends CI_Controller {
+class Glasir_opna extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -32,7 +32,7 @@ class Glasir_retu extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar Retur Glasir";
+			$d['judul']="Daftar Stock Opname BGPS dan Supply Glasir";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -43,12 +43,12 @@ class Glasir_retu extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_rh $where ";		
+			$text = "SELECT * FROM glasir_oh $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/glasir_retur/index/';
+			$config['base_url'] = site_url() . '/glasir_opna/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -61,20 +61,20 @@ class Glasir_retu extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_rh $where 
+			$text = "SELECT * FROM glasir_oh $where 
 					ORDER BY no_prod DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('glasir_retur/view', $d, true);		
+			$d['content'] = $this->load->view('glasir_opna/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
 		}
 	}
 	
-	public function tambah()
+	public function tambahBgps()
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
@@ -86,7 +86,7 @@ class Glasir_retu extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
-			$d['judul']="Retur Transaksi Glasir";
+			$d['judul']="Input Stok Opname BGPS Glasir";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasirRetu();
 			//$tgl_inp    = date('d-m-Y  h:i:s');
@@ -104,7 +104,7 @@ class Glasir_retu extends CI_Controller {
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 			
-			$d['content'] = $this->load->view('glasir_retur/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_opna/bgps_form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -149,7 +149,7 @@ class Glasir_retu extends CI_Controller {
                         $tong = "SELECT * FROM global_tong";
 			$d['l_tong'] = $this->glzModel->manualQuery($tong);
 			
-			$d['content'] = $this->load->view('glasir_retur/form_detail', $d, true);		
+			$d['content'] = $this->load->view('glasir_opna/form_detail', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -259,7 +259,7 @@ class Glasir_retu extends CI_Controller {
 					WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 									
-			$this->load->view('glasir_retur/cetak',$d);
+			$this->load->view('glasir_opna/cetak',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -305,7 +305,7 @@ class Glasir_retu extends CI_Controller {
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 									
-			$d['content'] = $this->load->view('glasir_retur/form', $d, true);		
+			$d['content'] = $this->load->view('glasir_opna/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -325,7 +325,7 @@ class Glasir_retu extends CI_Controller {
                                     JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id'";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_retur/detail',$d);
+			$this->load->view('glasir_opna/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -338,7 +338,7 @@ class Glasir_retu extends CI_Controller {
                                 $id = $this->uri->segment(3);
                                 $this->glzModel->manualQuery("DELETE FROM glasir_rhd WHERE no_prod='$id'");
                                 $this->glzModel->manualQuery("DELETE FROM glasir_rh WHERE no_prod='$id'");
-                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_retur'>";
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_opnaglasir_opna'>";
 			
 						
 		}else{

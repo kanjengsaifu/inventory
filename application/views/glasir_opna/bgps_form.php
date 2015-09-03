@@ -24,10 +24,7 @@ $(document).ready(function(){
 		//return false();
 	}
 	        
-        $("#tgl_plng").datepicker({
-			dateFormat:"dd-mm-yy"
-            });
-        $("#wktp").datepicker({
+        $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
 	
@@ -61,92 +58,28 @@ $(document).ready(function(){
 	};
 	
 	$("#simpan").click(function(){
-                var tgl_plng    = $("#tgl_plng").val();
-                var planner     = $("#planner").val();
-                var buyer       = $("#buyer").val();
-                var jns         = $("#jns").val();
-                var shift       = $("#shift").val();
-                var mpr         = $("#mpr").val();
-                
-		var id_glasir	= $("#id_glasir").val();
-		var volume	= $("#volume").val();
+                var tgl         = $("#tgl").val();
+                var id_glasir   = $("#id_glasir").val();
+                var volume      = $("#volume").val();
                 var densitas    = $("#densitas").val();
-                var vsc         = $("#vsc").val();
-                var petugas     = $("#petugas").val();
-                var wktp        = $("#wktp").val();
 		
 		var string = $("#form").serialize();
 		
-                if(tgl_plng.length==0){
+                if(tgl.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Tanggal planning tidak boleh kosong', 
+				msg:'Maaf, Tanggal pelaksanaan tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#tgl_plng").focus();
+			$("#tgl").focus();
 			return false();
 		}
                 
-                 if(planner.length==0){
+                 if(id_glasir.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Planner tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#planner").focus();
-			return false();
-		}
-                
-		if(buyer.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Buyer tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#buyer").focus();
-			return false();
-		}
-		
-		if(jns.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Jenis pengiriman tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#jns").focus();
-			return false();
-		}
-                
-		if(shift.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Shift tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#shift").focus();
-			return false();
-		}
-                
-                if(mpr.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Mesin produksi tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#mpr").focus();
-			return false();
-		}
-                
-                if(id_glasir.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Kode Glasir tidak boleh kosong', 
+				msg:'Maaf, Kode glasir tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -154,7 +87,7 @@ $(document).ready(function(){
 			return false();
 		}
                 
-                if(volume.length==0){
+                 if(volume.length==0){
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Volume tidak boleh kosong', 
@@ -165,7 +98,7 @@ $(document).ready(function(){
 			return false();
 		}
                 
-                if(densitas.length==0){
+                 if(densitas.length==0){
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Densitas tidak boleh kosong', 
@@ -173,39 +106,6 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#densitas").focus();
-			return false();
-		}
-                
-                if(vsc.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Viscositas tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#vsc").focus();
-			return false();
-		}
-                
-                if(petugas.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Petugas tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#petugas").focus();
-			return false();
-		}
-                
-                if(wktp.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Waktu transaksi tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#wktp").focus();
 			return false();
 		}
 		
@@ -237,17 +137,10 @@ $(document).ready(function(){
 	
 	$("#tambah_data").click(function(){
 		$(".detail").val('');
-                $("#dsc").val('');
-                $("#buyer").val('');
-                $("#jns").val('');
-                $("#shift").val('');
-                $("#mpr").val('');
-		$("#id_glasir").val('');
+                $("#id_glasir").val('');
                 $("#volume").val('');
                 $("#densitas").val('');
                 $("#vsc").val('');
-                $("#petugas").val('');
-                $("#wktp").val('');
 		$("#id_glasir").focus();
 	});
 	
@@ -289,19 +182,9 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-        <td width="150">No. Produksi</td>
+        <td width="150">No. Tranaskasi</td>
         <td width="5">:</td>
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
-    </tr>
-    <tr>    
-        <td>Tgl Planning</td>
-        <td>:</td>
-        <td><input name="tgl_plng" id="tgl_plng"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_plng;?>"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Planner</td>
-        <td width="5">:</td>
-        <td><input type="text" name="planner" id="planner" size="45" maxlength="12" value="<?php echo $planner;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>
@@ -309,48 +192,24 @@ $(document).ready(function(){
         <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td>Buyer</td>
+        <td>Kasie/Wasie QC</td>
         <td>:</td>
-        <td>
-        <select name="buyer" id="buyer" style="width:382px;">
-        <?php 
-		if(empty($buyer)){
-		?>
-        <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_byr->result() as $t){
-			if($buyer==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
+        <td><input type="text" name="petugas1" id="petugas1" class="detail" size="45" maxlength="20"/></td>
     </tr>
     <tr>    
-        <td>Jenis Pengiriman</td>
+        <td>Kasie/Wasie Prod</td>
         <td>:</td>
-        <td>
-        <select name="jns" id="jns" style="width:382px;">
-        <?php 
-		if(empty($jns)){
-		?>
-            <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_dlv->result() as $t){
-			if($jns==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
+        <td><input type="text" name="petugas2" id="petugas2" class="detail" size="45" maxlength="20"/></td>
+    </tr>
+    <tr>    
+        <td>Tgl Pelaksanaan</td>
+        <td>:</td>
+        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+    </tr>
+    <tr>    
+        <td width="150">Jam Pelaksanaan</td>
+        <td width="5">:</td>
+        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value=""/></td>
     </tr>
     <tr>    
         <td>Shift</td>
@@ -375,18 +234,18 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Mesin Produksi</td>
+        <td>Mesin Produksi Glasir</td>
         <td>:</td>
         <td>
-        <select name="mpr" id="mpr" style="width:382px;">
+        <select name="id_bm" id="id_bm" style="width:382px;">
         <?php 
-		if(empty($mpr)){
+		if(empty($id_bm)){
 		?>
             <option value="">-PILIH-</option>
         <?php
 		}
 		foreach($l_mpr->result() as $t){
-			if($mpr==$t->id_bm){
+			if($id_bm==$t->id_bm){
 		?>
         <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
         <?php }else { ?>
@@ -430,14 +289,19 @@ $(document).ready(function(){
         <td><input type="text" name="vsc" id="vsc"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
-        <td>Petugas</td>
-        <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+        <td width="150">Diambil dari</td>
+        <td width="5">:</td>
+        <td><input type="text" name="ddri" id="ddri" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td>Waktu Transaksi</td>
-        <td>:</td>
-        <td><input name="wktp" id="wktp"  size="45" maxlength="45" class="easyui-validatebox"/></td>
+        <td width="150">Nama Petugas (Karu)</td>
+        <td width="5">:</td>
+        <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Nama Petugas (Suplai)</td>
+        <td width="5">:</td>
+        <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255"/></td>
     </tr>
     </table>
     </fieldset>
