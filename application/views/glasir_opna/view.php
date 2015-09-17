@@ -31,11 +31,11 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
     <th>No</th>
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
-    <th>Stok Opname BGPS</th>
-    <th>Selisih Stok Opname BGPS</th>
+    <th>Transaksi BGPS</th>
+    <th>Selisih BGPS</th>
     <th>Aksi</th>
-    <th>Stok Opname Supply</th>
-    <th>Selisih Stok Opname Supply</th>
+    <th>Transaksi Supply</th>
+    <th>Selisih Supply</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
@@ -68,9 +68,13 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
+                        <?php
+			if($prosesBgps>0){
+			?>
             <a href="<?php echo base_url();?>index.php/glasir_opna/editBgps/<?php echo $db['no_prod'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
+                        <?php } ?>
             <?php } ?>
             </td>
             <td align="right" ><?php echo $prosesSply; ?></td>
@@ -80,9 +84,13 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
+                        <?php
+			if($prosesSply>0){
+			?>
             <a href="<?php echo base_url();?>index.php/glasir_opna/editSply/<?php echo $db['no_prod'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
+                        <?php } ?>
             <a href="<?php echo base_url();?>index.php/glasir_opna/hapus/<?php echo $db['no_prod'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>

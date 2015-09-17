@@ -73,7 +73,7 @@ $(function() {
             <td align="right" style="font-size:10px"><?php echo number_format($db['vsc'],2,'.', ''); ?> Pois</td>
             <td align="right" style="font-size:10px"><?php echo number_format($bkg,2,'.', ''); ?> Kg</td>
             <td align="right" style="font-size:10px"><?php echo number_format($db['sts']); ?> Kg</td>
-            <td align="right" style="font-size:10px"><?php echo number_format($db['selisih']); ?> Kg</td>
+            <td align="right" style="font-size:10px"><?php echo number_format($db['selisih'],2,'.', ''); ?> Kg</td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>

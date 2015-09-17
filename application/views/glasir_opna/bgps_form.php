@@ -12,14 +12,14 @@
                 var densitas = $("#densitas").val();
                 var sts = $("#sts").val();
 		
-		var bk_opname = 1.565*(parseInt(densitas-1000)/1000)*parseInt(volume);
+		var bk_opname = 1.565*(parseFloat(densitas-1000)/1000)*parseFloat(volume);
 		$("#bkg").val(bk_opname);
                 
-                if (parseInt(sts)>bk_opname) {
-                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                if (parseFloat(sts)>bk_opname) {
+                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
                     $("#selisih").val(selisih);
-                } else if (parseInt(sts)<bk_opname) {
-                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                } else if (parseFloat(sts)<bk_opname) {
+                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
                     $("#selisih").val(selisih);
                 }
 	}
@@ -54,6 +54,12 @@
 	}
 	        
         $("#tgl").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglp").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglb").datepicker({
 			dateFormat:"dd-mm-yy"
             });
 	
@@ -92,6 +98,7 @@
                 var id_glasir   = $("#id_glasir").val();
                 var volume      = $("#volume").val();
                 var densitas    = $("#densitas").val();
+                var id_bm    = $("#id_bm").val();
 		
 		var string = $("#form").serialize();
 		
@@ -117,6 +124,17 @@
 			return false();
 		}
                 
+                if(id_bm.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Ball mill tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#id_bm").focus();
+			return false();
+		}
+                
                  if(volume.length==0){
 			$.messager.show({
 				title:'Info',
@@ -132,6 +150,17 @@
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Densitas tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
+                
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -257,6 +286,39 @@
 		} ?>
         </select>
         </td>
+    </tr>
+    <tr>    
+        <td>Ball Mill/Tong</td>
+        <td>:</td>
+        <td>
+            <select name="id_bm" id="id_bm" style="width:382px;">
+        <?php 
+		if(empty($id_bm)){
+		?>
+        <option value="">-PILIH-</option>
+        <?php
+		}
+		foreach($l_bm->result() as $t){
+			if($id_bm==$t->id_bm){
+		?>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }
+		} ?>
+        </select>
+        </td>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
     </tr>
     </table>
     </fieldset>

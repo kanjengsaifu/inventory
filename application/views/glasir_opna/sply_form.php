@@ -12,14 +12,14 @@
                 var densitas = $("#densitas").val();
                 var sts = $("#sts").val();
 		
-		var bk_opname = 1.565*(parseInt(densitas-1000)/1000)*parseInt(volume);
+		var bk_opname = 1.565*(parseFloat(densitas-1000)/1000)*parseFloat(volume);
 		$("#bkg").val(bk_opname);
                 
-                if (parseInt(sts)>bk_opname) {
-                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                if (parseFloat(sts)>bk_opname) {
+                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
                     $("#selisih").val(selisih);
-                } else if (parseInt(sts)<bk_opname) {
-                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                } else if (parseFloat(sts)<bk_opname) {
+                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
                     $("#selisih").val(selisih);
                 }
 	}
@@ -56,7 +56,13 @@
         $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
-	
+	$("#tglp").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglb").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        
 	$("#id_glasir").focus();
 	$("#id_glasir").keyup(function(e){
 		var isi = $(e.target).val();
@@ -138,6 +144,17 @@
 			$("#densitas").focus();
 			return false();
 		}
+                
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
 		
 		$.ajax({
 			type	: 'POST',
@@ -184,9 +201,19 @@
 		AmbilDaftarGlasir();
 		$("#dlg").dialog('open');
 	});
+        
+        $("#cari_tglp").click(function(){
+		AmbilTglp();
+		$("#dlgp").dialog('open');
+	});
 	
 	$("#text_cari").keyup(function(){
 		AmbilDaftarGlasir();
+		//$("#dlg").dialog('open');
+	});
+        
+        $("#text_cari1").keyup(function(){
+		AmbilTglp();
 		//$("#dlg").dialog('open');
 	});
 	
@@ -200,6 +227,20 @@
 			cache	: false,
 			success	: function(data){
 				$("#daftar_glasir").html(data);
+			}
+		});
+	}
+        
+        function AmbilTglp(){
+		var cari = $("#id_glasir").val();
+		
+		$.ajax({
+			type	: 'POST',
+			url		: "<?php echo site_url(); ?>/ref_json/DataTglp",
+			data	: "cari="+cari,
+			cache	: false,
+			success	: function(data){
+				$("#daftar_tglp").html(data);
 			}
 		});
 	}
@@ -256,6 +297,42 @@
         <?php }
 		} ?>
         </select>
+        </td>
+    </tr>
+    <tr>    
+        <td>Tong</td>
+        <td>:</td>
+        <td>
+            <select name="id_bm" id="id_bm" style="width:382px;">
+        <?php 
+		if(empty($id_bm)){
+		?>
+        <option value="">-PILIH-</option>
+        <?php
+		}
+		foreach($l_bm->result() as $t){
+			if($id_bm==$t->id_bm){
+		?>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }
+		} ?>
+        </select>
+        </td>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
         </td>
     </tr>
     </table>
@@ -333,4 +410,8 @@
 <div id="dlg" class="easyui-dialog" title="Item Glasir" style="width:900px;height:400px; padding:5px;" data-options="closed:true">
 	Cari : <input type="text" name="text_cari" id="text_cari" size="50" />
 	<div id="daftar_glasir"></div>
+</div>
+<div id="dlgp" class="easyui-dialog" title="Tanggal Produksi Glasir" style="width:1000px;height:400px; padding:5px;" data-options="closed:true">
+	Cari : <input type="text" name="text_cari1" id="text_cari1" size="50"/>
+	<div id="daftar_tglp"></div>
 </div>

@@ -103,6 +103,8 @@ class Glasir_opna extends CI_Controller {
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_opna/bgps_form', $d, true);		
 			$this->load->view('home',$d);
@@ -140,6 +142,8 @@ class Glasir_opna extends CI_Controller {
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		
 			$this->load->view('home',$d);
@@ -209,8 +213,11 @@ class Glasir_opna extends CI_Controller {
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tglp']             = $this->app_model->tgl_sql($this->input->post('tglp'));
+                                $ud['tglb']             = $this->app_model->tgl_sql($this->input->post('tglb'));
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['shift']            = $this->input->post('shift');
+                                $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['sts']              = $this->input->post('sts');
@@ -264,12 +271,15 @@ class Glasir_opna extends CI_Controller {
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tglp']             = $this->app_model->tgl_sql($this->input->post('tglp'));
+                                $ud['tglb']             = $this->app_model->tgl_sql($this->input->post('tglb'));
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['shift']            = $this->input->post('shift');
+                                $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['sts']              = $this->input->post('sts');
-                                $ud['selisih']         = $this->input->post('selisih');
+                                $ud['selisih']          = $this->input->post('selisih');
                                 $ud['vsc']              = $this->input->post('vsc');
                                 $ud['area']             = 3;
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -388,6 +398,8 @@ class Glasir_opna extends CI_Controller {
                         
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_opna/bgps_form', $d, true);		
 			$this->load->view('home',$d);
@@ -429,6 +441,8 @@ class Glasir_opna extends CI_Controller {
                         
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		
 			$this->load->view('home',$d);

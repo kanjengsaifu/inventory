@@ -115,6 +115,17 @@ $(document).ready(function(){
 			$("#densitas").focus();
 			return false();
 		}
+                
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
 		
 		$.ajax({
 			type	: 'POST',
