@@ -72,40 +72,40 @@ class Glzmodel extends CI_Model {
 	public function getBulan($bln){
 		switch ($bln){
 			case 1: 
-				return "Januari";
+				return "Jan";
 				break;
 			case 2:
-				return "Februari";
+				return "Feb";
 				break;
 			case 3:
-				return "Maret";
+				return "Mar";
 				break;
 			case 4:
-				return "April";
+				return "Apr";
 				break;
 			case 5:
 				return "Mei";
 				break;
 			case 6:
-				return "Juni";
+				return "Jun";
 				break;
 			case 7:
-				return "Juli";
+				return "Jul";
 				break;
 			case 8:
-				return "Agustus";
+				return "Ags";
 				break;
 			case 9:
-				return "September";
+				return "Sep";
 				break;
 			case 10:
-				return "Oktober";
+				return "Okt";
 				break;
 			case 11:
-				return "November";
+				return "Nov";
 				break;
 			case 12:
-				return "Desember";
+				return "Des";
 				break;
 		}
 	} 
@@ -232,6 +232,70 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesItem($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_phd a 
+                        JOIN glasir b on a.id_glasir = b.id_glasir
+                        WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function ProsesItemSupp($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_phd_sp a 
+                        JOIN glasir b on a.id_glasir = b.id_glasir
+                        WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function ProsesItemTran($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_thd a 
+                        JOIN glasir b on a.id_glasir = b.id_glasir
+                        WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function ProsesItemRetu($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_rhd a 
+                        JOIN glasir b on a.id_glasir = b.id_glasir
+                        WHERE no_prod='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
         public function JmlGlasir($id){
 		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd WHERE no_prod='$id'";
 		$d = $this->glzModel->manualQuery($t);
@@ -324,6 +388,58 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesGlasirOpnaBgps($id){
+		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=2";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlGlasirOpnaBgps($id){
+		$t = "SELECT sum(selisih) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=2";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jml;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function ProsesGlasirOpnaSply($id){
+		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=3";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlGlasirOpnaSply($id){
+		$t = "SELECT sum(selisih) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=3";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jml;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function NewStatus($noprod,$idglasir,$batch){
 		$t = "SELECT b.nama_gps FROM glasir_phdh a
                         join glasir_patt b on a.idgps = b.idgps
@@ -364,6 +480,34 @@ class Glzmodel extends CI_Model {
 		if($r>0){
 			foreach($d->result() as $h){
 				$hasil = $h->nama_lengkap;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function CariGlasirStatus($id){
+		$t = "SELECT * FROM glasir_status WHERE id_status='$id'";
+		$d = $this->app_model->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->status;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function CariGlasirTglp($id){
+		$t = "SELECT * FROM glasir WHERE id_glasir='$id'";
+		$d = $this->app_model->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
 			}
 		}else{
 			$hasil = '';

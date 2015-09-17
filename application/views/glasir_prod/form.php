@@ -27,6 +27,12 @@ $(document).ready(function(){
         $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
+        $("#tglp").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglb").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
 	
 	$("#id_glasir").focus();
 	$("#id_glasir").keyup(function(e){
@@ -67,7 +73,8 @@ $(document).ready(function(){
                 var id_bmt      = $("#id_bmt").val();
                 var shift       = $("#shift").val();
                 var jam         = $("#jam").val();
-                var tgl         = $("#tgl").val();
+                var tglp         = $("#tglp").val();
+                var tglb         = $("#tglb").val();
 		
 		var string = $("#form").serialize();
 		
@@ -101,6 +108,28 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#tgl").focus();
+			return false();
+		}
+                
+                if(tglp.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal produksi tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tglp").focus();
+			return false();
+		}
+                
+                if(tglb.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal lulus tes bakar tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tglb").focus();
 			return false();
 		}
                 
@@ -151,6 +180,16 @@ $(document).ready(function(){
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Densitas tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -310,7 +349,17 @@ $(document).ready(function(){
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
-        <td>Turun Dari Ball Mill</td>
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+    </tr>
+    <tr>    
+        <td>Ball Mill</td>
         <td>:</td>
         <td>
             <select name="id_bm" id="id_bm" style="width:382px;">

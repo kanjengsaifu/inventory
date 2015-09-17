@@ -17,10 +17,10 @@ class Glasir_supp extends CI_Controller {
 			
                         $where = " WHERE no_prod<>''";
 			if(!empty($cari)){
-				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
+				$where .= " AND a.no_prod LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_glasir LIKE '%$cari%' OR b.nama_glasir LIKE '%$cari%'";
 			}
 			if(!empty($tgl)){
-				$where .= " AND tgl_inp LIKE '%$tgl%'";
+				$where .= " AND a.tgl_insert LIKE '%$tgl%' OR a.tgl LIKE '%$tgl%' OR a.tglp LIKE '%$tgl%' OR a.tglb LIKE '%$tgl%'";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -43,7 +43,9 @@ class Glasir_supp extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_ph_sp $where ";		
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd_sp a 
+                                join glasir b on a.id_glasir = b.id_glasir
+                                $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
@@ -61,8 +63,11 @@ class Glasir_supp extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_ph_sp $where 
-					ORDER BY no_prod DESC 
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd_sp a 
+                                        join glasir b on a.id_glasir = b.id_glasir
+                                        $where
+                                        GROUP BY a.no_prod
+					ORDER BY a.no_prod DESC
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
@@ -166,7 +171,7 @@ class Glasir_supp extends CI_Controller {
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
                                 $ud['id_bm']            = $this->input->post('id_bm');
-                                $ud['id_gps']            = $this->input->post('status');
+                                $ud['id_gps']           = $this->input->post('status');
 				$ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -174,6 +179,8 @@ class Glasir_supp extends CI_Controller {
                                 $ud['shift']            = $this->input->post('shift');
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
+                                $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
                                 $ud['petugas']          = $this->input->post('petugas');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -183,13 +190,13 @@ class Glasir_supp extends CI_Controller {
 				
 				$data = $this->glzModel->getSelectedData("glasir_ph_sp",$id);
 				if($data->num_rows()>0){
-					$this->glzModel->updateData("glasir_ph_sp",$up,$id);
+                                                $this->glzModel->updateData("glasir_ph_sp",$up,$id);
 						$data = $this->glzModel->getSelectedData("glasir_phd_sp",$id_d);
 						if($data->num_rows()>0){
 							$this->glzModel->updateData("glasir_phd_sp",$ud,$id_d);
 						}else{
                                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
-							$this->glzModel->insertData("glasir_phd",$ud);
+							$this->glzModel->insertData("glasir_phd_sp",$ud);
 						}
 					echo 'Update data Sukses';
 				}else{

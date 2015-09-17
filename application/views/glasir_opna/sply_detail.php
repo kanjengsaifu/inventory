@@ -78,7 +78,7 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/glasir_opna/hapus_detailBgps/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_opna/hapus_detailSply/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

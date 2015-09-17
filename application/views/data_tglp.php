@@ -12,40 +12,41 @@ $(function() {
 	);
 });
 
-function pilih(id){
-	$("#dlg").dialog('close');
-	$("#id_glasir").val(id);
-	$("#id_glasir").focus();
+function pilih(tglp,tglb){
+	$("#dlgp").dialog('close');
+	$("#tglp").val(tglp);
+        $("#tglb").val(tglb);
+	//$("#tglp").focus();
 	
 }
 </script>
 <table id="dataTable" class="detail" width="100%">
 <tr>
     <th>No</th>
+    <th>No Produksi</th>
     <th>Kode Glasir</th>
     <th>Nama Glasir</th>
-    <th>Nama Alias Glasir</th>
-    <th>Satuan</th>
+    <th>Tgl. Produksi</th>
+    <th>Tgl. Lulus Tes bakar</th>
     <th>Inputer</th>
-    <th>Status</th>
     <th>Ambil</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
 		$no =1;
 		foreach($data->result_array() as $db){ 
-		$status = $this->app_model->CariGlasirStatus($db['status']); 
+		$nama_glasir = $this->glzModel->CariGlasirTglp($db['id_glasir']); 
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="80" ><?php echo $db['id_glasir']; ?></td>
-            <td ><?php echo $db['nama_glasir']; ?></td>
-            <td ><?php echo $db['nama_alias']; ?></td>
-            <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
-            <td align="center" width="60" ><?php echo $db['inputer']; ?></td>
-            <td align="center" width="60" ><?php echo $status; ?></td>
+            <td align="center"><?php echo $db['id_glasir']; ?></td>
+            <td align="center"><?php echo $db['no_prod']; ?></td>
+            <td align="left"><?php echo $nama_glasir; ?></td>
+            <td align="center"><?php echo $this->glzModel->tgl_indo($db['tglp']); ?></td>
+            <td align="center"><?php echo $this->glzModel->tgl_indo($db['tglb']); ?></td>
+            <td align="center"><?php echo $db['inputer']; ?></td>
             <td align="center" width="80">
-            <a href="javascript:pilih('<?php echo $db['id_glasir'];?>')" >
+            <a href="javascript:pilih('<?php echo $this->glzModel->tgl_str($db['tglp']);?>','<?php echo $this->glzModel->tgl_str($db['tglb']);?>')" >
         	<img src="<?php echo base_url();?>asset/images/add.png" title='Ambil'>
         	</a>
             </td>

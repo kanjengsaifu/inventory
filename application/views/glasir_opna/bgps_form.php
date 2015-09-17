@@ -1,12 +1,41 @@
 <script type="text/javascript">
-$(document).ready(function(){
+        $(document).ready(function(){
 	$(':input:not([type="submit"])').each(function() {
 		$(this).focus(function() {
 			$(this).addClass('hilite');
 		}).blur(function() {
 			$(this).removeClass('hilite');});
-	});	
-	
+	});
+        
+        function hitung(){
+		var volume = $("#volume").val();
+                var densitas = $("#densitas").val();
+                var sts = $("#sts").val();
+		
+		var bk_opname = 1.565*(parseInt(densitas-1000)/1000)*parseInt(volume);
+		$("#bkg").val(bk_opname);
+                
+                if (parseInt(sts)>bk_opname) {
+                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                    $("#selisih").val(selisih);
+                } else if (parseInt(sts)<bk_opname) {
+                    var selisih = parseInt(bk_opname)-parseInt(sts);
+                    $("#selisih").val(selisih);
+                }
+	}
+	$("#id_glasir").keyup(function(){
+		hitung();
+	});
+	$("#sts").keyup(function(){
+		hitung();
+	});
+	$("#volume").keyup(function(){
+		hitung();
+	});
+	$("#densitas").keyup(function(){
+		hitung();
+	});
+        
 	tampil_data();
 	
 	function tampil_data(){
@@ -14,7 +43,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_retu/DataDetail",
+			url		: "<?php echo site_url(); ?>/glasir_opna/DataDetailBgps",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -53,6 +82,7 @@ $(document).ready(function(){
 			dataType : "json",
 			success	: function(data){
 				$("#nama_glasir").val(data.nama_glasir);
+                                $("#sts").val(data.s_bgps);
 			}
 		});
 	};
@@ -111,7 +141,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/glasir_retu/simpan",
+			url	: "<?php echo site_url(); ?>/glasir_opna/simpanBgps",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -146,7 +176,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/glasir_retu/cetak/'+kode);
+		window.open('<?php echo site_url();?>/glasir_opna/cetak/'+kode);
 		return false();
 	});
 	
@@ -192,14 +222,9 @@ $(document).ready(function(){
         <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td>Kasie/Wasie QC</td>
-        <td>:</td>
-        <td><input type="text" name="petugas1" id="petugas1" class="detail" size="45" maxlength="20"/></td>
-    </tr>
-    <tr>    
         <td>Kasie/Wasie Prod</td>
         <td>:</td>
-        <td><input type="text" name="petugas2" id="petugas2" class="detail" size="45" maxlength="20"/></td>
+        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
     </tr>
     <tr>    
         <td>Tgl Pelaksanaan</td>
@@ -233,28 +258,6 @@ $(document).ready(function(){
         </select>
         </td>
     </tr>
-    <tr>    
-        <td>Mesin Produksi Glasir</td>
-        <td>:</td>
-        <td>
-        <select name="id_bm" id="id_bm" style="width:382px;">
-        <?php 
-		if(empty($id_bm)){
-		?>
-            <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_mpr->result() as $t){
-			if($id_bm==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-    </tr>
     </table>
     </fieldset>
 </td>
@@ -271,37 +274,37 @@ $(document).ready(function(){
     <tr>    
         <td>Nama Glasir</td>
         <td>:</td>
-        <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
+        <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50" readonly="readonly"/></td>
+    </tr>
+    <tr>    
+        <td>Stok di Sistem (Kg)</td>
+        <td>:</td>
+        <td><input type="text" name="sts" id="sts" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
     </tr>
     <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="volume" id="volume" class="detail" size="20" maxlength="20"/></td>
     </tr>
     <tr>    
         <td>Densitas (gr/L)</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="densitas" id="densitas" class="detail" size="20" maxlength="20"/></td>
     </tr>
     <tr>    
         <td>Viscositas (Pois)</td>
         <td>:</td>
-        <td><input type="text" name="vsc" id="vsc"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="vsc" id="vsc" class="detail" size="20" maxlength="20"</td>
+    </tr>
+     <tr>    
+        <td>Stok Opname (Kg)</td>
+        <td>:</td>
+        <td><input type="text" name="bkg" id="bkg" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
     </tr>
     <tr>    
-        <td width="150">Diambil dari</td>
-        <td width="5">:</td>
-        <td><input type="text" name="ddri" id="ddri" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Nama Petugas (Karu)</td>
-        <td width="5">:</td>
-        <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Nama Petugas (Suplai)</td>
-        <td width="5">:</td>
-        <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255"/></td>
+        <td>Selisih Stok (Kg)</td>
+        <td>:</td>
+        <td><input type="text" name="selisih" id="selisih" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
     </tr>
     </table>
     </fieldset>
@@ -315,7 +318,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/glasir_retu/">
+    <a href="<?php echo base_url();?>index.php/glasir_opna/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

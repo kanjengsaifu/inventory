@@ -25,7 +25,7 @@ $(document).ready(function(){
 				$("#nama_glasir").val(data.nama_glasir);
 				$("#satuan").val(data.satuan);
 				$("#status").val(data.status);
-                                $("#stok_awal").val(data.stok_awal);
+                                $("#nama_alias").val(data.nama_alias);
 			}
 		});
 	}
@@ -34,7 +34,6 @@ $(document).ready(function(){
 		var kode_glasir	= $("#kode_glasir").val();
 		var nama_glasir	= $("#nama_glasir").val();
 		var satuan	= $("#satuan").val();
-                var stok_awal	= $("#stok_awal").val();
 		
 		var string = $("#form").serialize();
 		
@@ -66,16 +65,6 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#satuan").focus();
-			return false();
-		}
-                if(stok_awal.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Stok awal tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#stok_awal").focus();
 			return false();
 		}
                 if(!$("#status").val()){
@@ -130,14 +119,14 @@ $(document).ready(function(){
     <td><input type="text" name="nama_glasir" id="nama_glasir"  size="50" maxlength="50" class="easyui-validatebox" data-options="required:true,validType:'length[3,50]'" value="<?php echo $nama_glasir;?>"/></td>
 </tr>
 <tr>    
-	<td>Stok Awal</td>
+	<td>Nama Alias</td>
     <td>:</td>
-    <td><input type="text" name="stok_awal" id="stok_awal"  size="10" maxlength="10" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $stok_awal;?>"/></td>
+    <td><input type="text" name="nama_alias" id="nama_alias"  size="10" maxlength="50" class="easyui-validatebox" data-options="required:false,validType:'length[3,50]'" value="<?php echo $nama_alias;?>"/></td>
 </tr>
 <tr>    
 	<td>Satuan</td>
     <td>:</td>
-    <td><input value="Liter" readonly="true" type="text" name="satuan" id="satuan"  size="10" maxlength="10" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $satuan;?>"/></td>
+    <td><input value="Kilogram" readonly="true" type="text" name="satuan" id="satuan"  size="10" maxlength="10" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $satuan;?>"/></td>
 </tr>
 <tr>    
 	<td>Status</td>

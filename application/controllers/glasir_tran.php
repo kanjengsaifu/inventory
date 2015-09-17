@@ -17,10 +17,10 @@ class Glasir_tran extends CI_Controller {
 			
                         $where = " WHERE no_prod<>''";
 			if(!empty($cari)){
-				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
+				$where .= " AND a.no_prod LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_glasir LIKE '%$cari%' OR b.nama_glasir LIKE '%$cari%'";
 			}
 			if(!empty($tgl)){
-				$where .= " AND tgl_inp LIKE '%$tgl%'";
+				$where .= " AND a.tgl_insert LIKE '%$tgl%' OR a.tgl LIKE '%$tgl%' OR a.tglp LIKE '%$tgl%' OR a.tglb LIKE '%$tgl%'";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -43,7 +43,9 @@ class Glasir_tran extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_th $where ";		
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_thd a 
+                                join glasir b on a.id_glasir = b.id_glasir
+                                $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
@@ -61,8 +63,11 @@ class Glasir_tran extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_th $where 
-					ORDER BY no_prod DESC 
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_thd a 
+                                        join glasir b on a.id_glasir = b.id_glasir
+                                        $where
+                                        GROUP BY a.no_prod
+					ORDER BY a.no_prod DESC
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
@@ -173,6 +178,8 @@ class Glasir_tran extends CI_Controller {
                                 $ud['petugas1']         = $this->input->post('petugas1');
                                 $ud['petugas2']         = $this->input->post('petugas2');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
+                                $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['shift']            = $this->input->post('shift');
                                 $ud['id_bm']            = $this->input->post('id_bm');

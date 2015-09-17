@@ -24,6 +24,23 @@ class Ref_json extends CI_Controller {
 			header('location:'.base_url());
 		}
 	}
+        
+        public function DataTglp(){
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			$cari= $this->input->post('cari');
+			if(empty($cari)){
+				//$text = "SELECT * FROM glasir_phd";
+			}else{
+				$text = "SELECT * FROM glasir_phd WHERE id_glasir = '$cari'";
+			}
+			$d['data'] = $this->app_model->manualQuery($text);
+			
+			$this->load->view('data_tglp',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
 	
 	public function InfoGlasir()
 	{
@@ -39,15 +56,19 @@ class Ref_json extends CI_Controller {
                                         $data['nama_alias'] = $t->nama_alias;
 					$data['satuan'] = $t->satuan;
 					$data['status'] = $t->status;
-                                        //$data['stok_awal'] = $t->stok_awal;
+                                        $data['s_supply'] = $t->s_supply;
+                                        $data['s_bgps'] = $t->s_bgps;
+                                        $data['nama_alias'] = $t->nama_alias;
 					echo json_encode($data);
 				}
 			}else{
                                         $data['nama_glasir'] = '';
                                         $data['nama_alias'] = '';
-					$data['satuan'] = 'Liter';
+					$data['satuan'] = 'Kilogram';
 					$data['status'] = '';
-                                        //$data['stok_awal'] = '';
+                                        $data['s_supply'] = '';
+                                        $data['s_bgps'] = '';
+                                        $data['nama_alias'] = '';
 				echo json_encode($data);
 			}
 		}else{

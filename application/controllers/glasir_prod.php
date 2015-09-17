@@ -17,10 +17,10 @@ class Glasir_prod extends CI_Controller {
 			
                         $where = " WHERE no_prod<>''";
 			if(!empty($cari)){
-				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
+				$where .= " AND a.no_prod LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_glasir LIKE '%$cari%' OR b.nama_glasir LIKE '%$cari%'";
 			}
 			if(!empty($tgl)){
-				$where .= " AND tgl_inp LIKE '%$tgl%'";
+				$where .= " AND a.tgl_insert LIKE '%$tgl%' OR a.tgl LIKE '%$tgl%' OR a.tglp LIKE '%$tgl%' OR a.tglb LIKE '%$tgl%'";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -43,7 +43,9 @@ class Glasir_prod extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_ph $where ";		
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd a 
+                                join glasir b on a.id_glasir = b.id_glasir
+                                $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
@@ -61,8 +63,11 @@ class Glasir_prod extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_ph $where 
-					ORDER BY no_prod DESC 
+			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd a 
+                                        join glasir b on a.id_glasir = b.id_glasir
+                                        $where
+                                        GROUP BY a.no_prod
+					ORDER BY a.no_prod DESC
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
@@ -171,6 +176,8 @@ class Glasir_prod extends CI_Controller {
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tglp']              = $this->app_model->tgl_sql($this->input->post('tglp'));
+                                $ud['tglb']              = $this->app_model->tgl_sql($this->input->post('tglb'));
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -376,14 +383,8 @@ class Glasir_prod extends CI_Controller {
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
-                        $idx['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_phdh",$idx);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}else{
-				$idy['no_prod'] = $this->uri->segment(3);
+                                $idy['no_prod'] = $this->uri->segment(3);
+                                $id = $this->uri->segment(3);
                                 $q = $this->db->get_where("glasir_phd",$idy);
                                 $row = $q->num_rows();
                                 if($row>0){
@@ -392,8 +393,7 @@ class Glasir_prod extends CI_Controller {
                                 }else{
 				$this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id'");
                                 $this->glzModel->manualQuery("DELETE FROM glasir_ph WHERE no_prod='$id'");
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_prod'>";
 			}			
 		}else{
 			header('location:'.base_url());
@@ -404,19 +404,11 @@ class Glasir_prod extends CI_Controller {
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){                        
-                        $id['noprod'] = $this->uri->segment(3);
-			$q = $this->db->get_where("glasir_phdh",$id);
-			$row = $q->num_rows();
-			if($row>0){
-				echo "Masih ada data history detail yang terkait, data tidak bisa dihapus [Silahkan klik tanda panah kembali di browser <<=]";
-                                echo "<meta http-equiv='refresh:5' content='0; url=".base_url()."index.php/glasir_prod'>";
-			}else{
-				$id = $this->uri->segment(3);
+                                $id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
                                 $this->glzModel->manualQuery("DELETE FROM glasir_phd WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
                                 $this->edit();
-			}
                         
 		}else{
 			header('location:'.base_url());

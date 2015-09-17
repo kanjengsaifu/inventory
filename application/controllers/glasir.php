@@ -91,8 +91,8 @@ class Glasir extends CI_Controller {
 			
 			$d['kode_glasir']   ='';
 			$d['nama_glasir']   ='';
-                        $d['stok_awal']     ='';
-			$d['satuan']        ='Liter';
+                        $d['nama_alias']     ='';
+			$d['satuan']        ='Kilogram';
 			$d['status']        ='';
 			
 			$d['content'] = $this->load->view('glasir/form', $d, true);		
@@ -124,14 +124,14 @@ class Glasir extends CI_Controller {
 				foreach($data->result() as $db){
 					$d['kode_glasir']   =$id;
 					$d['nama_glasir']   =$db->nama_glasir;
-                                        $d['stok_awal']     =$db->stok_awal;
+                                        $d['nama_alias']     =$db->nama_alias;
 					$d['satuan']        =$db->satuan;
 					$d['status']        =$db->status;
 				}
 			}else{
 					$d['kode_glasir']   =$id;
 					$d['nama_glasir']   ='';
-                                        $d['stok_awal']     ='';
+                                        $d['nama_alias']     ='';
 					$d['satuan']        ='Liter';
 					$d['hrg_beli']      ='';
 					$d['status']        ='';
@@ -165,7 +165,7 @@ class Glasir extends CI_Controller {
 				
 				$up['id_glasir']=$this->input->post('kode_glasir');
 				$up['nama_glasir']=$this->input->post('nama_glasir');
-                                $up['stok_awal']=$this->input->post('stok_awal');
+                                $up['nama_alias']=$this->input->post('nama_alias');
 				$up['satuan']=$this->input->post('satuan');
                                 $up['status']=$this->input->post('status');
                                 $up['inputer']=$username;

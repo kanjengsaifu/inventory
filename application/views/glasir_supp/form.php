@@ -27,6 +27,12 @@ $(document).ready(function(){
         $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
+        $("#tglp").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglb").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
 	
 	$("#id_glasir").focus();
 	$("#id_glasir").keyup(function(e){
@@ -66,6 +72,8 @@ $(document).ready(function(){
                 var id_bm       = $("#id_bm").val();
                 var status       = $("#status").val();
                 var shift       = $("#shift").val();
+                var tglp         = $("#tglp").val();
+                var tglb         = $("#tglb").val();
 		
 		var string = $("#form").serialize();
 		
@@ -99,6 +107,28 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#tgl").focus();
+			return false();
+		}
+                
+                if(tglp.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal produksi tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tglp").focus();
+			return false();
+		}
+                
+                if(tglb.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal lulus tes bakar tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tglb").focus();
 			return false();
 		}
                 
@@ -149,6 +179,16 @@ $(document).ready(function(){
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Densitas tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -215,9 +255,19 @@ $(document).ready(function(){
 		AmbilDaftarGlasir();
 		$("#dlg").dialog('open');
 	});
+        
+        $("#cari_tglp").click(function(){
+		AmbilTglp();
+		$("#dlgp").dialog('open');
+	});
 	
 	$("#text_cari").keyup(function(){
 		AmbilDaftarGlasir();
+		//$("#dlg").dialog('open');
+	});
+        
+        $("#text_cari1").keyup(function(){
+		AmbilTglp();
 		//$("#dlg").dialog('open');
 	});
 	
@@ -234,7 +284,22 @@ $(document).ready(function(){
 			}
 		});
 	}
+        
+        function AmbilTglp(){
+		var cari = $("#id_glasir").val();
+		
+		$.ajax({
+			type	: 'POST',
+			url		: "<?php echo site_url(); ?>/ref_json/DataTglp",
+			data	: "cari="+cari,
+			cache	: false,
+			success	: function(data){
+				$("#daftar_tglp").html(data);
+			}
+		});
+	}
 });	
+
 </script>
 <form name="form" id="form">
 <table width="100%">
@@ -248,14 +313,14 @@ $(document).ready(function(){
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan</td>
-        <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
         <td>Petugas</td>
         <td>:</td>
         <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Keterangan</td>
+        <td width="5">:</td>
+        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
         <td width="150">Tanggal Pelaksanaan</td>
@@ -306,6 +371,19 @@ $(document).ready(function(){
         <td>Nama Glasir</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        </td>
     </tr>
     <tr>    
         <td>Tong</td>
@@ -390,4 +468,8 @@ $(document).ready(function(){
 <div id="dlg" class="easyui-dialog" title="Item Glasir" style="width:900px;height:400px; padding:5px;" data-options="closed:true">
 	Cari : <input type="text" name="text_cari" id="text_cari" size="50"/>
 	<div id="daftar_glasir"></div>
+</div>
+<div id="dlgp" class="easyui-dialog" title="Tanggal Produksi Glasir" style="width:1000px;height:400px; padding:5px;" data-options="closed:true">
+	Cari : <input type="text" name="text_cari1" id="text_cari1" size="50"/>
+	<div id="daftar_tglp"></div>
 </div>

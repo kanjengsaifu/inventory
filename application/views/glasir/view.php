@@ -34,7 +34,7 @@ Cari Kode & Nama Glasir : <input type="text" name="txt_cari" id="txt_cari" size=
 	if($data->num_rows()>0){
 		$no =1+$hal;
 		foreach($data->result_array() as $db){ 
-		$status = $this->app_model->CariGlasirStatus($db['status']); 
+		$status = $this->glzModel->CariGlasirStatus($db['status']); 
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
@@ -42,8 +42,8 @@ Cari Kode & Nama Glasir : <input type="text" name="txt_cari" id="txt_cari" size=
             <td ><?php echo $db['nama_glasir']; ?></td>
             <td ><?php echo $db['nama_alias']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps']); ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_supply']); ?></td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps'],2,'.',','); ?></td>
+            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_supply'],2,'.',','); ?></td>
             <td align="center" width="60" ><?php echo $db['inputer']; ?></td>
             <td align="center" width="60" ><?php echo $status; ?></td>
             <td align="center" width="120" ><?php echo $db['tgl_input']; ?></td>

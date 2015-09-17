@@ -27,7 +27,13 @@ $(document).ready(function(){
         $("#tgl").datepicker({
 			dateFormat:"dd-mm-yy"
             });
-	
+	$("#tglp").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+        $("#tglb").datepicker({
+			dateFormat:"dd-mm-yy"
+            });
+            
 	$("#id_glasir").focus();
 	$("#id_glasir").keyup(function(e){
 		var isi = $(e.target).val();
@@ -108,6 +114,16 @@ $(document).ready(function(){
 			$("#densitas").focus();
 			return false();
 		}
+                if(densitas<1000){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#densitas").focus();
+			return false();
+		}
 		
 		$.ajax({
 			type	: 'POST',
@@ -154,9 +170,19 @@ $(document).ready(function(){
 		AmbilDaftarGlasir();
 		$("#dlg").dialog('open');
 	});
+        
+        $("#cari_tglp").click(function(){
+		AmbilTglp();
+		$("#dlgp").dialog('open');
+	});
 	
 	$("#text_cari").keyup(function(){
 		AmbilDaftarGlasir();
+		//$("#dlg").dialog('open');
+	});
+        
+        $("#text_cari1").keyup(function(){
+		AmbilTglp();
 		//$("#dlg").dialog('open');
 	});
 	
@@ -170,6 +196,20 @@ $(document).ready(function(){
 			cache	: false,
 			success	: function(data){
 				$("#daftar_glasir").html(data);
+			}
+		});
+	}
+        
+        function AmbilTglp(){
+		var cari = $("#id_glasir").val();
+		
+		$.ajax({
+			type	: 'POST',
+			url		: "<?php echo site_url(); ?>/ref_json/DataTglp",
+			data	: "cari="+cari,
+			cache	: false,
+			success	: function(data){
+				$("#daftar_tglp").html(data);
 			}
 		});
 	}
@@ -187,11 +227,6 @@ $(document).ready(function(){
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan</td>
-        <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
         <td>Kasie/Wasie QC</td>
         <td>:</td>
         <td><input type="text" name="petugas1" id="petugas1" class="detail" size="45" maxlength="20"/></td>
@@ -200,6 +235,11 @@ $(document).ready(function(){
         <td>Kasie/Wasie Prod</td>
         <td>:</td>
         <td><input type="text" name="petugas2" id="petugas2" class="detail" size="45" maxlength="20"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Keterangan</td>
+        <td width="5">:</td>
+        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
         <td>Tgl Pelaksanaan</td>
@@ -274,6 +314,19 @@ $(document).ready(function(){
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        </td>
+    </tr>
+    <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
         <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
@@ -284,7 +337,7 @@ $(document).ready(function(){
         <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
-        <td>Viscositas (Pois)</td>
+        <td>Viscositas/Boume</td>
         <td>:</td>
         <td><input type="text" name="vsc" id="vsc"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
@@ -294,12 +347,12 @@ $(document).ready(function(){
         <td><input type="text" name="ddri" id="ddri" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td width="150">Nama Petugas (Karu)</td>
+        <td width="150">Petugas (Karu)</td>
         <td width="5">:</td>
         <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td width="150">Nama Petugas (Suplai)</td>
+        <td width="150">Petugas (Supply)</td>
         <td width="5">:</td>
         <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255"/></td>
     </tr>
@@ -328,6 +381,10 @@ $(document).ready(function(){
 <div id="tampil_data"></div>
 </fieldset>
 <div id="dlg" class="easyui-dialog" title="Item Glasir" style="width:900px;height:400px; padding:5px;" data-options="closed:true">
-	Cari : <input type="text" name="text_cari" id="text_cari" size="50" />
+	Cari : <input type="text" name="text_cari" id="text_cari" size="50"/>
 	<div id="daftar_glasir"></div>
+</div>
+<div id="dlgp" class="easyui-dialog" title="Tanggal Produksi Glasir" style="width:1000px;height:400px; padding:5px;" data-options="closed:true">
+	Cari : <input type="text" name="text_cari1" id="text_cari1" size="50"/>
+	<div id="daftar_tglp"></div>
 </div>

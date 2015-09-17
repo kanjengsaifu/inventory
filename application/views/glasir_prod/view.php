@@ -18,7 +18,7 @@ $(document).ready(function(){
 <div style="float:right; padding-bottom:5px;">
 <form name="form" method="post" action="<?php echo base_url();?>index.php/glasir_prod">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
-Cari No. Produksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" size="50" />
+Cari No. Produksi/Id. Glasir/Inputer : <input type="text" name="txt_cari" id="txt_cari" size="50" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
 </form>
 </div>
@@ -28,8 +28,9 @@ Cari No. Produksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" siz
     <th>No</th>
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
-    <th>Banyak Transaksi Input</th>
-    <th>Total Produksi Glasir dari Ball Mill</th>
+    <th>Transaksi Input</th>
+    <th>Total Produksi</th>
+    <th>List Item</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
@@ -39,19 +40,21 @@ Cari No. Produksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" siz
                 $g_total=0;
                 $p_total=0;
 		foreach($data->result_array() as $db){  
-		$tgl_plng = $this->glzModel->tgl_indo($db['tgl_inp']);
+		$tgl_plng = $this->glzModel->tgl_indo($db['tgl_insert']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
 		$proses = $this->glzModel->ProsesGlasir($db['no_prod']);
+                $prosesItem = $this->glzModel->ProsesItem($db['no_prod']);
 		$jml = $this->glzModel->JmlGlasir($db['no_prod']);
                 $p_total = $p_total + $proses;
                 $g_total = $g_total + $jml;
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
+            <td align="center"><?php echo $db['no_prod']; ?></td>
             <td align="center"><?php echo $tgl_plng; ?></td>
-            <td align="right" width="200"><?php echo $proses; ?></td>
+            <td align="right"><?php echo $proses; ?></td>
             <td align="right"><?php echo number_format($jml,2,',','.'); ?> Kilogram</td>
+            <td align="left"><?php echo $prosesItem; ?></td>
             <td align="center"><?php echo $nama_lengkap; ?></td>
             <td align="center" width="80">
             <?php

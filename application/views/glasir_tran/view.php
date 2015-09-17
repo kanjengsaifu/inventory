@@ -28,8 +28,9 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
     <th>No</th>
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
-    <th>Banyak Transaksi Input</th>
-    <th>Total Pemakaian Glasir</th>
+    <th>Transaksi Input</th>
+    <th>Total glasir ditarik Supply</th>
+    <th>List Item</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
@@ -39,9 +40,10 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
                 $g_total=0;
                 $p_total=0;
 		foreach($data->result_array() as $db){  
-		$tgl = $this->glzModel->tgl_indo($db['tgl_inp']);
+		$tgl = $this->glzModel->tgl_indo($db['tgl_insert']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
 		$proses = $this->glzModel->ProsesGlasirTran($db['no_prod']);
+                $prosesItemTran = $this->glzModel->ProsesItemTran($db['no_prod']);
 		$jml = $this->glzModel->JmlGlasirTran($db['no_prod']);
                 $p_total = $p_total + $proses;
                 $g_total = $g_total + $jml;
@@ -52,6 +54,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
             <td align="center"><?php echo $tgl; ?></td>
             <td align="right" width="200"><?php echo $proses; ?></td>
             <td align="right"><?php echo number_format($jml,2,',','.'); ?> Kilogram</td>
+            <td align="left"><?php echo $prosesItemTran; ?></td>
             <td align="center"><?php echo $nama_lengkap; ?></td>
             <td align="center" width="80">
             <?php
