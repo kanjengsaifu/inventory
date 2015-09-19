@@ -368,6 +368,6 @@ $config['alamat_instansi'] = 'Desa Cicadas Kec. Gunung Putri Kabupaten Bogor - J
 
 $config['prg'] = 'Mpod';
 $config['web_prg'] = 'itmov.wordpress.com';
-$config['limit_data']=10;
+$config['limit_data']=20;
 /* End of file config.php */
 /* Location: ./application/config/config.php */

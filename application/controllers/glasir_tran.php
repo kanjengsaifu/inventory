@@ -106,7 +106,7 @@ class Glasir_tran extends CI_Controller {
 			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
+                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%' or jns_bm like '%Tidak ada%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 			
 			$d['content'] = $this->load->view('glasir_tran/form', $d, true);		
@@ -174,9 +174,9 @@ class Glasir_tran extends CI_Controller {
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
-                                $ud['dsc']              = $this->input->post('dsc');
-                                $ud['petugas1']         = $this->input->post('petugas1');
-                                $ud['petugas2']         = $this->input->post('petugas2');
+                $ud['dsc']              = $this->input->post('dsc');
+				$ud['petugas1']         = $this->input->post('petugas1');
+				$ud['petugas2']         = $this->input->post('petugas2');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));

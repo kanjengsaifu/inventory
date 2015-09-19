@@ -289,24 +289,29 @@ $(document).ready(function(){
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
+        <td width="150">No. Batch</td>
+        <td width="5">:</td>
+        <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
+    </tr>
+    <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20" value="<?php echo $petugas;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>
         <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
+        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255" value="<?php echo $dsc;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Tanggal Pelaksanaan</td>
         <td width="5">:</td>
-        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Jam Pelaksanaan</td>
         <td width="5">:</td>
-        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value=""/></td>
+        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam;?>" /></td>
     </tr>
     <tr>    
         <td>Shift</td>
@@ -316,7 +321,7 @@ $(document).ready(function(){
         <?php 
 		if(empty($shift)){
 		?>
-            <option value="">-PILIH-</option>
+            <option  value="<?php echo $shift;?>" >-PILIH-</option>
         <?php
 		}
 		foreach($l_sft->result() as $t){
@@ -339,7 +344,7 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Kode Glasir</td>
         <td width="5">:</td>
-        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" />
+        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $id_glasir;?>" />
         <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
@@ -351,12 +356,12 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Tgl. Produksi</td>
         <td width="5">:</td>
-        <td><input name="tglp" id="tglp"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+        <td><input name="tglp" id="tglp"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tglp;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Tgl. Lulus Tes Bakar</td>
         <td width="5">:</td>
-        <td><input name="tglb" id="tglb"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+        <td><input name="tglb" id="tglb"  size="45" maxlength="12" class="easyui-validatebox"  value="<?php echo $tglb;?>" /></td>
     </tr>
     <tr>    
         <td>Ball Mill</td>
@@ -366,7 +371,7 @@ $(document).ready(function(){
         <?php 
 		if(empty($id_bm)){
 		?>
-        <option value="">-PILIH-</option>
+        <option  value="<?php echo $id_bm;?>">-PILIH-</option>
         <?php
 		}
 		foreach($l_bm->result() as $t){
@@ -386,10 +391,20 @@ $(document).ready(function(){
         <td>:</td>
         <td>
             <select name="id_bmt" id="id_bmt" style="width:382px;">
-        <option value="">-PILIH-</option>
-        <option value="1">Kapsul</option>
-        <option value="2">Tanker</option>
-        <option value="3">Tong</option>
+        <?php 
+		if(empty($id_bmt)){
+		?>
+        <option  value="<?php echo $id_bmt;?>">-PILIH-</option>
+        <?php
+		}
+		foreach($x_bm->result() as $t){
+			if($id_bmt==$t->id_bm){
+		?>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <?php }
+		} ?>
         </select>
         </td>
         </td>
@@ -397,12 +412,12 @@ $(document).ready(function(){
     <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"  value="<?php echo $volume;?>"/></td>
     </tr>
     <tr>    
         <td>Densitas</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/  value="<?php echo $densitas;?>"></td>
     </tr>
     </table>
     </fieldset>

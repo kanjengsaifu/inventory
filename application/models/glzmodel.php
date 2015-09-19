@@ -221,7 +221,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function ProsesGlasir($id){
-		$t = "SELECT idphd FROM glasir_phd WHERE no_prod='$id'";
+		$t = "SELECT idphd FROM glasir_phd WHERE no_prod='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -235,7 +235,7 @@ class Glzmodel extends CI_Model {
         public function ProsesItem($id){
 		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_phd a 
                         JOIN glasir b on a.id_glasir = b.id_glasir
-                        WHERE no_prod='$id'";
+                        WHERE no_prod='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -297,7 +297,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function JmlGlasir($id){
-		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd WHERE no_prod='$id'";
+		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd WHERE no_prod='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){

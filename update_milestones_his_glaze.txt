@@ -1,0 +1,13 @@
+#19 September 2015 07.00 - 12.00
+A. Programming
+    1. [config.php]-Rubah max lists view jadi 20
+    2. [glasir.php|hapus,glasir_prod.php|hapus]-Rubah fitur hapus jadi non hapus permanen
+    3. [glasir.php|index,glasir_prod.php|index]-Rubah list view tambah tag deleted
+    4. [glasir_prod|view.php]-Rubah tampilan tabel detail
+B. Databases
+    1. [semua table transaksi dan glasir]tambah kolom deleted di tabel glasir ~
+    2. [glasir_add_bgps,glasir_min_bgps] rubah notin [1] ke rubah notin [53] ~
+    3. [global_mesin]Tambah global mesin, 
+        - 52 Tong Tong [Umum] 0 0 liter ~
+        - 53 Kapsul Kapsul [Umum] 0 0 liter ~
+        - 54 Tanker Tanker [Umum] 0 0 liter ~

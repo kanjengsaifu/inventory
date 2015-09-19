@@ -18,9 +18,9 @@ class Glasir extends CI_Controller {
 				$sess_data['cari'] = $this->input->post("txt_cari");
 				$this->session->set_userdata($sess_data);
 				$cari = $this->session->userdata('cari');
-				$where = " WHERE id_glasir LIKE '%$cari%' OR nama_glasir LIKE '%$cari%' OR nama_alias LIKE '%$cari%'";
+				$where = " WHERE id_glasir LIKE '%$cari%' OR nama_glasir LIKE '%$cari%' OR nama_alias LIKE '%$cari%' AND deleted <> 1";
 			}else{
-				$where = ' ';
+				$where = 'WHERE deleted <> 1';
 				$kata = $this->session->userdata('cari');
 			}
 			
@@ -149,7 +149,7 @@ class Glasir extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){			
 			$id = $this->uri->segment(3);
-			$this->glzModel->manualQuery("DELETE FROM glasir WHERE id_glasir='$id'");
+			$this->glzModel->manualQuery("UPDATE glasir SET deleted = 1 WHERE id_glasir='$id'");
 			echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir'>";			
 		}else{
 			header('location:'.base_url());

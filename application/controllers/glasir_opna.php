@@ -142,7 +142,7 @@ class Glasir_opna extends CI_Controller {
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		
@@ -222,6 +222,7 @@ class Glasir_opna extends CI_Controller {
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['sts']              = $this->input->post('sts');
                                 $ud['selisih']          = $this->input->post('selisih');
+								$ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
                                 $ud['area']             = 2;
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -236,12 +237,12 @@ class Glasir_opna extends CI_Controller {
                                                 $this->glzModel->updateData("glasir_oh",$up,$id);
 						$data = $this->glzModel->getSelectedData("glasir_rhd",$id_d);
 						if($data->num_rows()>0){
-							$this->glzModel->updateData("glasir_ohd",$ud,$id_d);
+							$this->glzModel->insertData("glasir_ohd",$ud);
 						}else{
                                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_ohd",$ud);
 						}
-					echo 'Update data Sukses';
+					echo 'Simpan data Sukses';
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_oh",$up);
@@ -280,6 +281,7 @@ class Glasir_opna extends CI_Controller {
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['sts']              = $this->input->post('sts');
                                 $ud['selisih']          = $this->input->post('selisih');
+								$ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
                                 $ud['area']             = 3;
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -294,12 +296,12 @@ class Glasir_opna extends CI_Controller {
                                                 $this->glzModel->updateData("glasir_oh",$up,$id);
 						$data = $this->glzModel->getSelectedData("glasir_rhd",$id_d);
 						if($data->num_rows()>0){
-							$this->glzModel->updateData("glasir_ohd",$ud,$id_d);
+							$this->glzModel->insertData("glasir_ohd",$ud);
 						}else{
                                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_ohd",$ud);
 						}
-					echo 'Update data Sukses';
+					echo 'Simpan data Sukses';
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_oh",$up);
@@ -441,7 +443,7 @@ class Glasir_opna extends CI_Controller {
                         
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		

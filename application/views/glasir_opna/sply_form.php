@@ -300,7 +300,7 @@
         </td>
     </tr>
     <tr>    
-        <td>Tong</td>
+        <td>Ball Mill/Tong</td>
         <td>:</td>
         <td>
             <select name="id_bm" id="id_bm" style="width:382px;">
