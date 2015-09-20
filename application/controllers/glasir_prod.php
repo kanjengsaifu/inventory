@@ -98,7 +98,19 @@ class Glasir_prod extends CI_Controller {
 			$no_prod    = $this->glzModel->MaxPhGlasir();
 			
 			$d['no_prod']	= $no_prod;
+                        $d['batch']	= '';
+                        $d['petugas']	= '';
                         $d['dsc']	= '';
+                        $d['tgl']	= '';
+                        $d['jam']	= '';
+                        $d['shift']	= '';
+                        $d['id_glasir']	= '';
+                        $d['tglp']	= '';
+                        $d['tglb']	= '';
+                        $d['id_bm']	= '';
+                        $d['id_bmt']	= '';
+                        $d['volume']	= '';
+                        $d['densitas']	= '';
 			
 			$bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
@@ -411,6 +423,7 @@ class Glasir_prod extends CI_Controller {
 				}
 			}else{
 					$d['no_prod'] =$no_prod;
+                                        $d['batch']	= '';
                                         $d['petugas']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';

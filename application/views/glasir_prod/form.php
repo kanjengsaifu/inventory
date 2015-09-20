@@ -321,7 +321,7 @@ $(document).ready(function(){
         <?php 
 		if(empty($shift)){
 		?>
-            <option  value="<?php echo $shift;?>" >-PILIH-</option>
+            <option value="<?php echo $shift;?>">-PILIH-</option>
         <?php
 		}
 		foreach($l_sft->result() as $t){
@@ -417,7 +417,7 @@ $(document).ready(function(){
     <tr>    
         <td>Densitas</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/  value="<?php echo $densitas;?>"></td>
+        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;" value="<?php echo $densitas;?>" /></td>
     </tr>
     </table>
     </fieldset>

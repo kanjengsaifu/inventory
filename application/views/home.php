@@ -35,6 +35,38 @@
 <!-- notifikasi -->
 <script type="text/javascript" src="<?php echo base_url();?>asset/js/notifikasi.js"></script>
 
+<!--datagrid_export-->
+<link rel="stylesheet" href="<?php echo base_url();?>asset/jqwidgets/styles/jqx.base.css" type="text/css" />
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxcheckbox.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.columnsresize.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.filter.js"></script> 
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxdata.js"></script> 
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxdata.export.js"></script> 
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.export.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.storage.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.sort.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.aggregates.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.edit.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/demos.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxpanel.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxinput.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxcalendar.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxtooltip.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.grouping.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/globalization/globalize.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.aggregates.js.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#dataTable tr:even").addClass("stripe1");

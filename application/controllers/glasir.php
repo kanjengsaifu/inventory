@@ -74,6 +74,20 @@ class Glasir extends CI_Controller {
 			header('location:'.base_url());
 		}
 	}
+        
+        public function ldg()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->get_ldg();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
 	
 	public function tambah()
 	{

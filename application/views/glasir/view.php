@@ -8,68 +8,50 @@
 </a>
 
 </div>
-<div style="float:right; padding-bottom:5px;">
-<form name="form" method="post" action="<?php echo base_url();?>index.php/glasir">
-Cari Kode & Nama Glasir : <input type="text" name="txt_cari" id="txt_cari" size="50" />
-<button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
-</form>
-</div>
 <div id="gird" style="float:left; width:100%;">
-<table id="dataTable" width="100%">
-<tr>
-    <th>No</th>
-    <th>Kode Glasir</th>
-    <th>Nama Glasir</th>
-    <th>Nama Alias Glasir</th>
-    <th>Satuan</th>
-    <th>Stok di BGPS</th>
-    <th>Stok di Supply</th>
-    <th>Inputer</th>
-    <th>Status</th>
-    <th>Tgl Input</th>
-    <th>Update Terakhir</th>
-    <th>Aksi</th>
-</tr>
-<?php
-	if($data->num_rows()>0){
-		$no =1+$hal;
-		foreach($data->result_array() as $db){ 
-		$status = $this->glzModel->CariGlasirStatus($db['status']); 
-		?>    
-    	<tr>
-            <td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="80" ><?php echo $db['id_glasir']; ?></td>
-            <td ><?php echo $db['nama_glasir']; ?></td>
-            <td ><?php echo $db['nama_alias']; ?></td>
-            <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_bgps'],2,'.',','); ?></td>
-            <td align="right" width="100"  style="font-size:10px"><?php echo number_format($db['s_supply'],2,'.',','); ?></td>
-            <td align="center" width="60" ><?php echo $db['inputer']; ?></td>
-            <td align="center" width="60" ><?php echo $status; ?></td>
-            <td align="center" width="120" ><?php echo $db['tgl_input']; ?></td>
-            <td align="center" width="120" ><?php echo $db['tgl_update']; ?></td>
-            <td align="center" width="60">
-            <a href="<?php echo base_url();?>index.php/glasir/edit/<?php echo $db['id_glasir'];?>">
-			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
-			</a>
-            <a href="<?php echo base_url();?>index.php/glasir/hapus/<?php echo $db['id_glasir'];?>"
-            onClick="return confirm('Anda yakin ingin menghapus data ini?')">
-			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
-			</a>
-            </td>
-    </tr>
-    <?php
-		$no++;
-		}
-	}else{
-	?>
-    	<tr>
-        	<td colspan="9" align="center" >Tidak Ada Data</td>
-        </tr>
-    <?php	
-	}
-?>
-</table>
-<?php echo "<table align='center'><tr><td>".$paginator."</td></tr></table>"; ?>
+<script type="text/javascript">
+    $(document).ready(function () {
+    // prepare the data
+    var source ={
+        datatype: "json",
+        datafields: [
+                        { name: 'id_glasir' },
+                        { name: 'nama_glasir' },
+                        { name: 'nama_alias' },
+                        { name: 'satuan' },
+                        { name: 'status' },
+                        { name: 'inputer' },
+                        { name: 'tgl_input' },
+                        { name: 'tgl_update' },
+        ],
+        url: '<?php echo base_url().'index.php/glasir/ldg'?>'
+    };
+    $("#jqxgrid").jqxGrid({
+        width: '100%',
+        height: 480,
+        source: source,
+        pagesize: 15,
+        pageable: true,
+        sortable: true,
+        columnsresize: true,
+        filterable: true,
+        showtoolbar: true,
+        showstatusbar: true,
+        statusbarheight: 25,
+        pagesizeoptions: ['15', '30', '90', '100'],
+        columns: [
+                        { text: 'ID Glasir', datafield: 'id_glasir', width: 80 },
+                        { text: 'Nama Glasir', datafield: 'nama_glasir', width: 250 },
+                        { text: 'Nama Alias Glasir', datafield: 'nama_alias', width: 250 },
+                        { text: 'Satuan', datafield: 'satuan', width: 100 },
+                        { text: 'Status', datafield: 'status', width: 60 },
+                        { text: 'Inputer', datafield: 'inputer', width: 60 },
+                        { text: 'Tgl. Input', datafield: 'tgl_input', width: 160 },
+                        { text: 'Tgl. Update', datafield: 'tgl_update', width: 160 }
+        ]
+    });
+});
+</script>
+<div id="jqxgrid"></div>
 </div>
 </div>

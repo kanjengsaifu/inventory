@@ -15,12 +15,12 @@ class Glasir_supp extends CI_Controller {
 			$cari = $this->input->post('txt_cari');
 			$tgl = $this->glzModel->tgl_sql($this->input->post('cari_tgl'));
 			
-                        $where = " WHERE no_prod<>''";
+                        $where = " WHERE a.no_prod <>'' AND c.deleted <> 1";
 			if(!empty($cari)){
-				$where .= " AND a.no_prod LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_glasir LIKE '%$cari%' OR b.nama_glasir LIKE '%$cari%'";
+				$where .= " AND a.no_prod LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_glasir LIKE '%$cari%' OR b.nama_glasir LIKE '%$cari%' AND c.deleted <> 1";
 			}
 			if(!empty($tgl)){
-				$where .= " AND a.tgl_insert LIKE '%$tgl%' OR a.tgl LIKE '%$tgl%' OR a.tglp LIKE '%$tgl%' OR a.tglb LIKE '%$tgl%'";
+				$where .= " AND a.tgl_insert LIKE '%$tgl%' OR a.tgl LIKE '%$tgl%' OR a.tglp LIKE '%$tgl%' OR a.tglb LIKE '%$tgl%' AND c.deleted <> 1";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -45,6 +45,7 @@ class Glasir_supp extends CI_Controller {
 			
 			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd_sp a 
                                 join glasir b on a.id_glasir = b.id_glasir
+                                JOIN glasir_ph_sp c on a.no_prod = c.no_prod
                                 $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
@@ -65,6 +66,7 @@ class Glasir_supp extends CI_Controller {
 
 			$text = "SELECT b.nama_glasir, a.tgl_insert,a.no_prod,a.inputer,a.id_glasir,a.tgl,a.tglp,a.tglb FROM glasir_phd_sp a 
                                         join glasir b on a.id_glasir = b.id_glasir
+                                        JOIN glasir_ph_sp c on a.no_prod = c.no_prod
                                         $where
                                         GROUP BY a.no_prod
 					ORDER BY a.no_prod DESC
@@ -98,6 +100,17 @@ class Glasir_supp extends CI_Controller {
 			$d['no_prod']	= $no_prod;
                         $d['dsc']	= '';
                         $d['status']	= 2;
+                        $d['batch']	= '';
+                        $d['petugas']	= '';
+                        $d['tgl']	= '';
+                        $d['jam']	= '';
+                        $d['shift']	= '';
+                        $d['id_glasir']	= '';
+                        $d['tglp']	= '';
+                        $d['tglb']	= '';
+                        $d['id_bm']	= '';
+                        $d['volume']	= '';
+                        $d['densitas']	= '';
 			
 			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
@@ -187,6 +200,7 @@ class Glasir_supp extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
+                                $id_d['idphd']      = $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_ph_sp",$id);
 				if($data->num_rows()>0){
@@ -194,11 +208,12 @@ class Glasir_supp extends CI_Controller {
 						$data = $this->glzModel->getSelectedData("glasir_phd_sp",$id_d);
 						if($data->num_rows()>0){
 							$this->glzModel->updateData("glasir_phd_sp",$ud,$id_d);
+                                                        echo 'Update data Sukses';
 						}else{
                                                         $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_phd_sp",$ud);
+                                                        echo 'Simpan data Sukses';
 						}
-					echo 'Update data Sukses';
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_ph_sp",$up);
@@ -323,11 +338,103 @@ class Glasir_supp extends CI_Controller {
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['no_prod']	= $id;
-                                        $d['inputer']	= $db->inputer;  
+                                        $d['batch']	= '';
+                                        $d['petugas']	= '';
+                                        $d['dsc']	= '';
+                                        $d['tgl']	= '';
+                                        $d['jam']	= '';
+                                        $d['shift']	= '';
+                                        $d['id_glasir']	= '';
+                                        $d['tglp']	= '';
+                                        $d['tglb']	= '';
+                                        $d['id_bm']	= '';
+                                        $d['status']	= '';
+                                        $d['volume']	= '';
+                                        $d['densitas']	= '';
 				}
 			}else{
-					$d['no_prod'] ='';
-                                        $d['inputer']	='';
+					$d['no_prod'] =$id;
+                                        $d['batch']	='';
+                                        $d['petugas']	= '';
+                                        $d['dsc']	= '';
+                                        $d['tgl']	= '';
+                                        $d['jam']	= '';
+                                        $d['shift']	= '';
+                                        $d['id_glasir']	= '';
+                                        $d['tglp']	= '';
+                                        $d['tglb']	= '';
+                                        $d['id_bm']	= '';
+                                        $d['status']	= '';
+                                        $d['volume']	= '';
+                                        $d['densitas']	= '';
+			}
+			
+			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+			$d['l_bm'] = $this->glzModel->manualQuery($bm);
+                        $status = "SELECT * FROM global_status";
+			$d['l_status'] = $this->glzModel->manualQuery($status);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->glzModel->manualQuery($sft);
+									
+			$d['content'] = $this->load->view('glasir_supp/form', $d, true);		
+			$this->load->view('home',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
+        public function editDetail()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			
+			$d['prg']= $this->config->item('prg');
+			$d['web_prg']= $this->config->item('web_prg');
+			
+			$d['nama_program']= $this->config->item('nama_program');
+			$d['instansi']= $this->config->item('instansi');
+			$d['usaha']= $this->config->item('usaha');
+			$d['alamat_instansi']= $this->config->item('alamat_instansi');
+			
+			$d['judul'] = "Ubah input stock supply glasir";
+			
+			$no_prod = $this->uri->segment(3);
+                        $id_glasir = $this->uri->segment(4);
+                        $idphd = $this->uri->segment(5);
+			$text = "SELECT no_prod,idphd,petugas,dsc,tgl,id_gps, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,volume,densitas 
+                        FROM glasir_phd_sp WHERE no_prod='$no_prod' AND id_glasir='$id_glasir' AND idphd='$idphd'";
+			$data = $this->glzModel->manualQuery($text);
+			if($data->num_rows() > 0){
+				foreach($data->result() as $db){
+					$d['no_prod']	= $no_prod;
+                                        $d['batch']	= $db->idphd; 
+                                        $d['petugas']	= $db->petugas;
+                                        $d['dsc']	= $db->dsc;
+                                        $d['tgl']	= $this->app_model->tgl_sql($db->tgl);
+                                        $d['jam']	= $db->jam;
+                                        $d['shift']	= $db->shift;
+                                        $d['id_glasir']	= $db->id_glasir;
+                                        $d['tglp']	= $this->app_model->tgl_sql($db->tglp);
+                                        $d['tglb']	= $this->app_model->tgl_sql($db->tglb);
+                                        $d['id_bm']	= $db->id_bm;
+                                        $d['status']	= $db->id_gps;
+                                        $d['volume']	= $db->volume;
+                                        $d['densitas']	= $db->densitas;
+				}
+			}else{
+					$d['no_prod'] =$no_prod;
+                                        $d['petugas']	= '';
+                                        $d['dsc']	= '';
+                                        $d['tgl']	= '';
+                                        $d['jam']	= '';
+                                        $d['shift']	= '';
+                                        $d['id_glasir']	= '';
+                                        $d['tglp']	= '';
+                                        $d['tglb']	= '';
+                                        $d['id_bm']	= '';
+                                        $d['status']	= '';
+                                        $d['volume']	= '';
+                                        $d['densitas']	= '';
 			}
 			
 			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
@@ -371,12 +478,12 @@ class Glasir_supp extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.jam,a.tgl,a.idphd,d.nama_gps,f.nama,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
+			$text = "SELECT a.no_prod,TIME_FORMAT(a.jam,'%H:%i') as jam,a.tglb,a.tglp,d.nama_gps as status,a.tgl,a.idphd,d.nama_gps,f.nama,a.id_glasir,e.nama_glasir,c.nama_bm,a.volume,a.densitas,a.petugas,a.inputer, a.dsc
                                     FROM glasir_phd_sp as a JOIN glasir_ph_sp as b ON a.no_prod=b.no_prod 
                                     JOIN glasir as e ON a.id_glasir=e.id_glasir
                                     JOIN global_mesin as c ON a.id_bm=c.id_bm 
                                     JOIN global_status as d ON a.id_gps=d.idgps
-                                    JOIN global_shift as f ON a.shift=f.id WHERE a.no_prod='$id'";
+                                    JOIN global_shift as f ON a.shift=f.id WHERE a.no_prod='$id' AND a.deleted <> 1";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_supp/detail',$d);
@@ -390,9 +497,8 @@ class Glasir_supp extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
                         $id = $this->uri->segment(3);
-			
-				$this->glzModel->manualQuery("DELETE FROM glasir_phd_sp WHERE no_prod='$id'");
-                                $this->glzModel->manualQuery("DELETE FROM glasir_ph_sp WHERE no_prod='$id'");
+                                $this->glzModel->manualQuery("UPDATE glasir_phd_sp SET deleted = 1 WHERE no_prod='$id'");
+                                $this->glzModel->manualQuery("UPDATE glasir_ph_sp SET deleted = 1  WHERE no_prod='$id'");
                                 echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_supp'>";
 			
 			}			
@@ -408,7 +514,7 @@ class Glasir_supp extends CI_Controller {
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
-                                $this->glzModel->manualQuery("DELETE FROM glasir_phd_sp WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
+                                $this->glzModel->manualQuery("UPDATE glasir_phd_sp SET deleted = 1 WHERE no_prod='$id' AND id_glasir='$kode' AND idphd='$batch'");
                                 $this->edit();
                         
 		}else{

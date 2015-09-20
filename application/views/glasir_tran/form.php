@@ -68,6 +68,8 @@ $(document).ready(function(){
                 var id_glasir   = $("#id_glasir").val();
                 var volume      = $("#volume").val();
                 var densitas    = $("#densitas").val();
+                var shift    = $("#shift").val();
+                var id_bm    = $("#id_bm").val();
 		
 		var string = $("#form").serialize();
 		
@@ -79,6 +81,28 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#tgl").focus();
+			return false();
+		}
+                
+                if(shift.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Shift tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#shift").focus();
+			return false();
+		}
+                
+                if(id_bm.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Mesin produksi tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#id_bm").focus();
 			return false();
 		}
                 
@@ -227,29 +251,34 @@ $(document).ready(function(){
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
-        <td>Kasie/Wasie QC</td>
-        <td>:</td>
-        <td><input type="text" name="petugas1" id="petugas1" class="detail" size="45" maxlength="20"/></td>
+        <td width="150">No. Batch</td>
+        <td width="5">:</td>
+        <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
-        <td>Kasie/Wasie Prod</td>
-        <td>:</td>
-        <td><input type="text" name="petugas2" id="petugas2" class="detail" size="45" maxlength="20"/></td>
+        <td width="150">Petugas (Karu)</td>
+        <td width="5">:</td>
+        <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255" value="<?php echo $petugas3;?>"/></td>
+    </tr>
+    <tr>    
+        <td width="150">Petugas (Supply)</td>
+        <td width="5">:</td>
+        <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255" value="<?php echo $petugas4;?>"/></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>
         <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
+        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255" value="<?php echo $dsc;?>"/></td>
     </tr>
     <tr>    
         <td>Tgl Pelaksanaan</td>
         <td>:</td>
-        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
+        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl;?>"/></td>
     </tr>
     <tr>    
         <td width="150">Jam Pelaksanaan</td>
         <td width="5">:</td>
-        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value=""/></td>
+        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam;?>"/></td>
     </tr>
     <tr>    
         <td>Shift</td>
@@ -259,7 +288,7 @@ $(document).ready(function(){
         <?php 
 		if(empty($shift)){
 		?>
-            <option value="">-PILIH-</option>
+            <option value="<?php echo $shift;?>">-PILIH-</option>
         <?php
 		}
 		foreach($l_sft->result() as $t){
@@ -281,7 +310,7 @@ $(document).ready(function(){
         <?php 
 		if(empty($id_bm)){
 		?>
-            <option value="">-PILIH-</option>
+            <option value="<?php echo $id_bm;?>">-PILIH-</option>
         <?php
 		}
 		foreach($l_mpr->result() as $t){
@@ -304,7 +333,7 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Kode Glasir</td>
         <td width="5">:</td>
-        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" />
+        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $id_glasir;?>"/>
         <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
@@ -316,45 +345,35 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Tgl. Produksi</td>
         <td width="5">:</td>
-        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value="<?php echo $tglp;?>"/>
         <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
     <tr>    
         <td width="150">Tgl. Lulus Tes Bakar</td>
         <td width="5">:</td>
-        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value="<?php echo $tglb;?>"/>
         </td>
     </tr>
     <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" value="<?php echo $volume;?>" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td>Densitas (gr/L)</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" value="<?php echo $densitas;?>" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td>Viscositas/Boume</td>
         <td>:</td>
-        <td><input type="text" name="vsc" id="vsc"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
+        <td><input type="text" value="<?php echo $vsc;?>" name="vsc" id="vsc"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;"/></td>
     </tr>
     <tr>    
         <td width="150">Diambil dari</td>
         <td width="5">:</td>
-        <td><input type="text" name="ddri" id="ddri" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Petugas (Karu)</td>
-        <td width="5">:</td>
-        <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Petugas (Supply)</td>
-        <td width="5">:</td>
-        <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255"/></td>
+        <td><input type="text" value="<?php echo $ddri;?>" name="ddri" id="ddri" size="45" maxlength="255"/></td>
     </tr>
     </table>
     </fieldset>

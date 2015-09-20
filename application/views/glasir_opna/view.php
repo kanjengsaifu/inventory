@@ -32,10 +32,10 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
     <th>Transaksi BGPS</th>
-    <th>Selisih BGPS</th>
+    <th>Jumlah Stock Opname BGPS</th>
     <th>Aksi</th>
     <th>Transaksi Supply</th>
-    <th>Selisih Supply</th>
+    <th>Jumlah Stock Opname Supply</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
