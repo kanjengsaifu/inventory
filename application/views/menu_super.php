@@ -36,7 +36,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/lap_barang">Stok Glasir</a></span>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok Glasir</a></span>
     </li>
     <li>
     <span><a href="<?php echo base_url();?>index.php/lap_beli">Produksi Glasir</a></span>

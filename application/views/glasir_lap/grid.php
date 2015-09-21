@@ -1,12 +1,3 @@
-<div id="view">
-<div style="float:left; padding-bottom:5px;">
-<a href="<?php echo base_url();?>index.php/glasir/tambah">
-<button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah Data</button>
-</a>
-<a href="<?php echo base_url();?>index.php/glasir">
-<button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
-</a>
-</div>
 <div id="gird" style="float:left; width:100%;">
 <script type="text/javascript">
     $(document).ready(function () {
@@ -27,7 +18,7 @@
     };
     $("#jqxgrid").jqxGrid({
         width: '100%',
-        height: 480,
+        height: 490,
         source: source,
         pagesize: 15,
         pageable: true,
@@ -52,5 +43,4 @@
 });
 </script>
 <div id="jqxgrid"></div>
-</div>
-</div>
+</div>   

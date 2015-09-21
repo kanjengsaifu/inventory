@@ -283,7 +283,7 @@ class Glzmodel extends CI_Model {
         public function ProsesItemRetu($id){
 		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_rhd a 
                         JOIN glasir b on a.id_glasir = b.id_glasir
-                        WHERE no_prod='$id'";
+                        WHERE no_prod='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -363,7 +363,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function ProsesGlasirRetu($id){
-		$t = "SELECT idthd FROM glasir_rhd WHERE no_prod='$id'";
+		$t = "SELECT idthd FROM glasir_rhd WHERE no_prod='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -375,7 +375,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function JmlGlasirRetu($id){
-		$t = "SELECT sum(volume) as jml FROM glasir_rhd WHERE no_prod='$id'";
+		$t = "SELECT sum(volume) as jml FROM glasir_rhd WHERE no_prod='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -389,7 +389,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function ProsesGlasirOpnaBgps($id){
-		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=2";
+		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=2 AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -401,7 +401,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function JmlGlasirOpnaBgps($id){
-		$t = "SELECT sum(bkg) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=2";
+		$t = "SELECT sum(bkg) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=2 AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -415,7 +415,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function ProsesGlasirOpnaSply($id){
-		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=3";
+		$t = "SELECT idthd FROM glasir_ohd WHERE no_prod='$id' AND area=3 AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -427,7 +427,7 @@ class Glzmodel extends CI_Model {
 	}
         
         public function JmlGlasirOpnaSply($id){
-		$t = "SELECT sum(bkg) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=3";
+		$t = "SELECT sum(bkg) as jml FROM glasir_ohd WHERE no_prod='$id' AND area=3 AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){

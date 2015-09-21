@@ -15,7 +15,7 @@ class Glasir_opna extends CI_Controller {
 			$cari = $this->input->post('txt_cari');
 			$tgl = $this->glzModel->tgl_sql($this->input->post('cari_tgl'));
 			
-                        $where = " WHERE no_prod<>''";
+                        $where = " WHERE no_prod<>''  AND deleted <> 1";
 			if(!empty($cari)){
 				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
 			}
@@ -220,9 +220,9 @@ class Glasir_opna extends CI_Controller {
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
-                                $ud['sts']              = $this->input->post('sts');
-                                $ud['selisih']          = $this->input->post('selisih');
-								$ud['bkg']          	= $this->input->post('bkg');
+                                //$ud['sts']              = $this->input->post('sts');
+                                //$ud['selisih']          = $this->input->post('selisih');
+				$ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
                                 $ud['area']             = 2;
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -279,9 +279,9 @@ class Glasir_opna extends CI_Controller {
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
-                                $ud['sts']              = $this->input->post('sts');
-                                $ud['selisih']          = $this->input->post('selisih');
-								$ud['bkg']          	= $this->input->post('bkg');
+                                //$ud['sts']              = $this->input->post('sts');
+                                //$ud['selisih']          = $this->input->post('selisih');
+                                $ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
                                 $ud['area']             = 3;
                                 $ud['inputer']          = $this->session->userdata('username');
@@ -459,11 +459,12 @@ class Glasir_opna extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama_area as area,a.idthd,d.nama as shift,a.tgl,a.jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
+			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama_area as area,e.nama_bm,a.idthd,d.nama as shift,a.tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
                                     FROM glasir_ohd a
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id_area
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2";
+                                    JOIN global_mesin e ON a.id_bm = e.id_bm
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2 AND a.deleted <>1";
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_opna/bgps_detail',$d);
@@ -478,14 +479,15 @@ class Glasir_opna extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama_area as area,a.idthd,d.nama as shift,a.tgl,a.jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
+			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama_area as area,e.nama_bm,a.idthd,d.nama as shift,tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
                                     FROM glasir_ohd a
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id_area
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=3";
+                                    JOIN global_mesin e ON a.id_bm = e.id_bm
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=3 AND a.deleted <>1";
 			$d['data']= $this->glzModel->manualQuery($text);
 
-			$this->load->view('glasir_opna/bgps_detail',$d);
+			$this->load->view('glasir_opna/sply_detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -496,8 +498,8 @@ class Glasir_opna extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
                                 $id = $this->uri->segment(3);
-                                $this->glzModel->manualQuery("DELETE FROM glasir_ohd WHERE no_prod='$id'");
-                                $this->glzModel->manualQuery("DELETE FROM glasir_oh WHERE no_prod='$id'");
+                                $this->glzModel->manualQuery("UPDATE glasir_ohd SET deleted = 1 WHERE no_prod='$id'");
+                                $this->glzModel->manualQuery("UPDATE glasir_oh SET deleted = 1  WHERE no_prod='$id'");
                                 echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_opna'>";
 		}else{
 			header('location:'.base_url());
@@ -511,7 +513,7 @@ class Glasir_opna extends CI_Controller {
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
-                                $this->glzModel->manualQuery("DELETE FROM glasir_ohd WHERE no_prod='$id' AND id_glasir='$kode' AND idthd='$batch' AND area=2");
+                                $this->glzModel->manualQuery("UPDATE glasir_ohd SET deleted = 1 WHERE no_prod='$id' AND id_glasir='$kode' AND idthd='$batch' AND area=2");
                                 $this->editBgps();
 		}else{
 			header('location:'.base_url());
@@ -525,7 +527,7 @@ class Glasir_opna extends CI_Controller {
 				$id = $this->uri->segment(3);
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
-                                $this->glzModel->manualQuery("DELETE FROM glasir_ohd WHERE no_prod='$id' AND id_glasir='$kode' AND idthd='$batch' AND area=3");
+                                $this->glzModel->manualQuery("UPDATE glasir_ohd SET deleted = 1 WHERE no_prod='$id' AND id_glasir='$kode' AND idthd='$batch' AND area=3");
                                 $this->editSply();
 		}else{
 			header('location:'.base_url());

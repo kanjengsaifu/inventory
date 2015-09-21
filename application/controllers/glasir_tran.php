@@ -308,7 +308,7 @@ class Glasir_tran extends CI_Controller {
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['no_prod']	= $id;
-					$d['tgl']	= $this->glzModel->tgl_str($db->tgl);
+					$d['tgl']	= '';
                                         $d['batch']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';

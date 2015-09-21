@@ -14,15 +14,8 @@
 		
 		var bk_opname = 1.565*(parseFloat(densitas-1000)/1000)*parseFloat(volume);
 		$("#bkg").val(bk_opname);
-                
-                if (parseFloat(sts)>bk_opname) {
-                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
-                    $("#selisih").val(selisih);
-                } else if (parseFloat(sts)<bk_opname) {
-                    var selisih = parseFloat(bk_opname)-parseFloat(sts);
-                    $("#selisih").val(selisih);
-                }
 	}
+        
 	$("#id_glasir").keyup(function(){
 		hitung();
 	});
@@ -354,11 +347,6 @@
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50" readonly="readonly"/></td>
     </tr>
     <tr>    
-        <td>Stok di Sistem (Kg)</td>
-        <td>:</td>
-        <td><input type="text" name="sts" id="sts" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
-    </tr>
-    <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
         <td><input type="text" name="volume" id="volume" class="detail" size="20" maxlength="20"/></td>
@@ -377,11 +365,6 @@
         <td>Stok Opname (Kg)</td>
         <td>:</td>
         <td><input type="text" name="bkg" id="bkg" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
-    </tr>
-    <tr>    
-        <td>Selisih Stok (Kg)</td>
-        <td>:</td>
-        <td><input type="text" name="selisih" id="selisih" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
     </tr>
     </table>
     </fieldset>

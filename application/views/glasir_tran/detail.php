@@ -118,7 +118,7 @@ $(function() {
 <tr>
 	<th colspan="10" align="center" style="font-size:10px">Total</th>
         <th style="text-align:right;font-size:10px"><?php echo number_format($g_total);?> Ltr</th>
-        <th colspan="2" style="text-align:right;font-size:10px"></th>
+        <th colspan="3" style="text-align:right;font-size:10px"></th>
         <th style="text-align:right;font-size:10px"><?php echo number_format($b_total,2,'.', '');?> Kg</th>
 </tr>    
 </table>

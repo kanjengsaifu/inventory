@@ -29,22 +29,30 @@ $(function() {
 </style>
 <table id="dataTable" width="100%">
 <tr>
-    <th style="font-size:10px">No</th>
-    <th style="font-size:10px">Shift</th>
+        <th rowspan="2" style="text-align:right; font-size:10px">No</th>
+        <th colspan="3" align="center" style="font-size:10px">Pelaksanaan</th>
+        <th colspan="2" align="center" style="font-size:10px">Tanggal</th>
+        <th colspan="2" align="center" style="font-size:10px">Glasir</th>
+        <th rowspan="2" style="font-size:10px">Mesin</th>
+        <th rowspan="2" style="font-size:10px">Area</th>
+        <th rowspan="2" style="font-size:10px">Batch</th>
+        <th rowspan="2" style="font-size:10px">Volu<br>me</th>
+        <th rowspan="2" style="font-size:10px">Den<br>sitas</th>
+        <th rowspan="2" style="font-size:10px">Vis<br>cositas<br>/Boume</th>
+        <th rowspan="2" style="font-size:10px">Berat <br> Kering <br>(Kg)</th>
+        <th rowspan="2" style="font-size:10px">Ket.</th>
+        <th rowspan="2" style="font-size:10px">Petugas</th>
+        <th rowspan="2" style="font-size:10px">Inputer</th>
+        <th rowspan="2" style="font-size:10px">Aksi</th>
+</tr>
+<tr>
     <th style="font-size:10px">Tgl</th>
     <th style="font-size:10px">Jam</th>
-    <th style="font-size:10px">Id. Glasir</th>
-    <th style="font-size:10px">Nama Glasir</th>
-    <th style="font-size:10px">Area</th>
-    <th style="font-size:10px">Batch</th>
-    <th style="font-size:10px">Viscositas</th>
-    <th style="font-size:10px">Stok Opname</th>
-    <th style="font-size:10px">Stok Sistem</th>
-    <th style="font-size:10px">Selisih Stok</th>
-    <th style="font-size:10px">Keterangan</th>
-    <th style="font-size:10px">Kasie/Wasie(Prod)</th>
-    <th style="font-size:10px">Inputer</th>
-    <th style="font-size:10px">Aksi</th>
+    <th style="font-size:10px">Shift</th>
+    <th style="font-size:10px">Produksi</th>
+    <th style="font-size:10px">Tes Bakar</th>
+    <th style="font-size:10px">Kode</th>
+    <th style="font-size:10px">Nama</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
@@ -63,22 +71,25 @@ $(function() {
 		?>    
     	<tr>
             <td align="center" style="font-size:10px"><?php echo $no; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['shift']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['tgl']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['jam']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['shift']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['tglp']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['tglb']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['id_glasir']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['nama_glasir']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['area']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['idthd']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['volume']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['densitas']; ?></td>
             <td align="right" style="font-size:10px"><?php echo number_format($db['vsc'],2,'.', ''); ?> Pois</td>
             <td align="right" style="font-size:10px"><?php echo number_format($bkg,2,'.', ''); ?> Kg</td>
-            <td align="right" style="font-size:10px"><?php echo number_format($db['sts']); ?> Kg</td>
-            <td align="right" style="font-size:10px"><?php echo number_format($db['selisih']); ?> Kg</td>
             <td align="center" style="font-size:10px"><?php echo $db['dsc']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/glasir_opna/hapus_detailSply/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>/<?php echo $db['volume'];?>/<?php echo $db['densitas'];?>"
+            <a href="<?php echo base_url();?>index.php/glasir_opna/hapus_detailSply/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
@@ -100,7 +111,7 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="8" align="center" style="font-size:10px">Total</th>
+	<th colspan="11" align="center" style="font-size:10px">Total</th>
         <th style="text-align:right;font-size:10px"><?php echo number_format($g_total);?> Liter</th>
         <th colspan="2" style="text-align:right;font-size:10px"></th>
         <th style="text-align:right;font-size:10px"><?php echo number_format($b_total,2,'.', '');?> Kg</th>

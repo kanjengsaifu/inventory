@@ -22,6 +22,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>asset/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/js/clock.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>asset/js/datagrid-filter.js"></script>
 
 <!--datepicker-->
 <script type="text/javascript" src="<?php echo base_url(); ?>asset/js/ui.core.js"></script>
