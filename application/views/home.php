@@ -57,8 +57,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.sort.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.aggregates.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.pager.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.edit.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.selection.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/demos.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxpanel.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxinput.js"></script>
