@@ -5,8 +5,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'Hsi001';
-//$db['default']['password'] = 'toor';
+//$db['default']['password'] = 'Hsi001';
+$db['default']['password'] = 'toor';
 $db['default']['database'] = 'inventory';
 //$db['default']['port'] = '3307';
 
