@@ -65,7 +65,6 @@
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxtooltip.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.grouping.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/globalization/globalize.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.aggregates.js.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#dataTable tr:even").addClass("stripe1");
