@@ -90,7 +90,7 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['petugas3']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['petugas4']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
-            <td align="center" style="font-size:10px">
+            <td align="center" width="50" style="font-size:10px">
             <a href="<?php echo base_url();?>index.php/glasir_tran/editDetail/<?php echo $db['no_prod'];?>/<?php echo $db['id_glasir'];?>/<?php echo $db['idthd'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>

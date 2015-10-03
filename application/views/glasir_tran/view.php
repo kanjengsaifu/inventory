@@ -29,7 +29,7 @@ Cari No. Transaksi/Kode Glaze/Nama Glaze/Inputer : <input type="text" name="txt_
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
     <th>Transaksi Input</th>
-    <th>Total glasir ditarik Supply</th>
+    <th>Total glasir dikirim Supply</th>
     <th>List Item</th>
     <th>Inputer</th>
     <th>Aksi</th>

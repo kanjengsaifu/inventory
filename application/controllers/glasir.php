@@ -102,6 +102,20 @@ class Glasir extends CI_Controller {
 
 		}
 	}
+        
+        public function loadStokStatus()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->get_stok_status();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
 	
 	public function tambah()
 	{

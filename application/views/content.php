@@ -20,14 +20,14 @@ if($this->session->userdata('level')=='01'){
         <td align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_tran"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>03-Pemakaian Glasir</b></a>
         </td>
-        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_retur"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_retu"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
         <b>04-Retur Glasir</b></a>
         </td>
         <td align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>05-Stok Opname Glasir</b></a>
         </td>
-        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_rule"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
-        <b>Prosedur & IK Glasir</b></a>
+        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_lap"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <b>06-Stok Glasir</b></a>
         </td>
         </td>
         </td>

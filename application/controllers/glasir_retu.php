@@ -121,7 +121,7 @@ class Glasir_retu extends CI_Controller {
 			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
+                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%Tidak%' or jns_bm like '%glasir%' order by nama_bm desc";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 			
 			$d['content'] = $this->load->view('glasir_retur/form', $d, true);		
@@ -210,7 +210,7 @@ class Glasir_retu extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
-                                $id_d['idthd']      = $this->input->post('batch');
+                $id_d['idthd']          = $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_rh",$id);
 				if($data->num_rows()>0){

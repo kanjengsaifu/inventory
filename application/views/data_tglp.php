@@ -23,9 +23,9 @@ function pilih(tglp,tglb){
 <table id="dataTable" class="detail" width="100%">
 <tr>
     <th>No</th>
-    <th>No Produksi</th>
+    <th>No Glasir</th>
     <th>Kode Glasir</th>
-    <th>Nama Glasir</th>
+    <th>Nama Produksi</th>
     <th>Tgl. Produksi</th>
     <th>Tgl. Lulus Tes bakar</th>
     <th>Inputer</th>

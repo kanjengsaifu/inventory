@@ -210,6 +210,7 @@ class Glasir_tran extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
+				$id_d['idthd']      	= $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_th",$id);
 				if($data->num_rows()>0){
@@ -217,11 +218,12 @@ class Glasir_tran extends CI_Controller {
 						$data = $this->glzModel->getSelectedData("glasir_thd",$id_d);
 						if($data->num_rows()>0){
 							$this->glzModel->updateData("glasir_thd",$ud,$id_d);
+							echo 'Update data Sukses';
 						}else{
-                                                        $ud['tgl_insert']		= date('Y-m-d h:i:s');
+                            $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_thd",$ud);
+							echo 'Simpan data Sukses';
 						}
-					echo 'Update data Sukses';
 				}else{
                                         $up['tgl_inp']		= date('Y-m-d h:i:s');
 					$this->glzModel->insertData("glasir_th",$up);
@@ -351,7 +353,7 @@ class Glasir_tran extends CI_Controller {
 			$d['l_dlv'] = $this->glzModel->manualQuery($bm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
+                        $mpr = "SELECT * FROM global_mesin where jns_bm like '%Tidak%' or jns_bm like '%glasir%' order by nama_bm desc";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
 									
 			$d['content'] = $this->load->view('glasir_tran/form', $d, true);		
