@@ -495,6 +495,7 @@ class App_Model extends CI_Model {
 						$sess_data['nama_lengkap'] = $qad->nama_lengkap;
 						$sess_data['foto'] = $qad->foto;
 						$sess_data['level'] = $qad->level;
+                                                $sess_data['hak_akses'] = $qad->hak_akses;
 						$this->session->set_userdata($sess_data);
 					}
 					header('location:'.base_url().'index.php/home');

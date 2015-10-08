@@ -82,7 +82,7 @@ $(function() {
 
 </head>
 <body onLoad="goforit()">
-<div class="header" style="height:70px;background:white;padding:2px;margin:0;">	
+<div width="20%" class="header" style="height:100px; width: 100% ;background:white;padding:2px;margin:0;">	
 		<div style="float:left; padding:0px; margin:0px;">
         <img src='<?php echo base_url();?>asset/images/logo_koperasi_85.png' style="padding:0; margin:0;" width="76" height="71">
         </div>
@@ -93,7 +93,7 @@ $(function() {
       </div>
 		<div style="float:right; line-height:3px; text-align:center;">
         <br /><br />
-        <h1>Apilkasi <?php echo $nama_program;?></h1>
+        <h1><?php echo $nama_program;?></h1>
         <p>.:: Data - Transaksi - Stok - Stok Opname - Adjusment ::.</p>
         </div>
 	</div>	
@@ -110,7 +110,7 @@ $(function() {
 	</div>
 	<!-- awal kiri -->
     <div id="kiri" style="float:left;">
-    	<div id="Profil" class="easyui-panel" title="Profil Pengguna" style="float:left;width:170px;height:90px;padding:5px;">
+    	<div id="Profil" class="easyui-panel" title="Profil Pengguna" style="float:left;width:130px;height:90px;padding:5px;">
         <a href="<?php echo base_url();?>index.php/foto" title="Edit Foto">
         <img style="float:left;padding:2px;" src="<?php echo base_url();?>asset/foto_profil/<?php echo $this->app_model->CariFotoPengguna();?>" width="50" height="50" align="middle" />
         </a>
@@ -119,7 +119,7 @@ $(function() {
         <a href="<?php echo base_url();?>index.php/profil">Edit Profil</a>
         </p>
         </div>		
-        <div class="easyui-accordion" style="float:left;width:170px;">
+        <div class="easyui-accordion" style="float:left;width:130px;">
         	<?php
 			if($this->session->userdata('level')=='01'){
         		echo $this->load->view('menu_super');

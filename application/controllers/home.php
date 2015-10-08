@@ -18,8 +18,6 @@ class Home extends CI_Controller {
 			$d['instansi']= $this->config->item('instansi');
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-
-			
 			$d['judul']="Home";
 
 			$d['content']= $this->load->view('content',$d,true);

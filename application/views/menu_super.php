@@ -1,3 +1,118 @@
+<?php 
+            $akses = $this->session->userdata('hak_akses');
+            $user = $this->session->userdata('username');
+            if($akses=='glz'){
+            ?>
+<div title="Master" data-options="iconCls:'icon-tip'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/glasir">Item</a>
+    </li>
+    </ul>
+    </div>
+</div>
+<div title="Transaksi" data-options="iconCls:'icon-tip'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/glasir_prod">BGPS</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/glasir_supp">Supply</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_retu">Retur</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_opna">Adjusment</a>
+    </li>
+    </ul>
+    </div>
+</div>
+<div title="Laporan" data-options="iconCls:'icon-print'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok</a></span>
+    </li>
+    </ul>
+    </div>
+</div>
+<div title="Grafik" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Akurasi Data</a></span>
+    </li>
+    </ul>
+    </div>
+</div>
+<?php       
+            }elseif($akses=='dcl')
+            {
+            ?>
+<div title="Master" data-options="iconCls:'icon-tip'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/decal">Item Decal</a>
+    </li>
+    </ul>
+    </div>
+</div>
+<div title="Transaksi" data-options="iconCls:'icon-tip'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/glasir_prod">Item</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/glasir_supp">Produksi</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_retu">Retur</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_opna">Adjusment</a>
+    </ul>
+    </div>
+</div>
+<div title="Laporan" data-options="iconCls:'icon-print'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok</a></span>
+    </li>
+    </ul>
+    </div>
+</div>
+<div title="Grafik" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
+    <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
+    <ul class="easyui-tree">
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Akurasi Data</a></span>
+    </li>
+    </ul>
+    </div>
+</div>
+<?php      
+            }else{
+            ?>
 <div title="Master" data-options="iconCls:'icon-tip'" style="overflow:auto;padding:5px 0px;">
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
@@ -50,3 +165,6 @@
     </ul>
     </div>
 </div>
+<?php    
+            }
+            ?>
