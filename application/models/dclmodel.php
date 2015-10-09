@@ -528,7 +528,8 @@ class Dclmodel extends CI_Model {
                             LEFT JOIN global_size h ON h.id  = a.size
                             LEFT JOIN global_jenis_decal i ON i.id  = a.jenis
                             LEFT JOIN global_detail j ON j.id_related = a.id
-                            WHERE j.deleted = 0";
+                            WHERE j.deleted = 0
+                            ORDER BY a.id";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;
@@ -574,6 +575,61 @@ class Dclmodel extends CI_Model {
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;
+	}
+        
+        public function loadBuyer(){
+		$q = $this->db->get("global_buyer");
+		return $q;
+	}
+        
+        public function loadMaterial(){
+		$q = $this->db->get("global_material");
+		return $q;
+	}
+        
+        public function loadForming(){
+		$q = $this->db->get("global_forming");
+		return $q;
+	}
+        
+        public function loadShape(){
+		$q = $this->db->get("global_shape");
+		return $q;
+	}
+        
+        public function loadItem(){
+		$q = $this->db->get("global_items_kategori");
+		return $q;
+	}
+        
+        public function loadDekorasi(){
+		$q = $this->db->get("global_dekorasi");
+		return $q;
+	}
+        
+        public function loadSize(){
+		$q = $this->db->get("global_size");
+		return $q;
+	}
+        
+        public function loadJenis(){
+		$q = $this->db->get("global_jenis_decal");
+		return $q;
+	}
+        
+        public function MaxItemsDecal(){
+		$text = "SELECT max(id) as no FROM decal_items";
+		$data = $this->dclModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,1,5))+1;
+				$hasil = 'D'.sprintf("%04s", $tmp);
+			}
+		}else{
+			$hasil = 'D'.'0001';
+		}
+		return $hasil;
 	}
 	
 }

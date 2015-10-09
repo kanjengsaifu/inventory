@@ -31,55 +31,10 @@ $(document).ready(function(){
 	}
 		
 	$("#simpan").click(function(){
-		var kode_glasir	= $("#kode_glasir").val();
-		var nama_glasir	= $("#nama_glasir").val();
-		var satuan	= $("#satuan").val();
-		
 		var string = $("#form").serialize();
-		
-		if(kode_glasir.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Kode Glasir tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#kode_glasir").focus();
-			return false();
-		}
-		if(nama_glasir.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Nama Glasir tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#nama_glasir").focus();
-			return false();
-		}
-		if(satuan.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Satuan tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#satuan").focus();
-			return false();
-		}
-                if(!$("#status").val()){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Status tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#status").focus();
-			return false();
-		}
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir/simpan",
+			url		: "<?php echo site_url(); ?>/decal/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -109,41 +64,216 @@ $(document).ready(function(){
 <fieldset class="atas">
 <table width="100%">
 <tr>    
-	<td width="150">Kode Glasir</td>
+	<td width="150">Kode Decal</td>
     <td width="5">:</td>
-    <td><input type="text" name="kode_glasir" id="kode_glasir" size="12" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $kode_glasir;?>" /></td>
+    <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>" /></td>
 </tr>
 <tr>    
-	<td>Nama Glasir</td>
+	<td>Nama Decal</td>
     <td>:</td>
-    <td><input type="text" name="nama_glasir" id="nama_glasir"  size="50" maxlength="50" class="easyui-validatebox" data-options="required:true,validType:'length[3,50]'" value="<?php echo $nama_glasir;?>"/></td>
+    <td><input type="text" name="nama" id="nama"  size="45" maxlength="50" class="easyui-validatebox" data-options="required:true,validType:'length[3,50]'"/></td>
 </tr>
 <tr>    
 	<td>Nama Alias</td>
     <td>:</td>
-    <td><input type="text" name="nama_alias" id="nama_alias"  size="10" maxlength="50" class="easyui-validatebox" data-options="required:false,validType:'length[3,50]'" value="<?php echo $nama_alias;?>"/></td>
+    <td><input type="text" name="alias" id="alias"  size="45" maxlength="50" class="easyui-validatebox" data-options="required:false,validType:'length[3,50]'"/></td>
+</tr>
+<tr>    
+	<td>Nama Buyer</td>
+    <td>:</td>
+    <td>
+    <select name="buyer" id="buyer" style="width:288px;">
+    <?php if(isset($buyer)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadBuyer();
+			foreach($data->result() as $dt){					
+				if($buyer==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->nama;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->nama;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Material</td>
+    <td>:</td>
+    <td>
+    <select name="material" id="material" style="width:288px;">
+    <?php if(isset($material)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadMaterial();
+			foreach($data->result() as $dt){					
+				if($material==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->dsc;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->dsc;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Forming</td>
+    <td>:</td>
+    <td>
+    <select name="forming" id="forming" style="width:288px;">
+    <?php if(isset($forming)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadForming();
+			foreach($data->result() as $dt){					
+				if($forming==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->dsc;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->dsc;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Shape</td>
+    <td>:</td>
+    <td>
+    <select name="shape" id="shape" style="width:288px;">
+    <?php if(isset($shape)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadShape();
+			foreach($data->result() as $dt){					
+				if($shape==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->nama;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->nama;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Item</td>
+    <td>:</td>
+    <td>
+    <select name="item" id="item" style="width:288px;">
+    <?php if(isset($item)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadItem();
+			foreach($data->result() as $dt){					
+				if($item==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->nama;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->nama;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Dekorasi</td>
+    <td>:</td>
+    <td>
+    <select name="dekorasi" id="dekorasi" style="width:288px;">
+    <?php if(isset($dekorasi)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadDekorasi();
+			foreach($data->result() as $dt){					
+				if($dekorasi==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->dsc;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->dsc;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
+</tr>
+<tr>    
+	<td>Ukuran</td>
+    <td>:</td>
+    <td>
+    <select name="size" id="size" style="width:288px;">
+    <?php if(isset($size)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadSize();
+			foreach($data->result() as $dt){					
+				if($size==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->nama;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->nama;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
 </tr>
 <tr>    
 	<td>Satuan</td>
     <td>:</td>
-    <td><input value="Kilogram" readonly="true" type="text" name="satuan" id="satuan"  size="10" maxlength="10" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $satuan;?>"/></td>
+    <td><input value="pcs" readonly="true" type="text" name="satuan" id="satuan"  size="45" maxlength="10" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'" value="<?php echo $satuan;?>"/></td>
+</tr>
+<tr>    
+	<td>Jenis</td>
+    <td>:</td>
+    <td>
+    <select name="jenis" id="jenis" style="width:288px;">
+    <?php if(isset($jenis)){ ?>
+    	<option value="" selected="selected">-Pilih-</option>
+    <?php } 
+			$data = $this->dclModel->loadJenis();
+			foreach($data->result() as $dt){					
+				if($jenis==$dt->id){
+	?>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->nama;?></option>
+    <?php		}else{ ?>
+    			
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->nama;?></option>
+    <?php 		}
+			}
+	?>		
+    </select>
+    </td>
 </tr>
 <tr>    
 	<td>Status</td>
     <td>:</td>
     <td>
-    <select name="status" id="status">
+    <select name="status" id="status" style="width:288px;">
     <?php if(isset($status)){ ?>
-    	<option value="" selected="selected">-Pilih-</option>
     <?php } 
 			$data = $this->app_model->status_glasir();
 			foreach($data->result() as $dt){					
-				if($status==$dt->id_status){
+				if($status==$dt->id){
 	?>
-    			<option	 value="<?php echo $dt->id_status;?>" selected="selected"><?php echo $dt->status;?></option>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->status;?></option>
     <?php		}else{ ?>
     			
-    			<option	 value="<?php echo $dt->id_status;?>"><?php echo $dt->status;?></option>
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->status;?></option>
     <?php 		}
 			}
 	?>		
@@ -157,10 +287,10 @@ $(document).ready(function(){
 <tr>
 	<td colspan="3" align="center">
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
-    <a href="<?php echo base_url();?>index.php/glasir/tambah">
+    <a href="<?php echo base_url();?>index.php/decal/tambah">
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     </a>
-    <a href="<?php echo base_url();?>index.php/glasir/">
+    <a href="<?php echo base_url();?>index.php/decal/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-back'">KEMBALI</button>
     </a>
     </td>

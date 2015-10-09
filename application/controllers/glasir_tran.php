@@ -96,8 +96,6 @@ class Glasir_tran extends CI_Controller {
 			$d['judul']="Order Transaksi Glasir";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasirTran();
-			//$tgl_inp    = date('d-m-Y  h:i:s');
-			
 			$d['no_prod']	= $no_prod;
                         $d['batch']	= '';
                         $d['petugas3']	= '';
@@ -220,7 +218,7 @@ class Glasir_tran extends CI_Controller {
 							$this->glzModel->updateData("glasir_thd",$ud,$id_d);
 							echo 'Update data Sukses';
 						}else{
-                            $ud['tgl_insert']		= date('Y-m-d h:i:s');
+                                                $ud['tgl_insert']		= date('Y-m-d h:i:s');
 							$this->glzModel->insertData("glasir_thd",$ud);
 							echo 'Simpan data Sukses';
 						}

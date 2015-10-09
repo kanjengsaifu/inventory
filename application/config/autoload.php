@@ -107,7 +107,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('app_model','glzModel','sgrmodel','dclmodel');
+$autoload['model'] = array('app_model','glzModel','sgrmodel','dclModel');
 
 
 /* End of file autoload.php */
