@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Decal extends CI_Controller {
+class Decal_prod extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    

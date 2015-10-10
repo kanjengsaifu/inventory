@@ -517,7 +517,7 @@ class Dclmodel extends CI_Model {
         
          public function get_ldg(){
                 $query ="SELECT a.id, a.nama, a.alias,b.nama as buyer, c.dsc as material, d.dsc as forming, e.nama as shape, 
-                            f.nama as item, g.dsc as dekorasi, h.nama as size, i.nama as jenis, a.satuan, a.parent
+                            f.nama as item, g.dsc as dekorasi, h.nama as size, i.nama as jenis, a.satuan, a.parent, k.status
                             FROM decal_items a
                             LEFT JOIN global_buyer b ON b.id  = a.buyer
                             LEFT JOIN global_material c ON c.id  = a.material
@@ -528,6 +528,7 @@ class Dclmodel extends CI_Model {
                             LEFT JOIN global_size h ON h.id  = a.size
                             LEFT JOIN global_jenis_decal i ON i.id  = a.jenis
                             LEFT JOIN global_detail j ON j.id_related = a.id
+                            LEFT JOIN glasir_status k ON j.`status` = k.id
                             WHERE j.deleted = 0
                             ORDER BY a.id";
 		$query_result_detail = $this->db->query($query);
@@ -630,6 +631,14 @@ class Dclmodel extends CI_Model {
 			$hasil = 'D'.'0001';
 		}
 		return $hasil;
+	}
+        
+        public function hapus($get = array()){
+		# data for mou 014 master
+		$id = $get['id'];
+		//insert into data master
+		$query_master = "UPDATE global_detail SET deleted = 1 WHERE id_related = '$id' AND tabel = 'decal_items' ";
+		$query_result_master = $this->db->query($query_master);
 	}
 	
 }

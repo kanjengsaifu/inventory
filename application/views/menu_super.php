@@ -73,22 +73,26 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_prod">Item</a>
-    </li>
-    <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_supp">Produksi</a>
+    <a href="<?php echo base_url();?>index.php/decal_prod">Produksi</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian</a>
+    <a href="<?php echo base_url();?>index.php/decal_tran">Transit</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_retu">Retur</a>
+    <a href="<?php echo base_url();?>index.php/decal_used">Pemakaian</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname</a>
+    <a href="<?php echo base_url();?>index.php/decal_retu">Retur</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_opna">Adjusment</a>
+    <a href="<?php echo base_url();?>index.php/decal_opna">Stock Opname</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_adju">Adjusment</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_scra">Pemusnahan</a>
+    </li>
     </ul>
     </div>
 </div>
