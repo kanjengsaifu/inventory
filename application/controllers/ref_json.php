@@ -25,6 +25,23 @@ class Ref_json extends CI_Controller {
 		}
 	}
         
+        public function DataDecal(){
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			$cari= $this->input->post('cari');
+			if(empty($cari)){
+				$text = "SELECT id, nama, alias, satuan, parent, jenis FROM decal_items";
+			}else{
+				$text = "SELECT id, nama, alias, satuan, parent, jenis FROM decal_items WHERE id LIKE '%$cari%' OR nama LIKE '%$cari%' OR alias LIKE '%$cari%'";
+			}
+			$d['data'] = $this->dclModel->manualQuery($text);
+			
+			$this->load->view('data_decal',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
         public function DataTglp(){
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
@@ -76,59 +93,23 @@ class Ref_json extends CI_Controller {
 		}
 	}
         
-        public function CariNoSJ(){
-		$bln = date('m');
-		$th = date('y');
-		$text = "SELECT max(kodebeli) as no FROM h_beli";
-		$data = $this->app_model->manualQuery($text);
-		if($data->num_rows() > 0 ){
-			foreach($data->result() as $t){
-				$no = $t->no; 
-				$tmp = ((int) substr($no,5,5))+1;
-				$hasil = 'BL'.sprintf("%05s", $tmp);
-			}
-		}else{
-			$hasil = 'BL'.'00001';
-		}
-		return $hasil;
-	}
-	
-	public function InfoSupplier()
+        public function InfoDecal()
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 			$kode = $this->input->post('kode');
-			$text = "SELECT * FROM supplier WHERE kode_supplier='$kode'";
-			$tabel = $this->app_model->manualQuery($text);
+			$text = "SELECT * FROM decal_items WHERE id='$kode'";
+			$tabel = $this->dclModel->manualQuery($text);
 			$row = $tabel->num_rows();
 			if($row>0){
 				foreach($tabel->result() as $t){
-					$data['nama_supplier'] = $t->nama_supplier;
-					$data['alamat'] = $t->alamat;
+					$data['nama_decal'] = $t->nama;
 					echo json_encode($data);
 				}
 			}else{
-				$data['nama_supplier'] = '';
-				$data['alamat'] = '';
+                                        $data['nama_decal'] = '';
 				echo json_encode($data);
 			}
-		}else{
-			header('location:'.base_url());
-		}
-	}
-	
-	public function DataBarang(){
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			$cari= $this->input->post('cari');
-			if(empty($cari)){
-				$text = "SELECT * FROM barang";
-			}else{
-				$text = "SELECT * FROM barang WHERE kode_barang LIKE '%$cari%' OR nama_barang LIKE '%$cari%'";
-			}
-			$d['data'] = $this->app_model->manualQuery($text);
-			
-			$this->load->view('data_barang',$d);
 		}else{
 			header('location:'.base_url());
 		}

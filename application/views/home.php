@@ -87,14 +87,14 @@ $(function() {
         <img src='<?php echo base_url();?>asset/images/logo_koperasi_85.png' style="padding:0; margin:0;" width="76" height="71">
         </div>
         <div class="judul" style="float:left; line-height:3px; margin-top:0px; padding:2px 5px;">
-        <h1><?php echo $instansi;?></h1>
+        <h2><?php echo $instansi;?></h2>
       <p><b><?php echo $usaha;?></b></p>
       <p><?php echo $alamat_instansi;?></p>
       </div>
 		<div style="float:right; line-height:3px; text-align:center;">
         <br /><br />
-        <h1><?php echo $nama_program;?></h1>
-        <p>.:: Data - Transaksi - Stok - Stok Opname - Adjusment ::.</p>
+        <h3><?php echo $nama_program;?></h3>
+        <p>.:: Decal-Glaze-Saggar ::.</p>
         </div>
 	</div>	
 	
