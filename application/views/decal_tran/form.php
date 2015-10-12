@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/decal_prod/DataDetail",
+			url		: "<?php echo site_url(); ?>/decal_tran/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -123,7 +123,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/decal_prod/simpan",
+			url	: "<?php echo site_url(); ?>/decal_tran/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -171,7 +171,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/decal_prod/cetak/'+kode);
+		window.open('<?php echo site_url();?>/decal_tran/cetak/'+kode);
 		return false();
 	});
 	
@@ -222,21 +222,14 @@ $(document).ready(function(){
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
-        <td>Petugas</td>
+        <td>Petugas Prod. Decal</td>
         <td>:</td>
         <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20" value="<?php echo $petugas;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Kode Decal</td>
-        <td width="5">:</td>
-        <td><input type="text" name="id_decal_items" id="id_decal_items" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $id_decal_items;?>" />
-        <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
-        </td>
-    </tr>
-    <tr>    
-        <td>Nama Decal</td>
+        <td>Petugas Prod. Glaze</td>
         <td>:</td>
-        <td><input readonly="readonly" type="text" name="nama_decal" id="nama_decal"  size="45" class="detail" maxlength="50"/></td>
+        <td><input type="text" name="penerima" id="penerima" class="detail" size="45" maxlength="20" value="<?php echo $penerima;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Tanggal Pelaksanaan</td>
@@ -270,12 +263,6 @@ $(document).ready(function(){
         </select>
         </td>
     </tr>
-    </table>
-    </fieldset>
-</td>
-<td valign="top" width="50%">
-    <fieldset>
-    <table width="100%">
     <tr>    
         <td>Jenis Decal</td>
         <td>:</td>
@@ -299,51 +286,23 @@ $(document).ready(function(){
         </td>
         </td>
     </tr>
+    </table>
+    </fieldset>
+</td>
+<td valign="top" width="50%">
+    <fieldset>
+    <table width="100%">
     <tr>    
-        <td>Mesin Produksi</td>
-        <td>:</td>
-        <td>
-            <select name="id_bm" id="id_bm" style="width:382px;">
-        <?php 
-		if(empty($id_bm)){
-		?>
-        <option  value="<?php echo $id_bm;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($l_bm->result() as $t){
-			if($id_bm==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
+        <td width="150">Kode Decal</td>
+        <td width="5">:</td>
+        <td><input type="text" name="id_decal_items" id="id_decal_items" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $id_decal_items;?>" />
+        <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
     <tr>    
-        <td>Disimpan Ke</td>
+        <td>Nama Decal</td>
         <td>:</td>
-        <td>
-            <select name="id_bmt" id="id_bmt" style="width:382px;">
-        <?php 
-		if(empty($id_bmt)){
-		?>
-        <option  value="<?php echo $id_bmt;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($x_bm->result() as $t){
-			if($id_bmt==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
+        <td><input readonly="readonly" type="text" name="nama_decal" id="nama_decal"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
         <td>Ukuran Kertas</td>
@@ -428,7 +387,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/decal_prod/">
+    <a href="<?php echo base_url();?>index.php/decal_tran/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

@@ -30,9 +30,18 @@ class Ref_json extends CI_Controller {
 		if(!empty($cek)){
 			$cari= $this->input->post('cari');
 			if(empty($cari)){
-				$text = "SELECT id, nama, alias, satuan, parent, jenis FROM decal_items";
+				$text = "SELECT a.id, a.nama, a.alias, a.satuan, a.parent, a.jenis, b.nama as buyer, c.nama as shape FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_shape c ON c.id = a.shape
+                                            group by a.nama, a.buyer
+                                            order by a.id";
 			}else{
-				$text = "SELECT id, nama, alias, satuan, parent, jenis FROM decal_items WHERE id LIKE '%$cari%' OR nama LIKE '%$cari%' OR alias LIKE '%$cari%'";
+				$text = "SELECT a.id, a.nama, a.alias, a.satuan, a.parent, a.jenis, b.nama as buyer, c.nama as shape FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_shape c ON c.id = a.shape
+                                            WHERE a.id LIKE '%$cari%' OR a.nama LIKE '%$cari%' OR a.alias LIKE '%$cari%'
+                                            group by a.nama, a.buyer
+                                            order by a.id";
 			}
 			$d['data'] = $this->dclModel->manualQuery($text);
 			

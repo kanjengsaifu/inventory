@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Decal_prod extends CI_Controller {
+class Decal_opna extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -52,7 +52,7 @@ class Decal_prod extends CI_Controller {
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/decal_prod/index/';
+			$config['base_url'] = site_url() . '/decal_opna/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -76,7 +76,7 @@ class Decal_prod extends CI_Controller {
 			$d['data'] = $this->dclModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('decal_prod/view', $d, true);		
+			$d['content'] = $this->load->view('decal_opna/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -133,7 +133,7 @@ class Decal_prod extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 			
-			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
+			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -326,7 +326,7 @@ class Decal_prod extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 									
-			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
+			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -423,7 +423,7 @@ class Decal_prod extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 									
-			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
+			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -450,7 +450,7 @@ class Decal_prod extends CI_Controller {
                                     WHERE a.id_related='$id' AND a.deleted = 0";
 			$d['data']= $this->dclModel->manualQuery($text);
 
-			$this->load->view('decal_prod/detail',$d);
+			$this->load->view('decal_opna/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -465,7 +465,7 @@ class Decal_prod extends CI_Controller {
                                 $tgl_deleted = date('Y-m-d h:i:s');
                                 $this->dclModel->manualQuery("UPDATE decal_phd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id'");
                                 $this->dclModel->manualQuery("UPDATE decal_ph SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
-                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod'>";			
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_opna'>";			
 		}else{
 			header('location:'.base_url());
 		}

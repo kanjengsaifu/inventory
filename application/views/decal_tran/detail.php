@@ -37,10 +37,7 @@ $(function() {
         <th rowspan="2" style="font-size:10px">KW 2</th>
         <th rowspan="2" style="font-size:10px">KW 3</th>
         <th rowspan="2" style="font-size:10px">No. Po</th>
-        <th rowspan="2" style="font-size:10px">Mesin</th>
-        <th rowspan="2" style="font-size:10px">Disimpan</th>
-        <th rowspan="2" style="font-size:10px">PIC</th>
-        <th rowspan="2" style="font-size:10px">Inputer</th>
+        <th colspan="3" align="center" style="font-size:10px">Petugas Pelaksana</th>
         <th rowspan="2" style="font-size:10px">Aksi</th>
 </tr>
 <tr>
@@ -54,6 +51,9 @@ $(function() {
     <th style="font-size:10px">Ukuran</th>
     <th style="font-size:10px">Warna</th>
     <th style="font-size:10px">Komposisi</th>
+    <th style="font-size:10px">P. Decal</th>
+    <th style="font-size:10px">P. Glaze</th>
+    <th style="font-size:10px">Inputer</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
@@ -88,15 +88,14 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['kw2']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['kw3']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['no_po']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['nama_bm']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['nama_bmt']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['penerima']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_tran/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_tran/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

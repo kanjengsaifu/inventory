@@ -8,7 +8,7 @@
     <ul class="easyui-tree">
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir">Item</a>
+    <a href="<?php echo base_url();?>index.php/glasir">GLZ-Item</a>
     </li>
     </ul>
     </div>
@@ -17,22 +17,25 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_prod">BGPS</a>
+    <a href="<?php echo base_url();?>index.php/glasir_prod">GLZ-BGPS</a>
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_supp">Supply</a>
+    <a href="<?php echo base_url();?>index.php/glasir_supp">GLZ-Supply</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_tran">Pemakaian</a>
+    <a href="<?php echo base_url();?>index.php/glasir_tran">GLZ-Pemakaian</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_retu">Retur</a>
+    <a href="<?php echo base_url();?>index.php/glasir_retu">GLZ-Retur</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_opna">Stock Opname</a>
+    <a href="<?php echo base_url();?>index.php/glasir_opna">GLZ-Opname</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_opna">Adjusment</a>
+    <a href="<?php echo base_url();?>index.php/glasir_adju">GLZ-Adjusment</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_scra">GLZ-Scrap</a>
     </li>
     </ul>
     </div>
@@ -41,7 +44,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok</a></span>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Stok</a></span>
     </li>
     </ul>
     </div>
@@ -50,7 +53,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Akurasi Data</a></span>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Akurasi</a></span>
     </li>
     </ul>
     </div>
@@ -64,7 +67,7 @@
     <ul class="easyui-tree">
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/decal">Item Decal</a>
+    <a href="<?php echo base_url();?>index.php/decal">DCL-Item</a>
     </li>
     </ul>
     </div>
@@ -73,25 +76,25 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/decal_prod">Produksi</a>
+    <a href="<?php echo base_url();?>index.php/decal_prod">DCL-Produksi</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_tran">Transit</a>
+    <a href="<?php echo base_url();?>index.php/decal_tran">DCL-Transit</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_used">Pemakaian</a>
+    <a href="<?php echo base_url();?>index.php/decal_used">DCL-Pemakaian</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_retu">Retur</a>
+    <a href="<?php echo base_url();?>index.php/decal_retu">DCL-Retur</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_opna">Stock Opname</a>
+    <a href="<?php echo base_url();?>index.php/decal_opna">DCL-Opname</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_adju">Adjusment</a>
+    <a href="<?php echo base_url();?>index.php/decal_adju">DCL-Adjusment</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_scra">Pemusnahan</a>
+    <a href="<?php echo base_url();?>index.php/decal_scra">DCL-Scrap</a>
     </li>
     </ul>
     </div>
@@ -100,7 +103,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Stok</a></span>
     </li>
     </ul>
     </div>
@@ -109,7 +112,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Akurasi Data</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Akurasi</a></span>
     </li>
     </ul>
     </div>
@@ -125,7 +128,7 @@
     </li>
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir">Item Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir">GLZ-Item</a>
     </li>
     </ul>
     </div>
@@ -134,19 +137,46 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_prod">01-BGPS Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_prod">GLZ-BGPS</a>
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
-    <a href="<?php echo base_url();?>index.php/glasir_supp">02-Supply Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_supp">GLZ-Supply</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_tran">03-Pemakaian Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_tran">GLZ-Pemakaian</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_retu">04-Retur Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_retu">GLZ-Retur</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/glasir_opna">05-Stock Opname Glasir</a>
+    <a href="<?php echo base_url();?>index.php/glasir_opna">GLZ-Opname</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_adju">GLZ-Adjusment</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/glasir_scra">GLZ-Scrap</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/decal_prod">DCL-Produksi</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_tran">DCL-Transit</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_used">DCL-Pemakaian</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_retu">DCL-Retur</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_opna">DCL-Opname</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_adju">DCL-Adjusment</a>
+    </li>
+    <li data-options="iconCls:'icon-surat_keluar'">
+    <a href="<?php echo base_url();?>index.php/decal_scra">DCL-Scrap</a>
     </li>
     </ul>
     </div>
@@ -155,7 +185,10 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok Glasir</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Stok</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Stok</a></span>
     </li>
     </ul>
     </div>
@@ -164,7 +197,10 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">Stok Glasir</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Akurasi</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Akurasi</a></span>
     </li>
     </ul>
     </div>

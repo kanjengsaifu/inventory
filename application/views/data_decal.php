@@ -22,9 +22,10 @@ function pilih(id){
 <table id="dataTable" class="detail" width="100%">
 <tr>
     <th>No</th>
-    <th>Kode Decal</th>
-    <th>Nama Decal</th>
-    <th>Nama Alias Decal</th>
+    <th>Kode <br> Decal</th>
+    <th>Nama <br> Decal</th>
+    <th>Nama <br> Alias Decal</th>
+    <th>Nama <br> Buyer</th>
     <th>Satuan</th>
     <th>Jenis</th>
     <th>Group</th>
@@ -41,6 +42,7 @@ function pilih(id){
             <td align="center" width="80" ><?php echo $db['id']; ?></td>
             <td ><?php echo $db['nama']; ?></td>
             <td ><?php echo $db['alias']; ?></td>
+            <td ><?php echo $db['buyer']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
             <td align="center" width="60" ><?php echo $jenis; ?></td>
             <td align="center" width="60" ><?php echo $db['parent']; ?></td>
