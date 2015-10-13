@@ -34,14 +34,14 @@ class Ref_json extends CI_Controller {
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
                                             LEFT JOIN global_shape c ON c.id = a.shape
                                             group by a.nama, a.buyer
-                                            order by a.id";
+                                            order by a.nama, a.buyer";
 			}else{
 				$text = "SELECT a.id, a.nama, a.alias, a.satuan, a.parent, a.jenis, b.nama as buyer, c.nama as shape FROM decal_items a
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
                                             LEFT JOIN global_shape c ON c.id = a.shape
                                             WHERE a.id LIKE '%$cari%' OR a.nama LIKE '%$cari%' OR a.alias LIKE '%$cari%'
                                             group by a.nama, a.buyer
-                                            order by a.id";
+                                            order by a.nama, a.buyer";
 			}
 			$d['data'] = $this->dclModel->manualQuery($text);
 			

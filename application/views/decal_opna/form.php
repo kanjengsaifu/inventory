@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/decal_prod/DataDetail",
+			url		: "<?php echo site_url(); ?>/decal_opna/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -123,7 +123,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/decal_prod/simpan",
+			url	: "<?php echo site_url(); ?>/decal_opna/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -171,7 +171,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/decal_prod/cetak/'+kode);
+		window.open('<?php echo site_url();?>/decal_opna/cetak/'+kode);
 		return false();
 	});
 	
@@ -210,11 +210,6 @@ $(document).ready(function(){
         <td width="150">No. Transaksi</td>
         <td width="5">:</td>
         <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>" /></td>
-    </tr>
-    <tr>    
-        <td>No PO</td>
-        <td>:</td>
-        <td><input type="text" name="no_po" id="no_po" class="detail" size="45" maxlength="20" value="<?php echo $no_po;?>" /></td>
     </tr>
     <tr>    
         <td width="150">No. Batch</td>
@@ -300,45 +295,22 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Mesin Produksi</td>
+        <td>Area Opname</td>
         <td>:</td>
         <td>
-            <select name="id_bm" id="id_bm" style="width:382px;">
+            <select name="area" id="area" style="width:382px;">
         <?php 
-		if(empty($id_bm)){
+		if(empty($area)){
 		?>
-        <option  value="<?php echo $id_bm;?>">-PILIH-</option>
+        <option  value="<?php echo $area;?>">-PILIH-</option>
         <?php
 		}
-		foreach($l_bm->result() as $t){
-			if($id_bm==$t->id_bm){
+		foreach($l_area->result() as $t){
+			if($area==$t->id){
 		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
         <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
-    <tr>    
-        <td>Disimpan Ke</td>
-        <td>:</td>
-        <td>
-            <select name="id_bmt" id="id_bmt" style="width:382px;">
-        <?php 
-		if(empty($id_bmt)){
-		?>
-        <option  value="<?php echo $id_bmt;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($x_bm->result() as $t){
-			if($id_bmt==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
         <?php }
 		} ?>
         </select>
@@ -428,7 +400,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/decal_prod/">
+    <a href="<?php echo base_url();?>index.php/decal_opna/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

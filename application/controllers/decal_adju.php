@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Decal_opna extends CI_Controller {
+class Decal_adju extends CI_Controller {
 
 	/**
 	 * @author      : Mpod Schuzatcky    
@@ -32,7 +32,7 @@ class Decal_opna extends CI_Controller {
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
 			
-			$d['judul']="Daftar input stock opname decal";
+			$d['judul']="Daftar input stock adjusment decal";
 			
 			//paging
 			$page=$this->uri->segment(3);
@@ -52,7 +52,7 @@ class Decal_opna extends CI_Controller {
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
 			
-			$config['base_url'] = site_url() . '/decal_opna/index/';
+			$config['base_url'] = site_url() . '/decal_adju/index/';
 			$config['total_rows'] = $tot_hal->num_rows();
 			$config['per_page'] = $limit;
 			$config['uri_segment'] = 3;
@@ -76,7 +76,7 @@ class Decal_opna extends CI_Controller {
 			$d['data'] = $this->dclModel->manualQuery($text);
 			
 			
-			$d['content'] = $this->load->view('decal_opna/view', $d, true);		
+			$d['content'] = $this->load->view('decal_adju/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -95,7 +95,7 @@ class Decal_opna extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 
-			$d['judul']="Input stock opname decal";
+			$d['judul']="Input stock adjusment decal";
 			
 			$id         = $this->dclModel->MaxPhDecalOpna();
 			
@@ -129,7 +129,7 @@ class Decal_opna extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 			
-			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
+			$d['content'] = $this->load->view('decal_adju/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -206,7 +206,7 @@ class Decal_opna extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 			
-			$d['judul'] = "Form Order opname Glasir";
+			$d['judul'] = "Form Order adjusment Glasir";
 			
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM glasir_ph WHERE no_prod='$id'";
@@ -258,7 +258,7 @@ class Decal_opna extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 			
-			$d['judul'] = "Ubah input opname decal";
+			$d['judul'] = "Ubah input adjusment decal";
 			
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM decal_oh WHERE id='$id'";
@@ -314,7 +314,7 @@ class Decal_opna extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 									
-			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
+			$d['content'] = $this->load->view('decal_adju/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -334,7 +334,7 @@ class Decal_opna extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 			
-			$d['judul'] = "Ubah input stock opname";
+			$d['judul'] = "Ubah input stock adjusment";
 			
 			$id = $this->uri->segment(3);
                         $id_decal_items = $this->uri->segment(4);
@@ -403,7 +403,7 @@ class Decal_opna extends CI_Controller {
                         $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
 			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 									
-			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
+			$d['content'] = $this->load->view('decal_adju/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -429,7 +429,7 @@ class Decal_opna extends CI_Controller {
                                     WHERE a.id_related='$id' AND a.deleted = 0";
 			$d['data']= $this->dclModel->manualQuery($text);
 
-			$this->load->view('decal_opna/detail',$d);
+			$this->load->view('decal_adju/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -444,7 +444,7 @@ class Decal_opna extends CI_Controller {
                                 $tgl_deleted = date('Y-m-d h:i:s');
                                 $this->dclModel->manualQuery("UPDATE decal_ohd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id'");
                                 $this->dclModel->manualQuery("UPDATE decal_oh SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
-                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_opna'>";			
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_adju'>";			
 		}else{
 			header('location:'.base_url());
 		}

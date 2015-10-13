@@ -89,10 +89,10 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/decal_opna/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_adju/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_opna/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_adju/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['id_decal_items'];?>/<?php echo $db['batch'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

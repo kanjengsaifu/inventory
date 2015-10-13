@@ -679,6 +679,121 @@ class Dclmodel extends CI_Model {
 	}
         
         //======================================================================
+        
+        public function ProsesDecalOpna($id){
+		$t = "SELECT id FROM decal_ohd WHERE id_related='$id' AND deleted = 0";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function ProsesItemOpna($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_ohd a 
+                        JOIN decal_items b on a.id_decal_items = b.id
+                        WHERE a.id_related='$id' AND a.deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_decal;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function JmlDecalKW1Opna($id){
+		$t = "SELECT sum(kw1) as kw1 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlDecalKW2Opna($id){
+		$t = "SELECT sum(kw2) as kw2 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlDecalKW3Opna($id){
+		$t = "SELECT sum(kw3) as kw3 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw3;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlDecalKW4Opna($id){
+		$t = "SELECT sum(kw1+kw2+kw3) as kw4 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw4;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function MaxPhDecalOpna(){
+		$text = "SELECT max(id) as no FROM decal_oh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'OH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'OH'.'00001';
+		}
+		return $hasil;
+	}
+        
+        public function CariDecalJenisOpna($id){
+		$t = "SELECT * FROM global_jenis_decal WHERE id='$id'";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        //======================================================================
 }
 	
 /* End of file app_model.php */

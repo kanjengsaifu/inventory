@@ -7,16 +7,16 @@ $(document).ready(function(){
 </script>
 <div id="view">
 <div style="float:left; padding-bottom:5px;">
-<a href="<?php echo base_url();?>index.php/decal_opna/tambah">
+<a href="<?php echo base_url();?>index.php/decal_adju/tambah">
 <button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah</button>
 </a>
-<a href="<?php echo base_url();?>index.php/decal_opna">
+<a href="<?php echo base_url();?>index.php/decal_adju">
 <button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
 </a>
 
 </div>
 <div style="float:right; padding-bottom:5px;">
-<form name="form" method="post" action="<?php echo base_url();?>index.php/decal_opna">
+<form name="form" method="post" action="<?php echo base_url();?>index.php/decal_adju">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
 Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" size="15" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
@@ -78,10 +78,10 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
-            <a href="<?php echo base_url();?>index.php/decal_opna/edit/<?php echo $db['id_related'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_adju/edit/<?php echo $db['id_related'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_opna/hapus/<?php echo $db['id_related'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_adju/hapus/<?php echo $db['id_related'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

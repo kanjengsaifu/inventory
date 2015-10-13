@@ -81,7 +81,7 @@ $(function() {
 </script>
 
 </head>
-<body onLoad="goforit()">
+    <body onLoad="goforit()" style="height: 100%">
 <div width="20%" class="header" style="height:100px; width: 100% ;background:white;padding:2px;margin:0;">	
 		<div style="float:left; padding:0px; margin:0px;">
         <img src='<?php echo base_url();?>asset/images/logo_koperasi_85.png' style="padding:0; margin:0;" width="76" height="71">
@@ -131,7 +131,7 @@ $(function() {
 			?>
 		</div>
 	</div>       
-    <div id="tt" class="easyui-tabs" style="height:570px;">
+    <div id="tt" class="easyui-tabs" >
         <div title="<?php echo $judul;?>" style="padding:10px">
 		<?php echo $content;?>	
         </div>
