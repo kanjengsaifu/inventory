@@ -1,5 +1,7 @@
 <div style='float: left;'>
-    <input type="button" value="Export to Excel" id='excelExport' />
+     <input style="margin-top: 20px;" type="button" id='jqxButton1' value="Check All" />
+     <input style="margin-top: 20px;" type="button" id='jqxButton2' value="Uncheck All" />
+     <input type="button" value="Export to Excel" id='excelExport' />
 </div>
 <div id="gird" style="float:left; width:100%;">
 <script type="text/javascript">
@@ -154,6 +156,14 @@
             });
             
     $("#excelExport").jqxButton();
+    $("#jqxButton1").jqxButton({theme: 'energyblue'});
+    $('#jqxButton1').on('click', function () {
+       $("#jqxlistbox").jqxListBox('checkAll');
+    });
+    $("#jqxButton2").jqxButton({theme: 'energyblue'});
+    $('#jqxButton2').on('click', function () {
+       $("#jqxlistbox").jqxListBox('uncheckAll');
+    });
     $("#excelExport").click(function () {
                 $("#jqxgrid").jqxGrid('exportdata', 'xls', 'Data Stok Decal');           
             });
