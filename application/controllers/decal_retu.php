@@ -308,6 +308,7 @@ class Decal_retu extends CI_Controller {
                                         $d['kw2']               = '';
                                         $d['kw3']               = '';
                                         $d['penerima']          = '';
+                                        $d['petugas']           = '';
 			}
                         
                         $jd = "SELECT * FROM global_jenis_decal";

@@ -311,10 +311,10 @@ class Dclmodel extends CI_Model {
 			foreach($data->result() as $t){
 				$no = $t->no; 
 				$tmp = ((int) substr($no,2,5))+1;
-				$hasil = 'PD'.sprintf("%05s", $tmp);
+				$hasil = 'PH'.sprintf("%05s", $tmp);
 			}
 		}else{
-			$hasil = 'PD'.'00001';
+			$hasil = 'PH'.'00001';
 		}
 		return $hasil;
 	}
@@ -795,81 +795,116 @@ class Dclmodel extends CI_Model {
         
         //======================================================================
         
-        public function get_stok(){
-                    $query ="SELECT a.id, a.nama,b.nama as buyer, 
+        public function loadIdentity(){
+                    $query ="SELECT a.id, a.nama,b.nama as buyer
+                                FROM decal_items a
+                                LEFT JOIN global_buyer b ON b.id = a.buyer
+                                WHERE a.deleted = 0
+                                group by a.nama, a.buyer
+                                order by a.nama, a.buyer";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadStok(){
+                    $query ="SELECT  
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1kP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1sP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1bP,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1ksbP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2kP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2sP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2bP,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2ksbP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3kP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3sP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3bP,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3ksbP,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1kT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1sT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1bT,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END) as opkw1ksbT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2kT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2sT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2bT,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END) as opkw2ksbT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3kT,
                                 SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3sT,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3bT,
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3ksbT,
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)
-                                )+
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)
-                                )+
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 3 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)
-                                ) as kw1totP,
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw1 ELSE 0 END)
-                                )+
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw2 ELSE 0 END)
-                                )+
-                                (
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 6 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 7 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)+
-                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END)
-                                ) as kw1totT
+                                SUM(CASE WHEN d.jenis_decal = 1 AND d.size_kat = 8 AND d.area = 4 AND d.tgli = (select tgli from decal_ohd order by tgli asc limit 1) THEN d.kw3 ELSE 0 END) as opkw3bT
                                 FROM decal_items a
                                 LEFT JOIN global_buyer b ON b.id = a.buyer
-                                LEFT JOIN global_shape c ON c.id = a.shape
                                 LEFT JOIN decal_ohd d ON d.id_decal_items = a.id
                                 WHERE a.deleted = 0
                                 group by a.nama, a.buyer
                                 order by a.nama, a.buyer";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadProduction(){
+                    $query ="SELECT  
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 6 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw1 ELSE 0 END) as Pkw1k,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 7 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw1 ELSE 0 END) as Pkw1s,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 8 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw1 ELSE 0 END) as Pkw1b,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 6 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw2 ELSE 0 END) as Pkw2k,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 7 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw2 ELSE 0 END) as Pkw2s,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 8 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw2 ELSE 0 END) as Pkw2b,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 6 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw3 ELSE 0 END) as Pkw3k,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 7 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw3 ELSE 0 END) as Pkw3s,
+                                SUM(CASE WHEN e.jenis_decal = 1 AND e.size_kat = 8 AND e.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN e.kw3 ELSE 0 END) as Pkw3b
+                                FROM decal_items a LEFT JOIN global_buyer b ON b.id = a.buyer LEFT JOIN decal_phd e ON e.id_decal_items = a.id
+                                WHERE a.deleted = 0 group by a.nama, a.buyer order by a.nama, a.buyer";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadTransit(){
+                    $query ="SELECT a.id, a.nama,b.nama as buyer, 
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 6 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw1 ELSE 0 END) as Tkw1k,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 7 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw1 ELSE 0 END) as Tkw1s,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 8 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw1 ELSE 0 END) as Tkw1b,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 6 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw2 ELSE 0 END) as Tkw2k,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 7 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw2 ELSE 0 END) as Tkw2s,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 8 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw2 ELSE 0 END) as Tkw2b,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 6 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw3 ELSE 0 END) as Tkw3k,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 7 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw3 ELSE 0 END) as Tkw3s,
+                                SUM(CASE WHEN f.jenis_decal = 1 AND f.size_kat = 8 AND f.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN f.kw3 ELSE 0 END) as Tkw3b
+                                FROM decal_items a LEFT JOIN global_buyer b ON b.id = a.buyer LEFT JOIN decal_thd f ON f.id_decal_items = a.id
+                                WHERE a.deleted = 0 group by a.nama, a.buyer order by a.nama, a.buyer";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadUsed(){
+                    $query ="SELECT a.id, a.nama,b.nama as buyer, 
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 6 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw1 ELSE 0 END) as Ukw1k,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 7 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw1 ELSE 0 END) as Ukw1s,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 8 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw1 ELSE 0 END) as Ukw1b,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 6 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw2 ELSE 0 END) as Ukw2k,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 7 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw2 ELSE 0 END) as Ukw2s,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 8 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw2 ELSE 0 END) as Ukw2b,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 6 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw3 ELSE 0 END) as Ukw3k,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 7 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw3 ELSE 0 END) as Ukw3s,
+                                SUM(CASE WHEN g.jenis_decal = 1 AND g.size_kat = 8 AND g.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN g.kw3 ELSE 0 END) as Ukw3b
+                                FROM decal_items a LEFT JOIN global_buyer b ON b.id = a.buyer LEFT JOIN decal_uhd g ON g.id_decal_items = a.id
+                                WHERE a.deleted = 0 group by a.nama, a.buyer order by a.nama, a.buyer";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadReturn(){
+                    $query ="SELECT a.id, a.nama,b.nama as buyer, 
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 6 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw1 ELSE 0 END) as Rkw1k,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 7 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw1 ELSE 0 END) as Rkw1s,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 8 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw1 ELSE 0 END) as Rkw1b,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 6 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw2 ELSE 0 END) as Rkw2k,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 7 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw2 ELSE 0 END) as Rkw2s,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 8 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw2 ELSE 0 END) as Rkw2b,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 6 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw3 ELSE 0 END) as Rkw3k,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 7 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw3 ELSE 0 END) as Rkw3s,
+                                SUM(CASE WHEN h.jenis_decal = 1 AND h.size_kat = 8 AND h.tgli BETWEEN '2015-10-12 14:00:00' AND '2015-11-11 18:00:00' THEN h.kw3 ELSE 0 END) as Rkw3b
+                                FROM decal_items a LEFT JOIN global_buyer b ON b.id = a.buyer LEFT JOIN decal_rhd h ON h.id_decal_items = a.id
+                                WHERE a.deleted = 0 group by a.nama, a.buyer order by a.nama, a.buyer";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

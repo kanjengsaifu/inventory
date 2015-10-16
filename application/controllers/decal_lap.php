@@ -34,8 +34,12 @@ class decal_lap extends CI_Controller {
         
         public function loadStok()
 	{
-		$data['data_passed'] = $this->dclModel->get_stok();
-
+		//$data['data_passed'] = $this->dclModel->loadIdentity();
+                $data['data_passed'] = $this->dclModel->loadStok();
+                //$data['data_passed'] = $this->dclModel->loadProduction();
+                //$data['data_passed'] = $this->dclModel->loadTransit();
+                //$data['data_passed'] = $this->dclModel->loadUsed();
+                //$data['data_passed'] = $this->dclModel->loadReturn();
 		if ($data['data_passed']){
 
 			#convert data array passed into json
