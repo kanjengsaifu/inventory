@@ -174,14 +174,51 @@
                         {
                             cellclassname: 'column5', text: 'Grand <br>Total', align: 'center', editable: false, datafield: 'gtot', width: 80, pinned: true ,
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
-                                var total1 = parseFloat(rowdata.Fokw1kP) + parseFloat(rowdata.Fokw1sP)+ parseFloat(rowdata.Fokw1bP);
-                                var total2 = parseFloat(rowdata.Fokw2kP) + parseFloat(rowdata.Fokw2sP)+ parseFloat(rowdata.Fokw2bP);
-                                var total3 = parseFloat(rowdata.Fokw3kP) + parseFloat(rowdata.Fokw3sP)+ parseFloat(rowdata.Fokw3bP);
-                                var total4 = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
-                                var total5 = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
-                                var total6 = parseFloat(rowdata.Fokw3kT) + parseFloat(rowdata.Fokw3sT)+ parseFloat(rowdata.Fokw3bT);
-                                var totalIN = total1+total2+total3+total4+total5+total6;
-                                var total = totalIN;
+                                var Pstok_awal1 = parseFloat(rowdata.Fokw1kP) + parseFloat(rowdata.Fokw1sP)+ parseFloat(rowdata.Fokw1bP);
+                                var Pstok_awal2 = parseFloat(rowdata.Fokw2kP) + parseFloat(rowdata.Fokw2sP)+ parseFloat(rowdata.Fokw2bP);
+                                var Pstok_awal3 = parseFloat(rowdata.Fokw3kP) + parseFloat(rowdata.Fokw3sP)+ parseFloat(rowdata.Fokw3bP);
+                                var Pscrap1 = parseFloat(rowdata.Skw3kP) + parseFloat(rowdata.Skw3sP)+ parseFloat(rowdata.Skw3bP);
+                                var Pscrap2 = parseFloat(rowdata.Skw2kP) + parseFloat(rowdata.Skw2sP)+ parseFloat(rowdata.Skw2bP);
+                                var Pscrap3 = parseFloat(rowdata.Skw1kP) + parseFloat(rowdata.Skw1sP)+ parseFloat(rowdata.Skw1bP);
+                                var Pproduksi3 = parseFloat(rowdata.Pkw3k) + parseFloat(rowdata.Pkw3s)+ parseFloat(rowdata.Pkw3b);
+                                var Pproduksi2 = parseFloat(rowdata.Pkw2k) + parseFloat(rowdata.Pkw2s)+ parseFloat(rowdata.Pkw2b);
+                                var Pproduksi1 = parseFloat(rowdata.Pkw1k) + parseFloat(rowdata.Pkw1s)+ parseFloat(rowdata.Pkw1b);
+                                var Pretur3 = parseFloat(rowdata.RPkw3k) + parseFloat(rowdata.RPkw3s)+ parseFloat(rowdata.RPkw3b);
+                                var Pretur2 = parseFloat(rowdata.RPkw2k) + parseFloat(rowdata.RPkw2s)+ parseFloat(rowdata.RPkw2b);
+                                var Pretur1 = parseFloat(rowdata.RPkw1k) + parseFloat(rowdata.RPkw1s)+ parseFloat(rowdata.RPkw1b);
+                                var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
+                                var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
+                                var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Pstok_awal = Pstok_awal1+Pstok_awal2+Pstok_awal3;
+                                var Pscrap = Pscrap1+Pscrap2+Pscrap3;
+                                var Pproduksi = Pproduksi1+Pproduksi2+Pproduksi3;
+                                var Transit = Transit1+Transit2+Transit3;
+                                var Pretur = Pretur1+Pretur2+Pretur3;
+                                var Ptotal = (Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit);
+                                //===========================================================
+                                var Tstok_awal1 = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
+                                var Tstok_awal2 = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
+                                var Tstok_awal3 = parseFloat(rowdata.Fokw3kT) + parseFloat(rowdata.Fokw3sT)+ parseFloat(rowdata.Fokw3bT);
+                                var Tscrap3 = parseFloat(rowdata.Skw3kT) + parseFloat(rowdata.Skw3sT)+ parseFloat(rowdata.Skw3bT);
+                                var Tscrap2 = parseFloat(rowdata.Skw2kT) + parseFloat(rowdata.Skw2sT)+ parseFloat(rowdata.Skw2bT);
+                                var Tscrap1 = parseFloat(rowdata.Skw1kT) + parseFloat(rowdata.Skw1sT)+ parseFloat(rowdata.Skw1bT);
+                                var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
+                                var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
+                                var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Used3 = parseFloat(rowdata.Ukw3k) + parseFloat(rowdata.Ukw3s)+ parseFloat(rowdata.Ukw3b);
+                                var Used2 = parseFloat(rowdata.Ukw2k) + parseFloat(rowdata.Ukw2s)+ parseFloat(rowdata.Ukw2b);
+                                var Used1 = parseFloat(rowdata.Ukw1k) + parseFloat(rowdata.Ukw1s)+ parseFloat(rowdata.Ukw1b);
+                                var Used = Used1+Used2+Used3;
+                                var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
+                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw1b);
+                                var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
+                                var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
+                                var Tscrap = Tscrap1+Tscrap2+Tscrap3;
+                                var Transit = Transit1+Transit2+Transit3;
+                                var Tretur = Tretur1+Tretur2+Tretur3;
+                                var Ttotal = (Tstok_awal+Transit+Tretur)-(Tscrap+Used);
+                                var total = Ptotal+Ttotal;
+                                
                                 if (total < 10) {
                                     return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
                                 }
@@ -194,13 +231,27 @@
                         {
                             cellclassname: 'column4', text: 'Kantor <br>Glaze', align: 'center', editable: false, datafield: 'atd_tot', width: 75 ,  pinned: true , 
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
-                                var total1 = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
-                                var total2 = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
-                                var total3 = parseFloat(rowdata.Fokw3kT) + parseFloat(rowdata.Fokw3sT)+ parseFloat(rowdata.Fokw3bT);
-                                var total4 = parseFloat(rowdata.Skw3kT) + parseFloat(rowdata.Skw3sT)+ parseFloat(rowdata.Skw3bT);
-                                var total5 = parseFloat(rowdata.Skw2kT) + parseFloat(rowdata.Skw2sT)+ parseFloat(rowdata.Skw2bT);
-                                var total6 = parseFloat(rowdata.Skw1kT) + parseFloat(rowdata.Skw1sT)+ parseFloat(rowdata.Skw1bT);
-                                var total = (total1+total2+total3) - (total4+total5+total6);
+                                var Tstok_awal1 = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
+                                var Tstok_awal2 = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
+                                var Tstok_awal3 = parseFloat(rowdata.Fokw3kT) + parseFloat(rowdata.Fokw3sT)+ parseFloat(rowdata.Fokw3bT);
+                                var Tscrap3 = parseFloat(rowdata.Skw3kT) + parseFloat(rowdata.Skw3sT)+ parseFloat(rowdata.Skw3bT);
+                                var Tscrap2 = parseFloat(rowdata.Skw2kT) + parseFloat(rowdata.Skw2sT)+ parseFloat(rowdata.Skw2bT);
+                                var Tscrap1 = parseFloat(rowdata.Skw1kT) + parseFloat(rowdata.Skw1sT)+ parseFloat(rowdata.Skw1bT);
+                                var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
+                                var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
+                                var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Used3 = parseFloat(rowdata.Ukw3k) + parseFloat(rowdata.Ukw3s)+ parseFloat(rowdata.Ukw3b);
+                                var Used2 = parseFloat(rowdata.Ukw2k) + parseFloat(rowdata.Ukw2s)+ parseFloat(rowdata.Ukw2b);
+                                var Used1 = parseFloat(rowdata.Ukw1k) + parseFloat(rowdata.Ukw1s)+ parseFloat(rowdata.Ukw1b);
+                                var Used = Used1+Used2+Used3;
+                                var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
+                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw1b);
+                                var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
+                                var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
+                                var Tscrap = Tscrap1+Tscrap2+Tscrap3;
+                                var Transit = Transit1+Transit2+Transit3;
+                                var Tretur = Tretur1+Tretur2+Tretur3;
+                                var total = (Tstok_awal+Transit+Tretur)-(Tscrap+Used);
                                 if (total < 10) {
                                     return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
                                 }
@@ -213,13 +264,27 @@
                         {
                             cellclassname: 'column2', text: 'Produksi <br>Decal', align: 'center', editable: false, datafield: 'apd_tot', width: 75 ,  pinned: true ,
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
-                                var total1 = parseFloat(rowdata.Fokw1kP) + parseFloat(rowdata.Fokw1sP)+ parseFloat(rowdata.Fokw1bP);
-                                var total2 = parseFloat(rowdata.Fokw2kP) + parseFloat(rowdata.Fokw2sP)+ parseFloat(rowdata.Fokw2bP);
-                                var total3 = parseFloat(rowdata.Fokw3kP) + parseFloat(rowdata.Fokw3sP)+ parseFloat(rowdata.Fokw3bP);
-                                var total4 = parseFloat(rowdata.Skw3kP) + parseFloat(rowdata.Skw3sP)+ parseFloat(rowdata.Skw3bP);
-                                var total5 = parseFloat(rowdata.Skw2kP) + parseFloat(rowdata.Skw2sP)+ parseFloat(rowdata.Skw2bP);
-                                var total6 = parseFloat(rowdata.Skw1kP) + parseFloat(rowdata.Skw1sP)+ parseFloat(rowdata.Skw1bP);
-                                var total = (total1+total2+total3)-(total4+total5+total6);
+                                var Pstok_awal1 = parseFloat(rowdata.Fokw1kP) + parseFloat(rowdata.Fokw1sP)+ parseFloat(rowdata.Fokw1bP);
+                                var Pstok_awal2 = parseFloat(rowdata.Fokw2kP) + parseFloat(rowdata.Fokw2sP)+ parseFloat(rowdata.Fokw2bP);
+                                var Pstok_awal3 = parseFloat(rowdata.Fokw3kP) + parseFloat(rowdata.Fokw3sP)+ parseFloat(rowdata.Fokw3bP);
+                                var Pscrap1 = parseFloat(rowdata.Skw3kP) + parseFloat(rowdata.Skw3sP)+ parseFloat(rowdata.Skw3bP);
+                                var Pscrap2 = parseFloat(rowdata.Skw2kP) + parseFloat(rowdata.Skw2sP)+ parseFloat(rowdata.Skw2bP);
+                                var Pscrap3 = parseFloat(rowdata.Skw1kP) + parseFloat(rowdata.Skw1sP)+ parseFloat(rowdata.Skw1bP);
+                                var Pproduksi3 = parseFloat(rowdata.Pkw3k) + parseFloat(rowdata.Pkw3s)+ parseFloat(rowdata.Pkw3b);
+                                var Pproduksi2 = parseFloat(rowdata.Pkw2k) + parseFloat(rowdata.Pkw2s)+ parseFloat(rowdata.Pkw2b);
+                                var Pproduksi1 = parseFloat(rowdata.Pkw1k) + parseFloat(rowdata.Pkw1s)+ parseFloat(rowdata.Pkw1b);
+                                var Pretur3 = parseFloat(rowdata.RPkw3k) + parseFloat(rowdata.RPkw3s)+ parseFloat(rowdata.RPkw3b);
+                                var Pretur2 = parseFloat(rowdata.RPkw2k) + parseFloat(rowdata.RPkw2s)+ parseFloat(rowdata.RPkw2b);
+                                var Pretur1 = parseFloat(rowdata.RPkw1k) + parseFloat(rowdata.RPkw1s)+ parseFloat(rowdata.RPkw1b);
+                                var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
+                                var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
+                                var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Pstok_awal = Pstok_awal1+Pstok_awal2+Pstok_awal3;
+                                var Pscrap = Pscrap1+Pscrap2+Pscrap3;
+                                var Pproduksi = Pproduksi1+Pproduksi2+Pproduksi3;
+                                var Transit = Transit1+Transit2+Transit3;
+                                var Pretur = Pretur1+Pretur2+Pretur3;
+                                var total = (Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit);
                                 if (total < 10) {
                                     return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
                                 }
@@ -230,9 +295,9 @@
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Rkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Rkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Rkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Rkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Rkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Rkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd24',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Rkw1ksb', width: 75 , columngroup: 'apd24',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -246,9 +311,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Rkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Rkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Rkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Rkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Rkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Rkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd23',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Rkw2ksb', width: 75 , columngroup: 'apd23',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -262,9 +327,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Rkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Rkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Rkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Rkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Rkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Rkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd22',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Rkw3ksb', width: 75 , columngroup: 'apd22',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -278,9 +343,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [USED KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Ukw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Ukw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Ukw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Ukw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Ukw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Ukw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd21',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Ukw1ksb', width: 75 , columngroup: 'apd21',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -294,9 +359,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [USED KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Ukw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Ukw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Ukw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Ukw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Ukw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Ukw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd20',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Ukw2ksb', width: 75 , columngroup: 'apd20',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -310,9 +375,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [USED KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Ukw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Ukw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Ukw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Ukw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Ukw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Ukw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd19',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Ukw3ksb', width: 75 , columngroup: 'apd19',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -326,9 +391,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [TRANSIT KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Tkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Tkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Tkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd18',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Tkw1ksb', width: 75 , columngroup: 'apd18',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -342,9 +407,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [TRANSIT KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Tkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Tkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Tkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd17',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Tkw2ksb', width: 75 , columngroup: 'apd17',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -358,9 +423,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [TRANSIT KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Tkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Tkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Tkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd16',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Tkw3ksb', width: 75 , columngroup: 'apd16',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -374,9 +439,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [SCRAP KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw1kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw1sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw1bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Skw1kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Skw1sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Skw1bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd12',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw1ksbT', width: 75 , columngroup: 'apd12',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -390,9 +455,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [SCRAP KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw2kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw2sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw2bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Skw2kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Skw2sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Skw2bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd11',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw2ksbT', width: 75 , columngroup: 'apd11',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -406,9 +471,9 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [SCRAP KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw3kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw3sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw3bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Skw3kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Skw3sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Skw3bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd10',cellsformat: 'd2', width: 60 },
                         {
                             hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw3ksbT', width: 75 , columngroup: 'apd10',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
@@ -422,11 +487,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [STOK AWAL KW1]
-                        { hidden: true , cellclassname: 'column3', text: '[Sml]',  align: 'center',datafield: 'Fokw1kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3', text: '[Med]',  align: 'center',datafield: 'Fokw1sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3', text: '[Big]',  align: 'center',datafield: 'Fokw1bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Fokw1kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Fokw1sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Fokw1bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column3', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw1ksbT', width: 75 , columngroup: 'apd4',
+                            hidden: true , cellclassname: 'column1', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw1ksbT', width: 75 , columngroup: 'apd4',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
                                 if (total < 10) {
@@ -438,11 +503,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [STOK AWAL KW2]
-                        { hidden: true , cellclassname: 'column3a', text: '[Sml]',  align: 'center',datafield: 'Fokw2kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3a', text: '[Med]',  align: 'center',datafield: 'Fokw2sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3a', text: '[Big]',  align: 'center',datafield: 'Fokw2bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Fokw2kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Fokw2sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Fokw2bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd5',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column3a', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw2ksbT', width: 75 , columngroup: 'apd5',
+                            hidden: true , cellclassname: 'column1', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw2ksbT', width: 75 , columngroup: 'apd5',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
                                 if (total < 10) {
@@ -454,11 +519,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [STOK AWAL KW3]
-                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Fokw3kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Fokw3sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Fokw3bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Fokw3kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Fokw3sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Fokw3bT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd6',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column3b', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw3ksbT', width: 75 , columngroup: 'apd6',
+                            hidden: true , cellclassname: 'column1', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw3ksbT', width: 75 , columngroup: 'apd6',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw3kT) + parseFloat(rowdata.Fokw3sT)+ parseFloat(rowdata.Fokw3bT);
                                 if (total < 10) {
@@ -471,11 +536,11 @@
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'RPkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'RPkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'RPkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw1ksb', width: 75 , columngroup: 'apd27',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw1ksb', width: 75 , columngroup: 'apd27',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.RPkw1k) + parseFloat(rowdata.RPkw1s)+ parseFloat(rowdata.RPkw1b);
                                 if (total < 10) {
@@ -487,11 +552,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'RPkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'RPkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'RPkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw2ksb', width: 75 , columngroup: 'apd26',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw2ksb', width: 75 , columngroup: 'apd26',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.RPkw2k) + parseFloat(rowdata.RPkw2s)+ parseFloat(rowdata.RPkw2b);
                                 if (total < 10) {
@@ -503,11 +568,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'RPkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'RPkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'RPkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw3ksb', width: 75 , columngroup: 'apd25',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw3ksb', width: 75 , columngroup: 'apd25',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.RPkw3k) + parseFloat(rowdata.RPkw3s)+ parseFloat(rowdata.RPkw3b);
                                 if (total < 10) {
@@ -519,11 +584,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [PRODUKSI KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Pkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Pkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Pkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Pkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Pkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Pkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
                         {
-                           hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw1ksb', width: 75 , columngroup: 'apd15',
+                           hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw1ksb', width: 75 , columngroup: 'apd15',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Pkw1k) + parseFloat(rowdata.Pkw1s)+ parseFloat(rowdata.Pkw1b);
                                 if (total < 10) {
@@ -534,12 +599,12 @@
                                 }
                             }
                         },
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Pkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Pkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Pkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Pkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Pkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Pkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd14',cellsformat: 'd2', width: 60 },
                         //TRANSAKSI DETAIL AREA PRODUKSI [PRODUKSI KW2]
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw2ksb', width: 75 , columngroup: 'apd14',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw2ksb', width: 75 , columngroup: 'apd14',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Pkw2k) + parseFloat(rowdata.Pkw2s)+ parseFloat(rowdata.Pkw2b);
                                 if (total < 10) {
@@ -550,12 +615,12 @@
                                 }
                             }
                         },
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Pkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Pkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Pkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Pkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Pkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Pkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd13',cellsformat: 'd2', width: 60 },
                         //TRANSAKSI DETAIL AREA PRODUKSI [PRODUKSI KW3]
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw3ksb', width: 75 , columngroup: 'apd13',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Pkw3ksb', width: 75 , columngroup: 'apd13',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Pkw3k) + parseFloat(rowdata.Pkw3s)+ parseFloat(rowdata.Pkw3b);
                                 if (total < 10) {
@@ -567,11 +632,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [SCRAP KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw1kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw1sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw1bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Skw1kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Skw1sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Skw1bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd9',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw1ksbP', width: 75 , columngroup: 'apd9',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw1ksbP', width: 75 , columngroup: 'apd9',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Skw1kP) + parseFloat(rowdata.Skw1sP)+ parseFloat(rowdata.Skw1bP);
                                 if (total < 10) {
@@ -583,11 +648,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [SCRAP KW2]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw2kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw2sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw2bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Skw2kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Skw2sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Skw2bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd8',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw2ksbP', width: 75 , columngroup: 'apd8',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw2ksbP', width: 75 , columngroup: 'apd8',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Skw2kP) + parseFloat(rowdata.Skw2sP)+ parseFloat(rowdata.Skw2bP);
                                 if (total < 10) {
@@ -599,11 +664,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [SCRAP KW3]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Skw3kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Skw3sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Skw3bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Skw3kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Skw3sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Skw3bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd7',cellsformat: 'd2', width: 60 },
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw3ksbP', width: 75 , columngroup: 'apd7',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Skw3ksbP', width: 75 , columngroup: 'apd7',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Skw3kP) + parseFloat(rowdata.Skw3sP)+ parseFloat(rowdata.Skw3bP);
                                 if (total < 10) {
@@ -615,11 +680,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [STOK AWAL KW1]
-                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Fokw1kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Fokw1sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'Fokw1bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Fokw1kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Fokw1sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Fokw1bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw1ksbP', width: 75 , columngroup: 'apd1',
+                            hidden: true , cellclassname: 'column3',text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw1ksbP', width: 75 , columngroup: 'apd1',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw1kP) + parseFloat(rowdata.Fokw1sP)+ parseFloat(rowdata.Fokw1bP);
                                 if (total < 10) {
@@ -631,11 +696,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [STOK AWAL KW2]
-                        { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Fokw2kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Fokw2sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Fokw2bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Fokw2kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Fokw2sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Fokw2bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd2',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column1a', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw2ksbP', width: 75 , columngroup: 'apd2',
+                            hidden: true , cellclassname: 'column3', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw2ksbP', width: 75 , columngroup: 'apd2',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw2kP) + parseFloat(rowdata.Fokw2sP)+ parseFloat(rowdata.Fokw2bP);
                                 if (total < 10) {
@@ -647,11 +712,11 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI [STOK AWAL KW3]
-                        { hidden: true , cellclassname: 'column1b', text: '[Sml]',  align: 'center',datafield: 'Fokw3kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1b', text: '[Med]',  align: 'center',datafield: 'Fokw3sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60 },
-                        { hidden: true , cellclassname: 'column1b', text: '[Big]',  align: 'center',datafield: 'Fokw3bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60},
+                        { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Fokw3kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Fokw3sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column3b', text: '[Big]',  align: 'center',datafield: 'Fokw3bP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd3',cellsformat: 'd2', width: 60},
                         {
-                            hidden: true , cellclassname: 'column1b', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw3ksbP', width: 75 , columngroup: 'apd3',
+                            hidden: true , cellclassname: 'column3', text: 'Sub Total', align: 'center', editable: false, datafield: 'Fokw3ksbP', width: 75 , columngroup: 'apd3',
                             cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
                                 var total = parseFloat(rowdata.Fokw3kP) + parseFloat(rowdata.Fokw3sP)+ parseFloat(rowdata.Fokw3bP);
                                 if (total < 10) {

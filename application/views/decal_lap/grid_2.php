@@ -91,6 +91,16 @@
                         { name: 'Rkw3k' , type: 'number' },
                         { name: 'Rkw3s' , type: 'number' },
                         { name: 'Rkw3b' , type: 'number' },
+                         //========================================
+                        { name: 'RPkw1k' , type: 'number' },
+                        { name: 'RPkw1s' , type: 'number' },
+                        { name: 'RPkw1b' , type: 'number' },
+                        { name: 'RPkw2k' , type: 'number' },
+                        { name: 'RPkw2s' , type: 'number' },
+                        { name: 'RPkw2b' , type: 'number' },
+                        { name: 'RPkw3k' , type: 'number' },
+                        { name: 'RPkw3s' , type: 'number' },
+                        { name: 'RPkw3b' , type: 'number' },
                         //========================================
                         { name: 'Skw1kP' , type: 'number' },
                         { name: 'Skw1sP' , type: 'number' },
@@ -157,9 +167,9 @@
         statusbarheight: 25,
         pagesizeoptions: ['12', '30', '90', '100'],
         columns: [
-                        { text: 'Kode',  pinned: false, align: 'center',datafield: 'id', width: 60, pinned: true },
-                        { text: 'Nama',  pinned: false, align: 'center',datafield: 'nama', width: 201, pinned: true },
-                        { text: 'Buyer',  pinned: false, align: 'center',datafield: 'buyer', width: 100, pinned: true, hidden: true },
+                        { text: 'Kode',  align: 'center',datafield: 'id', width: 60, pinned: true },
+                        { text: 'Nama',  align: 'center',datafield: 'nama', width: 201, pinned: true },
+                        { text: 'Buyer',  align: 'center',datafield: 'buyer', width: 100, pinned: true, hidden: true },
                         //GRAND TOTAL
                         {
                             cellclassname: 'column5', text: 'Grand <br>Total', align: 'center', editable: false, datafield: 'gtot', width: 80, pinned: true ,
@@ -460,6 +470,54 @@
                             }
                         },
                         //TRANSAKSI DETAIL AREA PRODUKSI
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW1]
+                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw1b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd27',cellsformat: 'd2', width: 60 },
+                        {
+                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw1ksb', width: 75 , columngroup: 'apd27',
+                            cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
+                                var total = parseFloat(rowdata.RPkw1k) + parseFloat(rowdata.RPkw1s)+ parseFloat(rowdata.RPkw1b);
+                                if (total < 10) {
+                                    return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                                else {
+                                    return "<div style='margin: 4px; color: #008000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                            }
+                        },
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW2]
+                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw2k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw2s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw2b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd26',cellsformat: 'd2', width: 60 },
+                        {
+                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw2ksb', width: 75 , columngroup: 'apd26',
+                            cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
+                                var total = parseFloat(rowdata.RPkw2k) + parseFloat(rowdata.RPkw2s)+ parseFloat(rowdata.RPkw2b);
+                                if (total < 10) {
+                                    return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                                else {
+                                    return "<div style='margin: 4px; color: #008000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                            }
+                        },
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [RETUR KW3]
+                        { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'RPkw3k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'RPkw3s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        { hidden: true , cellclassname: 'column1', text: '[Big]',  align: 'center',datafield: 'RPkw3b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd25',cellsformat: 'd2', width: 60 },
+                        {
+                            hidden: true , cellclassname: 'column1',text: 'Sub Total', align: 'center', editable: false, datafield: 'RPkw3ksb', width: 75 , columngroup: 'apd25',
+                            cellsrenderer: function (index, datafield, value, defaultvalue, column, rowdata) {
+                                var total = parseFloat(rowdata.RPkw3k) + parseFloat(rowdata.RPkw3s)+ parseFloat(rowdata.RPkw3b);
+                                if (total < 10) {
+                                    return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                                else {
+                                    return "<div style='margin: 4px; color: #008000;' class='jqx-right-align'>" + total + "</div>";
+                                }
+                            }
+                        },
                         //TRANSAKSI DETAIL AREA PRODUKSI [PRODUKSI KW1]
                         { hidden: true , cellclassname: 'column1', text: '[Sml]',  align: 'center',datafield: 'Pkw1k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
                         { hidden: true , cellclassname: 'column1', text: '[Med]',  align: 'center',datafield: 'Pkw1s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd15',cellsformat: 'd2', width: 60 },
@@ -607,12 +665,9 @@
         ],
         columngroups: [
                     { text: 'Area Produksi Decal', align: 'center', name: 'header1' },
-                    //{ text: 'Retur [KW 1]', align: 'center', name: 'apd24' , parentgroup: 'header1'},
-                    //{ text: 'Retur [KW 2]', align: 'center', name: 'apd23' , parentgroup: 'header1'},
-                    //{ text: 'Retur [KW 3]', align: 'center', name: 'apd22' , parentgroup: 'header1'},
-                    { text: 'Pemakaian [KW 1]', align: 'center', name: 'apd21' , parentgroup: 'header1'},
-                    { text: 'Pemakaian [KW 2]', align: 'center', name: 'apd20' , parentgroup: 'header1'},
-                    { text: 'Pemakaian [KW 3]', align: 'center', name: 'apd19' , parentgroup: 'header1'},
+                    { text: 'Retur [KW 1]', align: 'center', name: 'apd27' , parentgroup: 'header1'},
+                    { text: 'Retur [KW 2]', align: 'center', name: 'apd26' , parentgroup: 'header1'},
+                    { text: 'Retur [KW 3]', align: 'center', name: 'apd25' , parentgroup: 'header1'},
                     { text: 'Produksi [KW 1]', align: 'center', name: 'apd15' , parentgroup: 'header1'},
                     { text: 'Produksi [KW 2]', align: 'center', name: 'apd14' , parentgroup: 'header1'},
                     { text: 'Produksi [KW 3]', align: 'center', name: 'apd13' , parentgroup: 'header1'},
@@ -624,6 +679,12 @@
                     { text: 'Stok Awal [KW 3]', align: 'center', name: 'apd3' , parentgroup: 'header1'},
                     //======================================================================================
                     { text: 'Area Transit Decal', align: 'center', name: 'header2' },
+                    { text: 'Pemakaian [KW 1]', align: 'center', name: 'apd21' , parentgroup: 'header2'},
+                    { text: 'Pemakaian [KW 2]', align: 'center', name: 'apd20' , parentgroup: 'header2'},
+                    { text: 'Pemakaian [KW 3]', align: 'center', name: 'apd19' , parentgroup: 'header2'},
+                    { text: 'Retur [KW 1]', align: 'center', name: 'apd24' , parentgroup: 'header2'},
+                    { text: 'Retur [KW 2]', align: 'center', name: 'apd23' , parentgroup: 'header2'},
+                    { text: 'Retur [KW 3]', align: 'center', name: 'apd22' , parentgroup: 'header2'},
                     { text: 'Transit [KW 1]', align: 'center', name: 'apd18' , parentgroup: 'header2'},
                     { text: 'Transit [KW 2]', align: 'center', name: 'apd17' , parentgroup: 'header2'},
                     { text: 'Transit [KW 3]', align: 'center', name: 'apd16' , parentgroup: 'header2'},
@@ -641,8 +702,8 @@
                         { label: 'Grand Total', value: 'gtot', checked: true },
                         { value: 'atd_tot' , label: 'KGtot', checked: true  },
                         { value: 'apd_tot' , label: 'PDtot', checked: true  },
+                        //AREA KANTOR GLAZE
                         //=======================================================
-                        //AREA PRODUKSI DECAL
                         //=======================================================
                         { value: 'Rkw1k' , label: 'RKW1k', checked: false  },
                         { value: 'Rkw1s' , label: 'RKW1s', checked: false  },
@@ -673,54 +734,6 @@
                         { value: 'Ukw3s' , label: 'UKW3s', checked: false  },
                         { value: 'Ukw3b' , label: 'UKW3b', checked: false  },
                         { value: 'Ukw3ksb' , label: 'UKW3ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Pkw1k' , label: 'PKW1k', checked: false  },
-                        { value: 'Pkw1s' , label: 'PKW1s', checked: false  },
-                        { value: 'Pkw1b' , label: 'PKW1b', checked: false  },
-                        { value: 'Pkw1ksb' , label: 'PKW1ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Pkw2k' , label: 'PKW2k', checked: false  },
-                        { value: 'Pkw2s' , label: 'PKW2s', checked: false  },
-                        { value: 'Pkw2b' , label: 'PKW2b', checked: false  },
-                        { value: 'Pkw2ksb' , label: 'PKW2ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Pkw3k' , label: 'PKW3k', checked: false  },
-                        { value: 'Pkw3s' , label: 'PKW3s', checked: false  },
-                        { value: 'Pkw3b' , label: 'PKW3b', checked: false  },
-                        { value: 'Pkw3ksb' , label: 'PKW3ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Skw1kP' , label: 'SPKW1k', checked: false  },
-                        { value: 'Skw1sP' , label: 'SPKW1s', checked: false  },
-                        { value: 'Skw1bP' , label: 'SPKW1b', checked: false  },
-                        { value: 'Skw1ksbP' , label: 'SPKW1ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Skw2kP' , label: 'SPKW2k', checked: false  },
-                        { value: 'Skw2sP' , label: 'SPKW2s', checked: false  },
-                        { value: 'Skw2bP' , label: 'SPKW2b', checked: false  },
-                        { value: 'Skw2ksbP' , label: 'SPKW2ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Skw3kP' , label: 'SPKW3k', checked: false  },
-                        { value: 'Skw3sP' , label: 'SPKW3s', checked: false  },
-                        { value: 'Skw3bP' , label: 'SPKW3b', checked: false  },
-                        { value: 'Skw3ksbP' , label: 'SPKW3ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Fokw1kP' , label: 'SAPKW1k', checked: false  },
-                        { value: 'Fokw1sP' , label: 'SAPKW1s', checked: false  },
-                        { value: 'Fokw1bP' , label: 'SAPKW1b', checked: false  },
-                        { value: 'Fokw1ksbP' , label: 'SAPKW1ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Fokw2kP' , label: 'SAPKW2k', checked: false  },
-                        { value: 'Fokw2sP' , label: 'SAPKW2s', checked: false  },
-                        { value: 'Fokw2bP' , label: 'SAPKW2b', checked: false  },
-                        { value: 'Fokw2ksbP' , label: 'SAPKW2ksb', checked: false  },
-                        //=======================================================
-                        { value: 'Fokw3kP' , label: 'SAPKW3k', checked: false  },
-                        { value: 'Fokw3sP' , label: 'SAPKW3s', checked: false  },
-                        { value: 'Fokw3bP' , label: 'SAPKW3b', checked: false  },
-                        { value: 'Fokw3ksbP' , label: 'SAPKW3ksb', checked: false  },
-                        //=======================================================
-                        //AREA KANTOR GLAZE
-                        //=======================================================
                         //=======================================================
                         { value: 'Tkw1k' , label: 'TKW1k', checked: false  },
                         { value: 'Tkw1s' , label: 'TKW1s', checked: false  },
@@ -765,7 +778,71 @@
                         { value: 'Fokw3kT' , label: 'SAPKW3k', checked: false  },
                         { value: 'Fokw3sT' , label: 'SAPKW3s', checked: false  },
                         { value: 'Fokw3bT' , label: 'SAPKW3b', checked: false  },
-                        { value: 'Fokw3ksbT' , label: 'SATKW3ksb', checked: false  }
+                        { value: 'Fokw3ksbT' , label: 'SATKW3ksb', checked: false  },
+                        //=======================================================
+                        //AREA PRODUKSI DECAL
+                        //=======================================================
+                        { value: 'RPkw1k' , label: 'RPKW1k', checked: false  },
+                        { value: 'RPkw1s' , label: 'RPKW1s', checked: false  },
+                        { value: 'RPkw1b' , label: 'RPKW1b', checked: false  },
+                        { value: 'RPkw1ksb' , label: 'RPKW1ksb', checked: false  },
+                        //=======================================================
+                        { value: 'RPkw2k' , label: 'RPKW2k', checked: false  },
+                        { value: 'RPkw2s' , label: 'RPKW2s', checked: false  },
+                        { value: 'RPkw2b' , label: 'RPKW2b', checked: false  },
+                        { value: 'RPkw2ksb' , label: 'RPKW2ksb', checked: false  },
+                        //=======================================================
+                        { value: 'RPkw3k' , label: 'RPKW3k', checked: false  },
+                        { value: 'RPkw3s' , label: 'RPKW3s', checked: false  },
+                        { value: 'RPkw3b' , label: 'RPKW3b', checked: false  },
+                        { value: 'RPkw3ksb' , label: 'RPKW3ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Pkw1k' , label: 'PKW1k', checked: false  },
+                        { value: 'Pkw1s' , label: 'PKW1s', checked: false  },
+                        { value: 'Pkw1b' , label: 'PKW1b', checked: false  },
+                        { value: 'Pkw1ksb' , label: 'PKW1ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Pkw2k' , label: 'PKW2k', checked: false  },
+                        { value: 'Pkw2s' , label: 'PKW2s', checked: false  },
+                        { value: 'Pkw2b' , label: 'PKW2b', checked: false  },
+                        { value: 'Pkw2ksb' , label: 'PKW2ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Pkw3k' , label: 'PKW3k', checked: false  },
+                        { value: 'Pkw3s' , label: 'PKW3s', checked: false  },
+                        { value: 'Pkw3b' , label: 'PKW3b', checked: false  },
+                        { value: 'Pkw3ksb' , label: 'PKW3ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Skw1kP' , label: 'SPKW1k', checked: false  },
+                        { value: 'Skw1sP' , label: 'SPKW1s', checked: false  },
+                        { value: 'Skw1bP' , label: 'SPKW1b', checked: false  },
+                        { value: 'Skw1ksbP' , label: 'SPKW1ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Skw2kP' , label: 'SPKW2k', checked: false  },
+                        { value: 'Skw2sP' , label: 'SPKW2s', checked: false  },
+                        { value: 'Skw2bP' , label: 'SPKW2b', checked: false  },
+                        { value: 'Skw2ksbP' , label: 'SPKW2ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Skw3kP' , label: 'SPKW3k', checked: false  },
+                        { value: 'Skw3sP' , label: 'SPKW3s', checked: false  },
+                        { value: 'Skw3bP' , label: 'SPKW3b', checked: false  },
+                        { value: 'Skw3ksbP' , label: 'SPKW3ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Fokw1kP' , label: 'SAPKW1k', checked: false  },
+                        { value: 'Fokw1sP' , label: 'SAPKW1s', checked: false  },
+                        { value: 'Fokw1bP' , label: 'SAPKW1b', checked: false  },
+                        { value: 'Fokw1ksbP' , label: 'SAPKW1ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Fokw2kP' , label: 'SAPKW2k', checked: false  },
+                        { value: 'Fokw2sP' , label: 'SAPKW2s', checked: false  },
+                        { value: 'Fokw2bP' , label: 'SAPKW2b', checked: false  },
+                        { value: 'Fokw2ksbP' , label: 'SAPKW2ksb', checked: false  },
+                        //=======================================================
+                        { value: 'Fokw3kP' , label: 'SAPKW3k', checked: false  },
+                        { value: 'Fokw3sP' , label: 'SAPKW3s', checked: false  },
+                        { value: 'Fokw3bP' , label: 'SAPKW3b', checked: false  },
+                        { value: 'Fokw3ksbP' , label: 'SAPKW3ksb', checked: false  }
+                        //=======================================================
+                        
                         ];
     $("#jqxlistbox").jqxListBox({ 
                         source: listSource, 
