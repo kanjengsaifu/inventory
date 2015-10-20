@@ -44,7 +44,7 @@ class Decal_adju extends CI_Controller {
 			endif;
 			
 			$text = "SELECT a.id_related,a.tgl_input, a.id_decal_items, b.nama, a.inputer
-                                    FROM decal_ohd a
+                                    FROM decal_ahd a
                                     LEFT JOIN decal_items b ON b.id = a.id_decal_items
                                 $where ";
                         
@@ -66,7 +66,7 @@ class Decal_adju extends CI_Controller {
 			
 
 			$text = "SELECT a.id_related,a.tgl_input, a.id_decal_items, b.nama, a.inputer
-                                    FROM decal_ohd a
+                                    FROM decal_ahd a
                                     LEFT JOIN decal_items b ON b.id = a.id_decal_items
                                         $where
                                         GROUP BY a.id_related
@@ -97,25 +97,35 @@ class Decal_adju extends CI_Controller {
 
 			$d['judul']="Input stock adjusment decal";
 			
-			$id         = $this->dclModel->MaxPhDecalOpna();
+			$id         = $this->dclModel->MaxPhDecalAdju();
 			
-			$d['id']                = $id;
-                        $d['batch']             = '';
-                        $d['area']             = '';
+			$d['id_related']        = $id;
+                        $d['id']                = '';
+                        $d['tgl_start']         = '';
+                        $d['tgl_end']           = '';
+                        $d['jam_start']         = '';
+                        $d['jam_end']           = '';
+                        $d['periode']           = '';
+                        $d['area']              = 0;
                         $d['id_decal_items']	= '';
-                        $d['nama_decal']        = '';
                         $d['nama_decal']        = '';
                         $d['tgli']              = '';
                         $d['jam']               = '';
-                        $d['jenis_decal']       = '';
+                        $d['jenis_decal']       = 0;
                         $d['shift']             = 1;
                         $d['size_kertas']       = 0;
-                        $d['size_kat']          = 1;
+                        $d['size_kat']          = 0;
                         $d['warna']             = '';
                         $d['komposisi']         = '';
-                        $d['kw1']               = '';
-                        $d['kw2']               = '';
-                        $d['kw3']               = '';
+                        $d['kw1_system']        = '';
+                        $d['kw2_system']        = '';
+                        $d['kw3_system']        = '';
+                        $d['kw1_opname']        = '';
+                        $d['kw2_opname']        = '';
+                        $d['kw3_opname']        = '';
+                        $d['kw1_selisih']       = '';
+                        $d['kw2_selisih']       = '';
+                        $d['kw3_selisih']       = '';
                         $d['petugas']           = '';
 			
                         $jd = "SELECT * FROM global_jenis_decal";
@@ -167,24 +177,24 @@ class Decal_adju extends CI_Controller {
 				$id_d['id_decal_items'] = $this->input->post('id_decal_items');
                                 $id_d['id']             = $this->input->post('batch');
 				
-				$data = $this->dclModel->getSelectedData("decal_oh",$id);
+				$data = $this->dclModel->getSelectedData("decal_ah",$id);
 				if($data->num_rows()>0){
-                                                $this->dclModel->updateData("decal_oh",$up,$id);
-						$data = $this->dclModel->getSelectedData("decal_ohd",$id_d);
+                                                $this->dclModel->updateData("decal_ah",$up,$id);
+						$data = $this->dclModel->getSelectedData("decal_ahd",$id_d);
 						if($data->num_rows()>0){
                                                         $ud['tgl_update']   = date('Y-m-d h:i:s');
-							$this->dclModel->updateData("decal_ohd",$ud,$id_d);
+							$this->dclModel->updateData("decal_ahd",$ud,$id_d);
                                                         echo 'Update data Sukses';
 						}else{
                                                         $ud['tgl_input']   = date('Y-m-d h:i:s');
-							$this->dclModel->insertData("decal_ohd",$ud);
+							$this->dclModel->insertData("decal_ahd",$ud);
                                                         echo 'Simpan data Sukses';
 						}
 				}else{
                                         $up['tgl_input']		= date('Y-m-d h:i:s');
-					$this->dclModel->insertData("decal_oh",$up);
+					$this->dclModel->insertData("decal_ah",$up);
                                         $ud['tgl_input']                = date('Y-m-d h:i:s');
-					$this->dclModel->insertData("decal_ohd",$ud);
+					$this->dclModel->insertData("decal_ahd",$ud);
 					echo 'Simpan data Sukses';		
 				}
 		}else{
@@ -261,7 +271,7 @@ class Decal_adju extends CI_Controller {
 			$d['judul'] = "Ubah input adjusment decal";
 			
 			$id = $this->uri->segment(3);
-			$text = "SELECT * FROM decal_oh WHERE id='$id'";
+			$text = "SELECT * FROM decal_ah WHERE id='$id'";
 			$data = $this->dclModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
@@ -341,8 +351,8 @@ class Decal_adju extends CI_Controller {
                         $batch = $this->uri->segment(5);
 			$text = "SELECT a.id as batch,a.shift,a.size_kertas,a.size_kat,a.id_related,a.id_decal_items,e.nama,TIME_FORMAT(a.jam,'%H:%i') as jam,i.nama as jenis,
                                     a.tgli,a.area,a.jenis_decal,a.warna,a.komposisi,e.nama as decal_item,a.kw1,a.kw2,a.kw3,a.petugas,a.inputer
-                                    FROM decal_ohd as a
-                                    LEFT JOIN decal_oh as b ON a.id_related=b.id 
+                                    FROM decal_ahd as a
+                                    LEFT JOIN decal_ah as b ON a.id_related=b.id 
                                     LEFT JOIN decal_items as e ON e.id=a.id_decal_items
                                     LEFT JOIN global_shift as f ON a.shift=f.id
                                     LEFT JOIN global_size as g ON g.id=a.size_kertas 
@@ -418,8 +428,8 @@ class Decal_adju extends CI_Controller {
 			$id = $this->input->post('kode');
 			$text = "SELECT a.id as batch,a.id_related,a.id_decal_items,e.nama,f.nama as shift ,TIME_FORMAT(a.jam,'%H:%i') as jam,i.nama as jenis, g.dsc as size_kertas, h.dsc as size_kat,
                                     a.tgli,c.nama as area,a.warna,a.komposisi,e.nama as decal_item,a.kw1,a.kw2,a.kw3,a.petugas,a.inputer
-                                    FROM decal_ohd as a 
-                                    LEFT JOIN decal_oh as b ON a.id_related=b.id 
+                                    FROM decal_ahd as a 
+                                    LEFT JOIN decal_ah as b ON a.id_related=b.id 
                                     LEFT JOIN global_area as c ON c.id=a.area 
                                     LEFT JOIN decal_items as e ON e.id=a.id_decal_items
                                     LEFT JOIN global_shift as f ON a.shift=f.id
@@ -442,8 +452,8 @@ class Decal_adju extends CI_Controller {
                     
                                 $id = $this->uri->segment(3);
                                 $tgl_deleted = date('Y-m-d h:i:s');
-                                $this->dclModel->manualQuery("UPDATE decal_ohd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id'");
-                                $this->dclModel->manualQuery("UPDATE decal_oh SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
+                                $this->dclModel->manualQuery("UPDATE decal_ahd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id'");
+                                $this->dclModel->manualQuery("UPDATE decal_ah SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
                                 echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_adju'>";			
 		}else{
 			header('location:'.base_url());
@@ -458,7 +468,7 @@ class Decal_adju extends CI_Controller {
                                 $kode = $this->uri->segment(4);
                                 $batch = $this->uri->segment(5);
                                 $tgl_deleted = date('Y-m-d h:i:s');
-                                $this->dclModel->manualQuery("UPDATE decal_ohd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id' AND id_decal_items='$kode' AND id='$batch'");
+                                $this->dclModel->manualQuery("UPDATE decal_ahd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id' AND id_decal_items='$kode' AND id='$batch'");
                                 $this->edit();
                         
 		}else{

@@ -48,8 +48,8 @@
         statusbarheight: 25,
         pagesizeoptions: ['13', '30', '90', '100'],
         columns: [
-                        { text: 'Kode',  pinned: false, align: 'center',columngroup: 'glasir', datafield: 'id_glasir', width: 50 },
-                        { text: 'Nama',  pinned: false, align: 'center',columngroup: 'glasir', datafield: 'nama_glasir', width: 201 },
+                        { text: 'Kode',  pinned: true, align: 'center', datafield: 'id_glasir', width: 50, },
+                        { text: 'Nama',  pinned: true, align: 'center', datafield: 'nama_glasir', width: 201 },
                         { text: 'BGPS',  align: 'center',datafield: 'stok_bgps', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 75 },
                         { text: 'Supply',  align: 'center',datafield: 'stok_supply', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 75 },
                         { text: 'Total',  align: 'center',datafield: 'total', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 80},

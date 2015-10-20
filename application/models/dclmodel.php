@@ -779,6 +779,21 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhDecalAdju(){
+		$text = "SELECT max(id) as no FROM decal_ah";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'AH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'AH'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function CariDecalJenisOpna($id){
 		$t = "SELECT * FROM global_jenis_decal WHERE id='$id'";
 		$d = $this->dclModel->manualQuery($t);
