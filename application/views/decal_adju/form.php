@@ -410,74 +410,7 @@ $(document).ready(function(){
     </fieldset>
 </td>
 </tr>
-</table>
-<table width="100%">
-<tr>
-<td valign="top" width="30%">
-    <fieldset>
-    <table width="100%">
-        <tr>    
-            <td>Kw 1 di system</td>
-            <td>:</td>
-            <td><input type="text" name="kw1_system" id="kw1_system"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1_system;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Kw 2 di system</td>
-            <td>:</td>
-            <td><input type="text" name="kw2_system" id="kw2_system"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw2_system;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Kw 3 di system</td>
-            <td>:</td>
-            <td><input type="text" name="kw3_system" id="kw3_system"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw3_system;?>" /></td>
-        </tr>
-    </table>
-    </fieldset>
-</td>
-<td valign="top" width="30%">
-    <fieldset>
-    <table width="100%">
-        <tr>    
-            <td>Hasil Opname Kw 1</td>
-            <td>:</td>
-            <td><input type="text" name="kw1_opname" id="kw1_opname"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1_opname;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Hasil Opname Kw 2</td>
-            <td>:</td>
-            <td><input type="text" name="kw2_opname" id="kw2_opname"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw2_opname;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Hasil Opname Kw 3</td>
-            <td>:</td>
-            <td><input type="text" name="kw3_opname" id="kw3_opname"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw3_opname;?>" /></td>
-        </tr>
-    </table>
-    </fieldset>
-</td>
-<td valign="top" width="30%">
-    <fieldset>
-    <table width="100%">
-        <tr>    
-            <td>Selisih Kw 1</td>
-            <td>:</td>
-            <td><input type="text" name="kw1_selisih" id="kw1_selisih"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1_selisih;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Selisih Kw 2</td>
-            <td>:</td>
-            <td><input type="text" name="kw2_selisih" id="kw2_selisih"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw2_selisih;?>" /></td>
-        </tr>
-        <tr>    
-            <td>Selisih Kw 3</td>
-            <td>:</td>
-            <td><input type="text" name="kw3_selisih" id="kw3_selisih"  class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw3_selisih;?>" /></td>
-        </tr>
-    </table>
-    </fieldset>
-</td>
-</tr>
-</table>  
+</table> 
 <fieldset class="bawah">
 <table width="100%">
 <tr>
