@@ -52,6 +52,26 @@
                         { name: 'nama' , type: 'string' },
                         { name: 'buyer' , type: 'string' },
                         //========================================
+                        { name: 'Tkw1_selisih_k' , type: 'number' },
+                        { name: 'Tkw1_selisih_s' , type: 'number' },
+                        { name: 'Tkw1_selisih_b' , type: 'number' },
+                        { name: 'Tkw2_selisih_k' , type: 'number' },
+                        { name: 'Tkw2_selisih_s' , type: 'number' },
+                        { name: 'Tkw2_selisih_b' , type: 'number' },
+                        { name: 'Tkw3_selisih_k' , type: 'number' },
+                        { name: 'Tkw3_selisih_s' , type: 'number' },
+                        { name: 'Tkw3_selisih_b' , type: 'number' },
+                        //========================================
+                        { name: 'Pkw1_selisih_k' , type: 'number' },
+                        { name: 'Pkw1_selisih_s' , type: 'number' },
+                        { name: 'Pkw1_selisih_b' , type: 'number' },
+                        { name: 'Pkw2_selisih_k' , type: 'number' },
+                        { name: 'Pkw2_selisih_s' , type: 'number' },
+                        { name: 'Pkw2_selisih_b' , type: 'number' },
+                        { name: 'Pkw3_selisih_k' , type: 'number' },
+                        { name: 'Pkw3_selisih_s' , type: 'number' },
+                        { name: 'Pkw3_selisih_b' , type: 'number' },
+                        //========================================
                         { name: 'Pkw1k' , type: 'number' },
                         { name: 'Pkw1s' , type: 'number' },
                         { name: 'Pkw1b' , type: 'number' },
@@ -486,6 +506,18 @@
                                 }
                             }
                         },
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [ADJUSTMENT KW1]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw1_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd28',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw1_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd28',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw1_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd28',cellsformat: 'd2', width: 60},
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [ADJUSTMENT KW2]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw2_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd29',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw2_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd29',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw2_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd29',cellsformat: 'd2', width: 60},
+                        //TRANSAKSI DETAIL AREA KANTOR GLAZE [ADJUSTMENT KW3]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Tkw3_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd30',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Tkw3_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd30',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Tkw3_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd30',cellsformat: 'd2', width: 60},
                         //TRANSAKSI DETAIL AREA KANTOR GLAZE [STOK AWAL KW1]
                         { hidden: true , cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Fokw1kT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
                         { hidden: true , cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Fokw1sT', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd4',cellsformat: 'd2', width: 60 },
@@ -679,6 +711,18 @@
                                 }
                             }
                         },
+                        //TRANSAKSI DETAIL AREA PRODUKSI [ADJUSTMENT KW1]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Pkw1_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd31',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Pkw1_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd31',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Pkw1_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd31',cellsformat: 'd2', width: 60},
+                        //TRANSAKSI DETAIL AREA PRODUKSI [ADJUSTMENT KW2]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Pkw2_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd32',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Pkw2_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd32',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Pkw2_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd32',cellsformat: 'd2', width: 60},
+                        //TRANSAKSI DETAIL AREA PRODUKSI [ADJUSTMENT KW3]
+                        { cellclassname: 'column1a', text: '[Sml]',  align: 'center',datafield: 'Pkw3_selisih_k', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd33',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Med]',  align: 'center',datafield: 'Pkw3_selisih_s', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd33',cellsformat: 'd2', width: 60 },
+                        { cellclassname: 'column1a', text: '[Big]',  align: 'center',datafield: 'Pkw3_selisih_b', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd33',cellsformat: 'd2', width: 60},
                         //TRANSAKSI DETAIL AREA PRODUKSI [STOK AWAL KW1]
                         { hidden: true , cellclassname: 'column3b', text: '[Sml]',  align: 'center',datafield: 'Fokw1kP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
                         { hidden: true , cellclassname: 'column3b', text: '[Med]',  align: 'center',datafield: 'Fokw1sP', cellsrenderer: cellsrendererx, cellsalign: 'right', columngroup: 'apd1',cellsformat: 'd2', width: 60 },
@@ -739,6 +783,9 @@
                     { text: 'Scrap [KW 1]', align: 'center', name: 'apd9' , parentgroup: 'header1'},
                     { text: 'Scrap [KW 2]', align: 'center', name: 'apd8' , parentgroup: 'header1'},
                     { text: 'Scrap [KW 3]', align: 'center', name: 'apd7' , parentgroup: 'header1'},
+                    { text: 'Adjusment [KW 1]', align: 'center', name: 'apd31' , parentgroup: 'header1'},
+                    { text: 'Adjusment [KW 2]', align: 'center', name: 'apd32' , parentgroup: 'header1'},
+                    { text: 'Adjusment [KW 3]', align: 'center', name: 'apd33' , parentgroup: 'header1'},
                     { text: 'Stok Awal [KW 1]', align: 'center', name: 'apd1' , parentgroup: 'header1'},
                     { text: 'Stok Awal [KW 2]', align: 'center', name: 'apd2' , parentgroup: 'header1'},
                     { text: 'Stok Awal [KW 3]', align: 'center', name: 'apd3' , parentgroup: 'header1'},
@@ -756,6 +803,9 @@
                     { text: 'Scrap [KW 1]', align: 'center', name: 'apd12' , parentgroup: 'header2'},
                     { text: 'Scrap [KW 2]', align: 'center', name: 'apd11' , parentgroup: 'header2'},
                     { text: 'Scrap [KW 3]', align: 'center', name: 'apd10' , parentgroup: 'header2'},
+                    { text: 'Adjusment [KW 1]', align: 'center', name: 'apd28' , parentgroup: 'header2'},
+                    { text: 'Adjusment [KW 2]', align: 'center', name: 'apd29' , parentgroup: 'header2'},
+                    { text: 'Adjusment [KW 3]', align: 'center', name: 'apd30' , parentgroup: 'header2'},
                     { text: 'Stok Awal [KW 1]', align: 'center', name: 'apd4' , parentgroup: 'header2'},
                     { text: 'Stok Awal [KW 2]', align: 'center', name: 'apd5' , parentgroup: 'header2'},
                     { text: 'Stok Awal [KW 3]', align: 'center', name: 'apd6' , parentgroup: 'header2'}

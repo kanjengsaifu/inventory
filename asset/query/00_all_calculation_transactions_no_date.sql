@@ -1,4 +1,10 @@
 select a.id, a.nama, x.nama as buyer,
+  coalesce(h.Tkw1_selisih_k, 0) Tkw1_selisih_k, coalesce(h.Tkw1_selisih_s, 0) Tkw1_selisih_s, coalesce(h.Tkw1_selisih_b, 0) Tkw1_selisih_b,
+  coalesce(h.Tkw2_selisih_k, 0) Tkw2_selisih_k, coalesce(h.Tkw2_selisih_s, 0) Tkw2_selisih_s, coalesce(h.Tkw2_selisih_b, 0) Tkw2_selisih_b,
+  coalesce(h.Tkw3_selisih_k, 0) Tkw3_selisih_k, coalesce(h.Tkw3_selisih_s, 0) Tkw3_selisih_s, coalesce(h.Tkw3_selisih_b, 0) Tkw3_selisih_b,
+  coalesce(h.Pkw1_selisih_k, 0) Pkw1_selisih_k, coalesce(h.Pkw1_selisih_s, 0) Pkw1_selisih_s, coalesce(h.Pkw1_selisih_b, 0) Pkw1_selisih_b,
+  coalesce(h.Pkw2_selisih_k, 0) Pkw2_selisih_k, coalesce(h.Pkw2_selisih_s, 0) Pkw2_selisih_s, coalesce(h.Pkw2_selisih_b, 0) Pkw2_selisih_b,
+  coalesce(h.Pkw3_selisih_k, 0) Pkw3_selisih_k, coalesce(h.Pkw3_selisih_s, 0) Pkw3_selisih_s, coalesce(h.Pkw3_selisih_b, 0) Pkw3_selisih_b,
   sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1kP,
   sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1sP,
   sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1bP,
@@ -140,5 +146,30 @@ left join
   where deleted = 0
   group by id_decal_items
 ) g on a.id = g.id_decal_items
+left join
+(
+  select id_decal_items, 
+  sum( case when jenis_decal = 1 then Tkw1_selisih_k else 0 end) Tkw1_selisih_k,
+  sum( case when jenis_decal = 1 then Tkw1_selisih_s else 0 end) Tkw1_selisih_s,
+  sum( case when jenis_decal = 1 then Tkw1_selisih_b else 0 end) Tkw1_selisih_b,
+  sum( case when jenis_decal = 1 then Tkw2_selisih_k else 0 end) Tkw2_selisih_k,
+  sum( case when jenis_decal = 1 then Tkw2_selisih_s else 0 end) Tkw2_selisih_s,
+  sum( case when jenis_decal = 1 then Tkw2_selisih_b else 0 end) Tkw2_selisih_b,
+  sum( case when jenis_decal = 1 then Tkw3_selisih_k else 0 end) Tkw3_selisih_k,
+  sum( case when jenis_decal = 1 then Tkw3_selisih_s else 0 end) Tkw3_selisih_s,
+  sum( case when jenis_decal = 1 then Tkw3_selisih_b else 0 end) Tkw3_selisih_b,
+  sum( case when jenis_decal = 1 then Pkw1_selisih_k else 0 end) Pkw1_selisih_k,
+  sum( case when jenis_decal = 1 then Pkw1_selisih_s else 0 end) Pkw1_selisih_s,
+  sum( case when jenis_decal = 1 then Pkw1_selisih_b else 0 end) Pkw1_selisih_b,
+  sum( case when jenis_decal = 1 then Pkw2_selisih_k else 0 end) Pkw2_selisih_k,
+  sum( case when jenis_decal = 1 then Pkw2_selisih_s else 0 end) Pkw2_selisih_s,
+  sum( case when jenis_decal = 1 then Pkw2_selisih_b else 0 end) Pkw2_selisih_b,
+  sum( case when jenis_decal = 1 then Pkw3_selisih_k else 0 end) Pkw3_selisih_k,
+  sum( case when jenis_decal = 1 then Pkw3_selisih_s else 0 end) Pkw3_selisih_s,
+  sum( case when jenis_decal = 1 then Pkw3_selisih_b else 0 end) Pkw3_selisih_b
+  from decal_ahd
+  where deleted = 0
+  group by id_decal_items
+) h on a.id = h.id_decal_items
 where b.deleted = 0 
 group by a.id, a.nama, a.buyer
