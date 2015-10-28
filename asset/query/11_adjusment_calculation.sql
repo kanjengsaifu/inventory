@@ -1,73 +1,339 @@
 select a.id, a.nama, x.nama as buyer,
+											
+                                /*=========================================================TRANSIT========================================================*/
+                                /* stok total kw1 transit */
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0)) Tkw1_system_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_opname_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_selisih_k,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0)) Tkw1_system_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_opname_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_selisih_s,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0)) Tkw1_system_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_opname_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_selisih_b,
+                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0)) Tkw1_system_ksb,
+	                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Tkw1_opname_ksb,
+										     
+										  ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                             coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0)))-
+	                             ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))) Tkw1_selisih_ksb,   
+	                                
+	                           	/* stok total kw2 transit */
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0)) Tkw2_system_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_opname_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_selisih_k,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0)) Tkw2_system_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_opname_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_selisih_s,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0)) Tkw2_system_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_opname_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_selisih_b,
+                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0)) Tkw2_system_ksb,
+	                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Tkw2_opname_ksb,
+										     
+										  ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                             coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0)))-
+	                             ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))) Tkw2_selisih_ksb,
+                                
+	                        	  /* stok total kw3 transit */
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0)) Tkw3_system_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_opname_k,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_selisih_k,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0)) Tkw3_system_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_opname_s,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_selisih_s,
+                                
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0)) Tkw3_system_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_opname_b,
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0))-
+                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_selisih_b,
+                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0)) Tkw3_system_ksb,
+	                                
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Tkw3_opname_ksb,
+										     
+										  ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                             coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0)))-
+	                             ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                             (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))) Tkw3_selisih_ksb,
+	                                
+	                        	/*============================================GRAND TOTAL AREA PRODUCTION=================================================*/
+	                        	((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+											  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+											  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0)) +
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0)) +
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+											  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0))) GT_prod,
+	                           /*=========================================================PRODUKSI================================================*/
 											/* stok total kw1 produksi */
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
-										  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0)) STkw1kP,
+										  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0)) Pkw1_system_k,
+										  		/* opname total kw1 produksi */
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_opname_k,
+											   (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+										  		coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0))-
+										      (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_selisih_k,
+										      
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
-                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0)) STkw1sP,
+                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0)) Pkw1_system_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_opname_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                   coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_selisih_s,
+											  
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
-                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0)) STkw1bP,
+                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0)) Pkw1_system_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_opname_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+                                	  coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_selisih_b,
+											  
 	                                /* stok total kw1 ksb produksi */
 	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
 											  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0))+
 	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
 	                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0))+
 	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
-	                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0)) STkw1ksbP,
+	                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0)) Pkw1_system_ksb,
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end)) Pkw1_opname_ksb,
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+											  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0)))-
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw1 else 0 end))) Pkw1_selisih_ksb,
+	                                
                                 /* stok total kw2 produksi */
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
-										  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0)) STkw2kP,
+										  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0)) Pkw2_system_k,
+										  		/* opname total kw1 produksi */
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_opname_k,
+											   (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+										  		coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0))-
+										      (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_selisih_k,
+										      
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
-                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0)) STkw2sP,
+                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0)) Pkw2_system_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_opname_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                   coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_selisih_s,
+											  
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
-                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0)) STkw2bP,
-                                /* stok total kw3 produksi */
+                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0)) Pkw2_system_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_opname_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+                                	  coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_selisih_b,
+											  
+	                                /* stok total kw1 ksb produksi */
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+											  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0)) Pkw2_system_ksb,
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end)) Pkw2_opname_ksb,
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+											  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0)))-
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw2 else 0 end))) Pkw2_selisih_ksb,
+	                                
+                                /* stok total kw2 produksi */
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
-										  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0)) STkw3kP,
+										  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0)) Pkw3_system_k,
+										  		/* opname total kw1 produksi */
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_opname_k,
+											   (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+										  		coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0))-
+										      (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_selisih_k,
+										      
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
-                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0)) STkw3sP,
+                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0)) Pkw3_system_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_opname_s,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                   coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_selisih_s,
+											  
                                 (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
-                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0)) STkw3bP,
-                                
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1kT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1sT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end) Fokw1bT,
-                                
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end) Fokw2kT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end) Fokw2sT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end) Fokw2bT,
-                                
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end) Fokw3kT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end) Fokw3sT,
-                                sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end) Fokw3bT,
-                                
-                                coalesce(c.Pkw1s, 0) Pkw1s, coalesce(c.Pkw1b, 0) Pkw1b,
-                                coalesce(c.Pkw2k, 0) Pkw2k, coalesce(c.Pkw2s, 0) Pkw2s, coalesce(c.Pkw2b, 0) Pkw2b,
-                                coalesce(c.Pkw3k, 0) Pkw3k, coalesce(c.Pkw3s, 0) Pkw3s, coalesce(c.Pkw3b, 0) Pkw3b,
-                                
-                                coalesce(d.Tkw1s, 0) Tkw1s, coalesce(d.Tkw1b, 0) Tkw1b,
-                                coalesce(d.Tkw2k, 0) Tkw2k, coalesce(d.Tkw2s, 0) Tkw2s, coalesce(d.Tkw2b, 0) Tkw2b,
-                                coalesce(d.Tkw3k, 0) Tkw3k, coalesce(d.Tkw3s, 0) Tkw3s, coalesce(d.Tkw3b, 0) Tkw3b,
-                                
-                                coalesce(e.Ukw1k, 0) Ukw1k, coalesce(e.Ukw1s, 0) Ukw1s, coalesce(e.Ukw1b, 0) Ukw1b,
-                                coalesce(e.Ukw2k, 0) Ukw2k, coalesce(e.Ukw2s, 0) Ukw2s, coalesce(e.Ukw2b, 0) Ukw2b,
-                                coalesce(e.Ukw3k, 0) Ukw3k, coalesce(e.Ukw3s, 0) Ukw3s, coalesce(e.Ukw3b, 0) Ukw3b,
-                                
-                                coalesce(f.Rkw1k, 0) Rkw1k, coalesce(f.Rkw1s, 0) Rkw1s, coalesce(f.Rkw1b, 0) Rkw1b,
-                                coalesce(f.Rkw2k, 0) Rkw2k, coalesce(f.Rkw2s, 0) Rkw2s, coalesce(f.Rkw2b, 0) Rkw2b,
-                                coalesce(f.Rkw3k, 0) Rkw3k, coalesce(f.Rkw3s, 0) Rkw3s, coalesce(f.Rkw3b, 0) Rkw3b,
-                                
-                                coalesce(f.RPkw1s, 0) RPkw1s, coalesce(f.RPkw1b, 0) RPkw1b,
-                                coalesce(f.RPkw2k, 0) RPkw2k, coalesce(f.RPkw2s, 0) RPkw2s, coalesce(f.RPkw2b, 0) RPkw2b,
-                                coalesce(f.RPkw3k, 0) RPkw3k, coalesce(f.RPkw3s, 0) RPkw3s, coalesce(f.RPkw3b, 0) RPkw3b,
-                                
-                                coalesce(g.Skw1sP, 0) Skw1sP, coalesce(g.Skw1bP, 0) Skw1bP,
-                                coalesce(g.Skw2kP, 0) Skw2kP, coalesce(g.Skw2sP, 0) Skw2sP, coalesce(g.Skw2bP, 0) Skw2bP,
-                                coalesce(g.Skw3kP, 0) Skw3kP, coalesce(g.Skw3sP, 0) Skw3sP, coalesce(g.Skw3bP, 0) Skw3bP,
-                                
-                                coalesce(g.Skw1kT, 0) Skw1kT, coalesce(g.Skw1sT, 0) Skw1sT, coalesce(g.Skw1bT, 0) Skw1bT,
-                                coalesce(g.Skw2kT, 0) Skw2kT, coalesce(g.Skw2sT, 0) Skw2sT, coalesce(g.Skw2bT, 0) Skw2bT,
-                                coalesce(g.Skw3kT, 0) Skw3kT, coalesce(g.Skw3sT, 0) Skw3sT, coalesce(g.Skw3bT, 0) Skw3bT
-                                
+                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0)) Pkw3_system_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_opname_b,
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+                                	  coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0))-
+											  (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_selisih_b,
+											  
+	                                /* stok total kw1 ksb produksi */
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+											  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0)) Pkw3_system_ksb,
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end)) Pkw3_opname_ksb,
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+											  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0)))-
+	                                ((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-11-11'  then b.kw3 else 0 end))) Pkw3_selisih_ksb,     
+	                        	/*============================================GRAND TOTAL AREA TRANSIT====================================================*/
+	                        	((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0))+
+	                           (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0))) GT_trans,
+										/*============================================GRAND TOTAL AREA PRODUCTION=================================================*/
+	                        	((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+											  coalesce(c.Pkw1k, 0) + coalesce(f.RPkw1k, 0))-(coalesce(d.Tkw1k, 0)+coalesce(g.Skw1kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1s, 0) + coalesce(f.RPkw1s, 0))-(coalesce(d.Tkw1s, 0)+coalesce(g.Skw1sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(c.Pkw1b, 0) + coalesce(f.RPkw1b, 0))-(coalesce(d.Tkw1b, 0)+coalesce(g.Skw1bP, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+											  coalesce(c.Pkw2k, 0) + coalesce(f.RPkw2k, 0))-(coalesce(d.Tkw2k, 0)+coalesce(g.Skw2kP, 0)) +
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2s, 0) + coalesce(f.RPkw2s, 0))-(coalesce(d.Tkw2s, 0)+coalesce(g.Skw2sP, 0)) +
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(c.Pkw2b, 0) + coalesce(f.RPkw2b, 0))-(coalesce(d.Tkw2b, 0)+coalesce(g.Skw2bP, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+											  coalesce(c.Pkw3k, 0) + coalesce(f.RPkw3k, 0))-(coalesce(d.Tkw3k, 0)+coalesce(g.Skw3kP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3s, 0) + coalesce(f.RPkw3s, 0))-(coalesce(d.Tkw3s, 0)+coalesce(g.Skw3sP, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 3 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(c.Pkw3b, 0) + coalesce(f.RPkw3b, 0))-(coalesce(d.Tkw3b, 0)+coalesce(g.Skw3bP, 0)))+
+	                        	((sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1k, 0) + coalesce(f.Rkw1k, 0))-(coalesce(e.Ukw1k, 0)+coalesce(g.Skw1kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1s, 0) + coalesce(f.Rkw1s, 0))-(coalesce(e.Ukw1s, 0)+coalesce(g.Skw1sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw1 else 0 end)+
+	                                coalesce(d.Tkw1b, 0) + coalesce(f.Rkw1b, 0))-(coalesce(e.Ukw1b, 0)+coalesce(g.Skw1bT, 0))+
+	                           (sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2k, 0) + coalesce(f.Rkw2k, 0))-(coalesce(e.Ukw2k, 0)+coalesce(g.Skw2kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2s, 0) + coalesce(f.Rkw2s, 0))-(coalesce(e.Ukw2s, 0)+coalesce(g.Skw2sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw2 else 0 end)+
+	                                coalesce(d.Tkw2b, 0) + coalesce(f.Rkw2b, 0))-(coalesce(e.Ukw2b, 0)+coalesce(g.Skw2bT, 0))+
+										(sum(case when b.jenis_decal = 1 and b.size_kat = 6 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3k, 0) + coalesce(f.Rkw3k, 0))-(coalesce(e.Ukw3k, 0)+coalesce(g.Skw3kT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 7 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3s, 0) + coalesce(f.Rkw3s, 0))-(coalesce(e.Ukw3s, 0)+coalesce(g.Skw3sT, 0))+
+	                                (sum(case when b.jenis_decal = 1 and b.size_kat = 8 and b.area = 4 and b.tgli = '2015-10-11'  then b.kw3 else 0 end)+
+	                                coalesce(d.Tkw3b, 0) + coalesce(f.Rkw3b, 0))-(coalesce(e.Ukw3b, 0)+coalesce(g.Skw3bT, 0))) GT_prod_trans	  	       
                               from decal_items a
                               left join global_buyer x on a.buyer = x.id
                               left join decal_ohd b
@@ -170,5 +436,5 @@ select a.id, a.nama, x.nama as buyer,
                                 where deleted = 0
                                 group by id_decal_items
                               ) g on a.id = g.id_decal_items
-                              where a.id ='D0001' and b.deleted = 0 and a.jenis = 1
+                              where b.deleted = 0 and a.jenis = 1
                               group by a.id, a.nama, a.buyer

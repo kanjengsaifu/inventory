@@ -858,15 +858,15 @@ class Dclmodel extends CI_Model {
                               left join
                               (
                                 select id_decal_items, 
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Pkw1k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Pkw1s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Pkw1b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Pkw2k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Pkw2s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Pkw2b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Pkw3k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Pkw3s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Pkw3b
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Pkw1k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Pkw1s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Pkw1b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Pkw2k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Pkw2s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Pkw2b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Pkw3k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Pkw3s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Pkw3b
                                 from decal_phd
                                 where deleted = 0
                                 group by id_decal_items
@@ -874,15 +874,15 @@ class Dclmodel extends CI_Model {
                               left join
                               (
                                 select id_decal_items, 
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Tkw1k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Tkw1s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Tkw1b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Tkw2k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Tkw2s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Tkw2b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Tkw3k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Tkw3s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Tkw3b
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Tkw1k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Tkw1s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Tkw1b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Tkw2k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Tkw2s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Tkw2b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Tkw3k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Tkw3s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Tkw3b
                                 from decal_thd
                                 where deleted = 0
                                 group by id_decal_items
@@ -890,15 +890,15 @@ class Dclmodel extends CI_Model {
                               left join
                               (
                                 select id_decal_items, 
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Ukw1k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Ukw1s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Ukw1b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Ukw2k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Ukw2s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Ukw2b,
-                                sum( case when jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Ukw3k,
-                                sum( case when jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Ukw3s,
-                                sum( case when jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Ukw3b
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Ukw1k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Ukw1s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Ukw1b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Ukw2k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Ukw2s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Ukw2b,
+                                sum( case when jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Ukw3k,
+                                sum( case when jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Ukw3s,
+                                sum( case when jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Ukw3b
                                 from decal_uhd
                                 where deleted = 0
                                 group by id_decal_items
@@ -906,24 +906,24 @@ class Dclmodel extends CI_Model {
                               left join
                               (
                                 select id_decal_items, 
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Rkw1k,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Rkw1s,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Rkw1b,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Rkw2k,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Rkw2s,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Rkw2b,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Rkw3k,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Rkw3s,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Rkw3b,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) RPkw1k,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) RPkw1s,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) RPkw1b,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) RPkw2k,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) RPkw2s,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) RPkw2b,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) RPkw3k,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) RPkw3s,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) RPkw3b
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Rkw1k,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Rkw1s,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Rkw1b,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Rkw2k,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Rkw2s,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Rkw2b,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Rkw3k,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Rkw3s,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Rkw3b,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) RPkw1k,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) RPkw1s,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) RPkw1b,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) RPkw2k,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) RPkw2s,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) RPkw2b,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) RPkw3k,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) RPkw3s,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) RPkw3b
                                 from decal_rhd
                                 where deleted = 0
                                 group by id_decal_items
@@ -931,29 +931,29 @@ class Dclmodel extends CI_Model {
                               left join
                               (
                                 select id_decal_items, 
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Skw1kP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Skw1sP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Skw1bP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Skw2kP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Skw2sP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Skw2bP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Skw3kP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Skw3sP,
-                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Skw3bP,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw1 else 0 end) Skw1kT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw1 else 0 end) Skw1sT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw1 else 0 end) Skw1bT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw2 else 0 end) Skw2kT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw2 else 0 end) Skw2sT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw2 else 0 end) Skw2bT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 then kw3 else 0 end) Skw3kT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 then kw3 else 0 end) Skw3sT,
-                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 then kw3 else 0 end) Skw3bT
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1kP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1sP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1bP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2kP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2sP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2bP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3kP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3sP,
+                                sum( case when area = 3 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3bP,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1kT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1sT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw1 else 0 end) Skw1bT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2kT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2sT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw2 else 0 end) Skw2bT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 6 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3kT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 7 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3sT,
+                                sum( case when area = 4 and jenis_decal = 1 and size_kat = 8 and tgli between '2015-10-12 18:00:00' and '2015-11-11 18:00:00' then kw3 else 0 end) Skw3bT
                                 from decal_shd
                                 where deleted = 0
                                 group by id_decal_items
                               ) g on a.id = g.id_decal_items
-                              where b.deleted = 0 
+                              where b.deleted = 0 and a.jenis = 1
                               group by a.id, a.nama, a.buyer";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();

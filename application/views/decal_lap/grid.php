@@ -210,7 +210,7 @@
                                 var Used1 = parseFloat(rowdata.Ukw1k) + parseFloat(rowdata.Ukw1s)+ parseFloat(rowdata.Ukw1b);
                                 var Used = Used1+Used2+Used3;
                                 var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
-                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw1b);
+                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw2b);
                                 var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
                                 var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
                                 var Tscrap = Tscrap1+Tscrap2+Tscrap3;
@@ -245,7 +245,7 @@
                                 var Used1 = parseFloat(rowdata.Ukw1k) + parseFloat(rowdata.Ukw1s)+ parseFloat(rowdata.Ukw1b);
                                 var Used = Used1+Used2+Used3;
                                 var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
-                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw1b);
+                                var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw2b);
                                 var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
                                 var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
                                 var Tscrap = Tscrap1+Tscrap2+Tscrap3;
