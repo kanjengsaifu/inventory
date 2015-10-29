@@ -209,12 +209,16 @@
                                 var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
                                 var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
                                 var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Padj1 = parseFloat(rowdata.Pkw1_selisih_k) + parseFloat(rowdata.Pkw1_selisih_s)+ parseFloat(rowdata.Pkw1_selisih_b);
+                                var Padj2 = parseFloat(rowdata.Pkw2_selisih_k) + parseFloat(rowdata.Pkw2_selisih_s)+ parseFloat(rowdata.Pkw2_selisih_b);
+                                var Padj3 = parseFloat(rowdata.Pkw3_selisih_k) + parseFloat(rowdata.Pkw3_selisih_s)+ parseFloat(rowdata.Pkw3_selisih_b);
+                                var Padj = Padj1 + Padj2 + Padj3;
                                 var Pstok_awal = Pstok_awal1+Pstok_awal2+Pstok_awal3;
                                 var Pscrap = Pscrap1+Pscrap2+Pscrap3;
                                 var Pproduksi = Pproduksi1+Pproduksi2+Pproduksi3;
                                 var Transit = Transit1+Transit2+Transit3;
                                 var Pretur = Pretur1+Pretur2+Pretur3;
-                                var Ptotal = (Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit);
+                                var Ptotal = ((Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit))-Padj;
                                 //===========================================================
                                 var Tstok_awal1 = parseFloat(rowdata.Fokw1kT) + parseFloat(rowdata.Fokw1sT)+ parseFloat(rowdata.Fokw1bT);
                                 var Tstok_awal2 = parseFloat(rowdata.Fokw2kT) + parseFloat(rowdata.Fokw2sT)+ parseFloat(rowdata.Fokw2bT);
@@ -232,11 +236,15 @@
                                 var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
                                 var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw2b);
                                 var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
+                                var Tadj1 = parseFloat(rowdata.Tkw1_selisih_k) + parseFloat(rowdata.Tkw1_selisih_s)+ parseFloat(rowdata.Tkw1_selisih_b);
+                                var Tadj2 = parseFloat(rowdata.Tkw2_selisih_k) + parseFloat(rowdata.Tkw2_selisih_s)+ parseFloat(rowdata.Tkw2_selisih_b);
+                                var Tadj3 = parseFloat(rowdata.Tkw3_selisih_k) + parseFloat(rowdata.Tkw3_selisih_s)+ parseFloat(rowdata.Tkw3_selisih_b);
+                                var Tadj = Tadj1 + Tadj2 + Tadj3;
                                 var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
                                 var Tscrap = Tscrap1+Tscrap2+Tscrap3;
                                 var Transit = Transit1+Transit2+Transit3;
                                 var Tretur = Tretur1+Tretur2+Tretur3;
-                                var Ttotal = (Tstok_awal+Transit+Tretur)-(Tscrap+Used);
+                                var Ttotal = ((Tstok_awal+Transit+Tretur)-(Tscrap+Used))-Tadj;
                                 var total = Ptotal+Ttotal;
                                 
                                 if (total < 10) {
@@ -267,11 +275,15 @@
                                 var Tretur3 = parseFloat(rowdata.Rkw3k) + parseFloat(rowdata.Rkw3s)+ parseFloat(rowdata.Rkw3b);
                                 var Tretur2 = parseFloat(rowdata.Rkw2k) + parseFloat(rowdata.Rkw2s)+ parseFloat(rowdata.Rkw2b);
                                 var Tretur1 = parseFloat(rowdata.Rkw1k) + parseFloat(rowdata.Rkw1s)+ parseFloat(rowdata.Rkw1b);
+                                var Tadj1 = parseFloat(rowdata.Tkw1_selisih_k) + parseFloat(rowdata.Tkw1_selisih_s)+ parseFloat(rowdata.Tkw1_selisih_b);
+                                var Tadj2 = parseFloat(rowdata.Tkw2_selisih_k) + parseFloat(rowdata.Tkw2_selisih_s)+ parseFloat(rowdata.Tkw2_selisih_b);
+                                var Tadj3 = parseFloat(rowdata.Tkw3_selisih_k) + parseFloat(rowdata.Tkw3_selisih_s)+ parseFloat(rowdata.Tkw3_selisih_b);
+                                var Tadj = Tadj1 + Tadj2 + Tadj3;
                                 var Tstok_awal = Tstok_awal1+Tstok_awal2+Tstok_awal3;
                                 var Tscrap = Tscrap1+Tscrap2+Tscrap3;
                                 var Transit = Transit1+Transit2+Transit3;
                                 var Tretur = Tretur1+Tretur2+Tretur3;
-                                var total = (Tstok_awal+Transit+Tretur)-(Tscrap+Used);
+                                var total = ((Tstok_awal+Transit+Tretur)-(Tscrap+Used))-Tadj;
                                 if (total < 10) {
                                     return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
                                 }
@@ -299,12 +311,16 @@
                                 var Transit3 = parseFloat(rowdata.Tkw3k) + parseFloat(rowdata.Tkw3s)+ parseFloat(rowdata.Tkw3b);
                                 var Transit2 = parseFloat(rowdata.Tkw2k) + parseFloat(rowdata.Tkw2s)+ parseFloat(rowdata.Tkw2b);
                                 var Transit1 = parseFloat(rowdata.Tkw1k) + parseFloat(rowdata.Tkw1s)+ parseFloat(rowdata.Tkw1b);
+                                var Padj1 = parseFloat(rowdata.Pkw1_selisih_k) + parseFloat(rowdata.Pkw1_selisih_s)+ parseFloat(rowdata.Pkw1_selisih_b);
+                                var Padj2 = parseFloat(rowdata.Pkw2_selisih_k) + parseFloat(rowdata.Pkw2_selisih_s)+ parseFloat(rowdata.Pkw2_selisih_b);
+                                var Padj3 = parseFloat(rowdata.Pkw3_selisih_k) + parseFloat(rowdata.Pkw3_selisih_s)+ parseFloat(rowdata.Pkw3_selisih_b);
+                                var Padj = Padj1 + Padj2 + Padj3;
                                 var Pstok_awal = Pstok_awal1+Pstok_awal2+Pstok_awal3;
                                 var Pscrap = Pscrap1+Pscrap2+Pscrap3;
                                 var Pproduksi = Pproduksi1+Pproduksi2+Pproduksi3;
                                 var Transit = Transit1+Transit2+Transit3;
                                 var Pretur = Pretur1+Pretur2+Pretur3;
-                                var total = (Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit);
+                                var total = ((Pstok_awal+Pproduksi+Pretur)-(Pscrap+Transit))-Padj;
                                 if (total < 10) {
                                     return "<div style='margin: 4px; color: #ff0000;' class='jqx-right-align'>" + total + "</div>";
                                 }
