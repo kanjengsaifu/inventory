@@ -15,18 +15,15 @@
         datatype: "json",
         datafields: [
                         { name: 'id' },
+                        { name: 'buyer' },
                         { name: 'nama' },
                         { name: 'alias' },
-                        { name: 'jenis' },
-                        { name: 'buyer' },
-                        { name: 'material' },
-                        { name: 'forming' },
-                        { name: 'shape' },
-                        { name: 'item' },
                         { name: 'dekorasi' },
                         { name: 'size' },
                         { name: 'satuan' },
-                        { name: 'status' }
+                        { name: 'jenis' },
+                        { name: 'tgl_insert' },
+                        { name: 'tgl_update' }
         ],
         url: '<?php echo base_url().'index.php/decal/ldg'?>'
     };
@@ -55,18 +52,13 @@
                         { text: 'Aksi', align: 'center', datafield: 'edit', filterable: false, width: 150,
                           cellsalign: 'center', cellsrenderer: button_renderer, editable: false, exportable: false },
                         { text: 'Kode Decal', datafield: 'id', width: 90 },
-                        { text: 'Nama Decal', datafield: 'nama', width: 110 },
-                        { text: 'Alias', datafield: 'alias', width: 50 },
-                        { text: 'Jenis', datafield: 'jenis', width: 100 },
-                        { text: 'Nama Buyer', datafield: 'buyer', width: 130 },
-                        { text: 'Material', datafield: 'material', width: 90 },
-                        { text: 'Forming', datafield: 'forming', width: 70 },
-                        { text: 'Shape', datafield: 'shape', width: 55 },
-                        { text: 'Item', datafield: 'item', width: 200 },
-                        { text: 'Dekorasi', datafield: 'dekorasi', width: 70 },
-                        { text: 'Ukuran', datafield: 'size', width: 80 },
-                        { text: 'Satuan', datafield: 'satuan', width: 70 },
-                        { text: 'Status', datafield: 'status', width: 100 }
+                        { text: 'Buyer', datafield: 'buyer', width: 110 },
+                        { text: 'Nama Decal', datafield: 'nama', width: 50 },
+                        { text: 'Alias', datafield: 'alias', width: 100 },
+                        { text: 'Jenis Dekorasi', datafield: 'dekorasi', width: 130 },
+                        { text: 'Ukuran Kertas', datafield: 'size', width: 130 },
+                        { text: 'Tanggal Insert', datafield: 'tgl_insert', width: 90 },
+                        { text: 'Tanggal Update', datafield: 'tgl_update', width: 70 }
         ]
     });
 });

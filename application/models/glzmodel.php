@@ -532,9 +532,10 @@ class Glzmodel extends CI_Model {
 
                                 REPLACE(FORMAT((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),2),',','') stok_bgps,
                                 REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=3 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),2),',','') stok_supply,
-
-                                REPLACE(FORMAT(GREATEST(REPLACE(FORMAT(coalesce(c.turun_bgps, 0) - coalesce(d.ditarik_supply, 0),2),',','') + 
-                                REPLACE(FORMAT((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0)) - coalesce(f.kirim_prod, 0),2),',',''),',',''),2),',','') total
+                                
+                                 REPLACE(FORMAT((GREATEST((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),',','')+
+                                GREATEST(((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=3 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),',','')),2),',','') total
+                                
                         from glasir a
                         left join glasir_ohd b
                           on a.id_glasir = b.id_glasir

@@ -131,21 +131,12 @@ class Dclmodel extends CI_Model {
 	}
         
         public function get_ldg(){
-                $query ="SELECT a.id, a.nama, a.alias,b.nama as buyer, c.dsc as material, d.dsc as forming, e.nama as shape, 
-                            f.nama as item, g.dsc as dekorasi, h.nama as size, i.nama as jenis, a.satuan, a.parent, k.status
-                            FROM decal_items a
-                            LEFT JOIN global_buyer b ON b.id  = a.buyer
-                            LEFT JOIN global_material c ON c.id  = a.material
-                            LEFT JOIN global_forming d ON d.id  = a.forming
-                            LEFT JOIN global_shape e ON e.id  = a.shape
-                            LEFT JOIN global_items_kategori f ON f.id  = a.item
-                            LEFT JOIN global_dekorasi g ON g.id  = a.dekorasi
-                            LEFT JOIN global_size h ON h.id  = a.size
-                            LEFT JOIN global_jenis_decal i ON i.id  = a.jenis
-                            LEFT JOIN global_detail j ON j.id_related = a.id
-                            LEFT JOIN glasir_status k ON j.`status` = k.id
-                            WHERE j.deleted = 0
-                            ORDER BY a.id";
+                $query ="select a.id,b.nama as buyer,a.nama,a.alias, c.nama as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.tgl_insert,a.tgl_update 
+                            from decal_items a
+                            left join global_buyer b on a.buyer = b.id
+                            left join global_dekorasi c on a.dekorasi = c.id
+                            left join global_size d on a.size = d.id
+                            left join global_jenis_decal e on a.jenis = e.id";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;
