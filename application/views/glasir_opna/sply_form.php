@@ -251,12 +251,12 @@
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan</td>
+        <td width="150">Keterangan/Status</td>
         <td width="5">:</td>
         <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
     </tr>
     <tr>    
-        <td>Kasie/Wasie Prod</td>
+        <td>Petugas</td>
         <td>:</td>
         <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
     </tr>

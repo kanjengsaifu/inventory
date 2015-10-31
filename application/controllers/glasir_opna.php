@@ -103,7 +103,7 @@ class Glasir_opna extends CI_Controller {
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%' OR nama_bm like '%Tanker%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_opna/bgps_form', $d, true);		
@@ -142,7 +142,7 @@ class Glasir_opna extends CI_Controller {
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
                         $mpr = "SELECT * FROM global_mesin where jns_bm like '%glasir%'";
 			$d['l_mpr'] = $this->glzModel->manualQuery($mpr);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%' OR nama_bm like '%Tanker%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 			
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		
@@ -400,7 +400,7 @@ class Glasir_opna extends CI_Controller {
                         
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%' OR nama_bm like '%Tanker%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_opna/bgps_form', $d, true);		
@@ -443,7 +443,7 @@ class Glasir_opna extends CI_Controller {
                         
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Ball Mill%' OR nama_bm like '%Tidak Ada%' OR nama_bm like '%Tong%' OR nama_bm like '%Tanker%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
 									
 			$d['content'] = $this->load->view('glasir_opna/sply_form', $d, true);		
@@ -464,7 +464,8 @@ class Glasir_opna extends CI_Controller {
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id
                                     JOIN global_mesin e ON a.id_bm = e.id_bm
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2 AND a.deleted <>1";
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2 AND a.deleted <>1
+                                    order by a.tgl_insert desc";    
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_opna/bgps_detail',$d);
@@ -484,7 +485,8 @@ class Glasir_opna extends CI_Controller {
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id
                                     JOIN global_mesin e ON a.id_bm = e.id_bm
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=3 AND a.deleted <>1";
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=3 AND a.deleted <>1
+                                    order by a.tgl_insert desc";    
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_opna/sply_detail',$d);

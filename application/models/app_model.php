@@ -136,7 +136,7 @@ class App_Model extends CI_Model {
 	}
         
         public function CariGlasirStatus($id){
-		$t = "SELECT * FROM glasir_status WHERE id_status='$id'";
+		$t = "SELECT * FROM glasir_status WHERE id='$id'";
 		$d = $this->app_model->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){

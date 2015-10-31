@@ -138,12 +138,12 @@ $(document).ready(function(){
     <?php } 
 			$data = $this->app_model->status_glasir();
 			foreach($data->result() as $dt){					
-				if($status==$dt->id_status){
+				if($status==$dt->id){
 	?>
-    			<option	 value="<?php echo $dt->id_status;?>" selected="selected"><?php echo $dt->status;?></option>
+    			<option	 value="<?php echo $dt->id;?>" selected="selected"><?php echo $dt->status;?></option>
     <?php		}else{ ?>
     			
-    			<option	 value="<?php echo $dt->id_status;?>"><?php echo $dt->status;?></option>
+    			<option	 value="<?php echo $dt->id;?>"><?php echo $dt->status;?></option>
     <?php 		}
 			}
 	?>		

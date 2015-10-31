@@ -34,7 +34,7 @@ function pilih(id){
 	if($data->num_rows()>0){
 		$no =1;
 		foreach($data->result_array() as $db){ 
-		$status = $this->app_model->CariGlasirStatus($db['status']); 
+		$status = $this->glzModel->CariGlasirStatus($db['status']); 
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
