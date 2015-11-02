@@ -20,7 +20,7 @@ select a.id_glasir, a.nama_glasir,
                         left join
                         (
                           select id_glasir, 
-                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl between '2015-09-16' AND '2015-10-30' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') turun_bgps
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '2015-09-16 18:00:00' AND '2015-10-30 18:00:00' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') turun_bgps
                           from glasir_phd
                           where deleted = 0
                           group by id_glasir
@@ -36,7 +36,7 @@ select a.id_glasir, a.nama_glasir,
                         left join
                         (
                           select id_glasir, 
-                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl between '2015-09-16' AND '2015-10-30' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') return_prod
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '2015-09-16 18:00:00' AND '2015-10-30 18:00:00' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') return_prod
                           from glasir_rhd
                           where deleted = 0
                           group by id_glasir
@@ -44,7 +44,7 @@ select a.id_glasir, a.nama_glasir,
                         left join
                         (
                           select id_glasir, 
-                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl between '2015-09-16' AND '2015-10-30' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') kirim_prod
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '2015-09-16 18:00:00' AND '2015-10-30 18:00:00' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') kirim_prod
                           from glasir_thd
                           where deleted = 0
                           group by id_glasir
