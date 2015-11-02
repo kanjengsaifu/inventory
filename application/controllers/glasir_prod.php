@@ -200,7 +200,7 @@ class Glasir_prod extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
-                $id_d['idphd']      = $this->input->post('batch');
+                                $id_d['idphd']      = $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_ph",$id);
 				if($data->num_rows()>0){

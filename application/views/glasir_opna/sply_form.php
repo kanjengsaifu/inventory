@@ -47,13 +47,28 @@
 	}
 	        
         $("#tgl").datepicker({
-			dateFormat:"dd-mm-yy"
+                        dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,3],
+                        showCurrentAtPos: 5,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
 	$("#tglp").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,4],
+                        showCurrentAtPos: 8,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         $("#tglb").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,4],
+                        showCurrentAtPos: 8,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         
 	$("#id_glasir").focus();
@@ -362,7 +377,7 @@
         <td><input type="text" name="vsc" id="vsc" class="detail" size="20" maxlength="20"</td>
     </tr>
      <tr>    
-        <td>Stok Opname (Kg)</td>
+        <td>Berat Kering (Kg)</td>
         <td>:</td>
         <td><input type="text" name="bkg" id="bkg" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
     </tr>

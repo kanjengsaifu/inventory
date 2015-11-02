@@ -222,9 +222,9 @@ class Glasir_opna extends CI_Controller {
                                 $ud['densitas']         = $this->input->post('densitas');
                                 //$ud['sts']              = $this->input->post('sts');
                                 //$ud['selisih']          = $this->input->post('selisih');
-				$ud['bkg']          	= $this->input->post('bkg');
+				//$ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
-                                $ud['area']             = 2;
+                                $ud['area']             = 1;
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -281,9 +281,9 @@ class Glasir_opna extends CI_Controller {
                                 $ud['densitas']         = $this->input->post('densitas');
                                 //$ud['sts']              = $this->input->post('sts');
                                 //$ud['selisih']          = $this->input->post('selisih');
-                                $ud['bkg']          	= $this->input->post('bkg');
+                                //$ud['bkg']          	= $this->input->post('bkg');
                                 $ud['vsc']              = $this->input->post('vsc');
-                                $ud['area']             = 3;
+                                $ud['area']             = 2;
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['no_prod']          = $this->input->post('no_prod');
@@ -459,13 +459,13 @@ class Glasir_opna extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama as area,e.nama_bm,a.idthd,d.nama as shift,a.tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
+			$text = "SELECT a.no_prod,c.nama as area,e.nama_bm,a.idthd,d.nama as shift,a.tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
                                     FROM glasir_ohd a
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id
                                     JOIN global_mesin e ON a.id_bm = e.id_bm
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2 AND a.deleted <>1
-                                    order by a.tgl_insert desc";    
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=1 AND a.deleted <>1
+                                    order by a.idthd desc";    
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_opna/bgps_detail',$d);
@@ -480,13 +480,13 @@ class Glasir_opna extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.no_prod,a.sts,a.selisih,c.nama as area,e.nama_bm,a.idthd,d.nama as shift,tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
+			$text = "SELECT a.no_prod,c.nama as area,e.nama_bm,a.idthd,d.nama as shift,tglp,a.tglb,a.tgl,TIME_FORMAT(a.jam,'%H:%i') as jam,a.id_glasir,b.nama_glasir,a.volume,a.densitas,a.vsc,a.dsc,a.petugas,a.inputer
                                     FROM glasir_ohd a
                                     JOIN glasir b ON a.id_glasir = b.id_glasir
                                     JOIN global_area c ON a.area = c.id
                                     JOIN global_mesin e ON a.id_bm = e.id_bm
-                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=3 AND a.deleted <>1
-                                    order by a.tgl_insert desc";    
+                                    JOIN global_shift d ON a.shift = d.id WHERE a.no_prod='$id' AND a.area=2 AND a.deleted <> 1
+                                    order by a.idthd desc";    
 			$d['data']= $this->glzModel->manualQuery($text);
 
 			$this->load->view('glasir_opna/sply_detail',$d);

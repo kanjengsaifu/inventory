@@ -1,0 +1,1 @@
+update glasir_thd set tgl_combine = concat(tgl,' ',jam)

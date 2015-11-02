@@ -46,13 +46,28 @@
 	}
 	        
         $("#tgl").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,3],
+                        showCurrentAtPos: 5,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         $("#tglp").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,4],
+                        showCurrentAtPos: 8,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         $("#tglb").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,4],
+                        showCurrentAtPos: 8,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
 	
 	$("#id_glasir").focus();
