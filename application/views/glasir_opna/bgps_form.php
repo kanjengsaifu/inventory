@@ -95,6 +95,7 @@
 			dataType : "json",
 			success	: function(data){
 				$("#nama_glasir").val(data.nama_glasir);
+                                $("#parent").val(data.parent);
                                 
 			}
 		});
@@ -344,6 +345,11 @@
         <td>Nama Glasir</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50" readonly="readonly"/></td>
+    </tr>
+    <tr>    
+        <td>Kode Induk Glasir</td>
+        <td>:</td>
+        <td><input readonly="readonly" type="text" name="parent" id="parent"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
         <td>Volume (liter)</td>

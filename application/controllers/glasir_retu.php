@@ -102,6 +102,7 @@ class Glasir_retu extends CI_Controller {
                         $d['batch']	= '';
                         $d['petugas3']	= '';
                         $d['petugas4']	= '';
+                        $d['parent']	= '';
                         $d['dsc']	= '';
                         $d['tgl']	= '';
                         $d['jam']	= '';
@@ -192,6 +193,7 @@ class Glasir_retu extends CI_Controller {
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas1']         = $this->input->post('petugas1');
                                 $ud['petugas2']         = $this->input->post('petugas2');
+                                $ud['parent_id']        = $this->input->post('parent');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tglp']              = $this->app_model->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']              = $this->app_model->tgl_sql($this->input->post('tglb'));
@@ -314,6 +316,7 @@ class Glasir_retu extends CI_Controller {
                                         $d['batch']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['jam']	= '';
                                         $d['shift']	= '';
@@ -332,6 +335,7 @@ class Glasir_retu extends CI_Controller {
                                         $d['batch']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';

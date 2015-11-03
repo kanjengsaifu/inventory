@@ -501,6 +501,20 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function CariParentName($id){
+		$t = "SELECT * FROM glasir WHERE id_glasir='$id'";
+		$d = $this->app_model->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
         public function CariGlasirTglp($id){
 		$t = "SELECT * FROM glasir WHERE id_glasir='$id'";
 		$d = $this->app_model->manualQuery($t);
@@ -516,7 +530,9 @@ class Glzmodel extends CI_Model {
 	}
         
          public function get_ldg(){
-                $query ="select id_glasir,nama_glasir,nama_alias,satuan,status,inputer,tgl_input,tgl_update FROM glasir WHERE deleted <> 1 ";
+                $query ="select a.id_glasir,a.parent,a.nama_glasir,a.nama_alias,a.satuan,b.status as status,a.inputer,a.tgl_input,a.tgl_update 
+                            FROM glasir a left join glasir_status b on a.status = b.id
+                            WHERE a.deleted <> 1 ";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

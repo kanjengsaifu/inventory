@@ -94,6 +94,7 @@ class Glasir_opna extends CI_Controller {
 			$d['no_prod']	= $no_prod;
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
+                        $d['parent']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -133,6 +134,7 @@ class Glasir_opna extends CI_Controller {
 			$d['no_prod']	= $no_prod;
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
+                        $d['parent']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -220,6 +222,7 @@ class Glasir_opna extends CI_Controller {
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
+                                $ud['parent_id']        = $this->input->post('parent');
                                 //$ud['sts']              = $this->input->post('sts');
                                 //$ud['selisih']          = $this->input->post('selisih');
 				//$ud['bkg']          	= $this->input->post('bkg');
@@ -279,6 +282,7 @@ class Glasir_opna extends CI_Controller {
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
+                                $ud['parent_id']        = $this->input->post('parent');
                                 //$ud['sts']              = $this->input->post('sts');
                                 //$ud['selisih']          = $this->input->post('selisih');
                                 //$ud['bkg']          	= $this->input->post('bkg');

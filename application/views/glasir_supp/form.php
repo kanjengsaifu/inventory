@@ -25,13 +25,28 @@ $(document).ready(function(){
 	}
 	        
         $("#tgl").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,3],
+                        showCurrentAtPos: 5,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         $("#tglp").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,3],
+                        showCurrentAtPos: 5,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
         $("#tglb").datepicker({
-			dateFormat:"dd-mm-yy"
+			dateFormat:"dd-mm-yy",
+                        numberOfMonths:[2,3],
+                        showCurrentAtPos: 5,
+                        beforeShow: function(){    
+                        $(".ui-datepicker").css('font-size', 11) 
+                        }
             });
 	
 	$("#id_glasir").focus();
@@ -59,6 +74,7 @@ $(document).ready(function(){
 			dataType : "json",
 			success	: function(data){
 				$("#nama_glasir").val(data.nama_glasir);
+                                $("#parent").val(data.parent);
 			}
 		});
 	};
@@ -376,6 +392,11 @@ $(document).ready(function(){
         <td>Nama Glasir</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
+    </tr>
+    <tr>    
+        <td>Kode Induk Glasir</td>
+        <td>:</td>
+        <td><input readonly="readonly" type="text" name="parent" id="parent"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
         <td width="150">Tgl. Produksi</td>

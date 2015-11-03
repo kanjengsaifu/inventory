@@ -100,6 +100,7 @@ class Glasir_tran extends CI_Controller {
                         $d['batch']	= '';
                         $d['petugas3']	= '';
                         $d['petugas4']	= '';
+                        $d['parent']	= '';
                         $d['dsc']	= '';
                         $d['tgl']	= '';
                         $d['jam']	= '';
@@ -187,6 +188,7 @@ class Glasir_tran extends CI_Controller {
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
+                                $ud['parent_id']        = $this->input->post('parent');
                                 $ud['dsc']              = $this->input->post('dsc');
 				//$ud['petugas1']         = $this->input->post('petugas1');
 				//$ud['petugas2']         = $this->input->post('petugas2');
@@ -312,6 +314,7 @@ class Glasir_tran extends CI_Controller {
                                         $d['batch']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['jam']	= '';
                                         $d['shift']	= '';
@@ -330,6 +333,7 @@ class Glasir_tran extends CI_Controller {
                                         $d['batch']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';

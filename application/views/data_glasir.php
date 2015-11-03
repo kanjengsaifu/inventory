@@ -19,26 +19,36 @@ function pilih(id){
 	
 }
 </script>
+
 <table id="dataTable" class="detail" width="100%">
 <tr>
-    <th>No</th>
-    <th>Kode Glasir</th>
-    <th>Nama Glasir</th>
-    <th>Nama Alias Glasir</th>
-    <th>Satuan</th>
-    <th>Inputer</th>
-    <th>Status</th>
-    <th>Ambil</th>
+        <th rowspan="2" style="text-align:right; font-size:10px;">No</th>
+        <th colspan="2" style="" align="center" style="font-size:10px">Kode Glaze</th>
+        <th colspan="2" align="center" style="font-size:10px">Nama Glaze</th>
+        <th rowspan="2" style="font-size:10px">Nama Alias Glaze</th>
+        <th rowspan="2" style="font-size:10px">Satuan</th>
+        <th rowspan="2" style="font-size:10px">Inputer</th>
+        <th rowspan="2" style="font-size:10px">Status</th>
+        <th rowspan="2" style="font-size:10px">Ambil</th>
+</tr>    
+<tr>
+    <th>Turunan</th>
+    <th>Induk</th>
+    <th>Induk</th>
+    <th>Turunan</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
 		$no =1;
 		foreach($data->result_array() as $db){ 
 		$status = $this->glzModel->CariGlasirStatus($db['status']); 
+                $parent = $this->glzModel->CariParentName($db['parent']); 
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center" width="80" ><?php echo $db['id_glasir']; ?></td>
+            <td align="center" width="80" ><?php echo $db['parent']; ?></td>
+            <td ><?php echo $parent; ?></td>
             <td ><?php echo $db['nama_glasir']; ?></td>
             <td ><?php echo $db['nama_alias']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>

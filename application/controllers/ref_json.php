@@ -80,6 +80,7 @@ class Ref_json extends CI_Controller {
 				foreach($tabel->result() as $t){
 					$data['nama_glasir'] = $t->nama_glasir;
                                         $data['nama_alias'] = $t->nama_alias;
+                                        $data['parent'] = $t->parent;
 					$data['satuan'] = $t->satuan;
 					$data['status'] = $t->status;
                                         $data['s_supply'] = $t->s_supply;
@@ -90,6 +91,7 @@ class Ref_json extends CI_Controller {
 			}else{
                                         $data['nama_glasir'] = '';
                                         $data['nama_alias'] = '';
+                                        $data['parent'] = '';
 					$data['satuan'] = 'Kilogram';
 					$data['status'] = '';
                                         $data['s_supply'] = '';

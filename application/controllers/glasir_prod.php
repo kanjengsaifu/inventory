@@ -100,6 +100,7 @@ class Glasir_prod extends CI_Controller {
 			$d['no_prod']	= $no_prod;
                         $d['batch']	= '';
                         $d['petugas']	= '';
+                        $d['parent']	= '';
                         $d['dsc']	= '';
                         $d['tgl']	= '';
                         $d['jam']	= '';
@@ -183,6 +184,7 @@ class Glasir_prod extends CI_Controller {
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
+                                $ud['parent_id']        = $this->input->post('parent');
 				$ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
                                 $ud['id_bm']            = $this->input->post('id_bm');
@@ -340,6 +342,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod']	= $id;
                                         $d['batch']	= '';
                                         $d['petugas']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';
@@ -356,6 +359,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod'] =$id;
                                         $d['batch']	='';
                                         $d['petugas']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';
@@ -425,6 +429,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod'] =$no_prod;
                                         $d['batch']	= '';
                                         $d['petugas']	= '';
+                                        $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';
