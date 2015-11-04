@@ -205,7 +205,7 @@ class Glasir_tran extends CI_Controller {
                                 $ud['petugas3']         = $this->input->post('petugas3');
                                 $ud['petugas4']         = $this->input->post('petugas4');
                                 $ud['inputer']          = $this->session->userdata('username');
-				
+				$ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
 				$id['no_prod']          = $this->input->post('no_prod');
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');

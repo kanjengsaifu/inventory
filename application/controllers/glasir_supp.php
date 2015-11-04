@@ -197,7 +197,7 @@ class Glasir_supp extends CI_Controller {
                                 $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
                                 $ud['petugas']          = $this->input->post('petugas');
-				
+				$ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
 				$id['no_prod']          = $this->input->post('no_prod');
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');

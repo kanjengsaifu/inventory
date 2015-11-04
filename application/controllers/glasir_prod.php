@@ -194,6 +194,7 @@ class Glasir_prod extends CI_Controller {
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
+                                $ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
                                 $ud['tglp']              = $this->app_model->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']              = $this->app_model->tgl_sql($this->input->post('tglb'));
                                 $ud['inputer']          = $this->session->userdata('username');
