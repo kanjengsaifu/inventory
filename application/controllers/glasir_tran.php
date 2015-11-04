@@ -487,6 +487,34 @@ class Glasir_tran extends CI_Controller {
 			header('location:'.base_url());
 		}
 	}
+        
+        public function getPicTran3()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicTran3();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getPicTran4()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicTran4();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
 	
 }
 

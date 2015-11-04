@@ -12,6 +12,8 @@
                         { name: 'nama_glasir' , type: 'string' },
                         { name: 'sab' , type: 'number' },
                         { name: 'sas' , type: 'number' },
+                        { name: 'adj_bgps' , type: 'number' },
+                        { name: 'adj_sply' , type: 'number' },
                         { name: 'gtot' , type: 'number' },
                         { name: 'turun_bgps' , type: 'number' },
                         { name: 'ditarik_supply' , type: 'number' },
@@ -50,22 +52,24 @@
         columns: [
                         { text: 'Kode',  pinned: true, align: 'center', datafield: 'id_glasir', width: 50, },
                         { text: 'Nama',  pinned: true, align: 'center', datafield: 'nama_glasir', width: 201 },
+                        { text: 'Total',  align: 'center',datafield: 'total', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 80},
                         { text: 'BGPS',  align: 'center',datafield: 'stok_bgps', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 75 },
                         { text: 'Supply',  align: 'center',datafield: 'stok_supply', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 75 },
-                        { text: 'Total',  align: 'center',datafield: 'total', cellsrenderer: cellsrenderer, cellsalign: 'right', columngroup: 'stg',cellsformat: 'd2', width: 80},
                         { text: 'Turun BGPS',  align: 'center',columngroup: 'trans',cellsrenderer: cellsrenderer, datafield: 'turun_bgps', cellsalign: 'right', cellsformat: 'd2', width: 120 },
                         { text: 'Ditarik Supply',  align: 'center',columngroup: 'trans',cellsrenderer: cellsrenderer, datafield: 'ditarik_supply', cellsalign: 'right', cellsformat: 'd2', width: 110 },
                         { text: 'Return Glasir',  align: 'center',columngroup: 'trans',cellsrenderer: cellsrenderer, datafield: 'return_prod', cellsalign: 'right', cellsformat: 'd2', width: 110 },
                         { text: 'Kirim Glasir',  align: 'center',columngroup: 'trans', cellsrenderer: cellsrenderer, datafield: 'kirim_prod', cellsalign: 'right', cellsformat: 'd2', width: 110 },
+                        { text: 'Total',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'gtot', cellsalign: 'right', cellsformat: 'd2', width: 70 },
                         { text: 'BGPS',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'sab', cellsalign: 'right', cellsformat: 'd2', width: 70 },
                         { text: 'Supply',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'sas', cellsalign: 'right', cellsformat: 'd2', width: 70 },
-                        { text: 'Total',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'gtot', cellsalign: 'right', cellsformat: 'd2', width: 70 }
+                        { text: 'BGPS',  align: 'center',columngroup: 'stok2', cellsrenderer: cellsrenderer, datafield: 'adj_bgps', cellsalign: 'right', cellsformat: 'd2', width: 70 },
+                        { text: 'Supply',  align: 'center',columngroup: 'stok2', cellsrenderer: cellsrenderer, datafield: 'adj_sply', cellsalign: 'right', cellsformat: 'd2', width: 70 }
         ],
         columngroups: [
-                    { text: 'Stok Glasir (Kilogram)', align: 'center', name: 'stg' },
-                    { text: 'Glasir', align: 'center', name: 'glasir' },
-                    { text: 'Transaksi Glasir (Kilogram)', align: 'center', name: 'trans' },
-                    { text: 'Penyesuaian (Kilogram)', align: 'center', name: 'stok' }
+                    { text: 'Stok Akhir Glaze (Kg)', align: 'center', name: 'stg' },
+                    { text: 'Transaksi Glaze (Kg)', align: 'center', name: 'trans' },
+                    { text: 'Stok Awal (Kg)', align: 'center', name: 'stok' },
+                    { text: 'Penyesuaian (Kg)', align: 'center', name: 'stok2' }
                 ]
     });
     $("#excelExport").jqxButton();

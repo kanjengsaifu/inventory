@@ -61,6 +61,7 @@
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxpanel.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxinput.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxdatetimeinput.js"></script>
+<script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxcombobox.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxcalendar.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxtooltip.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>asset/jqwidgets/jqxgrid.grouping.js"></script>

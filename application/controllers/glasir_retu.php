@@ -489,6 +489,34 @@ class Glasir_retu extends CI_Controller {
 			header('location:'.base_url());
 		}
 	}
+        
+        public function getPicRetu3()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicRetu3();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getPicRetu4()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicRetu4();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
 	
 }
 

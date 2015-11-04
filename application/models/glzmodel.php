@@ -160,6 +160,21 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhGlasirScra(){
+		$text = "SELECT max(no_prod) as no FROM glasir_sh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'SH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'SH'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function MaxPhGlasirTran(){
 		$text = "SELECT max(no_prod) as no FROM glasir_th";
 		$data = $this->glzModel->manualQuery($text);
@@ -264,6 +279,22 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesItemScra($id){
+		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_shd a 
+                        JOIN glasir b on a.id_glasir = b.id_glasir
+                        WHERE no_prod='$id'  AND a.deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_glasir;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
         public function ProsesItemTran($id){
 		$t = "SELECT GROUP_CONCAT(concat('[',b.id_glasir,'-',b.nama_glasir,']') SEPARATOR ', ') as nama_glasir FROM glasir_thd a 
                         JOIN glasir b on a.id_glasir = b.id_glasir
@@ -322,8 +353,34 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesGlasirScra($id){
+		$t = "SELECT idphd FROM glasir_shd WHERE no_prod='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function JmlGlasirSupp($id){
 		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_phd_sp WHERE no_prod='$id' AND deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jml;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlGlasirScra($id){
+		$t = "SELECT sum(1.565*((densitas-1000)/1000)*volume) as jml FROM glasir_shd WHERE no_prod='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -542,15 +599,16 @@ class Glzmodel extends CI_Model {
                 $query ="select a.id_glasir, a.nama_glasir,
                                 REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sab, 
                                 REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sas,
+                                COALESCE(g.adj_bgps, 0) adj_bgps, COALESCE(g.adj_sply, 0) adj_sply,
                                 REPLACE(FORMAT((COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0)+
                                 COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0)),2),',','')as gtot,
-                          coalesce(c.turun_bgps, 0) turun_bgps, coalesce(d.ditarik_supply, 0) ditarik_supply, coalesce(e.return_prod, 0) return_prod, coalesce(f.kirim_prod, 0) kirim_prod,
+                                COALESCE(c.turun_bgps, 0) turun_bgps, coalesce(d.ditarik_supply, 0) ditarik_supply, coalesce(e.return_prod, 0) return_prod, coalesce(f.kirim_prod, 0) kirim_prod,
 
-                                REPLACE(FORMAT((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),2),',','') stok_bgps,
-                                REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),2),',','') stok_supply,
+                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),2),',','') stok_bgps,
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),2),',','') stok_supply,
                                 
-                                 REPLACE(FORMAT((GREATEST((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),',','')+
-                                GREATEST(((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),',','')),2),',','') total
+                                REPLACE(FORMAT((GREATEST(((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),',','')+
+                                GREATEST((((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),',','')),2),',','') total
                                 
                         from glasir a
                         left join glasir_ohd b
@@ -573,20 +631,29 @@ class Glzmodel extends CI_Model {
                         ) d on a.id_glasir = d.id_glasir
                         left join
                         (
-                          select id_glasir, 
+                          select id_glasir, parent_id,
                           REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') return_prod
                           from glasir_rhd
                           where deleted = 0
                           group by id_glasir
-                        ) e on a.id_glasir = e.id_glasir
+                        ) e on a.id_glasir = e.parent_id
                         left join
                         (
-                          select id_glasir, 
+                          select id_glasir,  parent_id,
                           REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') kirim_prod
                           from glasir_thd
                           where deleted = 0
                           group by id_glasir
-                        ) f on a.id_glasir = f.id_glasir
+                        ) f on a.id_glasir = f.parent_id
+                        left join
+                        (
+                          select id_glasir, 
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (bgps_system-bgps_opname) ELSE 0 END), 0),2),',','') adj_bgps,
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (sply_system-sply_opname) ELSE 0 END), 0),2),',','') adj_sply
+                          from glasir_ahd
+                          where deleted = 0
+                          group by id_glasir
+                        ) g on a.id_glasir = g.id_glasir
                         where b.deleted = 0 
                         group by a.id_glasir";
 		$query_result_detail = $this->db->query($query);
@@ -598,6 +665,55 @@ class Glzmodel extends CI_Model {
                 $query ="SELECT a.id_glasir,a.volume,a.densitas,a.dsc,
                             REPLACE(FORMAT(COALESCE((1.565*((a.densitas-1000)/1000)*a.volume), 0),2),',','') as bkg
                             FROM glasir_ohd a";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicProd(){
+                $query ="select distinct petugas from glasir_phd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicSupp(){
+                $query ="select distinct petugas from glasir_phd_sp order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicScra(){
+                $query ="select distinct petugas from glasir_shd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicTran3(){
+                $query ="select distinct petugas3 from glasir_thd order by petugas3 asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicTran4(){
+                $query ="select distinct petugas4 from glasir_thd order by petugas4 asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicRetu3(){
+                $query ="select distinct petugas3 from glasir_rhd order by petugas3 asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicRetu4(){
+                $query ="select distinct petugas4 from glasir_rhd order by petugas4 asc";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

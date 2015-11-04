@@ -83,7 +83,6 @@ $(document).ready(function(){
             
 		var id_glasir	= $("#id_glasir").val();
 		var volume	= $("#volume").val();
-                var petugas     = $("#petugas").val();
                 var densitas    = $("#densitas").val();
                 var id_bm       = $("#id_bm").val();
                 var id_bmt      = $("#id_bmt").val();
@@ -212,16 +211,6 @@ $(document).ready(function(){
 			$("#densitas").focus();
 			return false();
 		}
-                if(petugas.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Petugas tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#petugas").focus();
-			return false();
-		}
 		
 		$.ajax({
 			type	: 'POST',
@@ -291,6 +280,7 @@ $(document).ready(function(){
 			}
 		});
 	}
+        
 });	
 </script>
 <form name="form" id="form">
@@ -312,7 +302,7 @@ $(document).ready(function(){
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20" value="<?php echo $petugas;?>" /></td>
+        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_prod/getPicProd'?>'"  value="<?php echo $petugas;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>

@@ -274,12 +274,12 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Petugas (Karu)</td>
         <td width="5">:</td>
-        <td><input type="text" name="petugas3" id="petugas3" size="45" maxlength="255" value="<?php echo $petugas3;?>"/></td>
+        <td><input style="width: 350px;" id="petugas3" class="easyui-combobox" name="petugas" data-options="valueField:'petugas3',textField:'petugas3',url:'<?php echo base_url().'index.php/glasir_tran/getPicTran3'?>'"  value="<?php echo $petugas3;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Petugas (Supply)</td>
         <td width="5">:</td>
-        <td><input type="text" name="petugas4" id="petugas4" size="45" maxlength="255" value="<?php echo $petugas4;?>"/></td>
+        <td><input style="width: 350px;" id="petugas4" class="easyui-combobox" name="petugas" data-options="valueField:'petugas4',textField:'petugas4',url:'<?php echo base_url().'index.php/glasir_tran/getPicTran4'?>'"  value="<?php echo $petugas4;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Keterangan</td>
