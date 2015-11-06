@@ -29,16 +29,99 @@ class Decal extends CI_Controller {
         
         public function ldg()
 	{
-                $this->load->model('dclModel');
-		$data['data_passed'] = $this->dclModel->get_ldg();
+                $query = "SELECT * FROM decal_items";
+                if (isset($_GET['id']))
+                {
+                        $pagenum = $_GET['pagenum'];
+                        $pagesize = $_GET['pagesize'];
+                        $start = $pagenum * $pagesize;
+                        $query = "SELECT SQL_CALC_FOUND_ROWS * FROM decal_items_detail WHERE parent_id='" .$_GET['id'] . "'";
+                        $query .= " LIMIT $start, $pagesize";
+                        $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+                        $sql = "SELECT FOUND_ROWS() AS `found_rows`;";
+                        $rows = mysql_query($sql);
+                        $rows = mysql_fetch_assoc($rows);
+                        $total_rows = $rows['found_rows'];	
+                        if (isset($_GET['sortdatafield']))
+                        {
+                                $sortfield = $_GET['sortdatafield'];
+                                $sortorder = $_GET['sortorder'];
 
-		if ($data['data_passed']){
+                                if ($sortfield != NULL)
+                                {		
+                                        if ($sortorder == "desc")
+                                        {
+                                                $query = "SELECT * FROM decal_items_detail WHERE parent_id='" .$_GET['id'] . "' ORDER BY" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
+                                        }
+                                        else if ($sortorder == "asc")
+                                        {
+                                                $query = "SELECT * FROM decal_items_detail WHERE parent_id='" .$_GET['id'] . "' ORDER BY" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
+                                        }			
+                                        $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+                                }
+                        }
+                        // get data and store in a json array
+                        while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                                $decal_items_detail[] = array(
+                                        'parent_id' => $row['parent_id'],
+                                        'item' => $row['item'],
+                                        'isi_motif' => $row['isi_motif'],
+                                        'warna' => $row['warna'],
+                                        'position' => $row['position']
+                                  );
+                        }
+                    $data[] = array(
+                       'TotalRows' => $total_rows,
+                           'Rows' => $decal_items_detail
+                        );
+                        echo json_encode($data);    	
+                }
+                else
+                {
+                        $pagenum = $_GET['pagenum'];
+                        $pagesize = $_GET['pagesize'];
+                        $start = $pagenum * $pagesize;
+                        $query = "SELECT SQL_CALC_FOUND_ROWS * FROM decal_items LIMIT $start, $pagesize";
+                        $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+                        $sql = "SELECT FOUND_ROWS() AS `found_rows`;";
+                        $rows = mysql_query($sql);
+                        $rows = mysql_fetch_assoc($rows);
+                        $total_rows = $rows['found_rows'];
+                        if (isset($_GET['sortdatafield']))
+                        {
+                                $sortfield = $_GET['sortdatafield'];
+                                $sortorder = $_GET['sortorder'];
 
-			#convert data array passed into json
-			echo json_encode($data['data_passed']);
-			//echo $data['data_passed'];
-
-		}
+                                if ($sortfield != NULL)
+                                {		
+                                        if ($sortorder == "desc")
+                                        {
+                                                $query = "SELECT * FROM decal_items ORDER BY" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
+                                        }
+                                        else if ($sortorder == "asc")
+                                        {
+                                                $query = "SELECT * FROM decal_items ORDER BY" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
+                                        }			
+                                        $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+                                }
+                        }
+                        while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+                                $decal_items[] = array(
+                                        'id' => $row['id'],
+                                        'nama' => $row['nama'],
+                                        'buyer' => $row['buyer'],
+                                        'dekorasi' => $row['dekorasi'],
+                                        'size' => $row['size'],
+                                        'satuan' => $row['satuan'],
+                                        'jenis' => $row['jenis']
+                                  );
+                        }
+                    $data[] = array(
+                       'TotalRows' => $total_rows,
+                           'Rows' => $decal_items
+                        );
+                        echo json_encode($data);
+                }
 	}
 	
 	public function tambah()

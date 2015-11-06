@@ -131,7 +131,7 @@ class Dclmodel extends CI_Model {
 	}
         
         public function get_ldg(){
-                $query ="select a.id,b.nama as buyer,a.nama,a.alias, c.nama as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.tgl_insert,a.tgl_update 
+                $query ="select a.id,a.nama,a.alias, b.nama as buyer,c.nama as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.tgl_insert,a.tgl_update, a.tgl_delete 
                             from decal_items a
                             left join global_buyer b on a.buyer = b.id
                             left join global_dekorasi c on a.dekorasi = c.id
