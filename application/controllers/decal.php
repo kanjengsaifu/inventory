@@ -29,7 +29,12 @@ class Decal extends CI_Controller {
         
         public function ldg()
 	{
-                $query = "SELECT * FROM decal_items";
+                $query = "SELECT a.id,a.nama,a.alias, b.nama as buyer,c.dsc as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.deleted,a.tgl_insert,a.tgl_update,a.tgl_delete
+                                    FROM decal_items a
+                                    left join global_buyer b on a.buyer = b.id
+                                    left join global_dekorasi c on a.dekorasi = c.id
+                                    left join global_size d on a.size = d.id
+                                    left join global_jenis_decal e on a.jenis = e.id where a.deleted = 0";
                 if (isset($_GET['id']))
                 {
                         $pagenum = $_GET['pagenum'];
@@ -81,7 +86,12 @@ class Decal extends CI_Controller {
                         $pagenum = $_GET['pagenum'];
                         $pagesize = $_GET['pagesize'];
                         $start = $pagenum * $pagesize;
-                        $query = "SELECT SQL_CALC_FOUND_ROWS * FROM decal_items LIMIT $start, $pagesize";
+                        $query = "SELECT SQL_CALC_FOUND_ROWS a.id,a.nama,a.alias, b.nama as buyer,c.dsc as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.deleted,a.tgl_insert,a.tgl_update,a.tgl_delete
+                                    FROM decal_items a
+                                    left join global_buyer b on a.buyer = b.id
+                                    left join global_dekorasi c on a.dekorasi = c.id
+                                    left join global_size d on a.size = d.id
+                                    left join global_jenis_decal e on a.jenis = e.id  where a.deleted = 0 LIMIT $start, $pagesize";
                         $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
                         $sql = "SELECT FOUND_ROWS() AS `found_rows`;";
                         $rows = mysql_query($sql);
@@ -96,11 +106,21 @@ class Decal extends CI_Controller {
                                 {		
                                         if ($sortorder == "desc")
                                         {
-                                                $query = "SELECT * FROM decal_items ORDER BY" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
+                                                $query = "SELECT a.id,a.nama,a.alias, b.nama as buyer,c.dsc as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.deleted,a.tgl_insert,a.tgl_update,a.tgl_delete
+                                                            FROM decal_items a
+                                                            left join global_buyer b on a.buyer = b.id
+                                                            left join global_dekorasi c on a.dekorasi = c.id
+                                                            left join global_size d on a.size = d.id
+                                                            left join global_jenis_decal e on a.jenis = e.id  where a.deleted = 0" . " " . $sortfield . " DESC LIMIT $start, $pagesize";
                                         }
                                         else if ($sortorder == "asc")
                                         {
-                                                $query = "SELECT * FROM decal_items ORDER BY" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
+                                                $query = "SELECT a.id,a.nama,a.alias, b.nama as buyer,c.dsc as dekorasi,d.dsc as size,a.satuan,e.nama as jenis,a.deleted,a.tgl_insert,a.tgl_update,a.tgl_delete
+                                                            FROM decal_items a
+                                                            left join global_buyer b on a.buyer = b.id
+                                                            left join global_dekorasi c on a.dekorasi = c.id
+                                                            left join global_size d on a.size = d.id
+                                                            left join global_jenis_decal e on a.jenis = e.id  where a.deleted = 0" . " " . $sortfield . " ASC LIMIT $start, $pagesize";
                                         }			
                                         $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
                                 }
@@ -139,12 +159,32 @@ class Decal extends CI_Controller {
 			$d['judul']="Data Decal";
 			$id    = $this->dclModel->MaxItemsDecal();
 			$d['id']	= $id;
-			$d['satuan']        ='pcs';
+                        $d['batch']	= '';
+			$d['satuan']        ='sheet';
 			$d['nama']              = '';
                         $d['alias']             = '';
+                        $d['item']             = '';
+                        $d['position']             = '';
+                        $d['isi_motif']             = '';
+                        $d['warna']             = '';
 			
 			$d['content'] = $this->load->view('decal/form', $d, true);		
 			$this->load->view('home',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
+        public function DataDetail()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			
+			$id = $this->input->post('kode');
+			$text = "select * from decal_items_detail where parent_id = '$id' AND deleted = 0";
+			$d['data']= $this->dclModel->manualQuery($text);
+
+			$this->load->view('decal/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -160,14 +200,9 @@ class Decal extends CI_Controller {
 			$d['instansi']= $this->config->item('instansi');
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-			$d['judul'] = "Data Decal";
+			$d['judul'] = "Ubah data decal";
 			$id    = $this->uri->segment(3);
-			$main  = "SELECT a.id, a.nama, a.alias, a.buyer, a.material, a.forming, a.shape, b.status,b.deleted,
-                            a.item, a.dekorasi, a.size, a.jenis, a.satuan, a.parent
-                            FROM decal_items a
-                            LEFT JOIN global_detail b ON b.id_related = a.id
-                            WHERE b.deleted = 0 AND a.id = '$id'
-                            ORDER BY a.id";
+			$main  = "select * from decal_items where id = '$id'";
 			$data1 = $this->dclModel->manualQuery($main);
 			if($data1->num_rows() > 0){
 				foreach($data1->result() as $db){
@@ -175,32 +210,107 @@ class Decal extends CI_Controller {
 					$d['nama']              = $db->nama;
                                         $d['alias']             = $db->alias;
 					$d['buyer']             = $db->buyer;
-					$d['material']          = $db->material;
-                                        $d['forming']           = $db->forming;
-					$d['shape']             = $db->shape;
-                                        $d['item']              = $db->item;
                                         $d['dekorasi']          = $db->dekorasi;
 					$d['size']              = $db->size;
 					$d['satuan']            = $db->satuan;
                                         $d['jenis']             = $db->jenis;
                                         $d['status']            = $db->status;
+                                        $d['batch']             = '';
+                                        $d['item']              = '';
+                                        $d['position']          = '';
+                                        $d['isi_motif']         = '';
+                                        $d['warna']             = '';
 				}
 			}else{
 					$d['id']                = $id;
+                                        $d['batch']             = '';
 					$d['nama']              = '';
                                         $d['alias']             = '';
 					$d['buyer']             = '';
-					$d['material']          = '';
-                                        $d['forming']           = '';
-					$d['shape']             = '';
-                                        $d['item']              = '';
                                         $d['dekorasi']          = '';
 					$d['size']              = '';
-					$d['satuan']            = 'pcs';
+					$d['satuan']            = 'sheet';
                                         $d['jenis']             = '';
                                         $d['status']            = '';
+                                        $d['item']              = '';
+                                        $d['position']          = '';
+                                        $d['isi_motif']         = '';
+                                        $d['warna']             = '';
 			}
 						
+			$d['content'] = $this->load->view('decal/form', $d, true);		
+			$this->load->view('home',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
+        public function editDetail()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			
+			$d['prg']= $this->config->item('prg');
+			$d['web_prg']= $this->config->item('web_prg');
+			
+			$d['nama_program']= $this->config->item('nama_program');
+			$d['instansi']= $this->config->item('instansi');
+			$d['usaha']= $this->config->item('usaha');
+			$d['alamat_instansi']= $this->config->item('alamat_instansi');
+			
+			$d['judul'] = "Ubah data decal";
+                      
+			$id = $this->uri->segment(3);
+                        $batch = $this->uri->segment(4);
+			$text = "select * from decal_items_detail where parent_id = '$id' and id = '$batch'";
+			$data = $this->dclModel->manualQuery($text);
+                        
+			if($data->num_rows() > 0){
+				foreach($data->result() as $db){
+                                        $d['batch']             = $batch;
+					$d['item']              = $db->item;
+                                        $d['position']          = $db->position;
+                                        $d['isi_motif']         = $db->isi_motif;
+                                        $d['warna']             = $db->warna;
+                                            $main  = "select * from decal_items where id = '$id'";
+                                            $data1 = $this->dclModel->manualQuery($main);
+                                            if($data1->num_rows() > 0){
+                                                    foreach($data1->result() as $db){
+                                                            $d['id']                = $id;
+                                                            $d['nama']              = $db->nama;
+                                                            $d['alias']             = $db->alias;
+                                                            $d['buyer']             = $db->buyer;
+                                                            $d['dekorasi']          = $db->dekorasi;
+                                                            $d['size']              = $db->size;
+                                                            $d['satuan']            = $db->satuan;
+                                                            $d['jenis']             = $db->jenis;
+                                                            $d['status']            = $db->status;
+                                                    }
+                                            }else{
+                                                            $d['id']                = $id;
+                                                            $d['batch']             = '';
+                                                            $d['nama']              = '';
+                                                            $d['alias']             = '';
+                                                            $d['buyer']             = '';
+                                                            $d['dekorasi']          = '';
+                                                            $d['size']              = '';
+                                                            $d['satuan']            = 'sheet';
+                                                            $d['jenis']             = '';
+                                                            $d['status']            = '';
+                                                            $d['item']              = '';
+                                                            $d['position']          = '';
+                                                            $d['isi_motif']         = '';
+                                                            $d['warna']             = '';
+                                            }
+				}
+			}else{
+					$d['item']              = '';
+                                        $d['position']          = '';
+                                        $d['isi_motif']         = '';
+                                        $d['warna']             = '';
+                                        
+			}
+									
 			$d['content'] = $this->load->view('decal/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
@@ -211,10 +321,28 @@ class Decal extends CI_Controller {
 	public function hapus()
 	{
 		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){			
-			$id = $this->uri->segment(3);
-			$this->glzModel->manualQuery("UPDATE global_detail SET deleted = 1 WHERE id_related='$id' AND tabel = 'decal_items'");
-			echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal'>";			
+		if(!empty($cek)){
+                    
+                                $id = $this->uri->segment(3);
+                                $tgl_deleted = date('Y-m-d h:i:s');
+                                $this->dclModel->manualQuery("UPDATE decal_items_detail SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE parent_id='$id'");
+                                $this->dclModel->manualQuery("UPDATE decal_items SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal'>";			
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
+	public function hapus_detail()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){                        
+                                $id = $this->uri->segment(3);
+                                $batch = $this->uri->segment(4);
+                                $tgl_deleted = date('Y-m-d h:i:s');
+                                $this->dclModel->manualQuery("UPDATE decal_items_detail SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE parent_id='$id' AND id='$batch'");
+                                $this->edit();
+                        
 		}else{
 			header('location:'.base_url());
 		}
@@ -224,48 +352,96 @@ class Decal extends CI_Controller {
 	{
 		
 		$cek = $this->session->userdata('logged_in');
-                $username = $this->session->userdata('username');
 		if(!empty($cek)){
-				$up['id']=$this->input->post('id');
-				$up['nama']=$this->input->post('nama');
-                                $up['alias']=$this->input->post('alias');
-				$up['buyer']=$this->input->post('buyer');
-                                $up['material']=$this->input->post('material');
-                                $up['forming']=$this->input->post('forming');
-				$up['shape']=$this->input->post('shape');
-                                $up['item']=$this->input->post('item');
-				$up['dekorasi']=$this->input->post('dekorasi');
-                                $up['size']=$this->input->post('size');
-                                $up['satuan']=$this->input->post('satuan');
-				$up['jenis']=$this->input->post('jenis');
-                                
-                                $ud['id_related']=$this->input->post('id');
-                                $ud['tabel']='decal_items';
-                                $ud['inputer']=$username;
-                                $ud['image']='none.png';
-                                $ud['status']=$this->input->post('status');
+				$up['id']		= $this->input->post('id');
+				$up['inputer']          = $this->session->userdata('username');
+                                $up['nama']		= $this->input->post('nama');
+                                $up['alias']		= $this->input->post('alias');
+                                $up['jenis']		= $this->input->post('jenis');
+                                $up['buyer']		= $this->input->post('buyer');
+                                $up['dekorasi']		= $this->input->post('dekorasi');
+                                $up['size']		= $this->input->post('size');
+                                $up['satuan']		= $this->input->post('satuan');
+                                $up['status']		= $this->input->post('status');
 				
-				$id['id']=$this->input->post('id');
-                                
-                                $id_d['id_related']     = $this->input->post('id');
-				$id_d['tabel']          = 'decal_items';
+                                $ud['parent_id']        = $this->input->post('id');
+				$ud['item']             = $this->input->post('item');
+				$ud['position']         = $this->input->post('position');
+				$ud['isi_motif']        = $this->input->post('isi_motif');
+                                $ud['warna']            = $this->input->post('warna');
+                                $ud['inputer']          = $this->session->userdata('username');
+				
+				$id['id']               = $this->input->post('id');
+				
+				$id_d['parent_id']     = $this->input->post('id');
+                                $id_d['id']             = $this->input->post('batch');
 				
 				$data = $this->dclModel->getSelectedData("decal_items",$id);
 				if($data->num_rows()>0){
-                                        $ud['tgl_update'] = date('Y-m-d h:i:s');
-					$this->dclModel->updateData("decal_items",$up,$id);
-                                        $this->dclModel->updateData("global_detail",$ud,$id_d);
-					echo 'Update data Sukses';
+                                                $this->dclModel->updateData("decal_items",$up,$id);
+						$data = $this->dclModel->getSelectedData("decal_items_detail",$id_d);
+						if($data->num_rows()>0){
+                                                        $ud['tgl_update']   = date('Y-m-d h:i:s');
+							$this->dclModel->updateData("decal_items_detail",$ud,$id_d);
+                                                        echo 'Update data Sukses';
+						}else{
+                                                        $ud['tgl_insert']   = date('Y-m-d h:i:s');
+							$this->dclModel->insertData("decal_items_detail",$ud);
+                                                        echo 'Simpan data Sukses';
+						}
 				}else{
-                                        $ud['tgl_input'] = date('Y-m-d h:i:s');
+                                        $up['tgl_insert']		= date('Y-m-d h:i:s');
 					$this->dclModel->insertData("decal_items",$up);
-                                        $this->dclModel->insertData("global_detail",$ud);
+                                        $ud['tgl_insert']                = date('Y-m-d h:i:s');
+					$this->dclModel->insertData("decal_items_detail",$ud);
 					echo 'Simpan data Sukses';		
 				}
 		}else{
 				header('location:'.base_url());
 		}
 	
+	}
+        
+        public function getItem()
+	{
+                $this->load->model('dclModel');
+		$data['data_passed'] = $this->dclModel->getItem();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getNama()
+	{
+                $this->load->model('dclModel');
+		$data['data_passed'] = $this->dclModel->getNama();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getAlias()
+	{
+                $this->load->model('dclModel');
+		$data['data_passed'] = $this->dclModel->getAlias();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
 	}
 	
 }

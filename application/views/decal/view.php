@@ -1,4 +1,13 @@
-<html lang="en">
+<div id="view">
+<div style="float:left; padding-bottom:5px;">
+<a href="<?php echo base_url();?>index.php/decal/tambah">
+<button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah Decal</button>
+</a>
+<a href="<?php echo base_url();?>index.php/decal">
+<button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
+</a>
+</div>
+<div id="gird" style="float:left; width:100%;">
 <head>
    <script type="text/javascript">
         $(document).ready(function () {
@@ -64,7 +73,7 @@
 				grid.jqxGrid(
 				{
 					virtualmode: true,
-					height: 190,
+					height: 200,
 					width: '90%',
 					sortable: true,
 					pageable: true,
@@ -75,11 +84,10 @@
 						return obj.data;
 					},
 					columns: [
-						  { text: 'ID Decal', datafield: 'parent_id', cellsformat: 'd', width: 90 },
-						  { text: 'Nama Item', datafield: 'item', width: 330 },
+						  { text: 'No', datafield: 'position', width: 50 },
+						  { text: 'Nama Item', datafield: 'item', width: 400 },
 						  { text: 'Komposisi', datafield: 'isi_motif', width: 180 },
-						  { text: 'Banyak Warna', datafield: 'warna', width: 150 },
-						  { text: 'Posisi', datafield: 'position', width: 140 }
+						  { text: 'Banyak Warna', datafield: 'warna', width: 150 }
 					  ]
 				});					
 			};
@@ -95,8 +103,15 @@
                     $("#jqxgrid").jqxGrid('resumeupdate');
                 }
             });
+            
+            var button_renderer = function (row, columnfield, value, defaulthtml, columnproperties) {
+            var id = $('#jqxgrid').jqxGrid('getcelltext', row, "id");
+            var button = '<center><a class="btn btn-xs btn-primary" href="'+ '<?php echo base_url('index.php/decal/edit'); ?>' +'/'+ id +'">Ubah</a>\n\
+            <a class="btn btn-xs btn-primary" href="'+ '<?php echo base_url('index.php/decal/hapus'); ?>' +'/'+ id +'">Hapus</a></center>';
+            return button;
+            };
 			
-			$("#jqxgrid").jqxGrid(
+            $("#jqxgrid").jqxGrid(
             {
                 width: '100%',
                 height: 480,
@@ -113,13 +128,15 @@
                     return dataAdapter.records;
                 },				
                 columns: [
-                  { text: 'ID Decal', datafield: 'id', width: 90},
+                  { text: 'Aksi', align: 'center', datafield: 'edit', filterable: false, width: 150,
+                  cellsalign: 'center', cellsrenderer: button_renderer, editable: false, exportable: false },  
+                  { text: 'ID Decal', datafield: 'id', width: 70},
+                  { text: 'Jenis', datafield: 'jenis', width: 100 },
                   { text: 'Nama Desain', datafield: 'nama', width: 330 },
                   { text: 'Buyer', datafield: 'buyer', width: 180 },
-                  { text: 'Dekorasi', datafield: 'dekorasi', width: 200 },
+                  { text: 'Dekorasi', datafield: 'dekorasi', width: 100 },
                   { text: 'Ukuran Kertas', datafield: 'size', width: 120 },
-                  { text: 'Satuan', datafield: 'satuan', width: 120 },
-                  { text: 'Jenis', datafield: 'jenis', width: 120 }
+                  { text: 'Satuan', datafield: 'satuan', width: 100 }
               ]
             });        	
         });
@@ -128,4 +145,5 @@
 <body class='default'>
    <div id="jqxgrid"></div>
 </body>
-</html>
+</div>
+</div>
