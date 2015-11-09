@@ -132,7 +132,7 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-	<td width="150">Kode Decal</td>
+	<td width="150">Kode Desain</td>
     <td width="5">:</td>
     <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>"/></td>
     </tr>
@@ -267,9 +267,9 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-        <td width="150">No. Batch</td>
+        <td width="150">Kode Item</td>
         <td width="5">:</td>
-        <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
+        <td><input type="text" name="item_code" id="item_code" size="45" maxlength="12" readonly="readonly" value="<?php echo $item_code;?>" /></td>
     </tr>    
     <tr>    
         <td>Item</td>

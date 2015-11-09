@@ -46,7 +46,7 @@ $(function() {
 		?>    
     	<tr>
             <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['id']; ?></td>
+            <td align="center" style="font-size:10px"><?php echo $db['item_code']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['parent_id']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['position']; ?></td>
             <td style="font-size:10px"><?php echo $db['item']; ?></td>
@@ -54,10 +54,10 @@ $(function() {
             <td align="center" style="font-size:10px"><?php echo $db['warna']; ?></td>
             <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:10px">
-            <a href="<?php echo base_url();?>index.php/decal/editDetail/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>">
+            <a href="<?php echo base_url();?>index.php/decal/editDetail/<?php echo $db['parent_id'];?>/<?php echo $db['item_code'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal/hapus_detail/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>"
+            <a href="<?php echo base_url();?>index.php/decal/hapus_detail/<?php echo $db['parent_id'];?>/<?php echo $db['item_code'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

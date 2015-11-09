@@ -53,6 +53,7 @@
 					cache: false,
 					datafields: [
 						 { name: 'parent_id' },
+                                                 { name: 'item_code' },
 						 { name: 'item' },
 						 { name: 'isi_motif' },
 						 { name: 'warna' },
@@ -84,10 +85,11 @@
 						return obj.data;
 					},
 					columns: [
-						  { text: 'No', datafield: 'position', width: 50 },
+						  { text: 'Kode Item', datafield: 'item_code', width: 100 },
 						  { text: 'Nama Item', datafield: 'item', width: 400 },
 						  { text: 'Komposisi', datafield: 'isi_motif', width: 180 },
-						  { text: 'Banyak Warna', datafield: 'warna', width: 150 }
+						  { text: 'Banyak Warna', datafield: 'warna', width: 150 },
+                                                  { text: 'Urutan Posisi', datafield: 'position', width: 100 }
 					  ]
 				});					
 			};
@@ -130,7 +132,7 @@
                 columns: [
                   { text: 'Aksi', align: 'center', datafield: 'edit', filterable: false, width: 150,
                   cellsalign: 'center', cellsrenderer: button_renderer, editable: false, exportable: false },  
-                  { text: 'ID Decal', datafield: 'id', width: 70},
+                  { text: 'Kode Desain', datafield: 'id', width: 90},
                   { text: 'Jenis', datafield: 'jenis', width: 100 },
                   { text: 'Nama Desain', datafield: 'nama', width: 330 },
                   { text: 'Buyer', datafield: 'buyer', width: 180 },

@@ -68,6 +68,7 @@ class Decal extends CI_Controller {
                         // get data and store in a json array
                         while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
                                 $decal_items_detail[] = array(
+                                        'item_code' => $row['item_code'],
                                         'parent_id' => $row['parent_id'],
                                         'item' => $row['item'],
                                         'isi_motif' => $row['isi_motif'],
@@ -158,8 +159,9 @@ class Decal extends CI_Controller {
 
 			$d['judul']="Data Decal";
 			$id    = $this->dclModel->MaxItemsDecal();
+                        $item_code    = $this->dclModel->MaxItemsCode();
 			$d['id']	= $id;
-                        $d['batch']	= '';
+                        $d['item_code']	= $item_code;
 			$d['satuan']        ='sheet';
 			$d['nama']              = '';
                         $d['alias']             = '';
@@ -215,7 +217,9 @@ class Decal extends CI_Controller {
 					$d['satuan']            = $db->satuan;
                                         $d['jenis']             = $db->jenis;
                                         $d['status']            = $db->status;
-                                        $d['batch']             = '';
+                                        $item_code              = $this->dclModel->MaxItemsCode();
+                                        $d['id']                = $id;
+                                        $d['item_code']         = $item_code;
                                         $d['item']              = '';
                                         $d['position']          = '';
                                         $d['isi_motif']         = '';
@@ -223,7 +227,7 @@ class Decal extends CI_Controller {
 				}
 			}else{
 					$d['id']                = $id;
-                                        $d['batch']             = '';
+                                        $d['item_code']             = '';
 					$d['nama']              = '';
                                         $d['alias']             = '';
 					$d['buyer']             = '';
@@ -261,13 +265,13 @@ class Decal extends CI_Controller {
 			$d['judul'] = "Ubah data decal";
                       
 			$id = $this->uri->segment(3);
-                        $batch = $this->uri->segment(4);
-			$text = "select * from decal_items_detail where parent_id = '$id' and id = '$batch'";
+                        $item_code = $this->uri->segment(4);
+			$text = "select * from decal_items_detail where parent_id = '$id' and item_code = '$item_code'";
 			$data = $this->dclModel->manualQuery($text);
                         
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
-                                        $d['batch']             = $batch;
+                                        $d['item_code']             = $item_code;
 					$d['item']              = $db->item;
                                         $d['position']          = $db->position;
                                         $d['isi_motif']         = $db->isi_motif;
@@ -288,7 +292,7 @@ class Decal extends CI_Controller {
                                                     }
                                             }else{
                                                             $d['id']                = $id;
-                                                            $d['batch']             = '';
+                                                            $d['item_code']         = '';
                                                             $d['nama']              = '';
                                                             $d['alias']             = '';
                                                             $d['buyer']             = '';
@@ -338,9 +342,9 @@ class Decal extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){                        
                                 $id = $this->uri->segment(3);
-                                $batch = $this->uri->segment(4);
+                                $item_code = $this->uri->segment(4);
                                 $tgl_deleted = date('Y-m-d h:i:s');
-                                $this->dclModel->manualQuery("UPDATE decal_items_detail SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE parent_id='$id' AND id='$batch'");
+                                $this->dclModel->manualQuery("UPDATE decal_items_detail SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE parent_id='$id' AND item_code='$item_code'");
                                 $this->edit();
                         
 		}else{
@@ -365,6 +369,7 @@ class Decal extends CI_Controller {
                                 $up['status']		= $this->input->post('status');
 				
                                 $ud['parent_id']        = $this->input->post('id');
+                                $ud['item_code']        = $this->input->post('item_code');
 				$ud['item']             = $this->input->post('item');
 				$ud['position']         = $this->input->post('position');
 				$ud['isi_motif']        = $this->input->post('isi_motif');
@@ -372,9 +377,10 @@ class Decal extends CI_Controller {
                                 $ud['inputer']          = $this->session->userdata('username');
 				
 				$id['id']               = $this->input->post('id');
+                                $idx                    = $this->input->post('id');
 				
 				$id_d['parent_id']     = $this->input->post('id');
-                                $id_d['id']             = $this->input->post('batch');
+                                $id_d['item_code']     = $this->input->post('item_code');
 				
 				$data = $this->dclModel->getSelectedData("decal_items",$id);
 				if($data->num_rows()>0){
@@ -383,10 +389,12 @@ class Decal extends CI_Controller {
 						if($data->num_rows()>0){
                                                         $ud['tgl_update']   = date('Y-m-d h:i:s');
 							$this->dclModel->updateData("decal_items_detail",$ud,$id_d);
+                                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal/edit/$idx'>";
                                                         echo 'Update data Sukses';
 						}else{
                                                         $ud['tgl_insert']   = date('Y-m-d h:i:s');
 							$this->dclModel->insertData("decal_items_detail",$ud);
+                                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal/edit/$idx'>";
                                                         echo 'Simpan data Sukses';
 						}
 				}else{
@@ -394,6 +402,7 @@ class Decal extends CI_Controller {
 					$this->dclModel->insertData("decal_items",$up);
                                         $ud['tgl_insert']                = date('Y-m-d h:i:s');
 					$this->dclModel->insertData("decal_items_detail",$ud);
+                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal/edit/$idx'>";
 					echo 'Simpan data Sukses';		
 				}
 		}else{

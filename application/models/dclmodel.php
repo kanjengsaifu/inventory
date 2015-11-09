@@ -197,6 +197,21 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxItemsCode(){
+		$text = "SELECT max(item_code) as no FROM decal_items_detail";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'IT'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'IT'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function NamaLengkap($id){
 		$t = "SELECT * FROM admins WHERE username='$id'";
 		$d = $this->glzModel->manualQuery($t);
