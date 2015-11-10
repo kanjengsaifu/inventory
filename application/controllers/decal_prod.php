@@ -17,7 +17,7 @@ class Decal_prod extends CI_Controller {
 			
                         $where = " WHERE a.id_related <>'' AND a.deleted <> 1";
 			if(!empty($cari)){
-				$where .= " AND a.id_related LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.id_decal_items LIKE '%$cari%' OR b.nama LIKE '%$cari%' AND a.deleted = 0";
+				$where .= " AND a.id_related LIKE '%$cari%' OR a.inputer LIKE '%$cari%' OR a.parent_id LIKE '%$cari%' OR b.nama LIKE '%$cari%' AND a.deleted = 0";
 			}
 			if(!empty($tgl)){
 				$where .= " AND a.tgl_input LIKE '%$tgl%' AND a.deleted = 0";
@@ -43,9 +43,9 @@ class Decal_prod extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT a.id_related,a.tgl_input, a.id_decal_items, b.nama, a.inputer
+			$text = "SELECT a.id_related,a.tgl_input, a.parent_id, b.nama, a.inputer
                                     FROM decal_phd a
-                                    LEFT JOIN decal_items b ON b.id = a.id_decal_items
+                                    LEFT JOIN decal_items b ON b.id = a.parent_id
                                 $where ";
                         
 			$tot_hal = $this->dclModel->manualQuery($text);		
@@ -65,9 +65,9 @@ class Decal_prod extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT a.id_related,a.tgl_input, a.id_decal_items, b.nama, a.inputer
+			$text = "SELECT a.id_related,a.tgl_input, a.parent_id, b.nama, a.inputer
                                     FROM decal_phd a
-                                    LEFT JOIN decal_items b ON b.id = a.id_decal_items
+                                    LEFT JOIN decal_items b ON b.id = a.parent_id
                                         $where
                                         GROUP BY a.id_related
 					ORDER BY a.id_related DESC
@@ -102,7 +102,7 @@ class Decal_prod extends CI_Controller {
 			$d['id']                = $id;
                         $d['batch']             = '';
                         $d['no_po']             = '';
-                        $d['id_decal_items']	= '';
+                        $d['parent_id']         = '';
                         $d['nama_decal']        = '';
                         $d['nama_decal']        = '';
                         $d['tgli']              = '';
@@ -149,21 +149,13 @@ class Decal_prod extends CI_Controller {
 				$up['inputer']          = $this->session->userdata('username');
 				
 				$ud['id_related']       = $this->input->post('id');
-				$ud['no_po']            = $this->input->post('no_po');
-				$ud['id_decal_items']   = $this->input->post('id_decal_items');
                                 $ud['shift']            = $this->input->post('shift');
                                 $ud['jam']              = $this->input->post('jam');
-                                $ud['jenis_decal']      = $this->input->post('jenis_decal');
-                                $ud['size_kertas']      = $this->input->post('size_kertas');
-                                $ud['size_kat']         = $this->input->post('size_kat');
-                                $ud['komposisi']        = $this->input->post('komposisi');
-                                $ud['warna']            = $this->input->post('warna');
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['id_bmt']           = $this->input->post('id_bmt');
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['kw1']              = $this->input->post('kw1');
                                 $ud['kw2']              = $this->input->post('kw2');
-                                $ud['kw3']              = $this->input->post('kw3');
                                 $ud['tgli']             = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $ud['inputer']          = $this->session->userdata('username');
 				
@@ -187,10 +179,15 @@ class Decal_prod extends CI_Controller {
                                                         echo 'Simpan data Sukses';
 						}
 				}else{
-                                        $up['tgl_input']		= date('Y-m-d h:i:s');
-					$this->dclModel->insertData("decal_ph",$up);
-                                        $ud['tgl_input']                = date('Y-m-d h:i:s');
-					$this->dclModel->insertData("decal_phd",$ud);
+                                        //$up['tgl_input']		= date('Y-m-d h:i:s');
+					//$this->dclModel->insertData("decal_ph",$up);
+                                        $sql = "insert into decal_phd (id,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                                tgl_input,tgl_update,tgl_delete,deleted)
+                                                select NULL,'PH00003',parent_id,item_code,isi_motif,isi_motif*100,0,1,1,1,'0000-00-00','00:00:00','citra','admin',
+                                                '0000-00-00 00:00:00','0000-00-00 00:00:00','0000-00-00 00:00:00',0  from decal_items_detail where parent_id = 'DI00003'";
+                                        $this->db->query($sql);
+                                        //$ud['tgl_input']                = date('Y-m-d h:i:s');
+					//$this->dclModel->insertData("decal_phd",$ud);
 					echo 'Simpan data Sukses';		
 				}
 		}else{
@@ -223,9 +220,10 @@ class Decal_prod extends CI_Controller {
 					$d['tgl_plng']	= $this->dclModel->tgl_indo($db->tgl_plng);
 					$d['no_po']	= $db->no_po;
                                         $d['planner']	= $db->planner;
+                                        $d['parent_id']	= '';
 				}
 			}else{
-					$d['no_prod']		=$id;
+                                        $d['parent_id']	= '';
 					$d['tgl_plng']	='';
 					$d['no_po']	='';
                                         $d['planner']	='';
@@ -271,10 +269,10 @@ class Decal_prod extends CI_Controller {
 			$data = $this->dclModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
-					$d['id']	= $id;
+					$d['id']                = $id;
                                         $d['batch']             = '';
                                         $d['no_po']             = '';
-                                        $d['id_decal_items']	= '';
+                                        $d['parent_id']         = '';
                                         $d['nama_decal']        = '';
                                         $d['tgli']              = '';
                                         $d['jam']               = '';
@@ -292,10 +290,10 @@ class Decal_prod extends CI_Controller {
                                         $d['petugas']           = '';
 				}
 			}else{
-					$d['id'] =$id;
+					$d['id']                =$id;
                                         $d['batch']             = '';
                                         $d['no_po']             = '';
-                                        $d['id_decal_items']	= '';
+                                        $d['parent_id']	= '';
                                         $d['nama_decal']        = '';
                                         $d['tgli']              = '';
                                         $d['jam']               = '';
@@ -436,19 +434,14 @@ class Decal_prod extends CI_Controller {
 		if(!empty($cek)){
 			
 			$id = $this->input->post('kode');
-			$text = "SELECT a.id as batch,a.id_related,a.no_po,a.id_decal_items,e.nama,f.nama as shift ,TIME_FORMAT(a.jam,'%H:%i') as jam,i.nama as jenis, g.dsc as size_kertas, h.dsc as size_kat,
-                                    a.tgli,a.warna,a.komposisi,d.jns_bm as nama_bmt,e.nama as decal_item,c.nama_bm,a.kw1,a.kw2,a.kw3,a.petugas,a.inputer
-                                    FROM decal_phd as a 
-                                    LEFT JOIN decal_ph as b ON a.id_related=b.id 
-                                    LEFT JOIN decal_items as e ON e.id=a.id_decal_items
-                                    LEFT JOIN global_mesin as c ON a.id_bm=c.id_bm
-                                    LEFT JOIN global_mesin as d ON a.id_bmt=d.id_bm
-                                    LEFT JOIN global_shift as f ON a.shift=f.id
-                                    LEFT JOIN global_size as g ON g.id=a.size_kertas 
-                                    LEFT JOIN global_size as h ON h.id=a.size_kat
-                                    LEFT JOIN global_jenis_decal as i ON i.id=a.jenis_decal
+			$text1 = "SELECT * from decal_phd a 
+                                    WHERE a.id_related='$id' AND a.deleted = 0 group by parent_id";
+			$d['data']= $this->dclModel->manualQuery($text1);
+                        
+                        $text2 = "SELECT a.id,a.id_related,a.parent_id,a.item_code,b.item,a.isi_motif,a.jml,a.rusak,a.shift,a.id_bm,a.id_bmt,a.petugas,a.inputer from decal_phd a 
+                                    left join decal_items_detail b on a.item_code = b.item_code
                                     WHERE a.id_related='$id' AND a.deleted = 0";
-			$d['data']= $this->dclModel->manualQuery($text);
+			$d['dataDetail']= $this->dclModel->manualQuery($text2);
 
 			$this->load->view('decal_prod/detail',$d);
 		}else{

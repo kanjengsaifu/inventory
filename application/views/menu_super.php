@@ -126,6 +126,9 @@
     <li data-options="iconCls:'icon-surat_perintah'">
     <a href="<?php echo base_url();?>index.php/pengguna">Pengguna</a>
     </li>
+    <li data-options="iconCls:'icon-surat_keputusan'">
+    <a href="<?php echo base_url();?>index.php/decal">DCL-Item</a>
+    </li>
     </li>
     <li data-options="iconCls:'icon-surat_keputusan'">
     <a href="<?php echo base_url();?>index.php/glasir">GLZ-Item</a>

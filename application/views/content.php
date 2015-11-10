@@ -105,29 +105,33 @@ if($this->session->userdata('level')=='01'){
         </td>
     </tr>
     <thead>
-            <td width="100%" class="btn" colspan="7" style="color:#000;"><center><b>Decal & Logo</b></center></td>
-        </thead>
+            <td width="100%" class="btn" colspan="8" style="color:#000;"><center><b>Decal & Logo</b></center></td>
+    </thead>
     <tr>
-    	<td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
+    	<td class="btn" align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
         <b>Item</b></a>
         </td>
-        <td align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_prod"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
+        <td align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_prod"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
         <b>Produksi</a>
         </td>
-        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
-        <b>Pemakaian</b></a>
+        <td class="btn" align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_tran"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
+        <b>Transit</b></a>
         </td>
-        <td align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_prod"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
-        <b>Retur</a>
+        <td align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_used"><img src="<?php echo base_url();?>asset/images/lelang.png" /><br />
+        <b>Pemakaian</a>
         </td>
-        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
-        <b>Stock Opname</b></a>
+        <td class="btn" align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_retu"><img src="<?php echo base_url();?>asset/images/admin_.png" /><br />
+        <b>Retur</b></a>
         </td>
-        <td align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
-        <b>05-Adjustment</b></a>
+        <td align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
+        <b>Opname</b></a>
         </td>
-        <td class="btn" align="center" width="14%"><a href="<?php echo base_url();?>index.php/glasir_lap"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
-        <b>06-Stok</b></a>
+        <td class="btn" align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_adju"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <b>Adjusment</b></a>
+        </td>
+        <td align="center" width="12.5%"><a href="<?php echo base_url();?>index.php/decal_scra"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
+        <b>Scrap</b></a>
+        </td>
         </td>
         </td>
         </td>

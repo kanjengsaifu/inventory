@@ -14,8 +14,8 @@ $(function() {
 
 function pilih(id){
 	$("#dlg").dialog('close');
-	$("#id_decal_items").val(id);
-	$("#id_decal_items").focus();
+	$("#parent_id").val(id);
+	$("#parent_id").focus();
 	
 }
 </script>
@@ -28,7 +28,6 @@ function pilih(id){
     <th>Nama <br> Buyer</th>
     <th>Satuan</th>
     <th>Jenis</th>
-    <th>Group</th>
     <th>Ambil</th>
 </tr>
 <?php
@@ -45,7 +44,6 @@ function pilih(id){
             <td ><?php echo $db['buyer']; ?></td>
             <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
             <td align="center" width="60" ><?php echo $jenis; ?></td>
-            <td align="center" width="60" ><?php echo $db['parent']; ?></td>
             <td align="center" width="80">
             <a href="javascript:pilih('<?php echo $db['id'];?>')" >
         	<img src="<?php echo base_url();?>asset/images/add.png" title='Ambil'>

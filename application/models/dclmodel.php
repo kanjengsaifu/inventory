@@ -239,8 +239,8 @@ class Dclmodel extends CI_Model {
 	}
         
         public function ProsesItem($id){
-		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_phd a 
-                        JOIN decal_items b on a.id_decal_items = b.id
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_phd a 
+                        JOIN decal_items b on a.parent_id = b.id
                         WHERE a.id_related='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
@@ -254,8 +254,8 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
-        public function JmlDecalKW1($id){
-		$t = "SELECT sum(kw1) as kw1 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
+        public function JmlDecalJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -268,41 +268,13 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
-        public function JmlDecalKW2($id){
-		$t = "SELECT sum(kw2) as kw2 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
+        public function JmlDecalRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
 			foreach($d->result() as $h){
 				$hasil = $h->kw2;
-			}
-		}else{
-			$hasil = 0;
-		}
-		return $hasil;
-	}
-        
-        public function JmlDecalKW3($id){
-		$t = "SELECT sum(kw3) as kw3 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
-		$d = $this->glzModel->manualQuery($t);
-		$r = $d->num_rows();
-		if($r>0){
-			foreach($d->result() as $h){
-				$hasil = $h->kw3;
-			}
-		}else{
-			$hasil = 0;
-		}
-		return $hasil;
-	}
-        
-        public function JmlDecalKW4($id){
-		$t = "SELECT sum(kw1+kw2+kw3) as kw4 FROM decal_phd WHERE id_related='$id' AND deleted <> 1";
-		$d = $this->glzModel->manualQuery($t);
-		$r = $d->num_rows();
-		if($r>0){
-			foreach($d->result() as $h){
-				$hasil = $h->kw4;
 			}
 		}else{
 			$hasil = 0;
@@ -1016,6 +988,52 @@ class Dclmodel extends CI_Model {
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;
+	}
+        
+        public function namaDesain($id){
+		$t = "SELECT * FROM decal_items WHERE id='$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function jenisDesain($id){
+		$t = "SELECT a.id,a.nama,a.alias,a.buyer,a.dekorasi,a.size,a.satuan,b.nama as jenis FROM decal_items a 
+                        LEFT JOIN global_jenis_decal b on a.jenis = b.id
+                        where a.id = '$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->jenis;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function kertas($id){
+		$t = "SELECT a.id,a.nama,a.alias,a.buyer,a.dekorasi,b.dsc as size,a.satuan,a.jenis FROM decal_items a 
+                        LEFT JOIN global_size b on a.jenis = b.id
+                        where a.id = '$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->size;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
 	}
         
 }

@@ -28,23 +28,23 @@ $(document).ready(function(){
 			dateFormat:"dd-mm-yy"
             });
 	
-	$("#id_decal_items").focus();
-	$("#id_decal_items").keyup(function(e){
+	$("#parent_id").focus();
+	$("#parent_id").keyup(function(e){
 		var isi = $(e.target).val();
 		$(e.target).val(isi.toUpperCase());
 	});
-	$("#id_decal_items").focus(function(e){
+	$("#parent_id").focus(function(e){
 		var isi = $(e.target).val();
 		CariDecal();
 	});
 	
-	$("#id_decal_items").keyup(function(){
+	$("#parent_id").keyup(function(){
 		CariDecal();
 		
 	});
 	
 	function CariDecal(){
-		var kode = $("#id_decal_items").val();
+		var kode = $("#parent_id").val();
 		$.ajax({
 			type	: 'POST',
 			url	: "<?php echo site_url(); ?>/ref_json/InfoDecal",
@@ -59,21 +59,21 @@ $(document).ready(function(){
 	
 	$("#simpan").click(function(){
             
-		var id_decal_items	= $("#id_decal_items").val();
+		var parent_id           = $("#parent_id").val();
 		var kw1                 = $("#kw1").val();
                 var kw2                 = $("#kw2").val();
                 var kw3                 = $("#kw3").val();
 		
 		var string = $("#form").serialize();
 		
-		if(id_decal_items.length==0){
+		if(parent_id.length==0){
 			$.messager.show({
 				title:'Info',
 				msg:'Maaf, Kode Decal tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#id_decal_items").focus();
+			$("#parent_id").focus();
 			return false();
 		}
                 
@@ -149,7 +149,7 @@ $(document).ready(function(){
 	
 	$("#tambah_data").click(function(){
 		$(".detail").val('');
-		$("#id_decal_items").val('');
+		$("#parent_id").val('');
                 $("#no_po").val('');
                 $("#batch").val('');
                 $("#petugas").val('');
@@ -166,7 +166,7 @@ $(document).ready(function(){
                 $("#kw1").val(0);
                 $("#kw2").val(0);
                 $("#kw3").val(0);
-		$("#id_decal_items").focus();
+		$("#parent_id").focus();
 	});
 	
 	$("#cetak").click(function(){
@@ -212,11 +212,6 @@ $(document).ready(function(){
         <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>" /></td>
     </tr>
     <tr>    
-        <td>No PO</td>
-        <td>:</td>
-        <td><input type="text" name="no_po" id="no_po" class="detail" size="45" maxlength="20" value="<?php echo $no_po;?>" /></td>
-    </tr>
-    <tr>    
         <td width="150">No. Batch</td>
         <td width="5">:</td>
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
@@ -227,17 +222,23 @@ $(document).ready(function(){
         <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20" value="<?php echo $petugas;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Kode Decal</td>
+        <td width="150">Kode Desain</td>
         <td width="5">:</td>
-        <td><input type="text" name="id_decal_items" id="id_decal_items" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $id_decal_items;?>" />
+        <td><input type="text" name="parent_id" id="parent_id" size="34.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $parent_id;?>" />
         <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
         </td>
     </tr>
     <tr>    
-        <td>Nama Decal</td>
+        <td>Nama Desain</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_decal" id="nama_decal"  size="45" class="detail" maxlength="50"/></td>
     </tr>
+    </table>
+    </fieldset>
+</td>
+<td valign="top" width="50%">
+    <fieldset>
+    <table width="100%">
     <tr>    
         <td width="150">Tanggal Pelaksanaan</td>
         <td width="5">:</td>
@@ -269,36 +270,7 @@ $(document).ready(function(){
 		} ?>
         </select>
         </td>
-    </tr>
-    </table>
-    </fieldset>
-</td>
-<td valign="top" width="50%">
-    <fieldset>
-    <table width="100%">
-    <tr>    
-        <td>Jenis Decal</td>
-        <td>:</td>
-        <td>
-            <select name="jenis_decal" id="jenis_decal" style="width:382px;">
-        <?php 
-		if(empty($jenis_decal)){
-		?>
-        <option  value="<?php echo $jenis_decal;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($l_jd->result() as $t){
-			if($jenis_decal==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
+    </tr>    
     <tr>    
         <td>Mesin Produksi</td>
         <td>:</td>
@@ -346,75 +318,9 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Ukuran Kertas</td>
+        <td>Jumlah</td>
         <td>:</td>
-        <td>
-            <select name="size_kertas" id="size_kertas" style="width:382px;">
-        <?php 
-		if(empty($size_kertas)){
-		?>
-        <option  value="<?php echo $size_kertas;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($l_uk->result() as $t){
-			if($size_kertas==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
-    <tr>    
-        <td>Ukuran Logo</td>
-        <td>:</td>
-        <td>
-            <select name="size_kat" id="size_kat" style="width:382px;">
-        <?php 
-		if(empty($size_kat)){
-		?>
-        <option  value="<?php echo $size_kat;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($l_ul->result() as $t){
-			if($size_kat==$t->id){
-		?>
-        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->dsc;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
-    <tr>    
-        <td>Banyak Warna</td>
-        <td>:</td>
-        <td><input type="text" name="warna" id="warna"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;"  value="<?php echo $warna;?>"/></td>
-    </tr>
-    <tr>    
-        <td>Komposisi</td>
-        <td>:</td>
-        <td><input type="text" name="komposisi" id="komposisi" class="detail" size="45" maxlength="20" value="<?php echo $komposisi;?>" /></td>
-    </tr>
-    <tr>    
-        <td>KW 1</td>
-        <td>:</td>
-        <td><input type="text" name="kw1" id="kw1"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1;?>" /></td>
-    </tr>
-    <tr>    
-        <td>KW 2</td>
-        <td>:</td>
-        <td><input type="text" name="kw2" id="kw2"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw2;?>" /></td>
-    </tr>
-    <tr>    
-        <td>KW 3</td>
-        <td>:</td>
-        <td><input type="text" name="kw3" id="kw3"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw3;?>" /></td>
+        <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1;?>" /></td>
     </tr>
     </table>
     </fieldset>
