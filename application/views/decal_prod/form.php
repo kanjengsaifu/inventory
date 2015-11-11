@@ -60,16 +60,19 @@ $(document).ready(function(){
 	$("#simpan").click(function(){
             
 		var parent_id           = $("#parent_id").val();
-		var kw1                 = $("#kw1").val();
-                var kw2                 = $("#kw2").val();
-                var kw3                 = $("#kw3").val();
+                var tgli                = $("#tgli").val();
+                var jam                 = $("#jam").val();
+                var shift               = $("#shift").val();
+                var id_bm               = $("#id_bm").val();
+                var id_bmt              = $("#id_bmt").val();
+                var jml                 = $("#jml").val();
 		
 		var string = $("#form").serialize();
-		
-		if(parent_id.length==0){
+                
+                if(parent_id.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Kode Decal tidak boleh kosong', 
+				msg:'Maaf, Kode desain tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -77,49 +80,72 @@ $(document).ready(function(){
 			return false();
 		}
                 
-                if(kw1.length==0){
+                if(tgli.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, KW 1 tidak boleh kosong', 
+				msg:'Maaf, Tanggal pelaksanaan tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#kw1").focus();
+			$("#tgli").focus();
 			return false();
 		}
                 
-                if(kw1<0){
+                if(shift.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Kuantitas KW 1 tidak boleh kurang dari 0', 
+				msg:'Maaf, Shift tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#kw1").focus();
+			$("#shift").focus();
 			return false();
 		}
                 
-                if(kw2<0){
+                if(id_bm.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Kuantitas KW 2 tidak boleh kurang dari 0', 
+				msg:'Maaf, Mesin produksi tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#kw2").focus();
+			$("#id_bm").focus();
 			return false();
 		}
                 
-                if(kw3<0){
+                if(id_bmt.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Kuantitas KW 3 tidak boleh kurang dari 0', 
+				msg:'Maaf, Penyimpanan tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#kw3").focus();
+			$("#id_bmt").focus();
 			return false();
 		}
+                
+                if(jml.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Jumlah Sheet tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#jml").focus();
+			return false();
+		}
+                
+                if(jml<0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Jumlah Sheet tidak boleh kurang dari 0', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#jml").focus();
+			return false();
+		}
+
 		
 		$.ajax({
 			type	: 'POST',
@@ -219,7 +245,7 @@ $(document).ready(function(){
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20" value="<?php echo $petugas;?>" /></td>
+        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/decal_prod/getPicProdDecal'?>'"  value="<?php echo $petugas;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Kode Desain</td>
@@ -240,20 +266,20 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-        <td width="150">Tanggal Pelaksanaan</td>
+        <td width="150">Tgl. Pelaksanaan</td>
         <td width="5">:</td>
         <td><input name="tgli" id="tgli"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgli;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Jam Pelaksanaan</td>
         <td width="5">:</td>
-        <td><input name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam;?>" /></td>
+        <td><input style="width: 350px;" name="jam" id="jam"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam;?>" /></td>
     </tr>
     <tr>    
         <td>Shift</td>
         <td>:</td>
         <td>
-        <select name="shift" id="shift" style="width:382px;">
+        <select name="shift" id="shift" style="width:350px;">
         <?php 
 		if(empty($shift)){
 		?>
@@ -275,7 +301,7 @@ $(document).ready(function(){
         <td>Mesin Produksi</td>
         <td>:</td>
         <td>
-            <select name="id_bm" id="id_bm" style="width:382px;">
+            <select name="id_bm" id="id_bm" style="width:350px;">
         <?php 
 		if(empty($id_bm)){
 		?>
@@ -298,7 +324,7 @@ $(document).ready(function(){
         <td>Disimpan Ke</td>
         <td>:</td>
         <td>
-            <select name="id_bmt" id="id_bmt" style="width:382px;">
+            <select name="id_bmt" id="id_bmt" style="width:350px;">
         <?php 
 		if(empty($id_bmt)){
 		?>
@@ -318,7 +344,7 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Jumlah</td>
+        <td>Jumlah Sheet</td>
         <td>:</td>
         <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1;?>" /></td>
     </tr>

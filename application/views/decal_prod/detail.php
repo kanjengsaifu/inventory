@@ -64,24 +64,23 @@ $(function() {
                 $total2 = $db['rusak'];
 		?>    
     	<tr>
-            <td align="center" width="20" style="font-size:10px"><?php echo $no; ?></td>
-            <td align="center" style="font-size:10px; fo"><?php echo $this->dclModel->tgl_indo($db['tgli']); ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['jam']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['shift']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['parent_id']; ?></td>
-            <td style="font-size:10px"><?php echo $namaDesain; ?></td>
-            
-            <td align="center" style="font-size:10px"><?php echo $jenisDesain; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $kertas; ?></td>
-            <td align="right" style="font-size:10px"><?php echo $db['isi_motif']; ?></td>
-            <td align="right" style="font-size:10px"><?php echo $db['id']; ?></td>
-            <td align="right" style="font-size:10px"><?php echo $db['jml']; ?></td>
-            <td align="right" style="font-size:10px"><?php echo $db['rusak']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['id_bm']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['id_bm']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['petugas']; ?></td>
-            <td align="center" style="font-size:10px"><?php echo $db['inputer']; ?></td>
-            <td align="center" style="font-size:10px">
+            <td align="center" width="20" style="font-size:11px; font-weight: bold;"><?php echo $no; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $this->dclModel->tgl_indo($db['tgli']); ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['jam']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['shift']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['parent_id']; ?></td>
+            <td style="font-size:11px; font-weight: bold;"><?php echo $namaDesain; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $jenisDesain; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $kertas; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['isi_motif']; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['id_group']; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['jml']; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['rusak']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['id_bm']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['id_bm']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['petugas']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['inputer']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;">
             <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
@@ -92,7 +91,7 @@ $(function() {
             </td>
                 <?php
                     foreach($dataDetail->result_array() as $dx){
-                        if($db['parent_id'] == $dx['parent_id']){
+                        if($db['parent_id'] == $dx['parent_id'] && $db['id_group'] == $dx['id_group']){
                     ?>
                 <tr>    
                             <td colspan="4" align="center" style="font-size:10px"></td>
@@ -108,10 +107,10 @@ $(function() {
                             <td align="center" style="font-size:10px"><?php echo $dx['petugas']; ?></td>
                             <td align="center" style="font-size:10px"><?php echo $dx['inputer']; ?></td>
                             <td align="center" style="font-size:10px">
-                            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>">
+                            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>/<?php echo $db['item_code'];?>/<?php echo $db['id'];?>">
                                         <img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
                                         </a>
-                            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>"
+                            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>/<?php echo $db['item_code'];?>/<?php echo $db['id'];?>"
                             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
                                         <img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
                                         </a>

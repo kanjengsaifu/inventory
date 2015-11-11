@@ -1036,6 +1036,13 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+         public function getPicProdDecal(){
+                $query ="select distinct petugas from decal_phd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
 }
 	
 /* End of file app_model.php */
