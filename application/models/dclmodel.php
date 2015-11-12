@@ -227,7 +227,7 @@ class Dclmodel extends CI_Model {
 	}
         
         public function ProsesDecal($id){
-		$t = "SELECT id FROM decal_phd WHERE id_related='$id' AND deleted = 0";
+		$t = "SELECT id FROM decal_phd WHERE id_related='$id' AND deleted = 0 group by id_group";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
 		if($r>0){
@@ -293,6 +293,20 @@ class Dclmodel extends CI_Model {
 			}
 		}else{
 			$hasil = 'PH'.'00001';
+		}
+		return $hasil;
+	}
+        
+        public function MaxPhGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_phd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
 		}
 		return $hasil;
 	}

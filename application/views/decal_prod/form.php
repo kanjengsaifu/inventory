@@ -176,22 +176,14 @@ $(document).ready(function(){
 	$("#tambah_data").click(function(){
 		$(".detail").val('');
 		$("#parent_id").val('');
-                $("#no_po").val('');
-                $("#batch").val('');
                 $("#petugas").val('');
                 $("#nama_decal").val('');
                 $("#tgli").val('');
                 $("#jam").val('');
-                $("#shift").val('');
-                $("#id_bm").val('');
-                $("#id_bmt").val('');
-                $("#size_kertas").val('');
-                $("#size_kat").val('');
-                $("#warna").val('');
-                $("#komposisi").val('');
-                $("#kw1").val(0);
-                $("#kw2").val(0);
-                $("#kw3").val(0);
+                $("#shift").val('1');
+                $("#id_bm").val('1');
+                $("#id_bmt").val('1');
+                $("#jml").val(0);
 		$("#parent_id").focus();
 	});
 	
@@ -238,9 +230,9 @@ $(document).ready(function(){
         <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">No. Batch</td>
+        <td width="150">No. Group</td>
         <td width="5">:</td>
-        <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
+        <td><input type="text" name="id_group" id="id_group" size="45" maxlength="12" readonly="readonly" value="<?php echo $id_group;?>" /></td>
     </tr>
     <tr>    
         <td>Petugas</td>
@@ -250,8 +242,8 @@ $(document).ready(function(){
     <tr>    
         <td width="150">Kode Desain</td>
         <td width="5">:</td>
-        <td><input type="text" name="parent_id" id="parent_id" size="34.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $parent_id;?>" />
-        <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        <td><input <?php echo $readonly;?> type="text" name="parent_id" id="parent_id" size="34.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $parent_id;?>" />
+            <button style="display: <?php echo $none;?>" type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'" >Cari</button>
         </td>
     </tr>
     <tr>    
@@ -311,9 +303,9 @@ $(document).ready(function(){
 		foreach($l_bm->result() as $t){
 			if($id_bm==$t->id_bm){
 		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
         <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?> - <?php echo $t->jns_bm;?></option>
+        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
         <?php }
 		} ?>
         </select>
@@ -321,7 +313,7 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Disimpan Ke</td>
+        <td>Penyimpanan</td>
         <td>:</td>
         <td>
             <select name="id_bmt" id="id_bmt" style="width:350px;">
@@ -346,7 +338,7 @@ $(document).ready(function(){
     <tr>    
         <td>Jumlah Sheet</td>
         <td>:</td>
-        <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw1;?>" /></td>
+        <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $jml;?>" /></td>
     </tr>
     </table>
     </fieldset>

@@ -98,40 +98,28 @@ class Decal_prod extends CI_Controller {
 			$d['judul']="Input stock produksi decal";
 			
 			$id         = $this->dclModel->MaxPhDecal();
+                        $id_group   = $this->dclModel->MaxPhGroup();
 			
 			$d['id']                = $id;
-                        $d['batch']             = '';
-                        $d['no_po']             = '';
+                        $d['id_group']          = $id_group;
+                        $d['petugas']             = '';
                         $d['parent_id']         = '';
-                        $d['nama_decal']        = '';
                         $d['nama_decal']        = '';
                         $d['tgli']              = '';
                         $d['jam']               = '';
-                        $d['jenis_decal']       = '';
                         $d['shift']             = 1;
                         $d['id_bm']             = 1;
                         $d['id_bmt']            = 1;
-                        $d['size_kertas']       = 0;
-                        $d['size_kat']          = 1;
-                        $d['warna']             = '';
-                        $d['komposisi']         = '';
-                        $d['kw1']               = '';
-                        $d['kw2']               = '';
-                        $d['kw3']               = '';
-                        $d['petugas']           = '';
-			
-                        $jd = "SELECT * FROM global_jenis_decal";
-			$d['l_jd'] = $this->dclModel->manualQuery($jd);
+                        $d['jml']               = 0;
+                        $d['readonly']          = '';
+                        $d['none']              = '';
+                        
 			$bm = "SELECT * FROM global_mesin where jns_bm like '%decal_cetak%' OR jns_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->dclModel->manualQuery($bm);
                         $xbm = "SELECT * FROM global_mesin where jns_bm like '%Tidak Ada%'";
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
-                        $uk = "SELECT * FROM global_size where nama like '%decal_size_paper%' OR nama like '%Tidak Ada%'";
-			$d['l_uk'] = $this->dclModel->manualQuery($uk);
-                        $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
-			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 			
 			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -158,11 +146,13 @@ class Decal_prod extends CI_Controller {
                                 $ud['petugas']          = $this->input->post('petugas');
                                 $ud['tgli']             = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $ud['inputer']          = $this->session->userdata('username');
+                                $ud['jml']              = $this->input->post('jml');
+                                $id_groupx              = $this->input->post('id_group');
                                 $parent_idx             = $this->input->post('parent_id');
                                 $jmlx                   = $this->input->post('jml');
                                 $shiftx                 = $this->input->post('shift');
                                 $jamx                   = $this->input->post('jam');
-                                $tgli                   = $this->input->post('tgli');
+                                $tglix                  = $this->input->post('tgli');
                                 $id_bmx                 = $this->input->post('id_bm');
                                 $id_bmtx                = $this->input->post('id_bmt');
                                 $petugasx               = $this->input->post('petugas');
@@ -170,35 +160,42 @@ class Decal_prod extends CI_Controller {
 				$id['id']               = $this->input->post('id');
 				
 				$id_d['id_related']     = $this->input->post('id');
-				$id_d['parent_id'] = $this->input->post('parent_id');
-                                $id_d['id']             = $this->input->post('batch');
+				$id_d['parent_id']      = $this->input->post('parent_id');
+                                $id_d['id_group']             = $this->input->post('id_group');
 				
 				$data = $this->dclModel->getSelectedData("decal_ph",$id);
 				if($data->num_rows()>0){
+                                                $up['tgl_update']		= date('Y-m-d h:i:s');
                                                 $this->dclModel->updateData("decal_ph",$up,$id);
 						$datax = $this->dclModel->getSelectedData("decal_phd",$id_d);
 						if($datax->num_rows()>0){
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_phd",$ud,$id_d);
+
+                                                        $sql = "update decal_phd set jml = '$jmlx'*isi_motif where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $this->db->query($sql);
+                                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
                                                         echo 'Update data Sukses';
 						}else{
                                                         $tgl_inputx		        = date('Y-m-d h:i:s');
-                                                        $sql = "insert into decal_phd (id,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                                        $sql = "insert into decal_phd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
                                                                 tgl_input,tgl_update,tgl_delete,deleted)
-                                                                select NULL,'$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tgli','$jamx','$petugasx','$inputerx',
+                                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
                                                                 '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
+                                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
                                                         echo 'Simpan data Sukses';
 						}
 				}else{
                                         $up['tgl_input']		= date('Y-m-d h:i:s');
                                         $tgl_inputx		        = date('Y-m-d h:i:s');
 					$this->dclModel->insertData("decal_ph",$up);
-                                        $sql = "insert into decal_phd (id,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                        $sql = "insert into decal_phd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
                                                 tgl_input,tgl_update,tgl_delete,deleted)
-                                                select NULL,'$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tgli','$jamx','$petugasx','$inputerx',
+                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
                                                 '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
                                         $this->db->query($sql);
+                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
 					echo 'Simpan data Sukses';		
 				}
 		}else{
@@ -278,62 +275,45 @@ class Decal_prod extends CI_Controller {
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM decal_ph WHERE id='$id'";
 			$data = $this->dclModel->manualQuery($text);
+                        $id_group   = $this->dclModel->MaxPhGroup();
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['id']                = $id;
-                                        $d['batch']             = '';
-                                        $d['no_po']             = '';
+                                        $d['id_group']          = $id_group;
+                                        $d['petugas']          = '';
                                         $d['parent_id']         = '';
                                         $d['nama_decal']        = '';
                                         $d['tgli']              = '';
                                         $d['jam']               = '';
-                                        $d['jenis_decal']       = '';
                                         $d['shift']             = 1;
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
-                                        $d['size_kertas']       = 0;
-                                        $d['size_kat']          = 1;
-                                        $d['warna']             = '';
-                                        $d['komposisi']         = '';
-                                        $d['kw1']               = '';
-                                        $d['kw2']               = '';
-                                        $d['kw3']               = '';
-                                        $d['petugas']           = '';
+                                        $d['jml']               = 0;
+                                        $d['readonly']          = "readonly='readonly'";
+                                        $d['none']              = "none";
 				}
 			}else{
-					$d['id']                =$id;
-                                        $d['batch']             = '';
-                                        $d['no_po']             = '';
-                                        $d['parent_id']	= '';
+					$d['id']                = '$id';
+                                        $d['id_group']          = '';
+                                        $d['petugas']          = '';
+                                        $d['parent_id']         = '';
                                         $d['nama_decal']        = '';
                                         $d['tgli']              = '';
                                         $d['jam']               = '';
-                                        $d['jenis_decal']       = '';
                                         $d['shift']             = 1;
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
-                                        $d['size_kertas']       = 0;
-                                        $d['size_kat']          = 1;
-                                        $d['warna']             = '';
-                                        $d['komposisi']         = '';
-                                        $d['kw1']               = '';
-                                        $d['kw2']               = '';
-                                        $d['kw3']               = '';
-                                        $d['petugas']           = '';
+                                        $d['jml']               = 0;
+                                        $d['readonly']          = '';
+                                        $d['none']              = '';
 			}
-			
-                        $jd = "SELECT * FROM global_jenis_decal";
-			$d['l_jd'] = $this->dclModel->manualQuery($jd);
+                        
 			$bm = "SELECT * FROM global_mesin where jns_bm like '%decal_cetak%' OR jns_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->dclModel->manualQuery($bm);
                         $xbm = "SELECT * FROM global_mesin where jns_bm like '%Tidak Ada%'";
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
-                        $uk = "SELECT * FROM global_size where nama like '%decal_size_paper%' OR nama like '%Tidak Ada%'";
-			$d['l_uk'] = $this->dclModel->manualQuery($uk);
-                        $ul = "SELECT * FROM global_size where nama like '%decal_size_kat%' OR nama like '%Tidak Ada%'";
-			$d['l_ul'] = $this->dclModel->manualQuery($ul);
 									
 			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
 			$this->load->view('home',$d);
@@ -354,17 +334,56 @@ class Decal_prod extends CI_Controller {
 			$d['instansi']= $this->config->item('instansi');
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
+                        $d['judul'] = "Ubah input stock stock decal";
 			
-			$d['judul'] = "Ubah input stock glasir turun ball mill";
+			$id_related = $this->uri->segment(3);
+                        $parent_id = $this->uri->segment(4);
+                        $id_group = $this->uri->segment(5);
+			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, sum(a.jml)/sum(a.isi_motif) as jml, a.rusak, a.shift, 
+                                    a.id_bm, a.id_bmt, a.tgli, a.jam, a.petugas, a.inputer, a.tgl_input, a.tgl_update, a.tgl_delete, a.deleted from decal_phd a
+                                    where a.id_related = '$id_related' and a.parent_id = '$parent_id' and a.id_group = '$id_group'
+                                    group by a.id_group";
+			$data = $this->dclModel->manualQuery($text);
+                        
+			if($data->num_rows() > 0){
+				foreach($data->result() as $db){
+					$d['id']                = $id_related;
+                                        $d['id_group']          = $id_group;
+                                        $d['petugas']           = $db->petugas;
+                                        $d['parent_id']         = $parent_id;
+                                        $d['tgli']              = $this->dclModel->tgl_sql($db->tgli);
+                                        $d['jam']               = $db->jam;
+                                        $d['shift']             = $db->shift;
+                                        $d['id_bm']             = $db->id_bm;
+                                        $d['id_bmt']            = $db->id_bmt;
+                                        $d['jml']               = $db->jml;
+                                        $d['readonly']          = "readonly='readonly'";
+                                        $d['none']              = "none";
+				}
+			}else{
+					$d['id']                =$id;
+                                        $d['id_group']          = '';
+                                        $d['petugas']           = '';
+                                        $d['parent_id']         = '';
+                                        $d['tgli']              = '';
+                                        $d['jam']               = '';
+                                        $d['shift']             = '';
+                                        $d['id_bm']             = '';
+                                        $d['id_bmt']            = '';
+                                        $d['jml']               = '';
+                                        $d['readonly']          = '';
+                                        $d['none']              = '';
+			}
 			
-			$id = $this->uri->segment(3);
-                        $id_decal_items = $this->uri->segment(4);
-                        $batch = $this->uri->segment(5);
-			//$text = "";
-			//$data = $this->dclModel->manualQuery($text);
-									
-			$this->load->view('data_decal',$d);	
-			//$this->load->view('home',$d);
+                        $bm = "SELECT * FROM global_mesin where jns_bm like '%decal_cetak%' OR jns_bm like '%Tidak Ada%'";
+			$d['l_bm'] = $this->dclModel->manualQuery($bm);
+                        $xbm = "SELECT * FROM global_mesin where jns_bm like '%Tidak Ada%'";
+			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
+                        $sft = "SELECT * FROM global_shift";
+			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        
+			$d['content'] = $this->load->view('decal_prod/form', $d, true);		
+			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
 		}

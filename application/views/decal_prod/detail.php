@@ -49,7 +49,7 @@ $(function() {
     <th style="font-size:10px">Nama</th>
     <th style="font-size:10px">Jenis</th>
     <th style="font-size:10px">Kertas</th>
-    <th style="font-size:10px">Komposisi</th>
+    <th style="font-size:10px">Isi</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
@@ -72,47 +72,42 @@ $(function() {
             <td style="font-size:11px; font-weight: bold;"><?php echo $namaDesain; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $jenisDesain; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $kertas; ?></td>
-            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['isi_motif']; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['isi_motif']; ?> pcs</td>
             <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['id_group']; ?></td>
-            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['jml']; ?></td>
-            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['rusak']; ?></td>
+            <td align="right" style="font-size:11px; font-weight: bold;"><?php echo $db['jml']/$db['isi_motif']; ?> sheet</td>
+            <td align="right" style="font-size:11px; font-weight: bold;"></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['id_bm']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['id_bm']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;">
-            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
             </td>
                 <?php
                     foreach($dataDetail->result_array() as $dx){
-                        if($db['parent_id'] == $dx['parent_id'] && $db['id_group'] == $dx['id_group']){
+                        if($db['id_group'] == $dx['id_group']){
                     ?>
-                <tr>    
-                            <td colspan="4" align="center" style="font-size:10px"></td>
+                <tr>                                                                                
+                            <td colspan="4" align="center" style="font-size:10px">-------------------------</td>
                             <td align="center" style="font-size:10px"><?php echo $dx['item_code']; ?></td>
                             <td style="font-size:10px"><?php echo $dx['item']; ?></td>
-                            <td colspan="2" align="center" style="font-size:10px"></td>
-                            <td align="right" style="font-size:10px"><?php echo $dx['isi_motif']; ?></td>
+                            <td colspan="2" align="center" style="font-size:10px">---------------</td>
+                            <td align="right" style="font-size:10px"><?php echo $dx['isi_motif']; ?> pcs</td>
                             <td align="right" style="font-size:10px"><?php echo $dx['id']; ?></td>
-                            <td align="right" style="font-size:10px"><?php echo $dx['jml']; ?></td>
-                            <td align="right" style="font-size:10px"><?php echo $dx['rusak']; ?></td>
-                            <td align="center" style="font-size:10px"><?php echo $dx['id_bm']; ?></td>
-                            <td align="center" style="font-size:10px"><?php echo $dx['id_bmt']; ?></td>
+                            <td align="right" style="font-size:10px"><?php echo $dx['jml']; ?> pcs</td>
+                            <td align="right" style="font-size:10px"><?php echo $dx['rusak']; ?> pcs</td>
+                            <td colspan="2" align="center" style="font-size:10px">-------------</td>
                             <td align="center" style="font-size:10px"><?php echo $dx['petugas']; ?></td>
                             <td align="center" style="font-size:10px"><?php echo $dx['inputer']; ?></td>
                             <td align="center" style="font-size:10px">
                             <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>/<?php echo $db['item_code'];?>/<?php echo $db['id'];?>">
                                         <img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
-                                        </a>
-                            <a href="<?php echo base_url();?>index.php/decal_prod/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>/<?php echo $db['item_code'];?>/<?php echo $db['id'];?>"
-                            onClick="return confirm('Anda yakin ingin menghapus data ini?')">
-                                        <img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
                                         </a>
                             </td>
                 </tr>        
@@ -120,7 +115,7 @@ $(function() {
                         }
                         else{
                             
-                        }    
+                        }
                     }
                     ?>
     </tr>
@@ -140,9 +135,9 @@ $(function() {
 	}
 ?>
 <tr>
-	<th colspan="12" align="center">Total</th>
+	<th colspan="10" align="center">Grand Total</th>
         <th style="text-align:right; font-size: 10px"><?php echo number_format($g_total1,0,'.',',');?> Pcs</th>
         <th style="text-align:right; font-size: 10px"><?php echo number_format($g_total2,0,'.',',');?> Pcs</th>
-        <th colspan="6" style="text-align:left; font-size: 13px">Grand Total [Jumlah-Rusak]: <?php echo number_format($g_total1-$g_total2,0,'.',',');?> Pcs</th>
+        <th colspan="6" style="text-align:left; font-size: 13px">[KW 1: <?php echo number_format($g_total1-$g_total2,0,'.',',');?> Pcs]-[KW 2: <?php echo number_format($g_total2,0,'.',',');?> Pcs]</th>
 </tr>    
 </table>
