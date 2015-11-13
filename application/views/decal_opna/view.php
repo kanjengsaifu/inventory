@@ -29,39 +29,33 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
         <th rowspan="2" style="font-size:10px">No.  <br> Transaksi</th>
         <th rowspan="2" style="font-size:10px">Tanggal  <br> Input</th>
         <th rowspan="2" style="font-size:10px">Input <br> Transaksi</th>
-        <th colspan="4" align="center" style="font-size:10px">Opname</th>
-        <th rowspan="2" style="font-size:10px">List  <br> Item</th>
+        <th colspan="3" align="center" style="font-size:10px">Produksi</th>
         <th rowspan="2" style="font-size:10px">Inputer</th>
         <th rowspan="2" style="font-size:10px">Aksi</th>
 </tr>
 <tr>
-    <th style="font-size:10px">KW 1</th>
-    <th style="font-size:10px">KW 2</th>
-    <th style="font-size:10px">KW 3</th>
-    <th style="font-size:10px">Total</th>
+    <th style="font-size:10px">Jumlah Pieces</th>
+    <th style="font-size:10px">Jumlah Pieces Rusak</th>
+    <th style="font-size:10px">List Design</th>
 </tr>
 <?php
 	if($data->num_rows()>0){
 		$no =1+$hal;
                 $g_total1=0;
                 $g_total2=0;
-                $g_total3=0;
-                $g_total4=0;
+                //$g_total3=0;
+                //$g_total4=0;
                 $p_total=0;
 		foreach($data->result_array() as $db){  
 		$tgl_input = $this->dclModel->tgl_indo($db['tgl_input']);
 		$nama_lengkap = $this->dclModel->NamaLengkap($db['inputer']);
 		$proses = $this->dclModel->ProsesDecalOpna($db['id_related']);
                 $prosesItem = $this->dclModel->ProsesItemOpna($db['id_related']);
-		$jml1 = $this->dclModel->JmlDecalKW1Opna($db['id_related']);
-                $jml2 = $this->dclModel->JmlDecalKW2Opna($db['id_related']);
-                $jml3 = $this->dclModel->JmlDecalKW3Opna($db['id_related']);
-                $jml4 = $this->dclModel->JmlDecalKW4Opna($db['id_related']);
+		$jml1 = $this->dclModel->JmlOpnaJML($db['id_related']);
+                $jml2 = $this->dclModel->JmlOpnaRusak($db['id_related']);
                 $p_total = $p_total + $proses;
                 $g_total1 = $g_total1 + $jml1;
                 $g_total2 = $g_total2 + $jml2;
-                $g_total3 = $g_total3 + $jml3;
-                $g_total4 = $g_total4 + $jml4;
 		?>    
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
@@ -70,8 +64,6 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
             <td align="right"><?php echo $proses; ?></td>
             <td align="right"><?php echo number_format($jml1,0,',','.'); ?> Pcs</td>
             <td align="right"><?php echo number_format($jml2,0,',','.'); ?> Pcs</td>
-            <td align="right"><?php echo number_format($jml3,0,',','.'); ?> Pcs</td>
-            <td align="right"><?php echo number_format($jml4,0,',','.'); ?> Pcs</td>
             <td align="left"><?php echo $prosesItem; ?></td>
             <td align="center"><?php echo $nama_lengkap; ?></td>
             <td align="center" width="80">
@@ -96,14 +88,12 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
                 <th style="text-align:right"><?php echo number_format($p_total);?></th>
                 <th style="text-align:right"><?php echo number_format($g_total1,0,',','.');?> Pcs</th>
                 <th style="text-align:right"><?php echo number_format($g_total2,0,',','.');?> Pcs</th>
-                <th style="text-align:right"><?php echo number_format($g_total3,0,',','.');?> Pcs</th>
-                <th style="text-align:right"><?php echo number_format($g_total4,0,',','.');?> Pcs</th>
     <?php
 	}else{
                 $g_total1=0;
                 $g_total2=0;
-                $g_total3=0;
-                $g_total4=0;
+                //$g_total3=0;
+                //$g_total4=0;
                 $p_total=0;
 	?>
     	<tr>
@@ -114,8 +104,6 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
         <th style="text-align:right"><?php echo number_format($p_total);?></th>
         <th style="text-align:right"><?php echo number_format($g_total1);?> Pcs</th>
         <th style="text-align:right"><?php echo number_format($g_total2);?> Pcs</th>
-        <th style="text-align:right"><?php echo number_format($g_total3);?> Pcs</th>
-        <th style="text-align:right"><?php echo number_format($g_total4);?> Pcs</th>
     </tr>
     <?php	
 	}

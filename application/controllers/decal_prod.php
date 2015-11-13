@@ -172,7 +172,7 @@ class Decal_prod extends CI_Controller {
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_phd",$ud,$id_d);
 
-                                                        $sql = "update decal_phd set jml = '$jmlx'*isi_motif, tgli = '$tglix' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $sql = "update decal_phd set jml = '$jmlx'*isi_motif, tgli = '$tglix', petugas = '$petugasx' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
                                                         echo 'Update data Sukses';

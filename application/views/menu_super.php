@@ -91,7 +91,7 @@
     <a href="<?php echo base_url();?>index.php/decal_opna">DCL-Opname</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_adju">DCL-Adjusment</a>
+    <a href="<?php echo base_url();?>index.php/home">DCL-Adjusment</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
     <a href="<?php echo base_url();?>index.php/decal_scra">DCL-Scrap</a>
@@ -176,7 +176,7 @@
     <a href="<?php echo base_url();?>index.php/decal_opna">DCL-Opname</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
-    <a href="<?php echo base_url();?>index.php/decal_adju">DCL-Adjusment</a>
+    <a href="<?php echo base_url();?>index.php/home">DCL-Adjusment</a>
     </li>
     <li data-options="iconCls:'icon-surat_keluar'">
     <a href="<?php echo base_url();?>index.php/decal_scra">DCL-Scrap</a>

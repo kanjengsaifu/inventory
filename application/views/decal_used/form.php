@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/decal_tran/DataDetail",
+			url		: "<?php echo site_url(); ?>/decal_used/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -149,7 +149,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/decal_tran/simpan",
+			url	: "<?php echo site_url(); ?>/decal_used/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -189,7 +189,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/decal_tran/cetak/'+kode);
+		window.open('<?php echo site_url();?>/decal_used/cetak/'+kode);
 		return false();
 	});
 	
@@ -237,7 +237,7 @@ $(document).ready(function(){
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/decal_tran/getPicTranDecal'?>'"  value="<?php echo $petugas;?>" ></td>
+        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/decal_used/getPicUsedDecal'?>'"  value="<?php echo $petugas;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Kode Desain</td>
@@ -352,7 +352,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/decal_tran/">
+    <a href="<?php echo base_url();?>index.php/decal_used/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>

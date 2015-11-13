@@ -81,10 +81,10 @@ $(function() {
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['petugas']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['inputer']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;">
-            <a href="<?php echo base_url();?>index.php/decal_tran/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_used/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_tran/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_used/hapus_detail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>
@@ -106,7 +106,7 @@ $(function() {
                             <td align="center" style="font-size:10px"><?php echo $dx['petugas']; ?></td>
                             <td align="center" style="font-size:10px"><?php echo $dx['inputer']; ?></td>
                             <td align="center" style="font-size:10px">
-                            <a href="<?php echo base_url();?>index.php/decal_tran/editItem/<?php echo $db['id_related'];?>/<?php echo $dx['parent_id'];?>/<?php echo $dx['id_group'];?>/<?php echo $dx['item_code'];?>/<?php echo $dx['id'];?>">
+                            <a href="<?php echo base_url();?>index.php/decal_used/editItem/<?php echo $db['id_related'];?>/<?php echo $dx['parent_id'];?>/<?php echo $dx['id_group'];?>/<?php echo $dx['item_code'];?>/<?php echo $dx['id'];?>">
                                         <img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
                                         </a>
                             </td>

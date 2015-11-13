@@ -7,16 +7,16 @@ $(document).ready(function(){
 </script>
 <div id="view">
 <div style="float:left; padding-bottom:5px;">
-<a href="<?php echo base_url();?>index.php/decal_tran/tambah">
+<a href="<?php echo base_url();?>index.php/decal_used/tambah">
 <button type="button" name="tambah" id="tambah" class="easyui-linkbutton" data-options="iconCls:'icon-add'">Tambah</button>
 </a>
-<a href="<?php echo base_url();?>index.php/decal_tran">
+<a href="<?php echo base_url();?>index.php/decal_used">
 <button type="button" name="refresh" id="refresh" class="easyui-linkbutton" data-options="iconCls:'icon-reload'">Refresh</button>
 </a>
 
 </div>
 <div style="float:right; padding-bottom:5px;">
-<form name="form" method="post" action="<?php echo base_url();?>index.php/decal_tran">
+<form name="form" method="post" action="<?php echo base_url();?>index.php/decal_used">
 Tanggal <input type="text" name="cari_tgl" id="cari_tgl" size="15" />
 Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" size="15" />
 <button type="submit" name="cari" id="cari" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
@@ -49,10 +49,10 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
 		foreach($data->result_array() as $db){  
 		$tgl_input = $this->dclModel->tgl_indo($db['tgl_input']);
 		$nama_lengkap = $this->dclModel->NamaLengkap($db['inputer']);
-		$proses = $this->dclModel->ProsesDecalTran($db['id_related']);
-                $prosesItem = $this->dclModel->ProsesItemTran($db['id_related']);
-		$jml1 = $this->dclModel->JmlTranJML($db['id_related']);
-                $jml2 = $this->dclModel->JmlTranRusak($db['id_related']);
+		$proses = $this->dclModel->ProsesDecalUsed($db['id_related']);
+                $prosesItem = $this->dclModel->ProsesItemUsed($db['id_related']);
+		$jml1 = $this->dclModel->JmlUsedJML($db['id_related']);
+                $jml2 = $this->dclModel->JmlUsedRusak($db['id_related']);
                 $p_total = $p_total + $proses;
                 $g_total1 = $g_total1 + $jml1;
                 $g_total2 = $g_total2 + $jml2;
@@ -70,10 +70,10 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
             <?php
 			if($this->session->userdata('level')=='01'){
 			?>
-            <a href="<?php echo base_url();?>index.php/decal_tran/edit/<?php echo $db['id_related'];?>">
+            <a href="<?php echo base_url();?>index.php/decal_used/edit/<?php echo $db['id_related'];?>">
 			<img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
 			</a>
-            <a href="<?php echo base_url();?>index.php/decal_tran/hapus/<?php echo $db['id_related'];?>"
+            <a href="<?php echo base_url();?>index.php/decal_used/hapus/<?php echo $db['id_related'];?>"
             onClick="return confirm('Anda yakin ingin menghapus data ini?')">
 			<img src="<?php echo base_url();?>asset/images/del.png" title='Hapus'>
 			</a>

@@ -310,6 +310,118 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function JmlUsedJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_uhd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlUsedRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_uhd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlRetuJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_rhd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlRetuRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_rhd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlScraJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_shd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlScraRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_shd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlOpnaJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlOpnaRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_ohd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function MaxPhDecal(){
 		$text = "SELECT max(id) as no FROM decal_ph";
 		$data = $this->glzModel->manualQuery($text);
@@ -341,6 +453,62 @@ class Dclmodel extends CI_Model {
         
         public function MaxThGroup(){
 		$text = "SELECT max(id_group) as no FROM decal_thd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
+        public function MaxUhGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_uhd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
+        public function MaxRhGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_rhd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
+        public function MaxShGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_shd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
+        public function MaxOhGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_ohd";
 		$data = $this->glzModel->manualQuery($text);
 		if($data->num_rows() > 0 ){
 			foreach($data->result() as $t){
@@ -497,8 +665,8 @@ class Dclmodel extends CI_Model {
 	}
         
         public function ProsesItemUsed($id){
-		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_uhd a 
-                        JOIN decal_items b on a.id_decal_items = b.id
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_uhd a 
+                        JOIN decal_items b on a.parent_id = b.id
                         WHERE a.id_related='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
@@ -611,9 +779,37 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function ProsesDecalScra($id){
+		$t = "SELECT id FROM decal_shd WHERE id_related='$id' AND deleted = 0";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			$hasil = $r;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function ProsesItemRetu($id){
-		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_rhd a 
-                        JOIN decal_items b on a.id_decal_items = b.id
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_rhd a 
+                        JOIN decal_items b on a.parent_id = b.id
+                        WHERE a.id_related='$id' AND a.deleted <> 1";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama_decal;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
+        public function ProsesItemScra($id){
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_shd a 
+                        JOIN decal_items b on a.parent_id = b.id
                         WHERE a.id_related='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
@@ -698,6 +894,36 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhDecalScra(){
+		$text = "SELECT max(id) as no FROM decal_sh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'SH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'SH'.'00001';
+		}
+		return $hasil;
+	}
+        
+        public function MaxPhDecalOpna(){
+		$text = "SELECT max(id) as no FROM decal_oh";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'OH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'OH'.'00001';
+		}
+		return $hasil;
+	}
+        
         public function CariDecalJenisRetu($id){
 		$t = "SELECT * FROM global_jenis_decal WHERE id='$id'";
 		$d = $this->dclModel->manualQuery($t);
@@ -727,8 +953,8 @@ class Dclmodel extends CI_Model {
 	}
         
         public function ProsesItemOpna($id){
-		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_ohd a 
-                        JOIN decal_items b on a.id_decal_items = b.id
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_ohd a 
+                        JOIN decal_items b on a.parent_id = b.id
                         WHERE a.id_related='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
@@ -794,21 +1020,6 @@ class Dclmodel extends CI_Model {
 			}
 		}else{
 			$hasil = 0;
-		}
-		return $hasil;
-	}
-        
-        public function MaxPhDecalOpna(){
-		$text = "SELECT max(id) as no FROM decal_oh";
-		$data = $this->glzModel->manualQuery($text);
-		if($data->num_rows() > 0 ){
-			foreach($data->result() as $t){
-				$no = $t->no; 
-				$tmp = ((int) substr($no,2,5))+1;
-				$hasil = 'OH'.sprintf("%05s", $tmp);
-			}
-		}else{
-			$hasil = 'OH'.'00001';
 		}
 		return $hasil;
 	}
@@ -1106,6 +1317,33 @@ class Dclmodel extends CI_Model {
 		return $result;
 	}
         
+        public function getPicUsedDecal(){
+                $query ="select distinct petugas from decal_uhd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicRetuDecal(){
+                $query ="select distinct petugas from decal_rhd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicScraDecal(){
+                $query ="select distinct petugas from decal_shd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicOpnaDecal(){
+                $query ="select distinct petugas from decal_ohd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}  
 }
 	
 /* End of file app_model.php */

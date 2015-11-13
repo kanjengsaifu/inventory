@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/decal_tran/DataDetail",
+			url		: "<?php echo site_url(); ?>/decal_used/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -62,7 +62,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/decal_tran/simpanItem",
+			url	: "<?php echo site_url(); ?>/decal_used/simpanItem",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -102,7 +102,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/decal_tran/cetak/'+kode);
+		window.open('<?php echo site_url();?>/decal_used/cetak/'+kode);
 		return false();
 	});
 	
@@ -194,7 +194,7 @@ $(document).ready(function(){
 	<td colspan="3" align="center">
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
-    <a href="<?php echo base_url();?>index.php/decal_tran/edit/<?php echo $id;?>">
+    <a href="<?php echo base_url();?>index.php/decal_used/edit/<?php echo $id;?>">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">KEMBALI</button>
     </a>
     </td>

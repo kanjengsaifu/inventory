@@ -97,8 +97,8 @@ class Decal_used extends CI_Controller {
 
 			$d['judul']="Input pemakaian decal";
 			
-			$id         = $this->dclModel->MaxPhDecalTran();
-                        $id_group   = $this->dclModel->MaxThGroup();
+			$id         = $this->dclModel->MaxPhDecalUsed();
+                        $id_group   = $this->dclModel->MaxUhGroup();
 			
 			$d['id']                = $id;
                         $d['id_group']          = $id_group;
@@ -172,7 +172,7 @@ class Decal_used extends CI_Controller {
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_uhd",$ud,$id_d);
 
-                                                        $sql = "update decal_uhd set jml = '$jmlx'*isi_motif, tgli = '$tglix' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $sql = "update decal_uhd set jml = '$jmlx'*isi_motif, tgli = '$tglix', petugas = '$petugasx' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_used/edit/$idx'>";
                                                         echo 'Update data Sukses';
@@ -300,7 +300,7 @@ class Decal_used extends CI_Controller {
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM decal_uh WHERE id='$id'";
 			$data = $this->dclModel->manualQuery($text);
-                        $id_group   = $this->dclModel->MaxThGroup();
+                        $id_group   = $this->dclModel->MaxUhGroup();
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['id']                = $id;
@@ -407,7 +407,7 @@ class Decal_used extends CI_Controller {
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
                         
-			$d['content'] = $this->load->view('decal_tran/form', $d, true);		
+			$d['content'] = $this->load->view('decal_used/form', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -459,7 +459,7 @@ class Decal_used extends CI_Controller {
                                         $d['rusak']             = '';
 			}
                         
-			$d['content'] = $this->load->view('decal_tran/formItem', $d, true);		
+			$d['content'] = $this->load->view('decal_used/formItem', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -481,7 +481,7 @@ class Decal_used extends CI_Controller {
                                     WHERE a.id_related='$id' AND a.deleted = 0";
 			$d['dataDetail']= $this->dclModel->manualQuery($text2);
 
-			$this->load->view('decal_tran/detail',$d);
+			$this->load->view('decal_used/detail',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -496,7 +496,7 @@ class Decal_used extends CI_Controller {
                                 $tgl_deleted = date('Y-m-d h:i:s');
                                 $this->dclModel->manualQuery("UPDATE decal_uhd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id'");
                                 $this->dclModel->manualQuery("UPDATE decal_uh SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id='$id'");
-                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_tran'>";			
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_used'>";			
 		}else{
 			header('location:'.base_url());
 		}
@@ -518,10 +518,10 @@ class Decal_used extends CI_Controller {
 		}
 	}
         
-        public function getPicTranDecal()
+        public function getPicUsedDecal()
 	{
                 $this->load->model('dclModel');
-		$data['data_passed'] = $this->dclModel->getPicTranDecal();
+		$data['data_passed'] = $this->dclModel->getPicUsedDecal();
 
 		if ($data['data_passed']){
 
