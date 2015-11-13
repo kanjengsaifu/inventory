@@ -282,6 +282,34 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function JmlTranJML($id){
+		$t = "SELECT sum(jml) as kw1 FROM decal_thd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw1;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
+        public function JmlTranRusak($id){
+		$t = "SELECT sum(rusak) as kw2 FROM decal_thd WHERE id_related='$id' AND deleted <> 1";
+		$d = $this->dclModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->kw2;
+			}
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+        
         public function MaxPhDecal(){
 		$text = "SELECT max(id) as no FROM decal_ph";
 		$data = $this->glzModel->manualQuery($text);
@@ -299,6 +327,20 @@ class Dclmodel extends CI_Model {
         
         public function MaxPhGroup(){
 		$text = "SELECT max(id_group) as no FROM decal_phd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no;
+				$hasil = $no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
+        public function MaxThGroup(){
+		$text = "SELECT max(id_group) as no FROM decal_thd";
 		$data = $this->glzModel->manualQuery($text);
 		if($data->num_rows() > 0 ){
 			foreach($data->result() as $t){
@@ -340,8 +382,8 @@ class Dclmodel extends CI_Model {
 	}
         
         public function ProsesItemTran($id){
-		$t = "SELECT GROUP_CONCAT(concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_thd a 
-                        JOIN decal_items b on a.id_decal_items = b.id
+		$t = "SELECT GROUP_CONCAT(distinct concat('[',b.id,'-',b.nama,']') SEPARATOR ', ') as nama_decal FROM decal_thd a 
+                        JOIN decal_items b on a.parent_id = b.id
                         WHERE a.id_related='$id' AND a.deleted <> 1";
 		$d = $this->glzModel->manualQuery($t);
 		$r = $d->num_rows();
@@ -1052,6 +1094,13 @@ class Dclmodel extends CI_Model {
         
          public function getPicProdDecal(){
                 $query ="select distinct petugas from decal_phd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicTranDecal(){
+                $query ="select distinct petugas from decal_thd order by petugas asc";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

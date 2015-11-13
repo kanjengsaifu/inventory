@@ -22,9 +22,9 @@ function pilih(id){
 <table id="dataTable" class="detail" width="100%">
 <tr>
     <th>No</th>
-    <th>Kode <br> Decal</th>
-    <th>Nama <br> Decal</th>
-    <th>Nama <br> Alias Decal</th>
+    <th>Kode <br> Desain</th>
+    <th>Nama <br> Desain</th>
+    <th>Nama <br> Alias Desain</th>
     <th>Nama <br> Buyer</th>
     <th>Satuan</th>
     <th>Jenis</th>
@@ -37,18 +37,35 @@ function pilih(id){
 		$jenis = $this->dclModel->CariDecalJenis($db['jenis']); 
 		?>    
     	<tr>
-            <td align="center" width="20"><?php echo $no; ?></td>
-            <td align="center" width="80" ><?php echo $db['id']; ?></td>
-            <td ><?php echo $db['nama']; ?></td>
-            <td ><?php echo $db['alias']; ?></td>
-            <td ><?php echo $db['buyer']; ?></td>
-            <td align="center" width="50" ><?php echo $db['satuan']; ?></td>
-            <td align="center" width="60" ><?php echo $jenis; ?></td>
-            <td align="center" width="80">
+            <td style="font-weight: bold" align="center" width="20"><?php echo $no; ?></td>
+            <td style="font-weight: bold" align="center"><?php echo $db['id']; ?></td>
+            <td style="font-weight: bold" ><?php echo $db['nama']; ?></td>
+            <td style="font-weight: bold" ><?php echo $db['alias']; ?></td>
+            <td style="font-weight: bold" ><?php echo $db['buyer']; ?></td>
+            <td style="font-weight: bold" align="center"><?php echo $db['satuan']; ?></td>
+            <td style="font-weight: bold" align="center"><?php echo $jenis; ?></td>
+            <td style="font-weight: bold" align="center">
             <a href="javascript:pilih('<?php echo $db['id'];?>')" >
         	<img src="<?php echo base_url();?>asset/images/add.png" title='Ambil'>
         	</a>
             </td>
+            <?php
+                    foreach($item->result_array() as $dx){
+                        if($db['id'] == $dx['parent_id']){
+                    ?>
+                <tr>          
+                            <td colspan="1" align="center" style="font-size:10px">----</td>
+                            <td align="center" style="font-size:10px"><?php echo $dx['item_code']; ?></td>
+                            <td style="font-size:10px"><?php echo $dx['item']; ?> = <?php echo $dx['isi_motif']; ?> pcs</td>
+                            <td colspan="5" align="center" style="font-size:10px"></td>
+                </tr>        
+                <?php
+                        }
+                        else{
+                            
+                        }
+                    }
+                    ?>
     </tr>
     <?php
 		$no++;

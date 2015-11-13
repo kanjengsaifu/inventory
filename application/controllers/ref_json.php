@@ -30,20 +30,19 @@ class Ref_json extends CI_Controller {
 		if(!empty($cek)){
 			$cari= $this->input->post('cari');
 			if(empty($cari)){
-				$text = "SELECT a.id, a.nama, a.alias, a.satuan, c.nama as jenis, b.nama as buyer FROM decal_items a
+				$text1 = "SELECT a.id, a.nama, a.alias, a.satuan, a.jenis, b.nama as buyer FROM decal_items a
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
-                                            LEFT JOIN global_jenis_decal c ON c.id = a.jenis
-                                            group by a.nama, a.buyer
-                                            order by a.nama, a.buyer";
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
 			}else{
-				$text = "SELECT a.id, a.nama, a.alias, a.satuan, c.nama as jenis, b.nama as buyer FROM decal_items a
+				$text1 = "SELECT a.id, a.nama, a.alias, a.satuan, a.jenis, b.nama as buyer FROM decal_items a
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
-                                            LEFT JOIN global_jenis_decal c ON c.id = a.jenis
-                                            WHERE a.id LIKE '%$cari%' OR a.nama LIKE '%$cari%' OR a.alias LIKE '%$cari%'
-                                            group by a.nama, a.buyer
-                                            order by a.nama, a.buyer";
+                                            WHERE b.nama LIKE '%$cari%' OR a.nama LIKE '%$cari%' OR a.alias LIKE '%$cari%' OR a.id LIKE '%$cari%'
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
 			}
-			$d['data'] = $this->dclModel->manualQuery($text);
+			$d['data'] = $this->dclModel->manualQuery($text1);
+                        $d['item'] = $this->dclModel->manualQuery($text2);
 			
 			$this->load->view('data_decal',$d);
 		}else{

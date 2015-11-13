@@ -106,7 +106,7 @@ $(function() {
                             <td align="center" style="font-size:10px"><?php echo $dx['petugas']; ?></td>
                             <td align="center" style="font-size:10px"><?php echo $dx['inputer']; ?></td>
                             <td align="center" style="font-size:10px">
-                            <a href="<?php echo base_url();?>index.php/decal_prod/editDetail/<?php echo $db['id_related'];?>/<?php echo $db['parent_id'];?>/<?php echo $db['id_group'];?>/<?php echo $db['item_code'];?>/<?php echo $db['id'];?>">
+                            <a href="<?php echo base_url();?>index.php/decal_prod/editItem/<?php echo $db['id_related'];?>/<?php echo $dx['parent_id'];?>/<?php echo $dx['id_group'];?>/<?php echo $dx['item_code'];?>/<?php echo $dx['id'];?>">
                                         <img src="<?php echo base_url();?>asset/images/ed.png" title='Edit'>
                                         </a>
                             </td>

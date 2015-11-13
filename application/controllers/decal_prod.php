@@ -152,7 +152,7 @@ class Decal_prod extends CI_Controller {
                                 $jmlx                   = $this->input->post('jml');
                                 $shiftx                 = $this->input->post('shift');
                                 $jamx                   = $this->input->post('jam');
-                                $tglix                  = $this->input->post('tgli');
+                                $tglix                  = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $id_bmx                 = $this->input->post('id_bm');
                                 $id_bmtx                = $this->input->post('id_bmt');
                                 $petugasx               = $this->input->post('petugas');
@@ -172,7 +172,7 @@ class Decal_prod extends CI_Controller {
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_phd",$ud,$id_d);
 
-                                                        $sql = "update decal_phd set jml = '$jmlx'*isi_motif where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $sql = "update decal_phd set jml = '$jmlx'*isi_motif, tgli = '$tglix' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
                                                         echo 'Update data Sukses';
@@ -198,6 +198,30 @@ class Decal_prod extends CI_Controller {
                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$idx'>";
 					echo 'Simpan data Sukses';		
 				}
+		}else{
+				header('location:'.base_url());
+		}
+	
+	}
+        
+        public function simpanItem()
+	{
+		
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+                                $id                     = $this->input->post('id');
+                                $id_group               = $this->input->post('id_group');
+                                $parent_id              = $this->input->post('parent_id');
+                                $batch                  = $this->input->post('batch');
+                                $item_code              = $this->input->post('item_code');
+                                $rusak                  = $this->input->post('rusak');
+                                $tgl_update		= date('Y-m-d h:i:s');
+                                
+                                $sql = "update decal_phd set rusak = '$rusak', tgl_update = '$tgl_update' where id_related = '$id' and id_group = '$id_group' and parent_id = '$parent_id'
+                                         and id = '$batch' and item_code = '$item_code'";
+                                $this->db->query($sql);
+                                echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_prod/edit/$id'>";
+                                echo 'Update data Sukses';
 		}else{
 				header('location:'.base_url());
 		}
@@ -270,7 +294,7 @@ class Decal_prod extends CI_Controller {
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
 			
-			$d['judul'] = "Ubah input stock stock decal";
+			$d['judul'] = "Ubah input stock decal";
 			
 			$id = $this->uri->segment(3);
 			$text = "SELECT * FROM decal_ph WHERE id='$id'";
@@ -289,8 +313,8 @@ class Decal_prod extends CI_Controller {
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
                                         $d['jml']               = 0;
-                                        $d['readonly']          = "readonly='readonly'";
-                                        $d['none']              = "none";
+                                        $d['readonly']          = '';
+                                        $d['none']              = '';
 				}
 			}else{
 					$d['id']                = '$id';
@@ -334,7 +358,7 @@ class Decal_prod extends CI_Controller {
 			$d['instansi']= $this->config->item('instansi');
 			$d['usaha']= $this->config->item('usaha');
 			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-                        $d['judul'] = "Ubah input stock stock decal";
+                        $d['judul'] = "Ubah input stock decal";
 			
 			$id_related = $this->uri->segment(3);
                         $parent_id = $this->uri->segment(4);
@@ -389,6 +413,58 @@ class Decal_prod extends CI_Controller {
 		}
 	}
         
+        public function editItem()
+	{
+		$cek = $this->session->userdata('logged_in');
+		if(!empty($cek)){
+			
+			$d['prg']= $this->config->item('prg');
+			$d['web_prg']= $this->config->item('web_prg');
+			
+			$d['nama_program']= $this->config->item('nama_program');
+			$d['instansi']= $this->config->item('instansi');
+			$d['usaha']= $this->config->item('usaha');
+			$d['alamat_instansi']= $this->config->item('alamat_instansi');
+                        $d['judul'] = "Ubah item stock decal";
+			
+			$id         = $this->uri->segment(3);
+                        $parent_id  = $this->uri->segment(4);
+                        $id_group   = $this->uri->segment(5);
+                        $item_code  = $this->uri->segment(6);
+                        $batch      = $this->uri->segment(7);
+			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, jml, a.rusak, a.shift, 
+                                    a.id_bm, a.id_bmt, a.tgli, a.jam, a.petugas, a.inputer, a.tgl_input, a.tgl_update, a.tgl_delete, a.deleted from decal_phd a
+                                    where a.id_related = '$id' and a.parent_id = '$parent_id' and a.id_group = '$id_group' and a.item_code = '$item_code' and a.id = '$batch'
+                                    group by a.id_group";
+			$data = $this->dclModel->manualQuery($text);
+                        
+			if($data->num_rows() > 0){
+				foreach($data->result() as $db){
+					$d['id']                = $id;
+                                        $d['id_group']          = $id_group;
+                                        $d['parent_id']         = $parent_id;
+                                        $d['item_code']         = $item_code;
+                                        $d['batch']             = $batch;
+                                        $d['jml']               = $db->jml;
+                                        $d['rusak']             = $db->rusak;
+				}
+			}else{
+					$d['id']                = '';
+                                        $d['id_group']          = '';
+                                        $d['parent_id']         = '';
+                                        $d['item_code']         = '';
+                                        $d['batch']             = '';
+                                        $d['jml']             = '';
+                                        $d['rusak']             = '';
+			}
+                        
+			$d['content'] = $this->load->view('decal_prod/formItem', $d, true);		
+			$this->load->view('home',$d);
+		}else{
+			header('location:'.base_url());
+		}
+	}
+        
         public function DataDetail()
 	{
 		$cek = $this->session->userdata('logged_in');
@@ -429,11 +505,11 @@ class Decal_prod extends CI_Controller {
 	{
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){                        
-                                $id = $this->uri->segment(3);
-                                $kode = $this->uri->segment(4);
-                                $batch = $this->uri->segment(5);
+                                $id_related = $this->uri->segment(3);
+                                $parent_id = $this->uri->segment(4);
+                                $id_group = $this->uri->segment(5);
                                 $tgl_deleted = date('Y-m-d h:i:s');
-                                $this->dclModel->manualQuery("UPDATE decal_phd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id' AND id_decal_items='$kode' AND id='$batch'");
+                                $this->dclModel->manualQuery("UPDATE decal_phd SET deleted = 1,tgl_delete = '$tgl_deleted' WHERE id_related='$id_related' AND parent_id='$parent_id' AND id_group='$id_group'");
                                 $this->edit();
                         
 		}else{
