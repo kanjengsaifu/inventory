@@ -28,6 +28,8 @@ function pilih(id){
     <th>Nama <br> Buyer</th>
     <th>Satuan</th>
     <th>Jenis</th>
+    <th>Ukuran</th>
+    <th>Dekorasi</th>
     <th>Ambil</th>
 </tr>
 <?php
@@ -44,6 +46,8 @@ function pilih(id){
             <td style="font-weight: bold" ><?php echo $db['buyer']; ?></td>
             <td style="font-weight: bold" align="center"><?php echo $db['satuan']; ?></td>
             <td style="font-weight: bold" align="center"><?php echo $jenis; ?></td>
+            <td style="font-weight: bold" ><?php echo $db['size']; ?></td>
+            <td style="font-weight: bold" ><?php echo $db['dekorasi']; ?></td>
             <td style="font-weight: bold" align="center">
             <a href="javascript:pilih('<?php echo $db['id'];?>')" >
         	<img src="<?php echo base_url();?>asset/images/add.png" title='Ambil'>
@@ -57,7 +61,7 @@ function pilih(id){
                             <td colspan="1" align="center" style="font-size:10px">----</td>
                             <td align="center" style="font-size:10px"><?php echo $dx['item_code']; ?></td>
                             <td style="font-size:10px"><?php echo $dx['item']; ?> = <?php echo $dx['isi_motif']; ?> pcs</td>
-                            <td colspan="5" align="center" style="font-size:10px"></td>
+                            <td colspan="7" align="center" style="font-size:10px"></td>
                 </tr>        
                 <?php
                         }

@@ -95,6 +95,7 @@ class Glasir_opna extends CI_Controller {
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
                         $d['parent']	= '';
+						$d['batch']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -135,6 +136,7 @@ class Glasir_opna extends CI_Controller {
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
                         $d['parent']	= '';
+						$d['batch']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -234,6 +236,7 @@ class Glasir_opna extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
+				$id_d['idthd']          = $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_oh",$id);
 				if($data->num_rows()>0){
@@ -294,6 +297,7 @@ class Glasir_opna extends CI_Controller {
 				
 				$id_d['no_prod']        = $this->input->post('no_prod');
 				$id_d['id_glasir']      = $this->input->post('id_glasir');
+				$id_d['idthd']          = $this->input->post('batch');
 				
 				$data = $this->glzModel->getSelectedData("glasir_oh",$id);
 				if($data->num_rows()>0){
@@ -394,12 +398,14 @@ class Glasir_opna extends CI_Controller {
 					$d['no_prod']	= $id;
                                         $d['tgl_inp']	= $db->tgl_inp;
                                         $d['inputer']	= $db->inputer; 
+										$d['batch']	= '';
 				}
 			}else{
 					$d['no_prod'] =$id;
 					$d['tgl']	='';
                                         $d['tgl_inp']	='';
                                         $d['inputer']	='';
+										$d['batch']	= '';
 			}
                         
                         $sft = "SELECT * FROM global_shift";
@@ -437,12 +443,14 @@ class Glasir_opna extends CI_Controller {
 					$d['no_prod']	= $id;
                                         $d['tgl_inp']	= $db->tgl_inp;
                                         $d['inputer']	= $db->inputer; 
+										$d['batch']	= '';
 				}
 			}else{
 					$d['no_prod'] =$id;
 					$d['tgl']	='';
                                         $d['tgl_inp']	='';
                                         $d['inputer']	='';
+										$d['batch']	= '';
 			}
                         
                         $sft = "SELECT * FROM global_shift";

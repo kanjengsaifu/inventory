@@ -29,15 +29,186 @@ class Ref_json extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 			$cari= $this->input->post('cari');
-			if(empty($cari)){
-				$text1 = "SELECT a.id, a.nama, a.alias, a.satuan, a.jenis, b.nama as buyer FROM decal_items a
+                        $buyer= $this->input->post('buyer');
+                        $jenis= $this->input->post('jenis');
+                        $size= $this->input->post('size');
+                        $dekorasi= $this->input->post('dekorasi');
+			if(!empty($buyer)){
+                                if(empty($buyer)){
+                                $buyerx = '';
+                                }else{
+                                    $buyerx = "b.nama LIKE '%$buyer%'";
+                                }
+                                if(empty($cari)){
+                                    $carix = '';
+                                }else{
+                                    $carix ="AND a.nama LIKE '%$cari%'";
+                                }
+                                if(empty($jenis)){
+                                    $jenisx = '';
+                                }else{
+                                    $jenisx = "AND e.nama LIKE '%$jenis%'";
+                                }
+                                if(empty($size)){
+                                    $sizex = '';
+                                }else{
+                                    $sizex = "AND c.dsc LIKE '%$size%'";
+                                }
+                                if(empty($dekorasi)){
+                                    $dekorasix = '';
+                                }else{
+                                    $dekorasix = "AND d.dsc LIKE '%$dekorasi%'";
+                                }
+				$text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
+                                            WHERE $buyerx $carix $jenisx $sizex $dekorasix
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
+			}elseif(!empty($cari)){
+                                if(empty($buyer)){
+                                $buyerx = '';
+                                }else{
+                                    $buyerx = "AND b.nama LIKE '%$buyer%'";
+                                }
+                                if(empty($cari)){
+                                    $carix = '';
+                                }else{
+                                    $carix ="a.nama LIKE '%$cari%'";
+                                }
+                                if(empty($jenis)){
+                                    $jenisx = '';
+                                }else{
+                                    $jenisx = "AND e.nama LIKE '%$jenis%'";
+                                }
+                                if(empty($size)){
+                                    $sizex = '';
+                                }else{
+                                    $sizex = "AND c.dsc LIKE '%$size%'";
+                                }
+                                if(empty($dekorasi)){
+                                    $dekorasix = '';
+                                }else{
+                                    $dekorasix = "AND d.dsc LIKE '%$dekorasi%'";
+                                }
+				$text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
+                                            WHERE $buyerx $carix $jenisx $sizex $dekorasix
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
+			}elseif(!empty($jenis)){
+                                if(empty($buyer)){
+                                $buyerx = '';
+                                }else{
+                                    $buyerx = "AND b.nama LIKE '%$buyer%'";
+                                }
+                                if(empty($cari)){
+                                    $carix = '';
+                                }else{
+                                    $carix ="AND a.nama LIKE '%$cari%'";
+                                }
+                                if(empty($jenis)){
+                                    $jenisx = '';
+                                }else{
+                                    $jenisx = "e.nama LIKE '%$jenis%'";
+                                }
+                                if(empty($size)){
+                                    $sizex = '';
+                                }else{
+                                    $sizex = "AND c.dsc LIKE '%$size%'";
+                                }
+                                if(empty($dekorasi)){
+                                    $dekorasix = '';
+                                }else{
+                                    $dekorasix = "AND d.dsc LIKE '%$dekorasi%'";
+                                }
+				$text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
+                                            WHERE $jenisx $buyerx $carix $sizex $dekorasix
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
+			}elseif(!empty($size)){
+                                if(empty($buyer)){
+                                $buyerx = '';
+                                }else{
+                                    $buyerx = "AND b.nama LIKE '%$buyer%'";
+                                }
+                                if(empty($cari)){
+                                    $carix = '';
+                                }else{
+                                    $carix ="AND a.nama LIKE '%$cari%'";
+                                }
+                                if(empty($jenis)){
+                                    $jenisx = '';
+                                }else{
+                                    $jenisx = "AND e.nama LIKE '%$jenis%'";
+                                }
+                                if(empty($size)){
+                                    $sizex = '';
+                                }else{
+                                    $sizex = "c.dsc LIKE '%$size%'";
+                                }
+                                if(empty($dekorasi)){
+                                    $dekorasix = '';
+                                }else{
+                                    $dekorasix = "AND d.dsc LIKE '%$dekorasi%'";
+                                }
+				$text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
+                                            WHERE $sizex $jenisx $buyerx $carix $dekorasix
+                                            order by a.id, a.buyer,a.nama";
+                                $text2 = "select * from decal_items_detail";
+			}elseif(!empty($dekorasi)){
+                                if(empty($buyer)){
+                                $buyerx = '';
+                                }else{
+                                    $buyerx = "AND b.nama LIKE '%$buyer%'";
+                                }
+                                if(empty($cari)){
+                                    $carix = '';
+                                }else{
+                                    $carix ="AND a.nama LIKE '%$cari%'";
+                                }
+                                if(empty($jenis)){
+                                    $jenisx = '';
+                                }else{
+                                    $jenisx = "AND e.nama LIKE '%$jenis%'";
+                                }
+                                if(empty($size)){
+                                    $sizex = '';
+                                }else{
+                                    $sizex = "AND c.dsc LIKE '%$size%'";
+                                }
+                                if(empty($dekorasi)){
+                                    $dekorasix = '';
+                                }else{
+                                    $dekorasix = "d.dsc LIKE '%$dekorasi%'";
+                                }
+				$text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
+                                            LEFT JOIN global_buyer b ON b.id = a.buyer
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
+                                            WHERE $dekorasix $sizex $jenisx $buyerx $carix 
                                             order by a.id, a.buyer,a.nama";
                                 $text2 = "select * from decal_items_detail";
 			}else{
-				$text1 = "SELECT a.id, a.nama, a.alias, a.satuan, a.jenis, b.nama as buyer FROM decal_items a
+                                $text1 = "SELECT a.id, a.nama, a.alias, d.dsc as dekorasi, c.dsc as size, a.satuan, a.jenis, e.nama as nama_jenis, b.nama as buyer FROM decal_items a
                                             LEFT JOIN global_buyer b ON b.id = a.buyer
-                                            WHERE b.nama LIKE '%$cari%' OR a.nama LIKE '%$cari%' OR a.alias LIKE '%$cari%' OR a.id LIKE '%$cari%'
+                                            LEFT JOIN global_size c ON c.id = a.size
+                                            LEFT JOIN global_dekorasi d ON d.id = a.dekorasi
+                                            LEFT JOIN global_jenis_decal e ON e.id = a.jenis
                                             order by a.id, a.buyer,a.nama";
                                 $text2 = "select * from decal_items_detail";
 			}
@@ -82,8 +253,6 @@ class Ref_json extends CI_Controller {
                                         $data['parent'] = $t->parent;
 					$data['satuan'] = $t->satuan;
 					$data['status'] = $t->status;
-                                        $data['s_supply'] = $t->s_supply;
-                                        $data['s_bgps'] = $t->s_bgps;
                                         $data['nama_alias'] = $t->nama_alias;
 					echo json_encode($data);
 				}
@@ -93,8 +262,6 @@ class Ref_json extends CI_Controller {
                                         $data['parent'] = '';
 					$data['satuan'] = 'Kilogram';
 					$data['status'] = '';
-                                        $data['s_supply'] = '';
-                                        $data['s_bgps'] = '';
                                         $data['nama_alias'] = '';
 				echo json_encode($data);
 			}

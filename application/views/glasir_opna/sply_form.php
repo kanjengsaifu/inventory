@@ -266,6 +266,11 @@
         <td width="5">:</td>
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
+	 <tr>    
+        <td width="150">No. Batch</td>
+        <td width="5">:</td>
+        <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
+    </tr>
     <tr>    
         <td width="150">Keterangan/Status</td>
         <td width="5">:</td>

@@ -198,18 +198,34 @@ $(document).ready(function(){
 		$("#dlg").dialog('open');
 	});
 	
-	$("#text_cari").keyup(function(){
+        $("#text_cari").keyup(function(){
 		AmbilDaftarDecal();
-		//$("#dlg").dialog('open');
+	});
+        
+	$("#text_buyer").keyup(function(){
+		AmbilDaftarDecal();
+	});
+        $("#text_jenis").keyup(function(){
+		AmbilDaftarDecal();
+	});
+        $("#text_size").keyup(function(){
+		AmbilDaftarDecal();
+	});
+        $("#text_dekorasi").keyup(function(){
+		AmbilDaftarDecal();
 	});
 	
 	function AmbilDaftarDecal(){
 		var cari = $("#text_cari").val();
+                var buyer = $("#text_buyer").val();
+                var jenis = $("#text_jenis").val();
+                var size = $("#text_size").val();
+                var dekorasi = $("#text_dekorasi").val();
 		
 		$.ajax({
 			type	: 'POST',
 			url		: "<?php echo site_url(); ?>/ref_json/DataDecal",
-			data	: "cari="+cari,
+			data	: {'cari': cari, 'buyer': buyer, 'jenis': jenis, 'size': size, 'dekorasi': dekorasi},
 			cache	: false,
 			success	: function(data){
 				$("#daftar_decal").html(data);
@@ -365,6 +381,10 @@ $(document).ready(function(){
 <div id="tampil_data"></div>
 </fieldset>
 <div id="dlg" class="easyui-dialog" title="Item Decal" style="width:800px;height:400px; padding:5px;" data-options="closed:true">
-	Cari : <input type="text" name="text_cari" id="text_cari" size="50"/>
+	Buyer : <input type="text" name="text_buyer" id="text_buyer" size="8"/>
+	Desain : <input type="text" name="text_cari" id="text_cari" size="8"/>
+        Jenis : <input type="text" name="text_jenis" id="text_jenis" size="8"/>
+        Size : <input type="text" name="text_size" id="text_size" size="8"/>
+        Dekorasi : <input type="text" name="text_dekorasi" id="text_dekorasi" size="8"/>
 	<div id="daftar_decal"></div>
 </div>
