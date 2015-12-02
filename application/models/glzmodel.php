@@ -191,11 +191,11 @@ class Glzmodel extends CI_Model {
 	}
         
         public function MaxPeriod(){
-		$text = "SELECT max(periode) as no FROM glasir_ahd";
+		$text = "SELECT max(period) as no FROM glasir_ohd";
 		$data = $this->glzModel->manualQuery($text);
 		if($data->num_rows() > 0 ){
 			foreach($data->result() as $t){
-				$hasil = $t->no+1;
+				$hasil = $t->no;
 			}
 		}else{
 			$hasil = '1';
@@ -660,11 +660,11 @@ class Glzmodel extends CI_Model {
                                 COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0)),2),',','')as gtot,
                                 COALESCE(c.turun_bgps, 0) turun_bgps, coalesce(d.ditarik_supply, 0) ditarik_supply, coalesce(e.return_prod, 0) return_prod, coalesce(f.kirim_prod, 0) kirim_prod,
 
-                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),2),',','') stok_bgps,
-                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),2),',','') stok_supply,
+                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)-COALESCE(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),2),',','') stok_bgps,
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),2),',','') stok_supply,
                                 
-                                REPLACE(FORMAT((GREATEST(((coalesce(c.turun_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),',','')+
-                                GREATEST((((coalesce(d.ditarik_supply, 0) + coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),',','')),2),',','') total
+                                REPLACE(FORMAT((GREATEST(((coalesce(c.turun_bgps, 0)-COALESCE(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),',','')+
+                                GREATEST((((coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),',','')),2),',','') total
                                 
                         from glasir a
                         left join glasir_ohd b

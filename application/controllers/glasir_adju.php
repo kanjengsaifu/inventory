@@ -124,6 +124,7 @@ class Glasir_adju extends CI_Controller {
 				$up['inputer']          = $this->session->userdata('username');
 				
 				$id                     = $this->input->post('id');
+                                $inputer                = $this->session->userdata('username');
 				$petugas                = $this->input->post('petugas');
                                 $periode                = $this->input->post('periode');
                                 $tgli                   = $this->app_model->tgl_sql($this->input->post('tgli'));
@@ -133,31 +134,79 @@ class Glasir_adju extends CI_Controller {
                                 $jam_start              = $this->input->post('jam_start');
                                 $tgl_end                = $this->app_model->tgl_sql($this->input->post('tgl_end'));
                                 $jam_end                = $this->input->post('jam_end');
+                                $start                  = $this->app_model->tgl_sql($this->input->post('tgl_start')).' '.$this->input->post('jam_start');
+                                $end                  = $this->app_model->tgl_sql($this->input->post('tgl_end')).' '.$this->input->post('jam_end');
 				
-				$id['id']               = $this->input->post('id');
+				$idx['id']               = $this->input->post('id');
 				
-				$data = $this->glzModel->getSelectedData("glasir_ah",$id);
+				$data = $this->glzModel->getSelectedData("glasir_ah",$idx);
 				if($data->num_rows()>0){
-                                                $this->glzModel->updateData("glasir_ah",$up,$id);
-						$data = $this->glzModel->getSelectedData("glasir_ahd",$id_d);
-						if($data->num_rows()>0){
-							$this->glzModel->updateData("glasir_ahd",$ud,$id_d);
-                                                        echo 'Update data Sukses';
-						}else{
-                                                        $ud['tgl_insert']		= date('Y-m-d h:i:s');
-							$this->glzModel->insertData("glasir_ahd",$ud);
-                                                        echo 'Simpan data Sukses';
-						}
+                                               echo 'Adjusment Sudah ada';
 				}else{
                                         $tgl_input		        = date('Y-m-d h:i:s');
                                         $up['tgl_input']		= date('Y-m-d h:i:s');
                                         $this->glzModel->insertData("glasir_ah",$up);
-                                        $sql = "insert into decal_ohd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
-                                                        tgl_input,tgl_update,tgl_delete,deleted)
-                                                        select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
-                                                        '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
+                                        $sql = "insert into glasir_ahd (id, id_glasir, id_related, inputer, petugas, periode, tgli, jam, shift, deleted, tgl_start, tgl_end, jam_start, jam_end,tgl_input, tgl_update, tgl_delete, 
+								bgps_system, bgps_opname, bgps_selisih, sply_system, sply_opname, sply_selisih)
+select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode-1, '$tgli', '$jam', $shift, 0, '$tgl_start', '$tgl_end', '$jam_start', '$jam_end', '$tgl_input', '0000-00-00 00:00:00',	'0000-00-00 00:00:00',
+                                REPLACE(FORMAT((coalesce(c.turun_bgps, 0)-coalesce(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),2),',','') bgps_system,
+                                REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as bgps_opname,
+                                REPLACE(FORMAT((coalesce(c.turun_bgps, 0)-coalesce(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-
+                                COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as bgps_selisih,
+                                
+                                REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0)-coalesce(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),2),',','') sply_system,
+                                REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_opname,
+                                REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0)-coalesce(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-
+                                COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_selisih
+                                   
+                        from glasir a
+                        left join glasir_ohd b
+                          on a.id_glasir = b.id_glasir
+                        left join
+                        (
+                          select id_glasir, 
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '$start' AND '$end' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') turun_bgps
+                          from glasir_phd
+                          where deleted = 0
+                          group by id_glasir
+                        ) c on a.id_glasir = c.id_glasir
+                        left join
+                        (
+                          select id_glasir, 
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '$start' AND '$end' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') ditarik_supply
+                          from glasir_phd_sp
+                          where deleted = 0
+                          group by id_glasir
+                        ) d on a.id_glasir = d.id_glasir
+                        left join
+                        (
+                          select id_glasir, parent_id, 
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '$start' AND '$end' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') return_prod
+                          from glasir_rhd
+                          where deleted = 0
+                          group by id_glasir
+                        ) e on a.id_glasir = e.parent_id
+                        left join
+                        (
+                          select id_glasir, parent_id,
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '$start' AND '$end' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') kirim_prod
+                          from glasir_thd
+                          where deleted = 0
+                          group by id_glasir
+                        ) f on a.id_glasir = f.parent_id
+                        left join
+                        (
+                          select id_glasir, 
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (bgps_system-bgps_opname) ELSE 0 END), 0),2),',','') adj_bgps,
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (sply_system-sply_opname) ELSE 0 END), 0),2),',','') adj_sply
+                          from glasir_ahd
+                          where deleted = 0
+                          group by id_glasir
+                        ) g on a.id_glasir = g.id_glasir
+                        where b.deleted = 0 
+                        group by a.id_glasir";
                                         $this->db->query($sql);
-                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_adju/edit/$idx'>";
+                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/glasir_adju/edit/$id'>";
                                         echo 'Simpan data Sukses';		
 				}
 		}else{
@@ -187,15 +236,15 @@ class Glasir_adju extends CI_Controller {
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['id']	= $id;
-                                        $d['petugas']	= $db->petugas;
-                                        $d['periode']	= $db->periode;
-                                        $d['tgli']	= $db->tgli;
-                                        $d['jam']	= $db->jam;
-                                        $d['shift']	= $db->shift;
-                                        $d['tgl_start']	= $db->tgl_start;
-                                        $d['jam_start']	= $db->jam_start;
-                                        $d['tgl_end']	= $db->tgl_end;
-                                        $d['jam_end']	= $db->jam_end;
+                                        $d['petugas']	= '';
+                                        $d['periode']	= '';
+                                        $d['tgli']	= '';
+                                        $d['jam']	= '';
+                                        $d['shift']	= '';
+                                        $d['tgl_start']	= '';
+                                        $d['jam_start']	= '';
+                                        $d['tgl_end']	= '';
+                                        $d['jam_end']	= '';
 				}
 			}else{
 					$d['no_prod'] =$id;
@@ -281,7 +330,7 @@ class Glasir_adju extends CI_Controller {
         public function getPicAdju()
 	{
                 $this->load->model('glzModel');
-		$data['data_passed'] = $this->glzModel->getPicScra();
+		$data['data_passed'] = $this->glzModel->getPicAdju();
 
 		if ($data['data_passed']){
 

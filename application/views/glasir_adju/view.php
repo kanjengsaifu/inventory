@@ -28,7 +28,7 @@ Cari No. Transaksi/Kode Glaze/Nama Glaze/Inputer : <input type="text" name="txt_
     <th>No</th>
     <th>No. Penyesuaian</th>
     <th>Tanggal Pelaksanaan</th>
-    <th>Transaksi Input</th>
+    <th>Item Di Adjust</th>
     <th>List Item</th>
     <th>Inputer</th>
     <th>Aksi</th>

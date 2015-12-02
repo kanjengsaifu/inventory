@@ -81,32 +81,43 @@ $(document).ready(function(){
 	
 	$("#simpan").click(function(){
             
-		var id_glasir	= $("#id_glasir").val();
-		var volume	= $("#volume").val();
-                var densitas    = $("#densitas").val();
-                var id_bm       = $("#id_bm").val();
-                var status       = $("#status").val();
+                var periode     = $("#periode").val();
+                var tgli        = $("#tgli").val();
+                var jam         = $("#jam").val();
                 var shift       = $("#shift").val();
-                var tglp         = $("#tglp").val();
-                var tglb         = $("#tglb").val();
+                var tgl_start   = $("#tgl_start").val();
+                var jam_start   = $("#jam_start").val();
+                var tgl_end     = $("#tgl_end").val();
+                var jam_end     = $("#jam_end").val();
 		
 		var string = $("#form").serialize();
-		
-		if(id_glasir.length==0){
+                
+                if(periode.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Kode Glasir tidak boleh kosong', 
+				msg:'Maaf, Periode tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#id_glasir").focus();
+			$("#periode").focus();
+			return false();
+		}
+                
+                if(tgli.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Tanggal pelaksanaan tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#tgli").focus();
 			return false();
 		}
                 
                 if(shift.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Shift tidak boleh kosong', 
+				msg:'Maaf, Tanggal shift tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
@@ -114,36 +125,47 @@ $(document).ready(function(){
 			return false();
 		}
                 
-                if(tgl.length==0){
+                if(tgl_start.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Tanggal pelaksanaan tidak boleh kosong', 
+				msg:'Maaf, Tanggal opname terakhir tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#tgl").focus();
+			$("#tgl_start").focus();
 			return false();
 		}
                 
-                if(tglp.length==0){
+                if(jam_start.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Tanggal produksi tidak boleh kosong', 
+				msg:'Maaf, Jam opname terakhir tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#tglp").focus();
+			$("#jam_start").focus();
 			return false();
 		}
                 
-                if(tglb.length==0){
+                if(tgl_end.length==0){
 			$.messager.show({
 				title:'Info',
-				msg:'Maaf, Tanggal lulus tes bakar tidak boleh kosong', 
+				msg:'Maaf, Tanggal opname sekarang tidak boleh kosong', 
 				timeout:2000,
 				showType:'show'
 			});
-			$("#tglb").focus();
+			$("#tgl_end").focus();
+			return false();
+		}
+                
+                if(jam_end.length==0){
+			$.messager.show({
+				title:'Info',
+				msg:'Maaf, Jam opname sekarang tidak boleh kosong', 
+				timeout:2000,
+				showType:'show'
+			});
+			$("#jam_end").focus();
 			return false();
 		}
                 
@@ -155,59 +177,6 @@ $(document).ready(function(){
 				showType:'show'
 			});
 			$("#jam").focus();
-			return false();
-		}
-                
-                if(id_bm.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Turun dari ball mill tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#id_bm").focus();
-			return false();
-		}
-                
-                if(status.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Status tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#status").focus();
-			return false();
-		}
-                
-		if(volume.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Volume tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#volume").focus();
-			return false();
-		}
-                if(densitas.length==0){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Densitas tidak boleh kosong', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#densitas").focus();
-			return false();
-		}
-                if(densitas<1000){
-			$.messager.show({
-				title:'Info',
-				msg:'Maaf, Densitas tidak boleh kurang dari 1000', 
-				timeout:2000,
-				showType:'show'
-			});
-			$("#densitas").focus();
 			return false();
 		}
 		
@@ -320,7 +289,7 @@ $(document).ready(function(){
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_adju/getPicAdju'?>'"  value="<?php echo $petugas;?>" ></td>
+        <td><input type="text" style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_adju/getPicAdju'?>'"  value="<?php echo $petugas;?>" ></td>
     </tr>
     <tr>    
         <td width="150">Periode</td>
