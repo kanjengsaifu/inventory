@@ -175,6 +175,34 @@ class Glzmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function MaxPhGlasirAdju(){
+		$text = "SELECT max(id) as no FROM glasir_ah";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$no = $t->no; 
+				$tmp = ((int) substr($no,2,5))+1;
+				$hasil = 'AH'.sprintf("%05s", $tmp);
+			}
+		}else{
+			$hasil = 'SH'.'00001';
+		}
+		return $hasil;
+	}
+        
+        public function MaxPeriod(){
+		$text = "SELECT max(periode) as no FROM glasir_ahd";
+		$data = $this->glzModel->manualQuery($text);
+		if($data->num_rows() > 0 ){
+			foreach($data->result() as $t){
+				$hasil = $t->no+1;
+			}
+		}else{
+			$hasil = '1';
+		}
+		return $hasil;
+	}
+        
         public function MaxPhGlasirTran(){
 		$text = "SELECT max(no_prod) as no FROM glasir_th";
 		$data = $this->glzModel->manualQuery($text);
@@ -714,6 +742,13 @@ class Glzmodel extends CI_Model {
         
         public function getPicScra(){
                 $query ="select distinct petugas from glasir_shd order by petugas asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicAdju(){
+                $query ="select distinct petugas from glasir_ahd order by petugas asc";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

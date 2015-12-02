@@ -91,77 +91,24 @@ class Glasir_adju extends CI_Controller {
 
 			$d['judul']="Input penyesuaian glasir";
 			
-			$no_prod    = $this->glzModel->MaxPhGlasirScra();
+			$id    = $this->glzModel->MaxPhGlasirAdju();
+                        $periode    = $this->glzModel->MaxPeriod();
 			
-			$d['no_prod']	= $no_prod;
-                        $d['dsc']	= '';
-                        $d['status']	= 2;
-                        $d['batch']	= '';
+			$d['id']	= $id;
                         $d['petugas']	= '';
-                        $d['parent']	= '';
-                        $d['tgl']	= '';
+                        $d['periode']	= $periode;
+                        $d['tgli']	= '';
                         $d['jam']	= '';
                         $d['shift']	= '';
-                        $d['id_glasir']	= '';
-                        $d['tglp']	= '';
-                        $d['tglb']	= '';
-                        $d['id_bm']	= '';
-                        $d['volume']	= '';
-                        $d['densitas']	= '';
-			
-			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
-			$d['l_bm'] = $this->glzModel->manualQuery($bm);
-                        $status = "SELECT * FROM global_status";
-			$d['l_status'] = $this->glzModel->manualQuery($status);
+                        $d['tgl_start']	= '';
+                        $d['jam_start']	= '';
+                        $d['tgl_end']	= '';
+                        $d['jam_end']	= '';
+                        
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
 			
 			$d['content'] = $this->load->view('glasir_adju/form', $d, true);		
-			$this->load->view('home',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
-        
-        public function status()
-	{
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			$d['prg']= $this->config->item('prg');
-			$d['web_prg']= $this->config->item('web_prg');
-			
-			$d['nama_program']= $this->config->item('nama_program');
-			$d['instansi']= $this->config->item('instansi');
-			$d['usaha']= $this->config->item('usaha');
-			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-
-			$d['judul']="Status Detail Produksi Glasir";
-			
-			$idphdh     = $this->glzModel->MaxPhdhGlasir();
-			//$tgl_inp    = date('Y-m-d h:i:s');
-                        $no_prod    = $this->uri->segment(3);
-			$id_glasir  = $this->uri->segment(4);
-                        $batch      = $this->uri->segment(5);
-                        $volume     = $this->uri->segment(6);
-                        $densitas   = $this->uri->segment(7);
-			
-			$d['idphdh']	= $idphdh;
-                        $d['no_prod']	= $no_prod;
-                        $d['id_glasir']	= $id_glasir;
-                        $d['batch']	= $batch;
-                        $d['volume']	= $volume;
-                        $d['densitas']	= $densitas;
-                        			
-			//$gps = "SELECT * FROM glasir_patt WHERE idgps NOT IN (SELECT idgps FROM glasir_phdh 
-                                        //where noprod = '$no_prod'  AND idglasir = '$id_glasir' AND idphd = '$batch')";
-                        $gps = "SELECT * FROM glasir_patt";
-			$d['l_gps'] = $this->glzModel->manualQuery($gps);
-                        $bm = "SELECT * FROM global_mesin";
-			$d['l_bm'] = $this->glzModel->manualQuery($bm);
-                        $tong = "SELECT * FROM global_tong";
-			$d['l_tong'] = $this->glzModel->manualQuery($tong);
-			
-			$d['content'] = $this->load->view('glasir_adju/form_detail', $d, true);		
 			$this->load->view('home',$d);
 		}else{
 			header('location:'.base_url());
@@ -173,32 +120,21 @@ class Glasir_adju extends CI_Controller {
 		
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
-				$up['no_prod']		= $this->input->post('no_prod');
-				//$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
+				$up['id']		= $this->input->post('id');
 				$up['inputer']          = $this->session->userdata('username');
-                                //$up['planner']          = $this->input->post('planner');
 				
-				$ud['no_prod']          = $this->input->post('no_prod');
-				$ud['id_glasir']        = $this->input->post('id_glasir');
-                                $ud['parent_id']        = $this->input->post('parent');
-                                $ud['id_bm']            = $this->input->post('id_bm');
-                                $ud['id_gps']           = $this->input->post('status');
-				$ud['volume']           = $this->input->post('volume');
-                                $ud['densitas']         = $this->input->post('densitas');
-                                $ud['inputer']          = $this->session->userdata('username');
-                                $ud['dsc']              = $this->input->post('dsc');
-                                $ud['shift']            = $this->input->post('shift');
-                                $ud['jam']              = $this->input->post('jam');
-                                $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
-                                $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
-                                $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
-                                $ud['petugas']          = $this->input->post('petugas');
-				$ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
-				$id['no_prod']          = $this->input->post('no_prod');
+				$id                     = $this->input->post('id');
+				$petugas                = $this->input->post('petugas');
+                                $periode                = $this->input->post('periode');
+                                $tgli                   = $this->app_model->tgl_sql($this->input->post('tgli'));
+                                $jam                    = $this->input->post('jam');
+				$shift                  = $this->input->post('shift');
+                                $tgl_start              = $this->app_model->tgl_sql($this->input->post('tgl_start'));
+                                $jam_start              = $this->input->post('jam_start');
+                                $tgl_end                = $this->app_model->tgl_sql($this->input->post('tgl_end'));
+                                $jam_end                = $this->input->post('jam_end');
 				
-				$id_d['no_prod']        = $this->input->post('no_prod');
-				$id_d['id_glasir']      = $this->input->post('id_glasir');
-                                $id_d['idphd']          = $this->input->post('batch');
+				$id['id']               = $this->input->post('id');
 				
 				$data = $this->glzModel->getSelectedData("glasir_ah",$id);
 				if($data->num_rows()>0){
@@ -213,11 +149,16 @@ class Glasir_adju extends CI_Controller {
                                                         echo 'Simpan data Sukses';
 						}
 				}else{
-                                        $up['tgl_inp']		= date('Y-m-d h:i:s');
-					$this->glzModel->insertData("glasir_ah",$up);
-                                        $ud['tgl_insert']		= date('Y-m-d h:i:s');
-					$this->glzModel->insertData("glasir_ahd",$ud);
-					echo 'Simpan data Sukses';		
+                                        $tgl_input		        = date('Y-m-d h:i:s');
+                                        $up['tgl_input']		= date('Y-m-d h:i:s');
+                                        $this->glzModel->insertData("glasir_ah",$up);
+                                        $sql = "insert into decal_ohd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                                        tgl_input,tgl_update,tgl_delete,deleted)
+                                                        select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
+                                                        '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
+                                        $this->db->query($sql);
+                                        echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_adju/edit/$idx'>";
+                                        echo 'Simpan data Sukses';		
 				}
 		}else{
 				header('location:'.base_url());
@@ -225,96 +166,6 @@ class Glasir_adju extends CI_Controller {
 	
 	}
         
-        public function simpanStatus()
-	{
-		
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			$ud['idphdh']		= $this->glzModel->MaxPhdhGlasir(); //
-			$ud['tgl']		= $this->glzModel->tgl_sql($this->input->post('tgl'));
-			$ud['idglasir']         = $this->input->post('idglasir'); //
-			$ud['inp']              = $this->session->userdata('username'); //
-			$ud['noprod']           = $this->input->post('noprod'); //
-			$ud['idphd']            = $this->input->post('batch');
-			$ud['volume']           = $this->input->post('volume');
-                        $ud['densitas']         = $this->input->post('densitas');
-                        $ud['idgps']            = $this->input->post('status');
-                        $ud['idbm']             = $this->input->post('id_bm');
-                        $ud['idtong']           = $this->input->post('id_tong');
-                        $ud['petugas']          = $this->input->post('petugas');
-                        $ud['dsc']          = $this->input->post('dsc');
-			
-                        $id['idphdh']           = $this->input->post('idphdh');
-			$q = $this->db->get_where("glasir_phdh",$id);
-			$row = $q->num_rows();
-			if($row>0){
-				$ud['inp_time'] = date('Y-m-d h:i:s');
-				//$this->db->update("glasir_phdh",$ud,$id);
-                                $this->db->insert("glasir_phdh",$ud);
-				echo "Data Sukses diUpdate";
-			}else{
-				$ud['inp_time'] = date('Y-m-d h:i:s');
-				$this->db->insert("glasir_phdh",$ud);
-				echo "Data Sukses diSimpan";
-			}
-		}else{
-				header('location:'.base_url());
-		}
-	
-	}
-	
-	public function cetak()
-	{
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			
-			$d['prg']= $this->config->item('prg');
-			$d['web_prg']= $this->config->item('web_prg');
-			
-			$d['nama_program']= $this->config->item('nama_program');
-			$d['instansi']= $this->config->item('instansi');
-			$d['usaha']= $this->config->item('usaha');
-			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-			
-			$d['judul'] = "Form Order Produksi Glasir";
-			
-			$id = $this->uri->segment(3);
-			$text = "SELECT * FROM glasir_ph WHERE no_prod='$id'";
-			$data = $this->glzModel->manualQuery($text);
-			if($data->num_rows() > 0){
-				foreach($data->result() as $db){
-					$d['no_prod']	= $id;
-					$d['tgl_plng']	= $this->glzModel->tgl_indo($db->tgl_plng);
-					$d['no_po']	= $db->no_po;
-                                        $d['planner']	= $db->planner;
-				}
-			}else{
-					$d['no_prod']		=$id;
-					$d['tgl_plng']	='';
-					$d['no_po']	='';
-                                        $d['planner']	='';
-			}
-			
-			$text = "SELECT a.no_prod,a.id_glasir,c.nama_gps,a.volume,a.densitas,
-					d.nama_bm,e.nama_tong,a.petugas,a.inputer
-					FROM glasir_phd as a 
-					JOIN glasir_ph as b
-					ON a.no_prod=b.no_prod
-					JOIN glasir_patt as c
-					ON a.idgps=c.idgps
-					JOIN global_mesin as d
-					ON a.id_bm=d.id_bm
-					JOIN global_tong as e
-					ON a.id_tong=e.id_tong
-					WHERE a.no_prod='$id'";
-			$d['data']= $this->glzModel->manualQuery($text);
-									
-			$this->load->view('glasir_adju/cetak',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
-	
 	public function edit()
 	{
 		$cek = $this->session->userdata('logged_in');
@@ -331,25 +182,20 @@ class Glasir_adju extends CI_Controller {
 			$d['judul'] = "Ubah input penyesuaian glasir";
 			
 			$id = $this->uri->segment(3);
-			$text = "SELECT * FROM glasir_ah WHERE no_prod='$id'";
+			$text = "SELECT * FROM glasir_ah WHERE id='$id'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
-					$d['no_prod']	= $id;
-                                        $d['batch']	= '';
-                                        $d['petugas']	= '';
-                                        $d['parent']	= '';
-                                        $d['dsc']	= '';
-                                        $d['tgl']	= '';
-                                        $d['jam']	= '';
-                                        $d['shift']	= '';
-                                        $d['id_glasir']	= '';
-                                        $d['tglp']	= '';
-                                        $d['tglb']	= '';
-                                        $d['id_bm']	= '';
-                                        $d['status']	= '';
-                                        $d['volume']	= '';
-                                        $d['densitas']	= '';
+					$d['id']	= $id;
+                                        $d['petugas']	= $db->petugas;
+                                        $d['periode']	= $db->periode;
+                                        $d['tgli']	= $db->tgli;
+                                        $d['jam']	= $db->jam;
+                                        $d['shift']	= $db->shift;
+                                        $d['tgl_start']	= $db->tgl_start;
+                                        $d['jam_start']	= $db->jam_start;
+                                        $d['tgl_end']	= $db->tgl_end;
+                                        $d['jam_end']	= $db->jam_end;
 				}
 			}else{
 					$d['no_prod'] =$id;
@@ -368,98 +214,15 @@ class Glasir_adju extends CI_Controller {
                                         $d['volume']	= '';
                                         $d['densitas']	= '';
 			}
-									
-			$d['content'] = $this->load->view('glasir_adju/form', $d, true);		
-			$this->load->view('home',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
-        
-        public function editDetail()
-	{
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
 			
-			$d['prg']= $this->config->item('prg');
-			$d['web_prg']= $this->config->item('web_prg');
-			
-			$d['nama_program']= $this->config->item('nama_program');
-			$d['instansi']= $this->config->item('instansi');
-			$d['usaha']= $this->config->item('usaha');
-			$d['alamat_instansi']= $this->config->item('alamat_instansi');
-			
-			$d['judul'] = "Ubah input penyesuaian glasir";
-			
-			$no_prod = $this->uri->segment(3);
-                        $id_glasir = $this->uri->segment(4);
-                        $idphd = $this->uri->segment(5);
-			$text = "SELECT no_prod,idphd,petugas,dsc,tgl,id_gps, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,volume,densitas 
-                        FROM glasir_ahd WHERE no_prod='$no_prod' AND id_glasir='$id_glasir' AND idphd='$idphd'";
-			$data = $this->glzModel->manualQuery($text);
-			if($data->num_rows() > 0){
-				foreach($data->result() as $db){
-					$d['no_prod']	= $no_prod;
-                                        $d['batch']	= $db->idphd; 
-                                        $d['petugas']	= $db->petugas;
-                                        $d['dsc']	= $db->dsc;
-                                        $d['tgl']	= $this->app_model->tgl_sql($db->tgl);
-                                        $d['jam']	= $db->jam;
-                                        $d['shift']	= $db->shift;
-                                        $d['id_glasir']	= $db->id_glasir;
-                                        $d['tglp']	= $this->app_model->tgl_sql($db->tglp);
-                                        $d['tglb']	= $this->app_model->tgl_sql($db->tglb);
-                                        $d['id_bm']	= $db->id_bm;
-                                        $d['status']	= $db->id_gps;
-                                        $d['volume']	= $db->volume;
-                                        $d['densitas']	= $db->densitas;
-				}
-			}else{
-					$d['no_prod'] =$no_prod;
-                                        $d['petugas']	= '';
-                                        $d['dsc']	= '';
-                                        $d['tgl']	= '';
-                                        $d['jam']	= '';
-                                        $d['shift']	= '';
-                                        $d['id_glasir']	= '';
-                                        $d['tglp']	= '';
-                                        $d['tglb']	= '';
-                                        $d['id_bm']	= '';
-                                        $d['status']	= '';
-                                        $d['volume']	= '';
-                                        $d['densitas']	= '';
-			}
-			
-			$bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
+                        $bm = "SELECT * FROM global_mesin where nama_bm like '%Tong%' OR nama_bm like '%Tidak Ada%'";
 			$d['l_bm'] = $this->glzModel->manualQuery($bm);
                         $status = "SELECT * FROM global_status";
 			$d['l_status'] = $this->glzModel->manualQuery($status);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->glzModel->manualQuery($sft);
-									
 			$d['content'] = $this->load->view('glasir_adju/form', $d, true);		
 			$this->load->view('home',$d);
-		}else{
-			header('location:'.base_url());
-		}
-	}
-        
-        public function DataDetailHistory()
-	{
-		$cek = $this->session->userdata('logged_in');
-		if(!empty($cek)){
-			
-			$noprod     = $this->input->post('noprod');
-                        $idglasir   = $this->input->post('idglasir');
-                        $batch      = $this->input->post('batch');
-			$text = "select a.idphdh,a.noprod,a.idglasir,a.idphd,b.nama_gps,a.tgl,a.volume,a.densitas,
-                                    c.id_bm,c.nama_bm,d.id_tong,d.nama_tong,a.petugas,a.dsc,a.inp,a.inp_time from glasir_phdh a
-                                    join glasir_patt b on a.idgps = b.idgps join global_mesin c on a.idbm = c.id_bm 
-                                    join global_tong d on a.idtong = d.id_tong
-                                    where a.noprod = '$noprod' and a.idglasir = '$idglasir' and a.idphd ='$batch'";
-			$d['data']= $this->glzModel->manualQuery($text);
-
-			$this->load->view('glasir_adju/detail_history',$d);
 		}else{
 			header('location:'.base_url());
 		}
@@ -515,7 +278,7 @@ class Glasir_adju extends CI_Controller {
 		}
 	}
         
-        public function getPicScra()
+        public function getPicAdju()
 	{
                 $this->load->model('glzModel');
 		$data['data_passed'] = $this->glzModel->getPicScra();

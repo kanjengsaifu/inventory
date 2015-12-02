@@ -14,7 +14,7 @@ $(document).ready(function(){
 		//alert(kode);
 		$.ajax({
 			type	: 'POST',
-			url		: "<?php echo site_url(); ?>/glasir_scra/DataDetail",
+			url		: "<?php echo site_url(); ?>/glasir_adju/DataDetail",
 			data	: "kode="+kode,
 			cache	: false,
 			success	: function(data){
@@ -24,7 +24,7 @@ $(document).ready(function(){
 		//return false();
 	}
 	        
-        $("#tgl").datepicker({
+        $("#tgli").datepicker({
 			dateFormat:"dd-mm-yy",
                         numberOfMonths:[2,3],
                         showCurrentAtPos: 5,
@@ -32,7 +32,7 @@ $(document).ready(function(){
                         $(".ui-datepicker").css('font-size', 11) 
                         }
             });
-        $("#tglp").datepicker({
+        $("#tgl_start").datepicker({
 			dateFormat:"dd-mm-yy",
                         numberOfMonths:[2,3],
                         showCurrentAtPos: 5,
@@ -40,7 +40,7 @@ $(document).ready(function(){
                         $(".ui-datepicker").css('font-size', 11) 
                         }
             });
-        $("#tglb").datepicker({
+        $("#tgl_end").datepicker({
 			dateFormat:"dd-mm-yy",
                         numberOfMonths:[2,3],
                         showCurrentAtPos: 5,
@@ -213,7 +213,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type	: 'POST',
-			url	: "<?php echo site_url(); ?>/glasir_scra/simpan",
+			url	: "<?php echo site_url(); ?>/glasir_adju/simpan",
 			data	: string,
 			cache	: false,
 			success	: function(data){
@@ -252,7 +252,7 @@ $(document).ready(function(){
 	
 	$("#cetak").click(function(){
 		var kode	= $("#no_prod").val();
-		window.open('<?php echo site_url();?>/glasir_scra/cetak/'+kode);
+		window.open('<?php echo site_url();?>/glasir_adju/cetak/'+kode);
 		return false();
 	});
 	
@@ -313,24 +313,24 @@ $(document).ready(function(){
     <fieldset>
     <table width="100%">
     <tr>    
-        <td width="150">No. Transaksi</td>
+        <td width="150">No. Adjusment</td>
         <td width="5">:</td>
-        <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
+        <td><input type="text" name="id" id="id" size="45" maxlength="12" readonly="readonly" value="<?php echo $id;?>" /></td>
     </tr>
     <tr>    
         <td>Petugas</td>
         <td>:</td>
-        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_scra/getPicScra'?>'"  value="<?php echo $petugas;?>" ></td>
+        <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_adju/getPicAdju'?>'"  value="<?php echo $petugas;?>" ></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan</td>
+        <td width="150">Periode</td>
         <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255" value="<?php echo $dsc;?>" /></td>
+        <td><input type="text" name="periode" id="periode" size="45" maxlength="255" value="<?php echo $periode;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Tanggal Pelaksanaan</td>
         <td width="5">:</td>
-        <td><input name="tgl" id="tgl"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl;?>" /></td>
+        <td><input name="tgli" id="tgli"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgli;?>" /></td>
     </tr>
     <tr>    
         <td width="150">Jam Pelaksanaan</td>
@@ -365,92 +365,26 @@ $(document).ready(function(){
 <td valign="top" width="50%">
     <fieldset>
     <table width="100%">
-    <tr>    
-        <td width="150">Kode Glasir</td>
-        <td width="5">:</td>
-        <td><input type="text" name="id_glasir" id="id_glasir" size="35.5" maxlength="12" class="easyui-validatebox" data-options="required:true,validType:'length[3,10]'"  value="<?php echo $id_glasir;?>" />
-        <button type="button" name="cari_barang" id="cari_barang" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
-        </td>
-    </tr>
-    <tr>    
-        <td>Nama Glasir</td>
-        <td>:</td>
-        <td><input readonly="readonly" type="text" name="nama_glasir" id="nama_glasir"  size="45" class="detail" maxlength="50"/></td>
-    </tr>
-    <tr>    
-        <td>Kode Induk Glasir</td>
-        <td>:</td>
-        <td><input readonly="readonly" type="text" name="parent" id="parent"  size="45" class="detail" maxlength="50"/></td>
-    </tr>
-    <tr>    
-        <td width="150">Tgl. Produksi</td>
-        <td width="5">:</td>
-        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value="<?php echo $tglp;?>"/>
-        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
-        </td>
-    </tr>
-    <tr>    
-        <td width="150">Tgl. Lulus Tes Bakar</td>
-        <td width="5">:</td>
-        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value="<?php echo $tglb;?>" />
-        </td>
-    </tr>
-    <tr>    
-        <td>Tong</td>
-        <td>:</td>
-        <td>
-            <select name="id_bm" id="id_bm" style="width:382px;">
-        <?php 
-		if(empty($id_bm)){
-		?>
-        <option value="<?php echo $id_bm;?>">-PILIH-</option>
-        <?php
-		}
-		foreach($l_bm->result() as $t){
-			if($id_bm==$t->id_bm){
-		?>
-        <option value="<?php echo $t->id_bm;?>" selected="selected"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->id_bm;?>"><?php echo $t->id_bm;?> - <?php echo $t->nama_bm;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
-    <tr>    
-        <td>Status</td>
-        <td>:</td>
-        <td>
-            <select name="status" id="status" style="width:382px;">
-        <?php 
-		if(empty($status)){
-		?>
-        <option value="">-PILIH-</option>
-        <?php
-		}
-		foreach($l_status->result() as $t){
-			if($status==$t->idgps){
-		?>
-        <option value="<?php echo $t->idgps;?>" selected="selected"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
-        <?php }else { ?>
-        <option value="<?php echo $t->idgps;?>"><?php echo $t->idgps;?> - <?php echo $t->nama_gps;?></option>
-        <?php }
-		} ?>
-        </select>
-        </td>
-        </td>
-    </tr>
-    <tr>    
-        <td>Volume (liter)</td>
-        <td>:</td>
-        <td><input type="text" name="volume" id="volume"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;" value="<?php echo $volume;?>"/></td>
-    </tr>
-    <tr>    
-        <td>Densitas</td>
-        <td>:</td>
-        <td><input type="text" name="densitas" id="densitas"  size="45" class="easyui-numberbox" data-options="min:0,precision:2" style="text-align:right;" value="<?php echo $densitas;?>"/></td>
-    </tr>
+        <tr>    
+            <td width="150">Tgl. Opname Terakhir</td>
+            <td width="5">:</td>
+            <td><input name="tgl_start" id="tgl_start"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_start;?>" /></td>
+        </tr>
+        <tr>    
+            <td width="150">Jam. Opname Terakhir</td>
+            <td width="5">:</td>
+            <td><input name="jam_start" id="jam_start"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam_start;?>" /></td>
+        </tr>
+        <tr>    
+            <td width="150">Tgl. Opname Sekarang</td>
+            <td width="5">:</td>
+            <td><input name="tgl_end" id="tgl_end"  size="45" maxlength="12" class="easyui-validatebox" value="<?php echo $tgl_end;?>" /></td>
+        </tr>
+        <tr>    
+            <td width="150">Jam. Opname Sekarang</td>
+            <td width="5">:</td>
+            <td><input name="jam_end" id="jam_end"  size="45" maxlength="12" class="easyui-timespinner" value="<?php echo $jam_end;?>" /></td>
+        </tr>
     </table>
     </fieldset>
 </td>
@@ -463,7 +397,7 @@ $(document).ready(function(){
     <button type="button" name="simpan" id="simpan" class="easyui-linkbutton" data-options="iconCls:'icon-save'">SIMPAN</button>
     <button type="button" name="tambah_data" id="tambah_data" class="easyui-linkbutton" data-options="iconCls:'icon-add'">TAMBAH</button>
     <button type="button" name="cetak" id="cetak" class="easyui-linkbutton" data-options="iconCls:'icon-print'">CETAK</button>
-    <a href="<?php echo base_url();?>index.php/glasir_scra/">
+    <a href="<?php echo base_url();?>index.php/glasir_adju/">
     <button type="button" name="kembali" id="kembali" class="easyui-linkbutton" data-options="iconCls:'icon-logout'">TUTUP</button>
     </a>
     </td>
