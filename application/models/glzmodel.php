@@ -653,18 +653,15 @@ class Glzmodel extends CI_Model {
         
          public function get_stok(){
                 $query ="select a.id_glasir, a.nama_glasir,
-                                REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sab, 
-                                REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sas,
+										  COALESCE(h.scrap_supp, 0) scrap_supp, 	
                                 COALESCE(g.adj_bgps, 0) adj_bgps, COALESCE(g.adj_sply, 0) adj_sply,
-                                REPLACE(FORMAT((COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0)+
-                                COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0)),2),',','')as gtot,
                                 COALESCE(c.turun_bgps, 0) turun_bgps, coalesce(d.ditarik_supply, 0) ditarik_supply, coalesce(e.return_prod, 0) return_prod, coalesce(f.kirim_prod, 0) kirim_prod,
 
-                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)-COALESCE(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),2),',','') stok_bgps,
-                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),2),',','') stok_supply,
+                                REPLACE(FORMAT((((coalesce(c.turun_bgps, 0)-(COALESCE(g.adj_bgps, 0)))) - coalesce(d.ditarik_supply, 0)),2),',','') stok_bgps,
+                                REPLACE(FORMAT(((((coalesce(d.ditarik_supply, 0)-(COALESCE(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0)),2),',','') stok_supply,
                                 
-                                REPLACE(FORMAT((GREATEST(((coalesce(c.turun_bgps, 0)-COALESCE(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_bgps, 0)),',','')+
-                                GREATEST((((coalesce(d.ditarik_supply, 0)-COALESCE(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-COALESCE(g.adj_sply, 0)),',','')),2),',','') total
+                                REPLACE(FORMAT((GREATEST(((coalesce(c.turun_bgps, 0)-(COALESCE(g.adj_bgps, 0))) - coalesce(d.ditarik_supply, 0)),',','')+
+                                GREATEST((((coalesce(d.ditarik_supply, 0)-(COALESCE(g.adj_sply, 0))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0)),',','')),2),',','') total
                                 
                         from glasir a
                         left join glasir_ohd b
@@ -710,6 +707,14 @@ class Glzmodel extends CI_Model {
                           where deleted = 0
                           group by id_glasir
                         ) g on a.id_glasir = g.id_glasir
+                        left join
+                        (
+                          select id_glasir,  parent_id,
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') scrap_supp
+                          from glasir_shd
+                          where deleted = 0
+                          group by id_glasir
+                        ) h on a.id_glasir = h.parent_id
                         where b.deleted = 0 
                         group by a.id_glasir";
 		$query_result_detail = $this->db->query($query);

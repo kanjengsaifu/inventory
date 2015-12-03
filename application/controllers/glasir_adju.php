@@ -148,15 +148,15 @@ class Glasir_adju extends CI_Controller {
                                         $this->glzModel->insertData("glasir_ah",$up);
                                         $sql = "insert into glasir_ahd (id, id_glasir, id_related, inputer, petugas, periode, tgli, jam, shift, deleted, tgl_start, tgl_end, jam_start, jam_end,tgl_input, tgl_update, tgl_delete, 
 								bgps_system, bgps_opname, bgps_selisih, sply_system, sply_opname, sply_selisih)
-select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode-1, '$tgli', '$jam', $shift, 0, '$tgl_start', '$tgl_end', '$jam_start', '$jam_end', '$tgl_input', '0000-00-00 00:00:00',	'0000-00-00 00:00:00',
-                                REPLACE(FORMAT((coalesce(c.turun_bgps, 0)-coalesce(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0),2),',','') bgps_system,
+select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode, '$tgli', '$jam', $shift, 0, '$tgl_start', '$tgl_end', '$jam_start', '$jam_end', '$tgl_input', '0000-00-00 00:00:00',	'0000-00-00 00:00:00',
+                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)-(coalesce(g.adj_bgps, 0))))-coalesce(d.ditarik_supply, 0),2),',','') bgps_system,
                                 REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as bgps_opname,
-                                REPLACE(FORMAT((coalesce(c.turun_bgps, 0)-coalesce(g.adj_bgps, 0)+sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(d.ditarik_supply, 0)-
+                                REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)-(coalesce(g.adj_bgps, 0))))-coalesce(d.ditarik_supply, 0)-
                                 COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as bgps_selisih,
                                 
-                                REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0)-coalesce(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0),2),',','') sply_system,
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0),2),',','') sply_system,
                                 REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_opname,
-                                REPLACE(FORMAT(((coalesce(d.ditarik_supply, 0)-coalesce(g.adj_sply, 0)+coalesce(e.return_prod, 0))+sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = 1 THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END)) - coalesce(f.kirim_prod, 0)-
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0)-
                                 COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_selisih
                                    
                         from glasir a
@@ -203,6 +203,14 @@ select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode-1, '$tgli', '$j
                           where deleted = 0
                           group by id_glasir
                         ) g on a.id_glasir = g.id_glasir
+                        left join
+                        (
+                          select id_glasir,  parent_id,
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') scrap_supp
+                          from glasir_shd
+                          where deleted = 0
+                          group by id_glasir
+                        ) h on a.id_glasir = h.parent_id
                         where b.deleted = 0 
                         group by a.id_glasir";
                                         $this->db->query($sql);

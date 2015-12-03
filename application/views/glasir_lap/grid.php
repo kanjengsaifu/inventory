@@ -10,8 +10,7 @@
         datafields: [
                         { name: 'id_glasir' , type: 'string' },
                         { name: 'nama_glasir' , type: 'string' },
-                        { name: 'sab' , type: 'number' },
-                        { name: 'sas' , type: 'number' },
+                        { name: 'scrap_supp' , type: 'number' },
                         { name: 'adj_bgps' , type: 'number' },
                         { name: 'adj_sply' , type: 'number' },
                         { name: 'gtot' , type: 'number' },
@@ -59,16 +58,13 @@
                         { text: 'Ditarik Supply',  align: 'center',columngroup: 'trans',cellsrenderer: cellsrenderer, datafield: 'ditarik_supply', cellsalign: 'right', cellsformat: 'd2', width: 110 },
                         { text: 'Return Glasir',  align: 'center',columngroup: 'trans',cellsrenderer: cellsrenderer, datafield: 'return_prod', cellsalign: 'right', cellsformat: 'd2', width: 110 },
                         { text: 'Kirim Glasir',  align: 'center',columngroup: 'trans', cellsrenderer: cellsrenderer, datafield: 'kirim_prod', cellsalign: 'right', cellsformat: 'd2', width: 110 },
-                        { text: 'Total',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'gtot', cellsalign: 'right', cellsformat: 'd2', width: 70 },
-                        { text: 'BGPS',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'sab', cellsalign: 'right', cellsformat: 'd2', width: 70 },
-                        { text: 'Supply',  align: 'center',columngroup: 'stok', cellsrenderer: cellsrenderer, datafield: 'sas', cellsalign: 'right', cellsformat: 'd2', width: 70 },
                         { text: 'BGPS',  align: 'center',columngroup: 'stok2', cellsrenderer: cellsrenderer, datafield: 'adj_bgps', cellsalign: 'right', cellsformat: 'd2', width: 70 },
-                        { text: 'Supply',  align: 'center',columngroup: 'stok2', cellsrenderer: cellsrenderer, datafield: 'adj_sply', cellsalign: 'right', cellsformat: 'd2', width: 70 }
+                        { text: 'Supply',  align: 'center',columngroup: 'stok2', cellsrenderer: cellsrenderer, datafield: 'adj_sply', cellsalign: 'right', cellsformat: 'd2', width: 70 },
+                        { text: 'Scrap Supply',  align: 'center', cellsrenderer: cellsrenderer, datafield: 'scrap_supp', cellsalign: 'right', cellsformat: 'd2', width: 100 }
         ],
         columngroups: [
                     { text: 'Stok Akhir Glaze (Kg)', align: 'center', name: 'stg' },
                     { text: 'Transaksi Glaze (Kg)', align: 'center', name: 'trans' },
-                    { text: 'Stok Awal (Kg)', align: 'center', name: 'stok' },
                     { text: 'Penyesuaian (Kg)', align: 'center', name: 'stok2' }
                 ]
     });

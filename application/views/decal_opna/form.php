@@ -352,9 +352,14 @@ $(document).ready(function(){
         </td>
     </tr>
     <tr>    
-        <td>Jumlah Sheet</td>
+        <td>Jumlah Sheet KW1</td>
         <td>:</td>
         <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $jml;?>" /></td>
+    </tr>
+	<tr>    
+        <td>Jumlah Sheet KW2</td>
+        <td>:</td>
+        <td><input type="text" name="kw2" id="kw2"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $kw2;?>" /></td>
     </tr>
     </table>
     </fieldset>
