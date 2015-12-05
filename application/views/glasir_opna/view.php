@@ -31,6 +31,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
     <th>No</th>
     <th>No. Transaksi</th>
     <th>Tanggal Input</th>
+    <th>Tanggal Pelaksanaan</th>
     <th>Transaksi BGPS</th>
     <th>Jumlah Stock Opname BGPS</th>
     <th>Aksi</th>
@@ -47,7 +48,8 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
                 $g_totalSply=0;
                 $p_totalSply=0;
 		foreach($data->result_array() as $db){  
-		$tgl = $this->glzModel->tgl_indo($db['tgl_inp']);
+		$tgl = $this->glzModel->tgl_indo($db['tgl_insert']);
+                $tgli = $this->glzModel->tgl_indo($db['tgl']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
 		$prosesBgps = $this->glzModel->ProsesGlasirOpnaBgps($db['no_prod']);
 		$jmlBgps = $this->glzModel->JmlGlasirOpnaBgps($db['no_prod']);
@@ -62,6 +64,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center" ><?php echo $db['no_prod']; ?></td>
             <td align="center"><?php echo $tgl; ?></td>
+            <td align="center"><?php echo $tgli; ?></td>
             <td align="right" ><?php echo $prosesBgps; ?></td>
             <td align="right"><?php echo number_format($jmlBgps,2,',','.'); ?> Kilogram</td>
             <td align="center">

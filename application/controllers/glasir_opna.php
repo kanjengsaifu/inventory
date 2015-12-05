@@ -15,12 +15,12 @@ class Glasir_opna extends CI_Controller {
 			$cari = $this->input->post('txt_cari');
 			$tgl = $this->glzModel->tgl_sql($this->input->post('cari_tgl'));
 			
-                        $where = " WHERE no_prod<>''  AND deleted <> 1";
+                        $where = " WHERE no_prod <>''  AND deleted <> 1";
 			if(!empty($cari)){
 				$where .= " AND no_prod LIKE '%$cari%' OR inputer LIKE '%$cari%'";
 			}
 			if(!empty($tgl)){
-				$where .= " AND tgl_inp LIKE '%$tgl%'";
+				$where .= " AND tgl_input LIKE '%$tgl%'";
 			}
 			
 			$d['prg']= $this->config->item('prg');
@@ -43,7 +43,7 @@ class Glasir_opna extends CI_Controller {
 			$offset = $page;
 			endif;
 			
-			$text = "SELECT * FROM glasir_oh $where ";		
+			$text = "SELECT * FROM glasir_ohd $where ";		
 			$tot_hal = $this->glzModel->manualQuery($text);		
 			
 			$d['tot_hal'] = $tot_hal->num_rows();
@@ -61,8 +61,9 @@ class Glasir_opna extends CI_Controller {
 			$d['hal'] = $offset;
 			
 
-			$text = "SELECT * FROM glasir_oh $where 
-					ORDER BY no_prod DESC 
+			$text = "SELECT * FROM glasir_ohd $where 
+                                        GROUP BY no_prod
+					ORDER BY tgl DESC 
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			

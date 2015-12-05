@@ -134,8 +134,8 @@ class Glasir_adju extends CI_Controller {
                                 $jam_start              = $this->input->post('jam_start');
                                 $tgl_end                = $this->app_model->tgl_sql($this->input->post('tgl_end'));
                                 $jam_end                = $this->input->post('jam_end');
-                                $start                  = $this->app_model->tgl_sql($this->input->post('tgl_start')).' '.$this->input->post('jam_start');
-                                $end                  = $this->app_model->tgl_sql($this->input->post('tgl_end')).' '.$this->input->post('jam_end');
+                                $start                  = "2015-01-01 18:00:00";
+                                $end                    = $this->app_model->tgl_sql($this->input->post('tgl_end')).' '.$this->input->post('jam_end');
 				
 				$idx['id']               = $this->input->post('id');
 				
@@ -154,9 +154,9 @@ select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode, '$tgli', '$jam
                                 REPLACE(FORMAT(((coalesce(c.turun_bgps, 0)-(coalesce(g.adj_bgps, 0))))-coalesce(d.ditarik_supply, 0)-
                                 COALESCE(sum(CASE WHEN b.area=1 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as bgps_selisih,
                                 
-                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0),2),',','') sply_system,
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - (coalesce(f.kirim_prod, 0) + coalesce(h.scrap_supp, 0)),2),',','') sply_system,
                                 REPLACE(FORMAT(COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_opname,
-                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - coalesce(f.kirim_prod, 0)- coalesce(h.scrap_supp, 0)-
+                                REPLACE(FORMAT((((coalesce(d.ditarik_supply, 0)-(coalesce(g.adj_sply, 0)))+coalesce(e.return_prod, 0))) - (coalesce(f.kirim_prod, 0) + coalesce(h.scrap_supp, 0))-
                                 COALESCE(sum(CASE WHEN b.area=2 AND b.deleted <> 1 AND b.inspected = 1 AND b.period = '$periode' THEN (1.565*((b.densitas-1000)/1000)*b.volume) ELSE 0 END), 0),2),',','') as sply_selisih
                                    
                         from glasir a

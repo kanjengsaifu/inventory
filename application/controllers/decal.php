@@ -383,19 +383,23 @@ class Decal extends CI_Controller {
                                 $id_d['item_code']     = $this->input->post('item_code');
 				
 				$data = $this->dclModel->getSelectedData("decal_items",$id);
+				$itemx             = $this->input->post('item');
 				if($data->num_rows()>0){
                                                 $this->dclModel->updateData("decal_items",$up,$id);
 						$data = $this->dclModel->getSelectedData("decal_items_detail",$id_d);
 						if($data->num_rows()>0){
                                                         $ud['tgl_update']   = date('Y-m-d h:i:s');
-							$this->dclModel->updateData("decal_items_detail",$ud,$id_d);
+														$this->dclModel->updateData("decal_items_detail",$ud,$id_d);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal/edit/$idx'>";
                                                         echo 'Update data Sukses';
 						}else{
+													if(!empty($$itemx)){		
                                                         $ud['tgl_insert']   = date('Y-m-d h:i:s');
-							$this->dclModel->insertData("decal_items_detail",$ud);
+														$this->dclModel->insertData("decal_items_detail",$ud);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal/edit/$idx'>";
                                                         echo 'Simpan data Sukses';
+													}
+													echo 'Update data Sukses';
 						}
 				}else{
                                         $up['tgl_insert']		= date('Y-m-d h:i:s');

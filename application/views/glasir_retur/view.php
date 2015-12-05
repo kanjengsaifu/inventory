@@ -27,7 +27,8 @@ Cari No. Transaksi/Kode Glaze/Nama Glaze/Inputer : <input type="text" name="txt_
 <tr>
     <th>No</th>
     <th>No. Transaksi</th>
-    <th>Tanggal Input</th>
+    <th>Tgl. Input</th>
+    <th>Tgl. Pelaksanaan</th>
     <th>Transaksi Input</th>
     <th>Total glasir ditarik Supply</th>
     <th>List Item</th>
@@ -41,6 +42,7 @@ Cari No. Transaksi/Kode Glaze/Nama Glaze/Inputer : <input type="text" name="txt_
                 $p_total=0;
 		foreach($data->result_array() as $db){  
 		$tgl = $this->glzModel->tgl_indo($db['tgl_insert']);
+                $tgli = $this->glzModel->tgl_indo($db['tgl']);
 		$nama_lengkap = $this->glzModel->NamaLengkap($db['inputer']);
 		$proses = $this->glzModel->ProsesGlasirRetu($db['no_prod']);
                 $prosesItemRetu = $this->glzModel->ProsesItemRetu($db['no_prod']);
@@ -52,6 +54,7 @@ Cari No. Transaksi/Kode Glaze/Nama Glaze/Inputer : <input type="text" name="txt_
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center" width="100" ><?php echo $db['no_prod']; ?></td>
             <td align="center"><?php echo $tgl; ?></td>
+            <td align="center"><?php echo $tgli; ?></td>
             <td align="right" width="200"><?php echo $proses; ?></td>
             <td align="right"><?php echo number_format($jml,2,',','.'); ?> Kilogram</td>
             <td align="left"><?php echo $prosesItemRetu; ?></td>

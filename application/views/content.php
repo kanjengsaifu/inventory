@@ -31,7 +31,7 @@ if($this->session->userdata('level')=='01'){
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>Opname</b></a>
         </td>
-        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/home"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_adju"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
         <b>Adjusment</b></a>
         </td>
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_scra"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
@@ -102,7 +102,7 @@ if($this->session->userdata('level')=='01'){
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>Opname</b></a>
         </td>
-        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/home"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_adju"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
         <b>Adjusment</b></a>
         </td>
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_scra"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
@@ -134,7 +134,7 @@ if($this->session->userdata('level')=='01'){
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/decal_opna"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
         <b>Opname</b></a>
         </td>
-        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/home"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
+        <td class="btn" align="center" width="11%"><a href="<?php echo base_url();?>index.php/glasir_adju"><img src="<?php echo base_url();?>asset/images/keuangan.png" /><br />
         <b>Adjusment</b></a>
         </td>
         <td align="center" width="11%"><a href="<?php echo base_url();?>index.php/decal_scra"><img src="<?php echo base_url();?>asset/images/surat_keluar.png" /><br />
