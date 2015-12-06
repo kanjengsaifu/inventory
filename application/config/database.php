@@ -8,7 +8,7 @@ $db['default']['username'] = 'root';
 //$db['default']['password'] = 'Hsi001';
 $db['default']['password'] = 'toor';
 $db['default']['database'] = 'inventory';
-//$db['default']['port'] = '3307';
+$db['default']['port'] = '3307';
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
