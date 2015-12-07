@@ -111,7 +111,8 @@ class Decal_opna extends CI_Controller {
                         $d['id_bm']             = 1;
                         $d['id_bmt']            = 1;
                         $d['jml']               = 0;
-						$d['kw2']               = 0;
+                        $d['area']               = 0;
+			$d['kw2']               = 0;
                         $d['readonly']          = '';
                         $d['none']              = '';
                         
@@ -121,6 +122,8 @@ class Decal_opna extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
 			
 			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);
@@ -148,23 +151,24 @@ class Decal_opna extends CI_Controller {
                                 $ud['tgli']             = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $ud['inputer']          = $this->session->userdata('username');
                                 $ud['jml']              = $this->input->post('jml');
-								$ud['kw2']              = $this->input->post('kw2');
+				$ud['kw2']              = $this->input->post('kw2');
                                 $id_groupx              = $this->input->post('id_group');
                                 $parent_idx             = $this->input->post('parent_id');
                                 $jmlx                   = $this->input->post('jml');
-								$kw2x                   = $this->input->post('kw2');
+				$kw2x                   = $this->input->post('kw2');
                                 $shiftx                 = $this->input->post('shift');
                                 $jamx                   = $this->input->post('jam');
                                 $tglix                  = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $id_bmx                 = $this->input->post('id_bm');
                                 $id_bmtx                = $this->input->post('id_bmt');
+                                $areax                  = $this->input->post('area');
                                 $petugasx               = $this->input->post('petugas');
 				
 				$id['id']               = $this->input->post('id');
 				
 				$id_d['id_related']     = $this->input->post('id');
 				$id_d['parent_id']      = $this->input->post('parent_id');
-                                $id_d['id_group']             = $this->input->post('id_group');
+                                $id_d['id_group']       = $this->input->post('id_group');
 				
 				$data = $this->dclModel->getSelectedData("decal_oh",$id);
 				if($data->num_rows()>0){
@@ -175,15 +179,15 @@ class Decal_opna extends CI_Controller {
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_ohd",$ud,$id_d);
 
-                                                        $sql = "update decal_ohd set jml = '$jmlx'*isi_motif, kw2 = '$kw2x'*isi_motif, tgli = '$tglix', petugas = '$petugasx' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $sql = "update decal_ohd set area = '$areax', jam = '$jamx', tgli = '$tglix', shift = '$shiftx', id_bm = '$id_bmx', id_bmt = '$id_bmtx', petugas = '$petugasx' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_opna/edit/$idx'>";
                                                         echo 'Update data Sukses';
 						}else{
                                                         $tgl_inputx		        = date('Y-m-d h:i:s');
-                                                        $sql = "insert into decal_ohd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,kw2,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                                        $sql = "insert into decal_ohd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,kw2,rusak,shift,id_bm,id_bmt,area,tgli,jam,petugas,inputer,
                                                                 tgl_input,tgl_update,tgl_delete,deleted)
-                                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,isi_motif*$kw2x,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
+                                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,isi_motif*$kw2x,0,'$shiftx','$id_bmx','$id_bmtx','$areax','$tglix','$jamx','$petugasx','$inputerx',
                                                                 '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_opna/edit/$idx'>";
@@ -308,7 +312,7 @@ class Decal_opna extends CI_Controller {
 				foreach($data->result() as $db){
 					$d['id']                = $id;
                                         $d['id_group']          = $id_group;
-                                        $d['petugas']          = '';
+                                        $d['petugas']           = '';
                                         $d['parent_id']         = '';
                                         $d['nama_decal']        = '';
                                         $d['tgli']              = '';
@@ -317,7 +321,8 @@ class Decal_opna extends CI_Controller {
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
                                         $d['jml']               = 0;
-										$d['kw2']               = 0;
+                                        $d['area']               = 0;
+					$d['kw2']               = 0;
                                         $d['readonly']          = '';
                                         $d['none']              = '';
 				}
@@ -333,7 +338,8 @@ class Decal_opna extends CI_Controller {
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
                                         $d['jml']               = 0;
-										$d['kw2']               = 0;
+                                        $d['area']               = 0;
+					$d['kw2']               = 0;
                                         $d['readonly']          = '';
                                         $d['none']              = '';
 			}
@@ -344,6 +350,8 @@ class Decal_opna extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
 									
 			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);
@@ -369,8 +377,8 @@ class Decal_opna extends CI_Controller {
 			$id_related = $this->uri->segment(3);
                         $parent_id = $this->uri->segment(4);
                         $id_group = $this->uri->segment(5);
-			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, sum(a.jml)/sum(a.isi_motif) as jml, a.rusak, a.shift, 
-                                    a.id_bm, a.id_bmt, a.tgli, a.jam, a.petugas, a.inputer, a.tgl_input, a.tgl_update, a.tgl_delete, a.deleted from decal_ohd a
+			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, sum(a.jml)/sum(a.isi_motif) as jml, sum(a.kw2)/sum(a.isi_motif) as kw2,a.rusak, a.shift, 
+                                    a.id_bm, a.id_bmt, a.area, a.tgli, a.jam, a.petugas, a.inputer, a.tgl_input, a.tgl_update, a.tgl_delete, a.deleted from decal_ohd a
                                     where a.id_related = '$id_related' and a.parent_id = '$parent_id' and a.id_group = '$id_group'
                                     group by a.id_group";
 			$data = $this->dclModel->manualQuery($text);
@@ -386,7 +394,9 @@ class Decal_opna extends CI_Controller {
                                         $d['shift']             = $db->shift;
                                         $d['id_bm']             = $db->id_bm;
                                         $d['id_bmt']            = $db->id_bmt;
+                                        $d['area']              = $db->area;
                                         $d['jml']               = $db->jml;
+                                        $d['kw2']               = $db->kw2;
                                         $d['readonly']          = "readonly='readonly'";
                                         $d['none']              = "none";
 				}
@@ -400,6 +410,7 @@ class Decal_opna extends CI_Controller {
                                         $d['shift']             = '';
                                         $d['id_bm']             = '';
                                         $d['id_bmt']            = '';
+                                        $d['area']              = '';
                                         $d['jml']               = '';
                                         $d['readonly']          = '';
                                         $d['none']              = '';
@@ -411,6 +422,8 @@ class Decal_opna extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
                         
 			$d['content'] = $this->load->view('decal_opna/form', $d, true);		
 			$this->load->view('home',$d);

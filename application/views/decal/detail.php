@@ -14,17 +14,17 @@ $(function() {
 </script>
 <style type="text/css">
 .stripe1 {
-    background-color:#FBEC88;
+    background-color:#ffffff;
 }
 .stripe2 {
-    background-color:#FFF;
+    background-color:#ccffff;
 }
 .highlight {
 	-moz-box-shadow: 1px 1px 2px #fff inset;
 	-webkit-box-shadow: 1px 1px 2px #fff inset;
 	box-shadow: 1px 1px 2px #fff inset;		  
 	border:             #aaa solid 1px;
-	background-color: #fece2f;
+	background-color: #00b2b3;
 }
 </style>
 <table id="dataTable" width="100%">
