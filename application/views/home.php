@@ -15,7 +15,7 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/layout.css">
 <link href="<?php echo base_url();?>asset/css/fonts/stylesheet.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/themes/cupertino/easyui.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/themes/metro-gray/easyui.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>asset/css/smoothness/jquery-ui-1.7.2.custom.css">
 
@@ -101,8 +101,8 @@ $(function() {
 	
 	<div class="panel-header" fit="true" style="height:21px;padding-top:1px;padding-right:20px">
 		<div style="float:left;">
-			<a style="color:#0000ff;" href="<?php echo base_url();?>index.php/home" class="easyui-linkbutton" data-options="plain:true" iconCls="icon-home">Home</a>
-            <a style="color:#0000ff;" href="<?php echo base_url();?>index.php/login/logout" class="easyui-linkbutton" data-options="plain:true" iconCls="icon-logout">Logout</a>
+			<a style="color:#000000;" href="<?php echo base_url();?>index.php/home" class="easyui-linkbutton" data-options="plain:true" iconCls="icon-home">Home</a>
+            <a style="color:#000000;" href="<?php echo base_url();?>index.php/login/logout" class="easyui-linkbutton" data-options="plain:true" iconCls="icon-logout">Logout</a>
 		</div>
 		<div style="float:right; padding-top:5px;">
 			<?php echo $this->app_model->CariNamaPengguna();?> &rarr;

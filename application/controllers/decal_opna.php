@@ -491,7 +491,7 @@ class Decal_opna extends CI_Controller {
 			
 			$id = $this->input->post('kode');
 			$text1 = "SELECT a.id,a.id_group,a.tgli,a.jam,a.id_related,a.parent_id,a.item_code,sum(a.isi_motif) as isi_motif,sum(a.jml) as jml,sum(a.rusak) as rusak,a.shift,a.id_bm,a.id_bmt,a.petugas,a.inputer from decal_ohd a  
-                                    WHERE a.id_related='$id' AND a.deleted = 0 group by a.id_group order by a.tgl_input desc";
+                                    WHERE a.id_related='$id' AND a.deleted = 0 group by a.id_group order by a.id desc";
 			$d['data']= $this->dclModel->manualQuery($text1);
                         
                         $text2 = "SELECT a.id,a.id_group,a.id_related,a.parent_id,a.item_code,b.item,a.isi_motif,a.jml,a.rusak,a.shift,a.id_bm,a.id_bmt,a.petugas,a.inputer from decal_ohd a 

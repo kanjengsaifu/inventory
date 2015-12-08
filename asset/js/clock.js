@@ -28,7 +28,7 @@ minutes="0"+minutes
 if (seconds<=9)
 seconds="0"+seconds
 //change font size here
-var cdate="<font color='#0000ff'><b>"+dayarray[day]+"</b>, "+daym+" "+montharray[month]+" "+year+" "+hours+":"+minutes+":"+seconds+" "+dn
+var cdate="<font color='#000000'><b>"+dayarray[day]+"</b>, "+daym+" "+montharray[month]+" "+year+" "+hours+":"+minutes+":"+seconds+" "+dn
 +"</b></font>"
 if (document.all)
 document.all.clock.innerHTML=cdate
