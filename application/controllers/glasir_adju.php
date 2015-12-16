@@ -348,6 +348,20 @@ select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode, '$tgli', '$jam
 
 		}
 	}
+        
+        public function getPeriod()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicAdju();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
 	
 }
 

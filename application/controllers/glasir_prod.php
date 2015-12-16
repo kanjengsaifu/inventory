@@ -96,9 +96,11 @@ class Glasir_prod extends CI_Controller {
 			$d['judul']="Input stock glasir turun ball mill";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasir();
+                        $periode    = $this->glzModel->MaxPeriod();
 			
 			$d['no_prod']	= $no_prod;
                         $d['batch']	= '';
+                        $d['periode']	= $periode;
                         $d['petugas']	= '';
                         $d['parent']	= '';
                         $d['dsc']	= '';
@@ -192,6 +194,7 @@ class Glasir_prod extends CI_Controller {
                                 $ud['shift']            = $this->input->post('shift');
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
+                                $ud['periode']          = $this->input->post('periode');
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
@@ -343,6 +346,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod']	= $id;
                                         $d['batch']	= '';
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
@@ -360,6 +364,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod'] =$id;
                                         $d['batch']	='';
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
@@ -406,7 +411,7 @@ class Glasir_prod extends CI_Controller {
 			$no_prod = $this->uri->segment(3);
                         $id_glasir = $this->uri->segment(4);
                         $idphd = $this->uri->segment(5);
-			$text = "SELECT no_prod,idphd,petugas,dsc,tgl, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,id_bmt,volume,densitas 
+			$text = "SELECT no_prod,idphd,petugas,dsc,tgl, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,id_bmt,volume,densitas,periode 
                         FROM glasir_phd WHERE no_prod='$no_prod' AND id_glasir='$id_glasir' AND idphd='$idphd'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
@@ -414,6 +419,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod']	= $no_prod;
                                         $d['batch']	= $db->idphd; 
                                         $d['petugas']	= $db->petugas;
+                                        $d['periode']	= $db->periode;
                                         $d['dsc']	= $db->dsc;
                                         $d['tgl']	= $this->app_model->tgl_sql($db->tgl);
                                         $d['jam']	= $db->jam;
@@ -430,6 +436,7 @@ class Glasir_prod extends CI_Controller {
 					$d['no_prod'] =$no_prod;
                                         $d['batch']	= '';
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
@@ -532,6 +539,20 @@ class Glasir_prod extends CI_Controller {
 	{
                 $this->load->model('glzModel');
 		$data['data_passed'] = $this->glzModel->getPicProd();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getPeriode()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPeriode();
 
 		if ($data['data_passed']){
 

@@ -736,7 +736,7 @@ class Glzmodel extends CI_Model {
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;
-	}
+        }
         
         public function getPicSupp(){
                 $query ="select distinct petugas from glasir_phd_sp order by petugas asc";
@@ -782,6 +782,34 @@ class Glzmodel extends CI_Model {
         
         public function getPicRetu4(){
                 $query ="select distinct petugas4 from glasir_rhd order by petugas4 asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPeriode(){
+                $query ="select distinct period from glasir_ohd order by period desc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getPicOpna(){
+                $query ="select distinct petugas from glasir_ohd order by period asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getDsc(){
+                $query ="select distinct dsc from glasir_ohd order by dsc asc";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function getInspected(){
+                $query ="select distinct inspected from glasir_ohd order by inspected asc";
 		$query_result_detail = $this->db->query($query);
                 $result = $query_result_detail->result();
 		return $result;

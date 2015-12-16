@@ -96,8 +96,11 @@ class Glasir_tran extends CI_Controller {
 			$d['judul']="Order Transaksi Glasir";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasirTran();
+                        $periode    = $this->glzModel->MaxPeriod();
+                        
 			$d['no_prod']	= $no_prod;
                         $d['batch']	= '';
+                        $d['periode']	= $periode;
                         $d['petugas3']	= '';
                         $d['petugas4']	= '';
                         $d['parent']	= '';
@@ -181,22 +184,18 @@ class Glasir_tran extends CI_Controller {
 		$cek = $this->session->userdata('logged_in');
 		if(!empty($cek)){
 				$up['no_prod']		= $this->input->post('no_prod');
-				//$up['tgl_plng']		= $this->app_model->tgl_sql($this->input->post('tgl_plng'));
-				//$up['no_po']            = $this->input->post('no_po');
 				$up['inputer']          = $this->session->userdata('username');
-                                //$up['planner']          = $this->input->post('planner');
 				
 				$ud['no_prod']          = $this->input->post('no_prod');
 				$ud['id_glasir']        = $this->input->post('id_glasir');
                                 $ud['parent_id']        = $this->input->post('parent');
                                 $ud['dsc']              = $this->input->post('dsc');
-				//$ud['petugas1']         = $this->input->post('petugas1');
-				//$ud['petugas2']         = $this->input->post('petugas2');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
                                 $ud['jam']              = $this->input->post('jam');
                                 $ud['shift']            = $this->input->post('shift');
+                                $ud['periode']          = $this->input->post('periode');
                                 $ud['id_bm']            = $this->input->post('id_bm');
                                 $ud['volume']           = $this->input->post('volume');
                                 $ud['densitas']         = $this->input->post('densitas');
@@ -312,6 +311,7 @@ class Glasir_tran extends CI_Controller {
 					$d['no_prod']	= $id;
 					$d['tgl']	= '';
                                         $d['batch']	= '';
+                                        $d['periode']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
                                         $d['parent']	= '';
@@ -331,6 +331,7 @@ class Glasir_tran extends CI_Controller {
 			}else{
 					$d['no_prod'] =$id;
                                         $d['batch']	= '';
+                                        $d['periode']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
                                         $d['parent']	= '';
@@ -383,13 +384,14 @@ class Glasir_tran extends CI_Controller {
 			$no_prod = $this->uri->segment(3);
                         $id_glasir = $this->uri->segment(4);
                         $idthd = $this->uri->segment(5);
-			$text = "SELECT no_prod,idthd,shift,tglb,tglp,tgl,TIME_FORMAT(jam,'%H:%i') as jam,id_glasir,id_bm,volume,densitas,vsc,dsc,petugas1,petugas2,petugas3,petugas4,inputer,ddri
+			$text = "SELECT no_prod,idthd,shift,tglb,tglp,tgl,TIME_FORMAT(jam,'%H:%i') as jam,id_glasir,id_bm,volume,densitas,vsc,dsc,petugas1,petugas2,petugas3,petugas4,inputer,ddri,periode
                                     FROM glasir_thd WHERE no_prod='$no_prod' AND id_glasir='$id_glasir' AND idthd='$idthd'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
 				foreach($data->result() as $db){
 					$d['no_prod']	= $no_prod;
                                         $d['batch']	= $db->idthd; 
+                                        $d['periode']	= $db->periode;
                                         $d['petugas3']	= $db->petugas3;
                                         $d['petugas4']	= $db->petugas4;
                                         $d['dsc']	= $db->dsc;
@@ -408,6 +410,7 @@ class Glasir_tran extends CI_Controller {
 			}else{
 					$d['no_prod'] =$no_prod;
                                         $d['batch']	= '';
+                                        $d['periode']	= '';
                                         $d['petugas3']	= '';
                                         $d['petugas4']	= '';
                                         $d['dsc']	= '';

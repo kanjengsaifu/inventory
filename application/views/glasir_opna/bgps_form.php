@@ -221,9 +221,19 @@
 		AmbilDaftarGlasir();
 		$("#dlg").dialog('open');
 	});
+        
+        $("#cari_tglp").click(function(){
+		AmbilTglp();
+		$("#dlgp").dialog('open');
+	});
 	
 	$("#text_cari").keyup(function(){
 		AmbilDaftarGlasir();
+		//$("#dlg").dialog('open');
+	});
+        
+        $("#text_cari1").keyup(function(){
+		AmbilTglp();
 		//$("#dlg").dialog('open');
 	});
 	
@@ -240,6 +250,21 @@
 			}
 		});
 	}
+        
+        function AmbilTglp(){
+		var cari = $("#id_glasir").val();
+		
+		$.ajax({
+			type	: 'POST',
+			url		: "<?php echo site_url(); ?>/ref_json/DataTglp",
+			data	: "cari="+cari,
+			cache	: false,
+			success	: function(data){
+				$("#daftar_tglp").html(data);
+			}
+		});
+	}
+        
 });	
 </script>
 <form name="form" id="form">
@@ -259,14 +284,24 @@
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan/Status</td>
+        <td width="150">Periode</td>
         <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
+        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"></td>
     </tr>
     <tr>    
-        <td>Petugas</td>
-        <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+        <td width="150">Keterangan/Status</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="dsc" class="easyui-combobox" name="dsc" data-options="required:true,valueField:'dsc',textField:'dsc',url:'<?php echo base_url().'index.php/glasir_opna/getDsc'?>'"></td>
+    </tr>
+    <tr>    
+        <td width="150">Telah Diperiksa (0/1)</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="inspected" class="easyui-combobox" name="inspected" data-options="required:true,valueField:'inspected',textField:'inspected',url:'<?php echo base_url().'index.php/glasir_opna/getInspected'?>'"></td>
+    </tr>
+    <tr>    
+        <td width="150">Petugas</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_opna/getPicOpna'?>'"></td>
     </tr>
     <tr>    
         <td>Tgl Pelaksanaan</td>
@@ -282,7 +317,7 @@
         <td>Shift</td>
         <td>:</td>
         <td>
-        <select name="shift" id="shift" style="width:382px;">
+        <select name="shift" id="shift" style="width:350px;">
         <?php 
 		if(empty($shift)){
 		?>
@@ -304,7 +339,7 @@
         <td>BM/Tong/Tanker</td>
         <td>:</td>
         <td>
-            <select name="id_bm" id="id_bm" style="width:382px;">
+            <select name="id_bm" id="id_bm" style="width:350px;">
         <?php 
 		if(empty($id_bm)){
 		?>
@@ -323,22 +358,12 @@
         </td>
         </td>
     </tr>
-    <tr>    
-        <td width="150">Tgl. Produksi</td>
-        <td width="5">:</td>
-        <td><input name="tglp" id="tglp"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
-    </tr>
-    <tr>    
-        <td width="150">Tgl. Lulus Tes Bakar</td>
-        <td width="5">:</td>
-        <td><input name="tglb" id="tglb"  size="45" maxlength="12" class="easyui-validatebox" value=""/></td>
-    </tr>
     </table>
     </fieldset>
 </td>
 <td valign="top" width="50%">
     <fieldset>
-    <table width="100%">
+    <table width="100%">    
     <tr>    
         <td width="150">Kode Glasir</td>
         <td width="5">:</td>
@@ -357,24 +382,37 @@
         <td><input readonly="readonly" type="text" name="parent" id="parent"  size="45" class="detail" maxlength="50"/></td>
     </tr>
     <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value="" />
+        </td>
+    </tr>
+    <tr>    
         <td>Volume (liter)</td>
         <td>:</td>
-        <td><input type="text" name="volume" id="volume" class="detail" size="20" maxlength="20"/></td>
+        <td><input type="text" name="volume" id="volume" class="detail" size="45" maxlength="20"/></td>
     </tr>
     <tr>    
         <td>Densitas (gr/L)</td>
         <td>:</td>
-        <td><input type="text" name="densitas" id="densitas" class="detail" size="20" maxlength="20"/></td>
+        <td><input type="text" name="densitas" id="densitas" class="detail" size="45" maxlength="20"/></td>
     </tr>
     <tr>    
         <td>Viscositas (Pois)</td>
         <td>:</td>
-        <td><input type="text" name="vsc" id="vsc" class="detail" size="20" maxlength="20"</td>
+        <td><input type="text" name="vsc" id="vsc" class="detail" size="45" maxlength="20"</td>
     </tr>
      <tr>    
         <td>Berat Kering (Kg)</td>
         <td>:</td>
-        <td><input type="text" name="bkg" id="bkg" class="detail" size="20" maxlength="20" readonly="readonly"/></td>
+        <td><input type="text" name="bkg" id="bkg" class="detail" size="45" maxlength="20" readonly="readonly"/></td>
     </tr>
     </table>
     </fieldset>
@@ -403,4 +441,8 @@
 <div id="dlg" class="easyui-dialog" title="Item Glasir" style="width:900px;height:400px; padding:5px;" data-options="closed:true">
 	Cari : <input type="text" name="text_cari" id="text_cari" size="50" />
 	<div id="daftar_glasir"></div>
+</div>
+<div id="dlgp" class="easyui-dialog" title="Tanggal Produksi Glasir" style="width:1000px;height:400px; padding:5px;" data-options="closed:true">
+	Cari : <input type="text" name="text_cari1" id="text_cari1" size="50"/>
+	<div id="daftar_tglp"></div>
 </div>

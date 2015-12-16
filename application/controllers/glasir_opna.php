@@ -96,7 +96,7 @@ class Glasir_opna extends CI_Controller {
                         $d['tgl_plng']	= '';
                         $d['planner']	= '';
                         $d['parent']	= '';
-						$d['batch']	= '';
+			$d['batch']	= '';
 			
 			$gps = "SELECT * FROM global_buyer";
 			$d['l_byr'] = $this->glzModel->manualQuery($gps);
@@ -217,6 +217,8 @@ class Glasir_opna extends CI_Controller {
 				$ud['id_glasir']        = $this->input->post('id_glasir');
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
+                                $ud['period']          = $this->input->post('periode');
+                                $ud['inspected']          = $this->input->post('inspected');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tglp']             = $this->app_model->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->app_model->tgl_sql($this->input->post('tglb'));
@@ -278,6 +280,8 @@ class Glasir_opna extends CI_Controller {
 				$ud['id_glasir']        = $this->input->post('id_glasir');
                                 $ud['dsc']              = $this->input->post('dsc');
                                 $ud['petugas']          = $this->input->post('petugas');
+                                $ud['period']           = $this->input->post('periode');
+                                $ud['inspected']          = $this->input->post('inspected');
                                 $ud['tgl']              = $this->app_model->tgl_sql($this->input->post('tgl'));
                                 $ud['tglp']             = $this->app_model->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->app_model->tgl_sql($this->input->post('tglb'));
@@ -546,6 +550,48 @@ class Glasir_opna extends CI_Controller {
                                 $this->editSply();
 		}else{
 			header('location:'.base_url());
+		}
+	}
+        
+        public function getPicOpna()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getPicOpna();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getDsc()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getDsc();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function getInspected()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->getInspected();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
 		}
 	}
 	

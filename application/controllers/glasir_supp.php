@@ -96,11 +96,13 @@ class Glasir_supp extends CI_Controller {
 			$d['judul']="Input stock supply glasir";
 			
 			$no_prod    = $this->glzModel->MaxPhGlasirSupp();
+                        $periode    = $this->glzModel->MaxPeriod();
 			
 			$d['no_prod']	= $no_prod;
                         $d['dsc']	= '';
                         $d['status']	= 2;
                         $d['batch']	= '';
+                        $d['periode']	= $periode;
                         $d['petugas']	= '';
                         $d['parent']	= '';
                         $d['tgl']	= '';
@@ -197,6 +199,7 @@ class Glasir_supp extends CI_Controller {
                                 $ud['tglp']             = $this->glzModel->tgl_sql($this->input->post('tglp'));
                                 $ud['tglb']             = $this->glzModel->tgl_sql($this->input->post('tglb'));
                                 $ud['petugas']          = $this->input->post('petugas');
+                                $ud['periode']          = $this->input->post('periode');
 				$ud['tgl_combine']      = $this->app_model->tgl_sql($this->input->post('tgl')).' '.$this->input->post('jam');
 				$id['no_prod']          = $this->input->post('no_prod');
 				
@@ -342,6 +345,7 @@ class Glasir_supp extends CI_Controller {
 					$d['no_prod']	= $id;
                                         $d['batch']	= '';
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
@@ -359,6 +363,7 @@ class Glasir_supp extends CI_Controller {
 					$d['no_prod'] =$id;
                                         $d['batch']	='';
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['parent']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
@@ -405,7 +410,7 @@ class Glasir_supp extends CI_Controller {
 			$no_prod = $this->uri->segment(3);
                         $id_glasir = $this->uri->segment(4);
                         $idphd = $this->uri->segment(5);
-			$text = "SELECT no_prod,idphd,petugas,dsc,tgl,id_gps, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,volume,densitas 
+			$text = "SELECT no_prod,idphd,petugas,dsc,tgl,id_gps, TIME_FORMAT(jam,'%H:%i') as jam, shift,id_glasir,tglp,tglb,id_bm,volume,densitas,periode 
                         FROM glasir_phd_sp WHERE no_prod='$no_prod' AND id_glasir='$id_glasir' AND idphd='$idphd'";
 			$data = $this->glzModel->manualQuery($text);
 			if($data->num_rows() > 0){
@@ -413,6 +418,7 @@ class Glasir_supp extends CI_Controller {
 					$d['no_prod']	= $no_prod;
                                         $d['batch']	= $db->idphd; 
                                         $d['petugas']	= $db->petugas;
+                                        $d['periode']	= $db->periode;
                                         $d['dsc']	= $db->dsc;
                                         $d['tgl']	= $this->app_model->tgl_sql($db->tgl);
                                         $d['jam']	= $db->jam;
@@ -428,6 +434,7 @@ class Glasir_supp extends CI_Controller {
 			}else{
 					$d['no_prod'] =$no_prod;
                                         $d['petugas']	= '';
+                                        $d['periode']	= '';
                                         $d['dsc']	= '';
                                         $d['tgl']	= '';
                                         $d['jam']	= '';

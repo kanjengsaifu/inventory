@@ -266,20 +266,35 @@
         <td width="5">:</td>
         <td><input type="text" name="no_prod" id="no_prod" size="45" maxlength="12" readonly="readonly" value="<?php echo $no_prod;?>" /></td>
     </tr>
-	 <tr>    
+    <tr>    
         <td width="150">No. Batch</td>
         <td width="5">:</td>
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
-        <td width="150">Keterangan/Status</td>
+        <td width="150">Periode</td>
         <td width="5">:</td>
-        <td><input type="text" name="dsc" id="dsc" size="45" maxlength="255"/></td>
+        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"></td>
     </tr>
     <tr>    
-        <td>Petugas</td>
-        <td>:</td>
-        <td><input type="text" name="petugas" id="petugas" class="detail" size="45" maxlength="20"/></td>
+        <td width="150">Periode</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"></td>
+    </tr>
+    <tr>    
+        <td width="150">Keterangan/Status</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="dsc" class="easyui-combobox" name="dsc" data-options="required:true,valueField:'dsc',textField:'dsc',url:'<?php echo base_url().'index.php/glasir_opna/getDsc'?>'"></td>
+    </tr>
+    <tr>    
+        <td width="150">Telah Diperiksa (0/1)</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="inspected" class="easyui-combobox" name="inspected" data-options="required:true,valueField:'inspected',textField:'inspected',url:'<?php echo base_url().'index.php/glasir_opna/getInspected'?>'"></td>
+    </tr>
+    <tr>    
+        <td width="150">Petugas</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="required:true,valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_opna/getPicOpna'?>'"></td>
     </tr>
     <tr>    
         <td>Tgl Pelaksanaan</td>
@@ -336,19 +351,6 @@
         </td>
         </td>
     </tr>
-    <tr>    
-        <td width="150">Tgl. Produksi</td>
-        <td width="5">:</td>
-        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
-        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
-        </td>
-    </tr>
-    <tr>    
-        <td width="150">Tgl. Lulus Tes Bakar</td>
-        <td width="5">:</td>
-        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
-        </td>
-    </tr>
     </table>
     </fieldset>
 </td>
@@ -371,6 +373,19 @@
         <td>Kode Induk Glasir</td>
         <td>:</td>
         <td><input readonly="readonly" type="text" name="parent" id="parent"  size="45" class="detail" maxlength="50"/></td>
+    </tr>    
+    <tr>    
+        <td width="150">Tgl. Produksi</td>
+        <td width="5">:</td>
+        <td><input name="tglp" id="tglp"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        <button type="button" name="cari_tglp" id="cari_tglp" class="easyui-linkbutton" data-options="iconCls:'icon-search'">Cari</button>
+        </td>
+    </tr>
+    <tr>    
+        <td width="150">Tgl. Lulus Tes Bakar</td>
+        <td width="5">:</td>
+        <td><input name="tglb" id="tglb"  size="35.5" maxlength="12" class="easyui-validatebox" value=""/>
+        </td>
     </tr>
     <tr>    
         <td>Volume (liter)</td>

@@ -272,6 +272,11 @@ $(document).ready(function(){
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
+        <td width="150">Periode</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"  value="<?php echo $periode;?>" ></td>
+    </tr>
+    <tr>    
         <td width="150">Petugas (Karu)</td>
         <td width="5">:</td>
         <td><input style="width: 350px;" name="petugas3" id="petugas3" class="easyui-combobox" name="petugas" data-options="valueField:'petugas3',textField:'petugas3',url:'<?php echo base_url().'index.php/glasir_tran/getPicTran3'?>'"  value="<?php echo $petugas3;?>" ></td>

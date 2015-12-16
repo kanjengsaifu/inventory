@@ -323,6 +323,11 @@ $(document).ready(function(){
         <td><input type="text" name="batch" id="batch" size="45" maxlength="12" readonly="readonly" value="<?php echo $batch;?>" /></td>
     </tr>
     <tr>    
+        <td width="150">Periode</td>
+        <td width="5">:</td>
+        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"  value="<?php echo $periode;?>" ></td>
+    </tr>
+    <tr>    
         <td>Petugas</td>
         <td>:</td>
         <td><input style="width: 350px;" id="petugas" class="easyui-combobox" name="petugas" data-options="valueField:'petugas',textField:'petugas',url:'<?php echo base_url().'index.php/glasir_scra/getPicScra'?>'"  value="<?php echo $petugas;?>" ></td>
