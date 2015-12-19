@@ -30,13 +30,14 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
 <tr>
     <th>No</th>
     <th>No. Transaksi</th>
-    <th>Tanggal Input</th>
-    <th>Tanggal Pelaksanaan</th>
-    <th>Transaksi BGPS</th>
-    <th>Jumlah Stock Opname BGPS</th>
+    <th>Tgl. Input</th>
+    <th>Tgl. Opname</th>
+    <th>Periode</th>
+    <th>Inputan<br> BGPS</th>
+    <th>Total Opname <br>Berat Kering BGPS</th>
     <th>Aksi</th>
-    <th>Transaksi Supply</th>
-    <th>Jumlah Stock Opname Supply</th>
+    <th>Inputan<br> Supply</th>
+    <th>Total Opname <br>Berat Kering Supply</th>
     <th>Inputer</th>
     <th>Aksi</th>
 </tr>
@@ -65,6 +66,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
             <td align="center" ><?php echo $db['no_prod']; ?></td>
             <td align="center"><?php echo $tgl; ?></td>
             <td align="center"><?php echo $tgli; ?></td>
+            <td align="center" ><?php echo $db['period']; ?></td>
             <td align="right" ><?php echo $prosesBgps; ?></td>
             <td align="right"><?php echo number_format($jmlBgps,2,',','.'); ?> Kilogram</td>
             <td align="center">
@@ -105,7 +107,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
 		$no++;
 		}
                 ?>
-                <th colspan="3" align="right">Total</th>
+                <th colspan="5" align="right">Total</th>
                 <th style="text-align:right"><?php echo number_format($p_totalBgps);?></th>
                 <th style="text-align:right"><?php echo number_format($g_totalBgps,2,',','.');?> Kilogram</th>
                 <th style="text-align:right"></th>
@@ -122,7 +124,7 @@ Cari No. Transaksi/Inputer : <input type="text" name="txt_cari" id="txt_cari" si
         	<td colspan="8" align="center" >Tidak Ada Data</td>
         </tr>
         <tr>
-	<th colspan="3" align="right">Total</th>
+	<th colspan="5" align="right">Total</th>
         <th style="text-align:right"><?php echo number_format($p_totalBgps);?></th>
         <th style="text-align:right"><?php echo number_format($g_totalBgps,2,',','.');?> Liter</th>
         <th style="text-align:right"></th>

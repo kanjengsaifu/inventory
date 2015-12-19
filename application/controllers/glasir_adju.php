@@ -206,7 +206,7 @@ select NULL,a.id_glasir, '$id', '$inputer', '$petugas', $periode, '$tgli', '$jam
                         left join
                         (
                           select id_glasir,  parent_id,
-                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') scrap_supp
+                          REPLACE(FORMAT(COALESCE(sum(case when deleted <> 1 AND tgl_combine between '$start' AND '$end' THEN (1.565*((densitas-1000)/1000)*volume) ELSE 0 END), 0),2),',','') scrap_supp
                           from glasir_shd
                           where deleted = 0
                           group by id_glasir

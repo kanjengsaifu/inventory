@@ -722,6 +722,20 @@ class Glzmodel extends CI_Model {
 		return $result;
 	}
         
+        public function loadAccBgps(){
+                $query ="select * from glasir_acc_bgps;";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
+        public function loadAccSply(){
+                $query ="select * from glasir_acc_sply;";
+		$query_result_detail = $this->db->query($query);
+                $result = $query_result_detail->result();
+		return $result;
+	}
+        
         public function get_stok_status(){
                 $query ="SELECT a.id_glasir,a.volume,a.densitas,a.dsc,
                             REPLACE(FORMAT(COALESCE((1.565*((a.densitas-1000)/1000)*a.volume), 0),2),',','') as bkg

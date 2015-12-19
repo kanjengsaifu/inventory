@@ -49,11 +49,14 @@
     </ul>
     </div>
 </div>
-<div title="Grafik" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
+<div title="Akurasi" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Akurasi</a></span>
+    <span><a href="<?php echo base_url();?>index.php/glasir_acc/accBgps">GLZ-BGPS</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_acc/accSply">GLZ-Supply</a></span>
     </li>
     </ul>
     </div>
@@ -112,7 +115,7 @@
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Akurasi</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_acc">DCL-Akurasi</a></span>
     </li>
     </ul>
     </div>
@@ -196,14 +199,17 @@
     </ul>
     </div>
 </div>
-<div title="Grafik" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
+<div title="Akurasi" data-options="iconCls:'icon-grafik'" style="overflow:auto;padding:5px 0px;">
     <div title="TreeMenu" data-options="iconCls:'icon-search'" style="padding:0px;">
     <ul class="easyui-tree">
     <li>
-    <span><a href="<?php echo base_url();?>index.php/decal_lap">DCL-Akurasi</a></span>
+    <span><a href="<?php echo base_url();?>index.php/decal_acc">DCL-Akurasi</a></span>
     </li>
     <li>
-    <span><a href="<?php echo base_url();?>index.php/glasir_lap">GLZ-Akurasi</a></span>
+    <span><a href="<?php echo base_url();?>index.php/glasir_acc/accBgps">GLZ-BGPS</a></span>
+    </li>
+    <li>
+    <span><a href="<?php echo base_url();?>index.php/glasir_acc/accSply">GLZ-Supply</a></span>
     </li>
     </ul>
     </div>

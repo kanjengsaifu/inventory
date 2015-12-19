@@ -67,7 +67,6 @@ class Glasir extends CI_Controller {
 					LIMIT $limit OFFSET $offset";
 			$d['data'] = $this->glzModel->manualQuery($text);
 			
-			
 			$d['content'] = $this->load->view('glasir/view', $d, true);		
 			$this->load->view('home',$d);
 		}else{
@@ -93,6 +92,34 @@ class Glasir extends CI_Controller {
 	{
                 $this->load->model('glzModel');
 		$data['data_passed'] = $this->glzModel->get_stok();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function loadAccBgps()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->loadAccBgps();
+
+		if ($data['data_passed']){
+
+			#convert data array passed into json
+			echo json_encode($data['data_passed']);
+			//echo $data['data_passed'];
+
+		}
+	}
+        
+        public function loadAccSply()
+	{
+                $this->load->model('glzModel');
+		$data['data_passed'] = $this->glzModel->loadAccSply();
 
 		if ($data['data_passed']){
 

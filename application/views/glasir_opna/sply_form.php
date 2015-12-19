@@ -277,11 +277,6 @@
         <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"></td>
     </tr>
     <tr>    
-        <td width="150">Periode</td>
-        <td width="5">:</td>
-        <td><input type="text" style="width: 350px;" id="periode" class="easyui-combobox" name="periode" data-options="required:true,valueField:'period',textField:'period',url:'<?php echo base_url().'index.php/glasir_prod/getPeriode'?>'"></td>
-    </tr>
-    <tr>    
         <td width="150">Keterangan/Status</td>
         <td width="5">:</td>
         <td><input type="text" style="width: 350px;" id="dsc" class="easyui-combobox" name="dsc" data-options="required:true,valueField:'dsc',textField:'dsc',url:'<?php echo base_url().'index.php/glasir_opna/getDsc'?>'"></td>
