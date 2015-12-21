@@ -266,6 +266,29 @@ $(document).ready(function(){
         <td>:</td>
         <td><input readonly="readonly" type="text" name="nama_decal" id="nama_decal"  size="45" class="detail" maxlength="50"/></td>
     </tr>
+    <tr>    
+        <td>Area</td>
+        <td>:</td>
+        <td>
+            <select name="area" id="area" style="width:350px;">
+        <?php 
+		if(empty($area)){
+		?>
+        <option  value="<?php echo $area;?>">-PILIH-</option>
+        <?php
+		}
+		foreach($l_ara->result() as $t){
+			if($area==$t->id){
+		?>
+        <option value="<?php echo $t->id;?>" selected="selected"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }else { ?>
+        <option value="<?php echo $t->id;?>"><?php echo $t->id;?> - <?php echo $t->nama;?></option>
+        <?php }
+		} ?>
+        </select>
+        </td>
+        </td>
+    </tr>
     </table>
     </fieldset>
 </td>

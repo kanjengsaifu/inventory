@@ -1303,6 +1303,20 @@ class Dclmodel extends CI_Model {
 		return $hasil;
 	}
         
+        public function shift($id){
+		$t = "SELECT * from global_shift where id = '$id'";
+		$d = $this->glzModel->manualQuery($t);
+		$r = $d->num_rows();
+		if($r>0){
+			foreach($d->result() as $h){
+				$hasil = $h->nama;
+			}
+		}else{
+			$hasil = '';
+		}
+		return $hasil;
+	}
+        
          public function getPicProdDecal(){
                 $query ="select distinct petugas from decal_phd order by petugas asc";
 		$query_result_detail = $this->db->query($query);

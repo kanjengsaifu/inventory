@@ -60,6 +60,7 @@ $(function() {
                 $namaDesain = $this->dclModel->namaDesain($db['parent_id']);
                 $jenisDesain = $this->dclModel->jenisDesain($db['parent_id']);
                 $kertas = $this->dclModel->kertas($db['parent_id']);
+                $shift = $this->dclModel->shift($db['shift']);
 		$total1 = $db['jml'];
                 $total2 = $db['rusak'];
 		?>    
@@ -67,7 +68,7 @@ $(function() {
             <td align="center" width="20" style="font-size:11px; font-weight: bold;"><?php echo $no; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $this->dclModel->tgl_indo($db['tgli']); ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['jam']; ?></td>
-            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['shift']; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $shift; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['parent_id']; ?></td>
             <td style="font-size:11px; font-weight: bold;"><?php echo $namaDesain; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $jenisDesain; ?></td>
