@@ -27,6 +27,7 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
 <tr>
         <th rowspan="2" style="text-align:right; font-size:10px">No</th>
         <th rowspan="2" style="font-size:10px">No.  <br> Transaksi</th>
+        <th rowspan="2" style="font-size:10px">Area  <br> Transaksi</th>
         <th rowspan="2" style="font-size:10px">Tanggal  <br> Input</th>
         <th rowspan="2" style="font-size:10px">Input <br> Transaksi</th>
         <th colspan="3" align="center" style="font-size:10px">Produksi</th>

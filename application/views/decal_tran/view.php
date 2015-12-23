@@ -27,8 +27,9 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
 <tr>
         <th rowspan="2" style="text-align:right; font-size:10px">No</th>
         <th rowspan="2" style="font-size:10px">No.  <br> Transaksi</th>
+        <th rowspan="2" style="font-size:10px">Area  <br> Transaksi</th>
         <th rowspan="2" style="font-size:10px">Tanggal  <br> Input</th>
-        <th rowspan="2" style="font-size:10px">Input <br> Transaksi</th>
+        <th rowspan="2" style="font-size:10px">Total <br> Item</th>
         <th colspan="3" align="center" style="font-size:10px">Produksi</th>
         <th rowspan="2" style="font-size:10px">Inputer</th>
         <th rowspan="2" style="font-size:10px">Aksi</th>
@@ -53,6 +54,7 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
                 $prosesItem = $this->dclModel->ProsesItemTran($db['id_related']);
 		$jml1 = $this->dclModel->JmlTranJML($db['id_related']);
                 $jml2 = $this->dclModel->JmlTranRusak($db['id_related']);
+                $area = $this->dclModel->area($db['area']);
                 $p_total = $p_total + $proses;
                 $g_total1 = $g_total1 + $jml1;
                 $g_total2 = $g_total2 + $jml2;
@@ -60,6 +62,7 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
     	<tr>
             <td align="center" width="20"><?php echo $no; ?></td>
             <td align="center"><?php echo $db['id_related']; ?></td>
+            <td align="center"><?php echo $area; ?></td>
             <td align="center"><?php echo $tgl_input; ?></td>
             <td align="right"><?php echo $proses; ?></td>
             <td align="right"><?php echo number_format($jml1,0,',','.'); ?> Pcs</td>
@@ -84,7 +87,7 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
 		$no++;
 		}
                 ?>
-                <th colspan="3" align="right">Total</th>
+                <th colspan="4" align="right">Total</th>
                 <th style="text-align:right"><?php echo number_format($p_total);?></th>
                 <th style="text-align:right"><?php echo number_format($g_total1,0,',','.');?> Pcs</th>
                 <th style="text-align:right"><?php echo number_format($g_total2,0,',','.');?> Pcs</th>
@@ -100,7 +103,7 @@ Transaksi/Kode/Nama/Inputer : <input type="text" name="txt_cari" id="txt_cari" s
         	<td colspan="8" align="center" >Tidak Ada Data</td>
         </tr>
         <tr>
-	<th colspan="3" align="right">Total</th>
+	<th colspan="4" align="right">Total</th>
         <th style="text-align:right"><?php echo number_format($p_total);?></th>
         <th style="text-align:right"><?php echo number_format($g_total1);?> Pcs</th>
         <th style="text-align:right"><?php echo number_format($g_total2);?> Pcs</th>

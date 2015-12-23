@@ -29,7 +29,8 @@ $(function() {
 </style>
 <table id="dataTable" width="100%">
 <tr>
-        <th rowspan="2" style="text-align:right; font-size:10px">No</th>
+        <th rowspan="2" style="text-align:center; font-size:10px">No</th>
+        <th rowspan="2" style="text-align:center; font-size:10px">Area</th>
         <th colspan="3" align="center" style="font-size:10px">Pelaksanaan</th>
         <th colspan="5" align="center" style="font-size:10px">Desain</th>
         <th rowspan="2" style="font-size:10px">Batch</th>
@@ -61,11 +62,13 @@ $(function() {
                 $jenisDesain = $this->dclModel->jenisDesain($db['parent_id']);
                 $kertas = $this->dclModel->kertas($db['parent_id']);
                 $shift = $this->dclModel->shift($db['shift']);
+                $area = $this->dclModel->area($db['area']);
 		$total1 = $db['jml'];
                 $total2 = $db['rusak'];
 		?>    
     	<tr>
             <td align="center" width="20" style="font-size:11px; font-weight: bold;"><?php echo $no; ?></td>
+            <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $area; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $this->dclModel->tgl_indo($db['tgli']); ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $db['jam']; ?></td>
             <td align="center" style="font-size:11px; font-weight: bold;"><?php echo $shift; ?></td>
@@ -95,7 +98,7 @@ $(function() {
                         if($db['id_group'] == $dx['id_group']){
                     ?>
                 <tr>                                                                                
-                            <td colspan="4" align="center" style="font-size:10px">-------------------------</td>
+                            <td colspan="5" align="center" style="font-size:10px">-------------------------</td>
                             <td align="center" style="font-size:10px"><?php echo $dx['item_code']; ?></td>
                             <td style="font-size:10px"><?php echo $dx['item']; ?></td>
                             <td colspan="2" align="center" style="font-size:10px">---------------</td>

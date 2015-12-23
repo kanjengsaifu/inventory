@@ -111,6 +111,7 @@ class Decal_retu extends CI_Controller {
                         $d['id_bm']             = 1;
                         $d['id_bmt']            = 1;
                         $d['jml']               = 0;
+                        $d['area']               = 0;
                         $d['readonly']          = '';
                         $d['none']              = '';
                         
@@ -120,6 +121,8 @@ class Decal_retu extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
 			
 			$d['content'] = $this->load->view('decal_retu/form', $d, true);		
 			$this->load->view('home',$d);
@@ -155,6 +158,7 @@ class Decal_retu extends CI_Controller {
                                 $tglix                  = $this->dclModel->tgl_sql($this->input->post('tgli'));
                                 $id_bmx                 = $this->input->post('id_bm');
                                 $id_bmtx                = $this->input->post('id_bmt');
+                                $areax                = $this->input->post('area');
                                 $petugasx               = $this->input->post('petugas');
 				
 				$id['id']               = $this->input->post('id');
@@ -172,15 +176,15 @@ class Decal_retu extends CI_Controller {
                                                         //$ud['tgl_update']   = date('Y-m-d h:i:s');
 							//$this->dclModel->updateData("decal_rhd",$ud,$id_d);
 
-                                                        $sql = "update decal_rhd set jml = '$jmlx'*isi_motif, tgli = '$tglix', petugas = '$petugasx' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
+                                                        $sql = "update decal_rhd set jml = '$jmlx'*isi_motif, tgli = '$tglix', petugas = '$petugasx', area = '$areax' where id_related = '$idx' and id_group = '$id_groupx' and parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_retu/edit/$idx'>";
                                                         echo 'Update data Sukses';
 						}else{
                                                         $tgl_inputx		        = date('Y-m-d h:i:s');
-                                                        $sql = "insert into decal_rhd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                                        $sql = "insert into decal_rhd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,area,tgli,jam,petugas,inputer,
                                                                 tgl_input,tgl_update,tgl_delete,deleted)
-                                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
+                                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$areax','$tglix','$jamx','$petugasx','$inputerx',
                                                                 '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
                                                         $this->db->query($sql);
                                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_retu/edit/$idx'>";
@@ -190,9 +194,9 @@ class Decal_retu extends CI_Controller {
                                         $up['tgl_input']		= date('Y-m-d h:i:s');
                                         $tgl_inputx		        = date('Y-m-d h:i:s');
 					$this->dclModel->insertData("decal_rh",$up);
-                                        $sql = "insert into decal_rhd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,tgli,jam,petugas,inputer,
+                                        $sql = "insert into decal_rhd (id,id_group,id_related,parent_id, item_code, isi_motif,jml,rusak,shift,id_bm,id_bmt,area,tgli,jam,petugas,inputer,
                                                 tgl_input,tgl_update,tgl_delete,deleted)
-                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$tglix','$jamx','$petugasx','$inputerx',
+                                                select NULL,'$id_groupx','$idx',parent_id,item_code,isi_motif,isi_motif*$jmlx,0,'$shiftx','$id_bmx','$id_bmtx','$areax','$tglix','$jamx','$petugasx','$inputerx',
                                                 '$tgl_inputx','0000-00-00 00:00:00','0000-00-00 00:00:00',0 from decal_items_detail where parent_id = '$parent_idx'";
                                         $this->db->query($sql);
                                         echo "<meta http-equiv='refresh' content='0; url=".base_url()."index.php/decal_retu/edit/$idx'>";
@@ -314,6 +318,7 @@ class Decal_retu extends CI_Controller {
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
                                         $d['jml']               = 0;
+                                        $d['area']               = 0;
                                         $d['readonly']          = '';
                                         $d['none']              = '';
 				}
@@ -329,6 +334,7 @@ class Decal_retu extends CI_Controller {
                                         $d['id_bm']             = 1;
                                         $d['id_bmt']            = 1;
                                         $d['jml']               = 0;
+                                        $d['area']               = 0;
                                         $d['readonly']          = '';
                                         $d['none']              = '';
 			}
@@ -339,6 +345,8 @@ class Decal_retu extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
 									
 			$d['content'] = $this->load->view('decal_retu/form', $d, true);		
 			$this->load->view('home',$d);
@@ -364,7 +372,7 @@ class Decal_retu extends CI_Controller {
 			$id_related = $this->uri->segment(3);
                         $parent_id = $this->uri->segment(4);
                         $id_group = $this->uri->segment(5);
-			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, sum(a.jml)/sum(a.isi_motif) as jml, a.rusak, a.shift, 
+			$text = "select a.id,a.id_group,a.id_related,a.parent_id,a.item_code, a.isi_motif, sum(a.jml)/sum(a.isi_motif) as jml, a.rusak, a.shift,a.area, 
                                     a.id_bm, a.id_bmt, a.tgli, a.jam, a.petugas, a.inputer, a.tgl_input, a.tgl_update, a.tgl_delete, a.deleted from decal_rhd a
                                     where a.id_related = '$id_related' and a.parent_id = '$parent_id' and a.id_group = '$id_group'
                                     group by a.id_group";
@@ -381,6 +389,7 @@ class Decal_retu extends CI_Controller {
                                         $d['shift']             = $db->shift;
                                         $d['id_bm']             = $db->id_bm;
                                         $d['id_bmt']            = $db->id_bmt;
+                                        $d['area']            = $db->area;
                                         $d['jml']               = $db->jml;
                                         $d['readonly']          = "readonly='readonly'";
                                         $d['none']              = "none";
@@ -395,6 +404,7 @@ class Decal_retu extends CI_Controller {
                                         $d['shift']             = '';
                                         $d['id_bm']             = '';
                                         $d['id_bmt']            = '';
+                                        $d['area']            = '';
                                         $d['jml']               = '';
                                         $d['readonly']          = '';
                                         $d['none']              = '';
@@ -406,6 +416,8 @@ class Decal_retu extends CI_Controller {
 			$d['x_bm'] = $this->dclModel->manualQuery($xbm);
                         $sft = "SELECT * FROM global_shift";
 			$d['l_sft'] = $this->dclModel->manualQuery($sft);
+                        $ara = "SELECT * FROM global_area where jenis like '%dcl%'";
+			$d['l_ara'] = $this->dclModel->manualQuery($ara);
                         
 			$d['content'] = $this->load->view('decal_retu/form', $d, true);		
 			$this->load->view('home',$d);
@@ -473,7 +485,7 @@ class Decal_retu extends CI_Controller {
 			
 			$id = $this->input->post('kode');
 			$text1 = "SELECT a.id,a.id_group,a.tgli,a.jam,a.id_related,a.parent_id,a.item_code,sum(a.isi_motif) as isi_motif,sum(a.jml) as jml,sum(a.rusak) as rusak,a.shift,a.id_bm,a.id_bmt,a.petugas,a.inputer from decal_rhd a  
-                                    WHERE a.id_related='$id' AND a.deleted = 0 group by a.id_group";
+                                    WHERE a.id_related='$id' AND a.deleted = 0 group by a.id_group order by a.id desc";
 			$d['data']= $this->dclModel->manualQuery($text1);
                         
                         $text2 = "SELECT a.id,a.id_group,a.id_related,a.parent_id,a.item_code,b.item,a.isi_motif,a.jml,a.rusak,a.shift,a.id_bm,a.id_bmt,a.petugas,a.inputer from decal_rhd a 

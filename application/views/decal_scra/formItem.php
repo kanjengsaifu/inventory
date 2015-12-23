@@ -174,14 +174,9 @@ $(document).ready(function(){
         <td><input type="text" name="item_code" id="item_code" size="45" maxlength="12" readonly="readonly" value="<?php echo $item_code;?>" /></td>
     </tr>
     <tr>    
-        <td>Jumlah Cetak (pcs)</td>
-        <td>:</td>
-        <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $jml;?>" /></td>
-    </tr>
-    <tr>    
         <td>Jumlah Rusak (pcs)</td>
         <td>:</td>
-        <td><input type="text" name="rusak" id="rusak"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $rusak;?>" /></td>
+        <td><input type="text" name="jml" id="jml"  size="45" class="easyui-numberbox" data-options="min:0,precision:0" style="text-align:right;" value="<?php echo $jml;?>" /></td>
     </tr>
     </table>
     </fieldset>
